@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS EtapaCatequese (
 CREATE TABLE IF NOT EXISTS Pessoa (
 	Id int(11) NOT NULL AUTO_INCREMENT,
 	Nome varchar(70) NOT NULL,
-	DataNascimento date() NOT NULL,
+	DataNascimento datetime NOT NULL,
 	Telefone1 varchar(12) NULL,
 	Telefone2 varchar(12) NULL,
 	cpf varchar(11) NULL,
@@ -53,11 +53,11 @@ CREATE TABLE IF NOT EXISTS Pessoa (
 	Numero varchar(10) NULL,
 	Complemento varchar(50) NULL,
 	Bairro varchar(20) NULL,
- 	CidadeId int(10) NULL,
+ 	MunicipioId int(10) NULL,
 	DataCadastramento datetime,
 	Status int(1) NOT NULL,
 	PRIMARY KEY (Id),
-	FOREIGN KEY (CidadeId) REFERENCES Cidade(Id)
+	FOREIGN KEY (MunicipioId) REFERENCES Municipio(Id)
 );
 
 CREATE TABLE IF NOT EXISTS NivelAcesso (
@@ -69,6 +69,8 @@ CREATE TABLE IF NOT EXISTS NivelAcesso (
 
 CREATE TABLE IF NOT EXISTS Usuario (
 	Id int(11) NOT NULL AUTO_INCREMENT,
+	Usuario varchar(50) NOT NULL,
+	Senha varchar(50) NOT NULL,
 	PessoaId int(10) NOT NULL,
 	NivelAcessoId int(10) NOT NULL,
 	Status int(1) NOT NULL,
@@ -77,7 +79,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
 	FOREIGN KEY (NivelAcessoId) REFERENCES NivelAcesso(Id)
 );
 
-CREATE TABLE IF NOT EXISTS Catequista (
+CREATE TABLE IF NOT EXISTS Professor (
 	Id int(11) NOT NULL AUTO_INCREMENT,
 	PessoaId int(10) NOT NULL,
 	Observacoes varchar(100) NOT NULL,
@@ -118,23 +120,23 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	Status int(1) NOT NULL,
 	DataCadastramento datetime,
 	PRIMARY KEY (Id),
-	FOREIGN KEY (PessoaId) REFERENCES Pessoa(Id),
+	FOREIGN KEY (AlunoId) REFERENCES Aluno(Id),
 	FOREIGN KEY (EtapaCatequeseId) REFERENCES EtapaCatequese(Id)
 );
 
 CREATE TABLE IF NOT EXISTS TurmaCatequese (
 	Id int(11) NOT NULL AUTO_INCREMENT,
 	EtapaCatequeseId int(10) NOT NULL,
-	CatequistaId int(10) NOT NULL,
+	ProfessorId int(10) NOT NULL,
 	Observacoes varchar(100) NOT NULL,
 	Status int(1) NOT NULL,
 	DataCadastramento datetime,
 	PRIMARY KEY (Id),
-	FOREIGN KEY (CatequistaId) REFERENCES Catequista(Id),
+	FOREIGN KEY (ProfessorId) REFERENCES Professor(Id),
 	FOREIGN KEY (EtapaCatequeseId) REFERENCES EtapaCatequese(Id)
 );
 
-CREATE TABLE IF NOT EXISTS TurmaCatequeseAlunos (
+CREATE TABLE IF NOT EXISTS TurmaCatequeseAluno (
 	Id int(11) NOT NULL AUTO_INCREMENT,
 	InscricaoCatequeseId int(10) NOT NULL,
 	TurmaCatequeseId int(10) NOT NULL,
@@ -176,7 +178,7 @@ CREATE TABLE IF NOT EXISTS TurmaCurso (
 	FOREIGN KEY (CursoId) REFERENCES Curso(Id)
 );
 
-CREATE TABLE IF NOT EXISTS TurmaCursoAlunos (
+CREATE TABLE IF NOT EXISTS TurmaCursoAluno (
 	Id int(11) NOT NULL AUTO_INCREMENT,
 	InscricaoCursoId int(10) NOT NULL,
 	TurmaCursoId int(10) NOT NULL,
