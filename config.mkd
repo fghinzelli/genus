@@ -1,0 +1,35 @@
+# Configuração do ambiente
+
+## Servidor web (Apache)
+* Habilitar o módulo **mod_rewrite**
+
+    sudo a2enmod rewrite
+
+    sudo systemctl restart apache2
+
+Obs.: É possível visualizar o status do módulo usando a função phpinfo();
+
+* Configurar um arquivo .htaccess
+Este arquivo permite modificar ou sobreescrever funções do apache sem editar os arquivos de configuração do servidor.
+Por default, o Apache proibe o uso deste tipo de arquivo, portanto é necessário alterar uma configuração para que isto funcione:
+
+    sudo vim /etc/apache2/sites-available/000-default.conf
+
+Dentro do arquivo de configuração, procure por **<VirtualHost *:80>** e inclua o seguinte código:
+
+    <VirtualHost *:80>
+        <Directory /var/www/html>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Require all granted
+        </Directory>
+
+        . . .
+    </VirtualHost>
+
+Após salvar e fechar o arquivo, reinicie o Apache:
+
+    sudo systemctl restart apache2
+
+
+

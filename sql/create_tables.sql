@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS EtapaCatequese (
 CREATE TABLE IF NOT EXISTS Pessoa (
 	Id int(11) NOT NULL AUTO_INCREMENT,
 	Nome varchar(70) NOT NULL,
+	Sexo char(1) NOT NULL,
 	DataNascimento datetime NOT NULL,
 	Telefone1 varchar(12) NULL,
 	Telefone2 varchar(12) NULL,
