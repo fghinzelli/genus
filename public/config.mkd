@@ -34,5 +34,10 @@ Após salvar e fechar o arquivo, reinicie o Apache:
 
 Referências: https://www.slimframework.com/docs/start/web-servers.html
 
+# Estrutura
 
+- services (API PHP Slim com conexao com o DB MySql)
+- models (Modelos que serão consumidos pelo AngularJS)
+- public (Diretório principal com os arquivos do FrontEnd - Bootstrap e JS)
+- sql (Scripts para a criacao do banco e inserção dos dados básicos)
 
