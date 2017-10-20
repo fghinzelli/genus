@@ -1,1 +1,1 @@
-INSERT INTO `NivelAcesso` (`Id`, `Descricao`, `Status`) VALUES (NULL, 'Administrador', '1');
+INSERT INTO `NivelAcesso` (`id`, `descricao`, `status`) VALUES (NULL, 'Administrador', '1');

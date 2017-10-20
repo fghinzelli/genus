@@ -1,10 +1,10 @@
 CREATE OR REPLACE VIEW ViewUsuario AS (
     SELECT 
-        u.Id,
-        u.Usuario,
-        u.Senha,
-        p.Nome
+        u.id,
+        u.usuario,
+        u.senha,
+        p.nome
     FROM 
-        Usuario u 
-        INNER JOIN Pessoa p ON p.Id = u.PessoaId
+        usuario u 
+        INNER JOIN pessoa p ON p.id = u.pessoaId
 );
