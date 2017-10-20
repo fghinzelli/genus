@@ -3,190 +3,190 @@ CREATE DATABASE IF NOT EXISTS genus;
 USE genus;
 
 CREATE TABLE IF NOT EXISTS Estado (
-    Id       INT          NOT NULL AUTO_INCREMENT,
-    CodigoUf INT          NOT NULL,
-    Nome     VARCHAR (50) NOT NULL,
-    Uf       CHAR 	 (2)  NOT NULL,
-    Regiao   INT	      NOT NULL,
-    PRIMARY KEY (Id)
+    id       INT          NOT NULL AUTO_INCREMENT,
+    codigoUf INT          NOT NULL,
+    nome     VARCHAR (50) NOT NULL,
+    uf       CHAR 	 (2)  NOT NULL,
+    regiao   INT	      NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS Municipio (
-  Id 	 INT 		  NOT NULL AUTO_INCREMENT,
-  Codigo INT		  NOT NULL,
-  Nome 	 VARCHAR(255) NOT NULL,
-  Uf	 CHAR(2)	  NOT NULL,
-  PRIMARY KEY (Id)
+  id 	 INT 		  NOT NULL AUTO_INCREMENT,
+  codigo INT		  NOT NULL,
+  nome 	 VARCHAR(255) NOT NULL,
+  uf	 CHAR(2)	  NOT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS Comunidade (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Nome varchar(50) NOT NULL,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	nome varchar(50) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS Escola (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Nome varchar(50) NOT NULL,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	nome varchar(50) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS EtapaCatequese (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Descricao varchar(50) NOT NULL,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	descricao varchar(50) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS Pessoa (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Nome varchar(70) NOT NULL,
-	Sexo char(1) NOT NULL,
-	DataNascimento datetime NOT NULL,
-	Telefone1 varchar(12) NULL,
-	Telefone2 varchar(12) NULL,
+	id int(11) NOT NULL AUTO_INCREMENT,
+	nome varchar(70) NOT NULL,
+	sexo char(1) NOT NULL,
+	dataNascimento datetime NOT NULL,
+	telefone1 varchar(12) NULL,
+	telefone2 varchar(12) NULL,
 	cpf varchar(11) NULL,
 	rg varchar(15) NULL,
-	Email varchar(50) NOT NULL,
-	Logradouro varchar(50) NULL,
-	Numero varchar(10) NULL,
-	Complemento varchar(50) NULL,
-	Bairro varchar(20) NULL,
- 	MunicipioId int(10) NULL,
-	DataCadastramento datetime,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (MunicipioId) REFERENCES Municipio(Id)
+	email varchar(50) NOT NULL,
+	logradouro varchar(50) NULL,
+	numero varchar(10) NULL,
+	complemento varchar(50) NULL,
+	bairro varchar(20) NULL,
+ 	municipioId int(10) NULL,
+	dataCadastramento datetime,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (municipioId) REFERENCES Municipio(id)
 );
 
 CREATE TABLE IF NOT EXISTS NivelAcesso (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Descricao varchar(50) NOT NULL,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	descricao varchar(50) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS Usuario (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Usuario varchar(50) NOT NULL,
-	Senha varchar(50) NOT NULL,
-	PessoaId int(10) NOT NULL,
-	NivelAcessoId int(10) NOT NULL,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (PessoaId) REFERENCES Pessoa(Id),
-	FOREIGN KEY (NivelAcessoId) REFERENCES NivelAcesso(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	usuario varchar(50) NOT NULL,
+	senha varchar(50) NOT NULL,
+	pessoaId int(10) NOT NULL,
+	nivelAcessoId int(10) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
+	FOREIGN KEY (nivelAcessoId) REFERENCES NivelAcesso(id)
 );
 
 CREATE TABLE IF NOT EXISTS Professor (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	PessoaId int(10) NOT NULL,
-	Observacoes varchar(100) NOT NULL,
-	Status int(1) NOT NULL,
-	DataInicio datetime NULL,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (PessoaId) REFERENCES Pessoa(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	pessoaId int(10) NOT NULL,
+	observacoes varchar(100) NOT NULL,
+	status int(1) NOT NULL,
+	dataInicio datetime NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
 );
 
 CREATE TABLE IF NOT EXISTS Aluno (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	PessoaId int(10) NOT NULL,
-	Observacoes varchar(100) NOT NULL,
-	Status int(1) NOT NULL,
-	DataCadastramento datetime,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (PessoaId) REFERENCES Pessoa(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	pessoaId int(10) NOT NULL,
+	observacoes varchar(100) NOT NULL,
+	status int(1) NOT NULL,
+	dataCadastramento datetime,
+	PRIMARY KEY (id),
+	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
 );
 
 CREATE TABLE IF NOT EXISTS ResponsavelAluno (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	PessoaResponsavelId int(10) NOT NULL,
-	AlunoId int(10) NOT NULL,
-	Observacoes varchar(100) NOT NULL,
-	Status int(1) NOT NULL,
-	DataCadastramento datetime,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (PessoaResponsavelId) REFERENCES Pessoa(Id),
-	FOREIGN KEY (AlunoId) REFERENCES Aluno(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	pessoaResponsavelId int(10) NOT NULL,
+	alunoId int(10) NOT NULL,
+	observacoes varchar(100) NOT NULL,
+	status int(1) NOT NULL,
+	dataCadastramento datetime,
+	PRIMARY KEY (id),
+	FOREIGN KEY (pessoaResponsavelId) REFERENCES Pessoa(id),
+	FOREIGN KEY (alunoId) REFERENCES Aluno(id)
 );
 
 CREATE TABLE IF NOT EXISTS InscricaoCatequese (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	AlunoId int(10) NOT NULL,
-	EtapaCatequeseId int(10) NOT NULL,
-	Observacoes varchar(100) NOT NULL,
-	Situacao int(1) NOT NULL,
-	Status int(1) NOT NULL,
-	DataCadastramento datetime,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (AlunoId) REFERENCES Aluno(Id),
-	FOREIGN KEY (EtapaCatequeseId) REFERENCES EtapaCatequese(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	alunoId int(10) NOT NULL,
+	etapaCatequeseId int(10) NOT NULL,
+	observacoes varchar(100) NOT NULL,
+	situacao int(1) NOT NULL,
+	status int(1) NOT NULL,
+	dataCadastramento datetime,
+	PRIMARY KEY (id),
+	FOREIGN KEY (alunoId) REFERENCES Aluno(id),
+	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id)
 );
 
 CREATE TABLE IF NOT EXISTS TurmaCatequese (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	EtapaCatequeseId int(10) NOT NULL,
-	ProfessorId int(10) NOT NULL,
-	Observacoes varchar(100) NOT NULL,
-	Status int(1) NOT NULL,
-	DataCadastramento datetime,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (ProfessorId) REFERENCES Professor(Id),
-	FOREIGN KEY (EtapaCatequeseId) REFERENCES EtapaCatequese(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	etapaCatequeseId int(10) NOT NULL,
+	professorId int(10) NOT NULL,
+	observacoes varchar(100) NOT NULL,
+	status int(1) NOT NULL,
+	dataCadastramento datetime,
+	PRIMARY KEY (id),
+	FOREIGN KEY (professorId) REFERENCES Professor(id),
+	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id)
 );
 
 CREATE TABLE IF NOT EXISTS TurmaCatequeseAluno (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	InscricaoCatequeseId int(10) NOT NULL,
-	TurmaCatequeseId int(10) NOT NULL,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (InscricaoCatequeseId) REFERENCES InscricaoCatequese(Id),
-	FOREIGN KEY (TurmaCatequeseId) REFERENCES TurmaCatequese(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	inscricaoCatequeseId int(10) NOT NULL,
+	turmaCatequeseId int(10) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id),
+	FOREIGN KEY (turmaCatequeseId) REFERENCES TurmaCatequese(id)
 );
 
 CREATE TABLE IF NOT EXISTS Curso (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Descricao varchar(50) NOT NULL,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	descricao varchar(50) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS InscricaoCurso (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	AlunoId int(10) NOT NULL,
-	CursoId int(10) NOT NULL,
-	Observacoes varchar(100) NOT NULL,
-	Situacao int(1) NOT NULL,
-	Status int(1) NOT NULL,
-	DataCadastramento datetime,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (AlunoId) REFERENCES Aluno(Id),
-	FOREIGN KEY (CursoId) REFERENCES Curso(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	alunoId int(10) NOT NULL,
+	cursoId int(10) NOT NULL,
+	observacoes varchar(100) NOT NULL,
+	situacao int(1) NOT NULL,
+	status int(1) NOT NULL,
+	dataCadastramento datetime,
+	PRIMARY KEY (id),
+	FOREIGN KEY (alunoId) REFERENCES Aluno(id),
+	FOREIGN KEY (cursoId) REFERENCES Curso(id)
 );
 
 CREATE TABLE IF NOT EXISTS TurmaCurso (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	CursoId int(10) NOT NULL,
-	ProfessorId int(10) NOT NULL,
-	Observacoes varchar(100) NOT NULL,
-	Status int(1) NOT NULL,
-	DataCadastramento datetime,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (ProfessorId) REFERENCES Professor(Id),
-	FOREIGN KEY (CursoId) REFERENCES Curso(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	cursoId int(10) NOT NULL,
+	professorId int(10) NOT NULL,
+	observacoes varchar(100) NOT NULL,
+	status int(1) NOT NULL,
+	dataCadastramento datetime,
+	PRIMARY KEY (id),
+	FOREIGN KEY (professorId) REFERENCES Professor(id),
+	FOREIGN KEY (cursoId) REFERENCES Curso(id)
 );
 
 CREATE TABLE IF NOT EXISTS TurmaCursoAluno (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	InscricaoCursoId int(10) NOT NULL,
-	TurmaCursoId int(10) NOT NULL,
-	Status int(1) NOT NULL,
-	PRIMARY KEY (Id),
-	FOREIGN KEY (InscricaoCursoId) REFERENCES InscricaoCurso(Id),
-	FOREIGN KEY (TurmaCursoId) REFERENCES TurmaCurso(Id)
+	id int(11) NOT NULL AUTO_INCREMENT,
+	inscricaoCursoId int(10) NOT NULL,
+	turmaCursoId int(10) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (inscricaoCursoId) REFERENCES InscricaoCurso(id),
+	FOREIGN KEY (turmaCursoId) REFERENCES TurmaCurso(id)
 );
 
 
