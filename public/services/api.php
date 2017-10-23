@@ -29,7 +29,7 @@
 	function getPessoas() {
 		$stmt = getConn()->query("SELECT * FROM Pessoa");
 		$pessoas = $stmt->fetchAll(PDO::FETCH_OBJ);
-		echo "{\"categorias\":" . json_encode($pessoas) . "}";
+		echo "{\"pessoas\":" . json_encode($pessoas) . "}";
 	}
 
 	function addPessoa() {
