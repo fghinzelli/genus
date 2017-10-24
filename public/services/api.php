@@ -1,5 +1,6 @@
 <?php
 	require 'vendor/autoload.php';
+	require 'db_connection.php';
 
 	$app = new \Slim\Slim();
 	$app->response()->header('Content-Type', 'application/json;charset=utf-8');
@@ -28,14 +29,6 @@
 	});
 	
 	$app->run();
-	
-	function getConn() {
-		return new PDO('mysql:host=localhost;dbname=genus',
-					   'root',
-					   'root',
-					    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
-		);
-	}
 
 	/* USUARIOS */
 
