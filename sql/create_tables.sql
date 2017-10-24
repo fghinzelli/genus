@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS Paroquia(
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (dioceseId) REFERENCES Diocese(Id)
+	FOREIGN KEY (dioceseId) REFERENCES Diocese(Id),
 	FOREIGN KEY (municipioId) REFERENCES Municipio(id)
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS Comunidade (
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (municipioId) REFERENCES Municipio(id)
+	FOREIGN KEY (municipioId) REFERENCES Municipio(id),
 	FOREIGN KEY (paroquiaId) REFERENCES Paroquia(id)
 );
 
