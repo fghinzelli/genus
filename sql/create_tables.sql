@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS Municipio (
 CREATE TABLE IF NOT EXISTS Diocese(
 	id INT NOT NULL AUTO_INCREMENT,
 	nome varchar(50) NOT NULL,
-	cnpj varchar(14) NOT NULL,
-	email varchar(50) NOT NULL,
+	cnpj varchar(14) NULL,
+	email varchar(50) NULL,
 	telefone varchar(15) NULL,
 	logradouro varchar(50) NULL,
 	numero varchar(10) NULL,
@@ -33,15 +33,16 @@ CREATE TABLE IF NOT EXISTS Diocese(
  	municipioId int(10) NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
-	PRIMARY KEY (id)
+	usuarioUltimaAlteracaoId INT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (municipioId) REFERENCES Municipio(id)
 );
 
 CREATE TABLE IF NOT EXISTS Paroquia(
 	id INT NOT NULL AUTO_INCREMENT,
 	nome varchar(50) NOT NULL,
-	cnpj varchar(14) NOT NULL,
-	email varchar(50) NOT NULL,
+	cnpj varchar(14) NULL,
+	email varchar(50) NULL,
 	telefone varchar(15) NULL,
 	logradouro varchar(50) NULL,
 	numero varchar(10) NULL,
@@ -51,9 +52,10 @@ CREATE TABLE IF NOT EXISTS Paroquia(
 	dioceseId INT(10) NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (dioceseId) REFERENCES Diocese(Id)
+	FOREIGN KEY (municipioId) REFERENCES Municipio(id)
 );
 
 CREATE TABLE IF NOT EXISTS Comunidade (
@@ -68,12 +70,14 @@ CREATE TABLE IF NOT EXISTS Comunidade (
 	complemento varchar(50) NULL,
 	bairro varchar(20) NULL,
  	municipioId int(10) NULL,
-	email varchar(50) NOT NULL,
+	email varchar(50) NULL,
 	telefone varchar(15) NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
-	PRIMARY KEY (id)
+	usuarioUltimaAlteracaoId INT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (municipioId) REFERENCES Municipio(id)
+	FOREIGN KEY (paroquiaId) REFERENCES Paroquia(id)
 );
 
 CREATE TABLE IF NOT EXISTS SituacaoDizimo (
@@ -132,16 +136,16 @@ CREATE TABLE IF NOT EXISTS Pessoa (
 	complemento varchar(50) NULL,
 	bairro varchar(20) NULL,
  	municipioId int(10) NULL,
-	numeroDizimo INT NULL,
+	numeroDizimo VARCHAR(20) NULL,
 	comunidadeId int(10) NOT NULL,
-	observacoes varchar(50) NOT NULL,
+	observacoes varchar(50) NULL,
 	batizado int(1) NOT NULL,
 	localBatismo varchar(30) NULL,
-	primeiraEucaristia int(1) NOT NULL,
+	primeiraEucaristia int(1) NULL,
 	localEucaristia varchar(30) NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (municipioId) REFERENCES Municipio(id)
 );
@@ -160,7 +164,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
 	pessoaId int(10) NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
 );
@@ -184,7 +188,7 @@ CREATE TABLE IF NOT EXISTS Professor (
 	observacoes varchar(100) NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (comunidadeId) REFERENCES Comunidade(id),
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
@@ -198,7 +202,7 @@ CREATE TABLE IF NOT EXISTS Aluno (
 	etapaEscolaId INT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
 	FOREIGN KEY (escolaId) REFERENCES Escola(id),
@@ -227,7 +231,7 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	situacaoDizimoId INT NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (alunoId) REFERENCES Aluno(id),
 	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
@@ -245,7 +249,7 @@ CREATE TABLE IF NOT EXISTS TurmaCatequese (
 	diaSemana INT NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	horario varchar(30) NOT NULL,
 	paroquiaId INT NOT NULL,
 	PRIMARY KEY (id),
@@ -261,7 +265,7 @@ CREATE TABLE IF NOT EXISTS TurmaCatequeseAluno (
 	turmaCatequeseId int(10) NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id),
 	FOREIGN KEY (turmaCatequeseId) REFERENCES TurmaCatequese(id)
@@ -273,7 +277,7 @@ CREATE TABLE IF NOT EXISTS Curso (
 	paroquiaId INT NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (paroquiaId) REFERENCES Paroquia(id)
 );
@@ -283,7 +287,7 @@ CREATE TABLE IF NOT EXISTS SituacaoEdicaoCurso (
 	descricao varchar(50) NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -299,7 +303,7 @@ CREATE TABLE IF NOT EXISTS CursoEdicao (
 	situacaoEdicaoCursoId INT NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (cursoId) REFERENCES Curso(id),
 	FOREIGN KEY (turnoId) REFERENCES Turno(id),
@@ -316,7 +320,7 @@ CREATE TABLE IF NOT EXISTS InscricaoCurso (
 	paroquiaId INT NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (alunoId) REFERENCES Aluno(id),
 	FOREIGN KEY (cursoId) REFERENCES Curso(id),
@@ -330,7 +334,7 @@ CREATE TABLE IF NOT EXISTS TurmaCurso (
 	observacoes varchar(100) NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NOT NULL,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (professorId) REFERENCES Professor(id),
 	FOREIGN KEY (cursoId) REFERENCES Curso(id)
