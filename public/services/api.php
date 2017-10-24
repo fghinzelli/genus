@@ -22,15 +22,17 @@
 		echo var_dump($data['usuario']['username']);
 	});
 	*/
-
-	$app->post('/usuarios/login', function() use ($app) { login($app); });
-
+	
+	$app->post('/usuarios/login', function() use ($app) { 
+		login($app); 
+	});
+	
 	$app->run();
 	
 	function getConn() {
 		return new PDO('mysql:host=localhost;dbname=genus',
 					   'root',
-					   'sys@dmin',
+					   'root',
 					    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
 		);
 	}
@@ -43,7 +45,7 @@
 		$usuario = json_decode($json, true); // parse the JSON into an assoc. array
 		$username = $usuario['usuario']['username'];
 		$password = $usuario['usuario']['password'];
-
+		
 		//if (!empty($usuario->username) && !empty($usuario->password)) {
 		$sql = "SELECT id, nome, usuario from ViewUsuario WHERE usuario = :usuario AND senha = :senha LIMIT 1";
 		$conn = getConn();
@@ -57,8 +59,7 @@
 			$arrayRetorno['token'] = bin2hex(openssl_random_pseudo_bytes(8)); // Gera um token aleatorio
 			$tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour'));
 			updateToken($username, $arrayRetorno['token'], $tokenExpiration);
-			return json_encode($arrayRetorno);
-				
+			echo json_encode($arrayRetorno);
 		}
 	
 
