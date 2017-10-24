@@ -162,6 +162,8 @@ CREATE TABLE IF NOT EXISTS Usuario (
 	usuario varchar(50) NOT NULL,
 	senha varchar(50) NOT NULL,
 	pessoaId int(10) NOT NULL,
+	token CHAR(16) NULL,
+	tokenExpiracao DATETIME NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,

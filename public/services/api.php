@@ -13,6 +13,17 @@
 	$app->post('/pessoas','addPessoa');
 	$app->put('/pessoas/:id','savePessoa');
 	$app->delete('/pessoas/:id','deletePessoa');
+	//$app->post('/usuarios/login', 'login')->setParams([$app]);
+
+	/*
+	$app->post('/usuarios/login', function () use ($app) {
+		$json = $app->request->getBody();
+		$data = json_decode($json, true); // parse the JSON into an assoc. array
+		echo var_dump($data['usuario']['username']);
+	});
+	*/
+
+	$app->post('/usuarios/login', function() use ($app) { login($app); });
 
 	$app->run();
 	
@@ -22,6 +33,50 @@
 					   'sys@dmin',
 					    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
 		);
+	}
+
+	/* USUARIOS */
+
+	function login($app) {
+		//$usuario = json_decode();
+		$json = $app->request->getBody();
+		$usuario = json_decode($json, true); // parse the JSON into an assoc. array
+		$username = $usuario['usuario']['username'];
+		$password = $usuario['usuario']['password'];
+
+		//if (!empty($usuario->username) && !empty($usuario->password)) {
+		$sql = "SELECT id, nome, usuario from ViewUsuario WHERE usuario = :usuario AND senha = :senha LIMIT 1";
+		$conn = getConn();
+		$passwordMD5 = md5($password);
+		$stmt = $conn->prepare($sql);
+		$stmt->bindParam("usuario", $username);
+		$stmt->bindParam("senha", $passwordMD5);
+		$stmt->execute();
+		if ($stmt->fetchColumn() > 0) {
+			$arrayRetorno['user'] = $username;
+			$arrayRetorno['token'] = bin2hex(openssl_random_pseudo_bytes(8)); // Gera um token aleatorio
+			$tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour'));
+			updateToken($username, $arrayRetorno['token'], $tokenExpiration);
+			return json_encode($arrayRetorno);
+				
+		}
+	
+
+	}
+
+	function updateToken($username, $token, $tokenExpiration) {
+		if (!empty($username) && !empty($token) && !empty($tokenExpiration)) {
+			$sql = 'UPDATE Usuario SET token = :token, tokenExpiracao = :tokenExpiracao WHERE usuario = :usuario;';
+			$conn = getConn();
+			$stmt = $conn->prepare($sql);
+			$stmt->bindParam("usuario", $username);
+			$stmt->bindParam("token", $token);
+			$stmt->bindParam("tokenExpiracao", $tokenExpiration);
+			$stmt->execute();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/* PESSOAS */
