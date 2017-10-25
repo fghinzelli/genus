@@ -1,5 +1,5 @@
 <?php
-    class User {
+    class Usuario {
         private $db;
         private $username;
         
@@ -16,11 +16,11 @@
             if($validPassword === false) return false;
             // Retorna um array com os dados
             $token = bin2hex(openssl_random_pseudo_bytes(8)); // Gera um token aleatorio
-            $arrayRetorno['user'] = $username;
+            $arrayRetorno['username'] = $username;
             $arrayRetorno['token'] = $token;
             // Atualiza o token no registro do usuario
             $this->updateUserToken($username, $token);
-            return $arrayRetorno;
+            echo json_encode($arrayRetorno);
         }
 
         function userExists($username) {
@@ -72,11 +72,11 @@
 
         function updateUserToken($username, $token) {
             $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour'));
-            $sql = "UPDATE Usuario SET token = :token, tokenExpiracao = :tokenExpiracao WHERE usuario = :usuario";
+            $sql = "UPDATE Usuario SET token = :token, tokenExpiracao = :tokenExpiracao WHERE username = :username";
 			$query = $this->db->prepare($sql);
-			$query->bindParam("usuario", $username);
-			$query->bindParam("token", $token);
-			$query->bindParam("tokenExpiracao", $tokenExpiration);
+			$query->bindParam(":username", $username);
+			$query->bindParam(":token", $token);
+			$query->bindParam(":tokenExpiracao", $tokenExpiration);
 			$query->execute();
         }
 

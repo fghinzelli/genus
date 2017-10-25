@@ -21,7 +21,7 @@
 		if ($request->hasHeader('Authorization')) {
 			//$token = explode('Basic ', $request->getHeader('Authorization')[0])[1];
 			$token = $request->getHeader('Authorization')[0];
-			$user = new User(db::getInstance());
+			$user = new Usuario(db::getInstance());
 			$result = $user->isValidToken($token);
 			if($result === true) {
 				$response = $next($request, $response);
@@ -63,9 +63,22 @@
 		}
 	})->add($middleAuthorization);
 
-	$app->post('/login', function() use ($app) { 
-		login($app); 
+	$app->post('/login', function($request, $response, $args) { 
+		$data = $request->getParsedBody();
+		$usuario = new Usuario(db::getInstance());    
+		$result = $usuario->checkUser($data['username'], $data['password']);
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'Informacoes de login incorretas.' ))));
+		} else {  
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write($result);
+		}
 	});
+
+	$app->run();
 	/*
 	$app->post('/pessoas','addPessoa');
 	$app->put('/pessoas/:id','savePessoa');
@@ -84,11 +97,12 @@
 	
 	
 	
-	$app->run();
+	
 
 	/* USUARIOS */
-
+	/*
 	function login($app) {
+
 		//$usuario = json_decode();
 		$json = $app->request->getBody();
 		$usuario = json_decode($json, true); // parse the JSON into an assoc. array
@@ -96,6 +110,7 @@
 		$password = $usuario['usuario']['password'];
 		
 	}
+	*/
 		//if (!empty($usuario->username) && !empty($usuario->password)) {
 		/*
 		$sql = "SELECT id, nome, usuario from ViewUsuario WHERE usuario = :usuario AND senha = :senha LIMIT 1";
