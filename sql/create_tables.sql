@@ -159,8 +159,8 @@ CREATE TABLE IF NOT EXISTS AcessoNivel (
 
 CREATE TABLE IF NOT EXISTS Usuario (
 	id int(11) NOT NULL AUTO_INCREMENT,
-	usuario varchar(50) NOT NULL,
-	senha varchar(50) NOT NULL,
+	username varchar(50) NOT NULL,
+	senha varchar(255) NOT NULL,
 	pessoaId int(10) NOT NULL,
 	token CHAR(16) NULL,
 	tokenExpiracao DATETIME NULL,

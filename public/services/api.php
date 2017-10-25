@@ -1,19 +1,77 @@
 <?php
 	require 'vendor/autoload.php';
-	require 'db_connection.php';
-
-	$app = new \Slim\Slim();
-	$app->response()->header('Content-Type', 'application/json;charset=utf-8');
+	require 'model/db.php';
+	require 'model/Pessoa.php';
+	require 'model/Usuario.php';
 	
-	$app->get('/', function () {
+	//require 'db_connection.php';
+
+	$app = new \Slim\App([
+		'settings' => [
+			'displayErrorDetails' => true
+		]
+	]);
+
+	$app->get('/', function ($request, $response) {
 		echo "Genus API ";
 	});
-	
-	$app->get('/pessoas', 'getPessoas');
-	$app->get('/pessoas/:id','getPessoa');
+
+	// Verifica se o usuario possui autorizacao
+	$middleAuthorization = function ($request, $response, $next) {
+		if ($request->hasHeader('Authorization')) {
+			//$token = explode('Basic ', $request->getHeader('Authorization')[0])[1];
+			$token = $request->getHeader('Authorization')[0];
+			$user = new User(db::getInstance());
+			$result = $user->isValidToken($token);
+			if($result === true) {
+				$response = $next($request, $response);
+				return $response;
+			} else {
+				return $response->withStatus(401);
+			}
+		} else {
+			return $response->withStatus(401);
+		}
+	};
+
+
+	$app->get('/pessoas', function($request, $response, $args) {
+		$pessoa = new Pessoa(db::getInstance());
+		$result = $pessoa->getPessoas();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	$app->get('/pessoas/{id}', function($request, $response, $args) {
+		$pessoa = new Pessoa(db::getInstance());
+		$result = $pessoa->getPessoa($args['id']);
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	$app->post('/login', function() use ($app) { 
+		login($app); 
+	});
+	/*
 	$app->post('/pessoas','addPessoa');
 	$app->put('/pessoas/:id','savePessoa');
 	$app->delete('/pessoas/:id','deletePessoa');
+	
+	*/
 	//$app->post('/usuarios/login', 'login')->setParams([$app]);
 
 	/*
@@ -24,9 +82,7 @@
 	});
 	*/
 	
-	$app->post('/usuarios/login', function() use ($app) { 
-		login($app); 
-	});
+	
 	
 	$app->run();
 
@@ -39,7 +95,9 @@
 		$username = $usuario['usuario']['username'];
 		$password = $usuario['usuario']['password'];
 		
+	}
 		//if (!empty($usuario->username) && !empty($usuario->password)) {
+		/*
 		$sql = "SELECT id, nome, usuario from ViewUsuario WHERE usuario = :usuario AND senha = :senha LIMIT 1";
 		$conn = getConn();
 		$passwordMD5 = md5($password);
@@ -72,102 +130,8 @@
 			return false;
 		}
 	}
-
+	*/
 	/* PESSOAS */
-
-	function getPessoas() {
-		$stmt = getConn()->query("SELECT * FROM Pessoa");
-		$pessoas = $stmt->fetchAll(PDO::FETCH_OBJ);
-		echo "{\"pessoas\":" . json_encode($pessoas) . "}";
-	}
-
-	function addPessoa() {
-		$request = \Slim\Slim::getInstance()->request();
-		$pessoa = json_decode($request->getBody());
-		$sql = "INSERT INTO Pessoa (`nome`, `sexo`, `dataNascimento`, `telefone1`, `telefone2`, `cpf`, `rg`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `dataCadastramento`, `status`) 
-				VALUES (:nome, :sexo, :dataNascimento, :telefone1, :telefone2, :cpf, :rg, :email, :logradouro, :numero, :complemento, :bairro, :municipioId, :dataCadastramento, :status) ";
-		$conn = getConn();
-		$stmt = $conn->prepare($sql);
-		$stmt->bindParam("nome",$pessoa->nome);
-		$stmt->bindParam("sexo",$pessoa->sexo);
-		$stmt->bindParam("dataNascimento",$pessoa->dataNascimento);
-		$stmt->bindParam("telefone1",$pessoa->telefone1);
-		$stmt->bindParam("telefone2",$pessoa->telefone2);
-		$stmt->bindParam("cpf",$pessoa->cpf);
-		$stmt->bindParam("rg",$pessoa->rg);
-		$stmt->bindParam("email",$pessoa->email);
-		$stmt->bindParam("logradouro",$pessoa->logradouro);
-		$stmt->bindParam("numero",$pessoa->numero);
-		$stmt->bindParam("complemento",$pessoa->complemento);
-		$stmt->bindParam("bairro",$pessoa->bairro);
-		$stmt->bindParam("municipioId",$pessoa->municipioId);
-		$stmt->bindParam("dataCadastramento",$pessoa->dataCadastramento);
-		$stmt->bindParam("status",$pessoa->status);
-		$stmt->execute();
-		$produto->id = $conn->lastInsertId();
-		echo json_encode($produto);
-	}
-	
-
-	function getPessoa($id)
-	{
-	  $conn = getConn();
-	  $sql = "SELECT * FROM Pessoa WHERE id=:id";
-	  $stmt = $conn->prepare($sql);
-	  $stmt->bindParam("id",$id);
-	  $stmt->execute();
-	  $pessoa = $stmt->fetchObject();
-	
-	  //municipio
-	  $sql = "SELECT * FROM Municipio WHERE id=:id";
-	  $stmt = $conn->prepare($sql);
-	  $stmt->bindParam("id",$pessoa->municipioId);
-	  $stmt->execute();
-	  $pessoa->municipio =  $stmt->fetchObject();
-	
-	  echo json_encode($pessoa);
-	}
-
-	function savePessoa($id)
-	{
-	  $request = \Slim\Slim::getInstance()->request();
-	  $pessoa = json_decode($request->getBody());
-	  $sql = "UPDATE Pessoa SET nome=:nome,sexo=:sexo,dataNascimento=:dataNascimento,telefone1=:telefone1,
-	  		  telefone2=:telefone2,cpf=:cpf,rg=:rg,email=:email,logradouro=:logradouro,numero=:numero,
-			  complemento=:complemento,bairro=:bairro,municipioId=:municipioId,dataCadastramento=:dataCadastramento,status=:status
-	  		  WHERE id=:id";
-	  $conn = getConn();
-	  $stmt = $conn->prepare($sql);
-	  $stmt->bindParam("nome",$pessoa->nome);
-	  $stmt->bindParam("sexo",$pessoa->sexo);
-	  $stmt->bindParam("dataNascimento",$pessoa->dataNascimento);
-	  $stmt->bindParam("telefone1",$pessoa->telefone1);
-	  $stmt->bindParam("telefone2",$pessoa->telefone2);
-	  $stmt->bindParam("cpf",$pessoa->cpf);
-	  $stmt->bindParam("rg",$pessoa->rg);
-	  $stmt->bindParam("email",$pessoa->email);
-	  $stmt->bindParam("logradouro",$pessoa->logradouro);
-	  $stmt->bindParam("numero",$pessoa->numero);
-	  $stmt->bindParam("complemento",$pessoa->complemento);
-	  $stmt->bindParam("bairro",$pessoa->bairro);
-	  $stmt->bindParam("municipioId",$pessoa->municipioId);
-	  $stmt->bindParam("dataCadastramento",$pessoa->dataCadastramento);
-	  $stmt->bindParam("status",$pessoa->status);
-	  $stmt->bindParam("id",$id);
-	  $stmt->execute();
-	  echo json_encode($pessoa);
-	
-	}
-	
-	function deletePessoa($id)
-	{
-	  $sql = "DELETE FROM Pessoa WHERE id=:id";
-	  $conn = getConn();
-	  $stmt = $conn->prepare($sql);
-	  $stmt->bindParam("id",$id);
-	  $stmt->execute();
-	  echo "{'message':'Pessoa apagada'}";
-	}
 
 
 	/*
