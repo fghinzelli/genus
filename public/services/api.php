@@ -112,7 +112,7 @@
 		if($result === false) {
 			return $response->withStatus(200)
 				->withHeader('Content-Type', 'application/json;charset=utf-8')
-				->write(json_encode(array('error'=> array('message' => 'Informacoes de login incorretas.' ))));
+				->write(json_encode(array('error'=> array('message' => 'Informações incorretas!' ))));
 		} else {  
 			return $response->withStatus(200)
 				->withHeader('Content-Type', 'application/json;charset=utf-8')

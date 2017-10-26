@@ -15,7 +15,7 @@ angular.module('Authentication')
                     AuthenticationService.SetCredentials($scope.username, response.token);
                     $location.path('/');
                 } else {
-                    $scope.error = response.error;
+                    $scope.error = response.error['message'];
                     $scope.dataLoading = false;
                 }
             });

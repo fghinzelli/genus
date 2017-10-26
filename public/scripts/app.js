@@ -11,6 +11,7 @@ angular.module('BasicHttpAuthExample', [
     'ngCookies'
 ])
  
+
 .config(['$routeProvider', function ($routeProvider) {
 
     $routeProvider
@@ -23,11 +24,12 @@ angular.module('BasicHttpAuthExample', [
         .when('/', {
             controller: 'HomeController',
             templateUrl: 'modules/home/views/home.html'
+            //templateUrl: 'dashboard.html'
         })
  
         .otherwise({ redirectTo: '/login' });
 }])
- 
+
 .run(['$rootScope', '$location', '$cookieStore', '$http',
     function ($rootScope, $location, $cookieStore, $http) {
         // keep user logged in after page refresh
