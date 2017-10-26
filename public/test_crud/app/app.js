@@ -1,12 +1,13 @@
 var app = angular.module('myApp', ['ngRoute']);
+
 app.factory("services", ['$http', function($http) {
-  var serviceBase = 'services/'
+  var serviceBase = '/genus/services/'
     var obj = {};
     obj.getCustomers = function(){
         return $http.get(serviceBase + 'pessoas');
     }
     obj.getCustomer = function(customerID){
-        return $http.get(serviceBase + 'pessoas?id=' + customerID);
+        return $http.get(serviceBase + 'pessoas/' + customerID);
     }
 
     obj.insertCustomer = function (customer) {
@@ -32,7 +33,8 @@ app.factory("services", ['$http', function($http) {
 
 app.controller('listCtrl', function ($scope, services) {
     services.getCustomers().then(function(data){
-        $scope.customers = data.data;
+        console.log(data.data.pessoas);
+        $scope.customers = data.data.pessoas;
     });
 });
 
