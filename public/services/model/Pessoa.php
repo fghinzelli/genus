@@ -2,10 +2,68 @@
 
 class Pessoa {
     private $db;
-
+    public $id;
+    public $nome;
+    public $sexo;
+    public $nomePai;
+    public $nomeMae;
+    public $dataNascimento;
+    public $telefone1;
+    public $telefone2;
+    public $cpf;
+    public $rg;
+    public $email;
+    public $logradouro;
+    public $numero;
+    public $complemento;
+    public $bairro;
+    public $municipioId;
+    public $numeroDizimo;
+    public $comunidadeId;
+    public $observacoes;
+    public $batizado;
+    public $localBatismo;
+    public $primeiraEucaristia;
+    public $localPrimeiraEucaristia;
+    public $status;
+    public $dataUltimaAlteracao;
+    public $usuarioUltimaAlteracaoId;
+    
     function __construct($db) {
         $this->db = $db;
     }
+
+    function loadData($id, $nome, $sexo, $nomePai, $nomeMae, $dataNascimento, $telefone1, $telefone2,
+                      $cpf, $rg, $email, $logradouro, $numero, $complemento, $bairro, $municipioId,
+                      $numeroDizimo, $comunidadeId, $observacoes, $batizado, $localBatismo, $primeiraEucaristia,
+                      $localPrimeiraEucaristia, $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
+        $this->id = $id;
+		$this->nome = $nome;
+        $this->sexo = $sexo;
+        $this->nomePai = $nomePai;
+        $this->nomeMae = $nomeMae;
+		$this->dataNascimento = $dataNascimento;
+		$this->telefone1 = $telefone1;
+		$this->telefone2 = $telefone2;
+		$this->cpf = $cpf;
+		$this->rg = $rg;
+		$this->email = $email;
+		$this->logradouro = $logradouro;
+		$this->numero = $numero;
+		$this->complemento = $complemento;
+		$this->bairro = $bairro;
+        $this->municipioId = $municipioId;
+        $this->numeroDizimo = $numeroDizimo;
+        $this->comunidadeId = $comunidadeId;
+        $this->observacoes = $observacoes;
+        $this->batizado = $batizado;
+        $this->localBatismo = $localBatismo;
+        $this->primeiraEucaristia = $primeiraEucaristia;
+        $this->localPrimeiraEucaristia = $localPrimeiraEucaristia;
+        $this->status = $status;
+        $this->dataUltimaAlteracao = $dataUltimaAlteracao;
+        $this->usuarioUltimaAlteracaoId = $usuarioUltimaAlteracaoId;
+    } 
 
     function getPessoas() {
         $sql = "SELECT * FROM Pessoa";
@@ -32,74 +90,97 @@ class Pessoa {
       echo json_encode($pessoa);
     }
 
-    function addPessoa($nome, $sexo, $dataNascimento, $telefone1, $telefone2, $cpf, $rg, $email, $logradouro, $numero, $complemento, $bairro, $municipioId, $dataCadastramento, $status) {
-        //$request = \Slim\Slim::getInstance()->request();
-        //$pessoa = json_decode($request->getBody());
-        $sql = "INSERT INTO Pessoa (`nome`, `sexo`, `dataNascimento`, `telefone1`, `telefone2`, `cpf`, `rg`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `dataCadastramento`, `status`) 
-                VALUES (:nome, :sexo, :dataNascimento, :telefone1, :telefone2, :cpf, :rg, :email, :logradouro, :numero, :complemento, :bairro, :municipioId, :dataCadastramento, :status) ";
+    function addPessoa() {
+        $sql = "INSERT INTO Pessoa (`nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, 
+                                    `cpf`, `rg`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, 
+                                    `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, 
+                                    `primeiraEucaristia`, `localPrimeiraEucaristia`, 
+                                    `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+                VALUES (:nome, :sexo, :nomePai, :nomeMae, :dataNascimento, :telefone1, :telefone2, 
+                        :cpf, :rg, :email, :logradouro, :numero, :complemento, :bairro, :municipioId,
+                        :numeroDizimo, :comunidadeId, :observacoes, :batizado, :localBatismo,
+                        :primeiraEucaristia, :localPrimeiraEucaristia, 
+                        :status, :dataUltimaAlteracao, :usuarioUltimaAlteracaoId)";
         $query = $this->db->prepare($sql);
-        $query->bindParam("nome",$pessoa->nome);
-        $query->bindParam("sexo",$pessoa->sexo);
-        $query->bindParam("dataNascimento",$pessoa->dataNascimento);
-        $query->bindParam("telefone1",$pessoa->telefone1);
-        $query->bindParam("telefone2",$pessoa->telefone2);
-        $query->bindParam("cpf",$pessoa->cpf);
-        $query->bindParam("rg",$pessoa->rg);
-        $query->bindParam("email",$pessoa->email);
-        $query->bindParam("logradouro",$pessoa->logradouro);
-        $query->bindParam("numero",$pessoa->numero);
-        $query->bindParam("complemento",$pessoa->complemento);
-        $query->bindParam("bairro",$pessoa->bairro);
-        $query->bindParam("municipioId",$pessoa->municipioId);
-        $query->bindParam("dataCadastramento",$pessoa->dataCadastramento);
-        $query->bindParam("status",$pessoa->status);
+        $query->bindParam(":nome",$this->nome);
+        $query->bindParam(":sexo",$this->sexo);
+        $query->bindParam(":nomePai",$this->nomePai);
+        $query->bindParam(":nomeMae",$this->nomeMae);
+        $query->bindParam(":dataNascimento",$this->dataNascimento);
+        $query->bindParam(":telefone1",$this->telefone1);
+        $query->bindParam(":telefone2",$this->telefone2);
+        $query->bindParam(":cpf",$this->cpf);
+        $query->bindParam(":rg",$this->rg);
+        $query->bindParam(":email",$this->email);
+        $query->bindParam(":logradouro",$this->logradouro);
+        $query->bindParam(":numero", $this->numero);
+        $query->bindParam(":complemento", $this->complemento);
+        $query->bindParam(":bairro", $this->bairro);
+        $query->bindParam(":municipioId", $this->municipioId);
+        $query->bindParam(":numeroDizimo", $this->numeroDizimo);
+        $query->bindParam(":comunidadeId", $this->comunidadeId);
+        $query->bindParam(":observacoes", $this->observacoes);
+        $query->bindParam(":batizado", $this->batizado);
+        $query->bindParam(":localBatismo", $this->localBatismo);
+        $query->bindParam(":primeiraEucaristia", $this->primeiraEucaristia);
+        $query->bindParam(":localPrimeiraEucaristia", $this->localPrimeiraEucaristia);
+        $query->bindParam("status",$this->status);
+        $query->bindParam("dataUltimaAlteracao", $this->dataUltimaAlteracao);
+        $query->bindParam("usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
         $query->execute();
-        $produto->id = $conn->lastInsertId();
-        echo json_encode($produto);
+        $this->id = $this->db->lastInsertId();
+        echo json_encode($this);
     }
     
-    
-    
-    
-    function savePessoa($id)
+    function savePessoa()
     {
-      $request = \Slim\Slim::getInstance()->request();
-      $pessoa = json_decode($request->getBody());
-      $sql = "UPDATE Pessoa SET nome=:nome,sexo=:sexo,dataNascimento=:dataNascimento,telefone1=:telefone1,
-                telefone2=:telefone2,cpf=:cpf,rg=:rg,email=:email,logradouro=:logradouro,numero=:numero,
-              complemento=:complemento,bairro=:bairro,municipioId=:municipioId,dataCadastramento=:dataCadastramento,status=:status
+        $sql = "UPDATE Pessoa SET nome=:nome, sexo=:sexo, nomePai=:nomePai, nomeMae=:nomeMae, 
+                                  dataNascimento=:dataNascimento, telefone1=:telefone1, telefone2=:telefone2, 
+                                  cpf=:cpf, rg=:rg, email=:email, logradouro=:logradouro, numero=:numero, 
+                                  complemento=:complemento, bairro=:bairro, municipioId=:municipioId, 
+                                  numeroDizimo=:numeroDizimo, comunidadeId=:comunidadeId, observacoes=:observacoes, 
+                                  batizado=:batizado, localBatismo=:localBatismo, primeiraEucaristia=:primeiraEucaristia, 
+                                  localPrimeiraEucaristia=:localPrimeiraEucaristia, status=:status, 
+                                  dataUltimaAlteracao=:dataUltimaAlteracao, usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
                 WHERE id=:id";
-      $conn = getConn();
-      $query = $conn->prepare($sql);
-      $query->bindParam("nome",$pessoa->nome);
-      $query->bindParam("sexo",$pessoa->sexo);
-      $query->bindParam("dataNascimento",$pessoa->dataNascimento);
-      $query->bindParam("telefone1",$pessoa->telefone1);
-      $query->bindParam("telefone2",$pessoa->telefone2);
-      $query->bindParam("cpf",$pessoa->cpf);
-      $query->bindParam("rg",$pessoa->rg);
-      $query->bindParam("email",$pessoa->email);
-      $query->bindParam("logradouro",$pessoa->logradouro);
-      $query->bindParam("numero",$pessoa->numero);
-      $query->bindParam("complemento",$pessoa->complemento);
-      $query->bindParam("bairro",$pessoa->bairro);
-      $query->bindParam("municipioId",$pessoa->municipioId);
-      $query->bindParam("dataCadastramento",$pessoa->dataCadastramento);
-      $query->bindParam("status",$pessoa->status);
-      $query->bindParam("id",$id);
+      $query = $this->db->prepare($sql);
+      $query->bindParam(":id",$this->id);
+      $query->bindParam(":nome",$this->nome);
+      $query->bindParam(":sexo",$this->sexo);
+      $query->bindParam(":nomePai",$this->nomePai);
+      $query->bindParam(":nomeMae",$this->nomeMae);
+      $query->bindParam(":dataNascimento",$this->dataNascimento);
+      $query->bindParam(":telefone1",$this->telefone1);
+      $query->bindParam(":telefone2",$this->telefone2);
+      $query->bindParam(":cpf",$this->cpf);
+      $query->bindParam(":rg",$this->rg);
+      $query->bindParam(":email",$this->email);
+      $query->bindParam(":logradouro",$this->logradouro);
+      $query->bindParam(":numero", $this->numero);
+      $query->bindParam(":complemento", $this->complemento);
+      $query->bindParam(":bairro", $this->bairro);
+      $query->bindParam(":municipioId", $this->municipioId);
+      $query->bindParam(":numeroDizimo", $this->numeroDizimo);
+      $query->bindParam(":comunidadeId", $this->comunidadeId);
+      $query->bindParam(":observacoes", $this->observacoes);
+      $query->bindParam(":batizado", $this->batizado);
+      $query->bindParam(":localBatismo", $this->localBatismo);
+      $query->bindParam(":primeiraEucaristia", $this->primeiraEucaristia);
+      $query->bindParam(":localPrimeiraEucaristia", $this->localPrimeiraEucaristia);
+      $query->bindParam("status",$this->status);
+      $query->bindParam("dataUltimaAlteracao", $this->dataUltimaAlteracao);
+      $query->bindParam("usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
       $query->execute();
-      echo json_encode($pessoa);
-    
+      echo json_encode($this);
     }
     
-    function deletePessoa($id)
+    function deletePessoa()
     {
       $sql = "DELETE FROM Pessoa WHERE id=:id";
-      $conn = getConn();
-      $query = $conn->prepare($sql);
-      $query->bindParam("id",$id);
+      $query = $this->db->prepare($sql);
+      $query->bindParam(":id",$this->id);
       $query->execute();
-      echo "{'message':'Pessoa apagada'}";
+      echo "{'message': 'Pessoa apagada'}";
     }
 }
 ?>

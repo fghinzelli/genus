@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS Pessoa (
 	batizado int(1) NOT NULL,
 	localBatismo varchar(30) NULL,
 	primeiraEucaristia int(1) NULL,
-	localEucaristia varchar(30) NULL,
+	localPrimeiraEucaristia varchar(30) NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,

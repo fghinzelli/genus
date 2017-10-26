@@ -43,7 +43,7 @@
             $query->bindParam(':token', $token, PDO::PARAM_STR);
             $query->execute();
             if($query->rowCount() > 0) {
-                $this->updateToken($token);
+                $this->updateExpirateToken($token);
                 return true;
             } else {
                 return false;
@@ -80,7 +80,7 @@
 			$query->execute();
         }
 
-        function updateToken($token) {
+        function updateExpirateToken($token) {
             $tokenExpiration = date('Y-m-d H:i:s', strtotime('+1 hour'));
             $sql = "UPDATE Usuario SET token = :token, tokenExpiracao = :tokenExpiracao WHERE token = :token";
 			$query = $this->db->prepare($sql);

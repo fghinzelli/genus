@@ -34,7 +34,9 @@
 		}
 	};
 
+	/* CRUD PESSOAS */
 
+	// SELECT ALL
 	$app->get('/pessoas', function($request, $response, $args) {
 		$pessoa = new Pessoa(db::getInstance());
 		$result = $pessoa->getPessoas();
@@ -49,6 +51,7 @@
 		}
 	})->add($middleAuthorization);
 
+	// SELECT ONE
 	$app->get('/pessoas/{id}', function($request, $response, $args) {
 		$pessoa = new Pessoa(db::getInstance());
 		$result = $pessoa->getPessoa($args['id']);
@@ -62,6 +65,45 @@
 			->write($result);
 		}
 	})->add($middleAuthorization);
+
+	// INSERT
+	$app->post('/pessoas', function($request, $response, $args) {
+		$data = $request->getParsedBody();
+		$pessoa = new Pessoa(db::getInstance());
+		$pessoa->loadData(null, $data['nome'], $data['sexo'], $data['nomePai'], $data['nomeMae'],
+						  $data['dataNascimento'], $data['telefone1'], $data['telefone2'], $data['cpf'], $data['rg'], 
+					 	  $data['email'], $data['logradouro'], $data['numero'], $data['complemento'], 
+						  $data['bairro'], $data['municipioId'], $data['numeroDizimo'], $data['comunidadeId'],
+						  $data['observacoes'], $data['batizado'], $data['localBatismo'], $data['primeiraEucaristia'],
+						  $data['localPrimeiraEucaristia'], $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
+						);
+		$result = $pessoa->addPessoa();
+		return $response->write($result);
+	})->add($middleAuthorization);
+	
+	// UPDATE
+	$app->put('/pessoas/{id}', function($request, $response, $args) {
+		$data = $request->getParsedBody();
+		$pessoa = new Pessoa(db::getInstance());
+		$pessoa->loadData($args['id'], $data['nome'], $data['sexo'], $data['nomePai'], $data['nomeMae'],
+						  $data['dataNascimento'], $data['telefone1'], $data['telefone2'], $data['cpf'], $data['rg'], 
+					 	  $data['email'], $data['logradouro'], $data['numero'], $data['complemento'], 
+						  $data['bairro'], $data['municipioId'], $data['numeroDizimo'], $data['comunidadeId'],
+						  $data['observacoes'], $data['batizado'], $data['localBatismo'], $data['primeiraEucaristia'],
+						  $data['localPrimeiraEucaristia'], $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
+						);
+		$result = $pessoa->savePessoa();
+		return $response->write($result);
+	})->add($middleAuthorization);
+
+	// DELETE
+	$app->delete('/pessoas/{id}', function($request, $response, $args) {
+		$pessoa = new Pessoa(db::getInstance());
+		$pessoa->id = $args['id'];
+		$result = $pessoa->deletePessoa();
+		return $response->write($result);
+	})->add($middleAuthorization);
+
 
 	$app->post('/login', function($request, $response, $args) { 
 		$data = $request->getParsedBody();
@@ -78,9 +120,11 @@
 		}
 	});
 
+	
+
 	$app->run();
 	/*
-	$app->post('/pessoas','addPessoa');
+	
 	$app->put('/pessoas/:id','savePessoa');
 	$app->delete('/pessoas/:id','deletePessoa');
 	

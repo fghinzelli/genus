@@ -1,7 +1,7 @@
 CREATE OR REPLACE VIEW ViewUsuario AS (
     SELECT 
         u.id,
-        u.usuario,
+        u.username,
         u.senha,
         p.nome
     FROM 
