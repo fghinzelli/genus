@@ -3,6 +3,7 @@ var app = angular.module('myApp', ['ngRoute']);
 app.factory("services", ['$http', function($http) {
   var serviceBase = '/genus/services/'
     var obj = {};
+    $http.defaults.headers.common['Authorization'] = 's45gs6df4gsdf';
     obj.getCustomers = function(){
         return $http.get(serviceBase + 'pessoas');
     }

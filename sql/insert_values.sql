@@ -11,13 +11,13 @@ INSERT INTO `Comunidade` (`id`, `nome`, `padroeiro`, `paroquiaId`, `dataFuncacao
 INSERT INTO `AcessoNivel` (`id`, `descricao`, `status`) VALUES (NULL, 'Administrador', '1');
 
 -- Pessoa
-INSERT INTO `Pessoa` (`id`, `nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, `cpf`, `rg`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, `primeiraEucaristia`, `localEucaristia`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+INSERT INTO `Pessoa` (`id`, `nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, `cpf`, `rg`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, `primeiraEucaristia`, `localPrimeiraEucaristia`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
 VALUES 
 (NULL, 'Fernando Ghinzelli', 'M', 'Jose Luis Ghinzelli', 'Lourdes Ghinzelli', '2017-08-14 00:00:00', NULL, NULL, NULL, NULL, 'fghinzelli@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
 (NULL, 'Mariel Carissimi', 'F', 'Mario Carissimi', 'Teresa Maria Pasa Carissimi', '2017-06-11 00:00:00', NULL, NULL, NULL, NULL, 'mariel@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL);
 
 -- Usuario
-INSERT INTO `Usuario` (`id`, `usuario`, `senha`, `pessoaId`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'fghinzelli', '827ccb0eea8a706c4c34a16891f84e7b', 1, 1, NULL, NULL);
+INSERT INTO `Usuario` (`id`, `username`, `senha`, `pessoaId`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'fghinzelli', '$2y$10$ykcFDQXMhxWDBbHeJm9QTuej1LITWjYCj9GCUCWAPM8JuqYdbkFYO', 1, 1, NULL, NULL);
 
 -- AcessoParoquia 
 INSERT INTO `AcessoParoquia` (`id`, `paroquiaId`, `usuarioId`, `nivelAcessoId`) VALUES (NULL, '1', '1', '1');
