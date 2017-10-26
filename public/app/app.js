@@ -3,26 +3,26 @@ app.factory("services", ['$http', function($http) {
   var serviceBase = 'services/'
     var obj = {};
     obj.getCustomers = function(){
-        return $http.get(serviceBase + 'customers');
+        return $http.get(serviceBase + 'pessoas');
     }
     obj.getCustomer = function(customerID){
-        return $http.get(serviceBase + 'customer?id=' + customerID);
+        return $http.get(serviceBase + 'pessoas?id=' + customerID);
     }
 
     obj.insertCustomer = function (customer) {
-    return $http.post(serviceBase + 'insertCustomer', customer).then(function (results) {
+    return $http.post(serviceBase + 'pessoas', customer).then(function (results) {
         return results;
     });
 	};
 
 	obj.updateCustomer = function (id,customer) {
-	    return $http.post(serviceBase + 'updateCustomer', {id:id, customer:customer}).then(function (status) {
+	    return $http.post(serviceBase + 'pessoas', {id:id, customer:customer}).then(function (status) {
 	        return status.data;
 	    });
 	};
 
 	obj.deleteCustomer = function (id) {
-	    return $http.delete(serviceBase + 'deleteCustomer?id=' + id).then(function (status) {
+	    return $http.delete(serviceBase + 'pessoas/' + id).then(function (status) {
 	        return status.data;
 	    });
 	};
