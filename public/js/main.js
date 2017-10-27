@@ -25,6 +25,11 @@ angular.module('BasicHttpAuthExample', [
         .when('/', {
             controller: 'HomeController',
             templateUrl: 'js/modules/home/views/home.html'
+        })
+
+        .when('/pessoas', {
+            controller: 'PessoasController',
+            templateUrl: 'js/modules/home/views/Pessoas.html'
             //templateUrl: 'dashboard.html'
         })
  
