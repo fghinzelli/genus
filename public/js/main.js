@@ -8,7 +8,8 @@ angular.module('BasicHttpAuthExample', [
     'Authentication',
     'Home',
     'ngRoute',
-    'ngCookies'
+    'ngCookies',
+    'ui.bootstrap'
 ])
  
 
