@@ -15,24 +15,35 @@ angular.module('BasicHttpAuthExample', [
 
 .config(['$routeProvider', function ($routeProvider) {
 
+    //$locationProvider.html5Mode(true);
+
     $routeProvider
         .when('/login', {
             controller: 'LoginController',
-            templateUrl: 'js/modules/authentication/views/login.html',
+            templateUrl: 'partials/login.html',
             hideMenus: true
         })
  
         .when('/', {
             controller: 'HomeController',
-            templateUrl: 'js/modules/home/views/home.html'
+            templateUrl: 'partials/home.html'
         })
 
         .when('/pessoas', {
             controller: 'PessoasController',
-            templateUrl: 'js/modules/home/views/Pessoas.html'
-            //templateUrl: 'dashboard.html'
+            templateUrl: 'partials/pessoas_list.html'
         })
- 
+
+        .when('/pessoas/new', {
+            controller: 'PessoasController',
+            templateUrl: 'partials/pessoas_form.html'
+        })
+
+        .when('/pessoas/edit/:pessoaId', {
+            controller: 'PessoasController',
+            templateUrl: 'partials/pessoas_form.html'
+        })
+
         .otherwise({ redirectTo: '/login' });
 }])
 
