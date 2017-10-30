@@ -3,16 +3,19 @@
 angular.module('Home',)
 
 .controller('PessoasController',
-    ['$scope', '$http', '$cookieStore',
-    function ($scope, $http, $cookieStore ) {
+    ['$scope', '$http', '$cookieStore', 
+    function ($scope, $http, $cookieStore, $routeParams) {
         
         var serviceBase = '/genus/services/';
         var globals = $cookieStore.get('globals');
         $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
+        
+        
         $scope.pessoas = [];
         $scope.filtro = '';
         $scope.mensagem = '';
     
+        
         $http.get(serviceBase + 'pessoas')
         .success(function(retorno) {
             $scope.pessoas = retorno.pessoas;
@@ -21,6 +24,10 @@ angular.module('Home',)
             console.log(erro)
         });
     
+        $scope.submeterForm = function() {
+            console.log($scope.pessoa);
+        }
+
         $scope.remover = function(pessoa) {
     
             $http.delete(serviceBase + 'pessoas/' + pessoa.id)
