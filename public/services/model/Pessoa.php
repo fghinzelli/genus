@@ -180,7 +180,7 @@ class Pessoa {
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();
-      echo "{'message': 'Pessoa apagada'}";
+      echo json_encode("{'message': 'Pessoa apagada'}");
     }
 }
 ?>

@@ -14,6 +14,11 @@ angular.module('Home',)
         $scope.pessoas = [];
         $scope.filtro = '';
         $scope.mensagem = '';
+        $scope.showSuccessAlert = true;
+        $scope.switchBool = function(value) {
+            $scope[value] = !$scope[value];
+        };
+
     
         
         $http.get(serviceBase + 'pessoas')
@@ -34,7 +39,7 @@ angular.module('Home',)
             .success(function() {
                 var indiceDaPessoa = $scope.pessoas.indexOf(pessoa);
                 $scope.pessoas.splice(indiceDaPessoa, 1);
-                $scope.mensagem = 'Pessoa ' + pessoa.nome + ' removida com sucesso!';
+                $scope.mensagem = pessoa.nome + ' removid(o)a com sucesso!';
     
             })
             .error(function(erro) {
