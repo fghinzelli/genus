@@ -12,12 +12,17 @@ class Pessoa {
     public $telefone2;
     public $cpf;
     public $rg;
+    public $rgEmissor;
+    public $rgUF;
+    public $passaporte;
+    public $nacionalidade;
     public $email;
     public $logradouro;
     public $numero;
     public $complemento;
     public $bairro;
     public $municipioId;
+    public $cep;
     public $numeroDizimo;
     public $comunidadeId;
     public $observacoes;
@@ -34,7 +39,8 @@ class Pessoa {
     }
 
     function loadData($id, $nome, $sexo, $nomePai, $nomeMae, $dataNascimento, $telefone1, $telefone2,
-                      $cpf, $rg, $email, $logradouro, $numero, $complemento, $bairro, $municipioId,
+                      $cpf, $rg, $rgEmissor, $rgUF, $passaporte, $nacionalidade, $email, $logradouro, 
+                      $numero, $complemento, $bairro, $municipioId,
                       $numeroDizimo, $comunidadeId, $observacoes, $batizado, $localBatismo, $primeiraEucaristia,
                       $localPrimeiraEucaristia, $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
         $this->id = $id;
@@ -46,7 +52,11 @@ class Pessoa {
 		$this->telefone1 = $telefone1;
 		$this->telefone2 = $telefone2;
 		$this->cpf = $cpf;
-		$this->rg = $rg;
+        $this->rg = $rg;
+        $this->rgEmissor = $rgEmissor;
+        $this->rgUF = $rgUF;
+        $this->passaporte = $passaporte;
+        $this->nacionalidade = $nacionalidade;
 		$this->email = $email;
 		$this->logradouro = $logradouro;
 		$this->numero = $numero;
@@ -92,7 +102,8 @@ class Pessoa {
 
     function addPessoa() {
         $sql = "INSERT INTO Pessoa (`nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, 
-                                    `cpf`, `rg`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, 
+                                    `cpf`, `rg`, `rgEmissor`, `rgUF`, `passaporte`, `nacionalidade`, `email`, `logradouro`, 
+                                    `numero`, `complemento`, `bairro`, `municipioId`, 
                                     `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, 
                                     `primeiraEucaristia`, `localPrimeiraEucaristia`, 
                                     `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
@@ -111,6 +122,10 @@ class Pessoa {
         $query->bindParam(":telefone2",$this->telefone2);
         $query->bindParam(":cpf",$this->cpf);
         $query->bindParam(":rg",$this->rg);
+        $query->bindParam(":rgEmissor",$this->rgEmissor);
+        $query->bindParam(":rgUF",$this->rgUF);
+        $query->bindParam(":passaporte",$this->passaporte);
+        $query->bindParam(":nacionalidade",$this->nacionalidade);
         $query->bindParam(":email",$this->email);
         $query->bindParam(":logradouro",$this->logradouro);
         $query->bindParam(":numero", $this->numero);
@@ -136,7 +151,8 @@ class Pessoa {
     {
         $sql = "UPDATE Pessoa SET nome=:nome, sexo=:sexo, nomePai=:nomePai, nomeMae=:nomeMae, 
                                   dataNascimento=:dataNascimento, telefone1=:telefone1, telefone2=:telefone2, 
-                                  cpf=:cpf, rg=:rg, email=:email, logradouro=:logradouro, numero=:numero, 
+                                  cpf=:cpf, rg=:rg, rgEmissor:=rgEmissor, rgUF:=rgUF, passaporte:=passaporte, nacionalidade:=nacionalidade,
+                                  email=:email, logradouro=:logradouro, numero=:numero, 
                                   complemento=:complemento, bairro=:bairro, municipioId=:municipioId, 
                                   numeroDizimo=:numeroDizimo, comunidadeId=:comunidadeId, observacoes=:observacoes, 
                                   batizado=:batizado, localBatismo=:localBatismo, primeiraEucaristia=:primeiraEucaristia, 
@@ -154,6 +170,10 @@ class Pessoa {
       $query->bindParam(":telefone2",$this->telefone2);
       $query->bindParam(":cpf",$this->cpf);
       $query->bindParam(":rg",$this->rg);
+      $query->bindParam(":rgEmissor",$this->rgEmissor);
+      $query->bindParam(":rgUF",$this->rgUF);
+      $query->bindParam(":passaporte",$this->passaporte);
+      $query->bindParam(":nacionalidade",$this->nacionalidade);
       $query->bindParam(":email",$this->email);
       $query->bindParam(":logradouro",$this->logradouro);
       $query->bindParam(":numero", $this->numero);
