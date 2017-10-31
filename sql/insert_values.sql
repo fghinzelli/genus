@@ -17,7 +17,7 @@ VALUES
 (NULL, 'Mariel Carissimi', 'F', 'Mario Carissimi', 'Teresa Maria Pasa Carissimi', '2017-06-11 00:00:00', NULL, NULL, NULL, NULL, 'mariel@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL);
 
 -- Usuario
-INSERT INTO `Usuario` (`id`, `username`, `senha`, `pessoaId`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'fghinzelli', '$2y$10$ykcFDQXMhxWDBbHeJm9QTuej1LITWjYCj9GCUCWAPM8JuqYdbkFYO', 1, 1, NULL, NULL);
+INSERT INTO `Usuario` (`id`, `username`, `senha`, `pessoaId`, `token`, `tokenExpiracao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'fghinzelli', '$2y$10$K/V0l5OwEQH59sZiNLoG4eRWAhcGIgHgDiR2/tVNeWvJRNEGFmwDO', 1, '07d5ccaeb0da5486', '2017-10-31 03:23:13', 1, NULL, NULL);
 
 -- AcessoParoquia 
 INSERT INTO `AcessoParoquia` (`id`, `paroquiaId`, `usuarioId`, `nivelAcessoId`) VALUES (NULL, '1', '1', '1');
