@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -12,32 +12,44 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-            <li class="active"><a href="#/"><i class="fa fa-home"></i> Início</a></li>
-            <li><a href="#/"><i class="fa fa-edit"></i> Catequese <b class="caret"></b></a></li>
-            <li><a href="#/pessoas">Alunos</a></li>
-            <li><a href="#/pessoas">Catequistas</a></li>
-            <li><a href="#/pessoas">Turmas</a></li>
-            <li><a href="#/pessoas">Inscrições</a></li>
-
-            <li class="dropdown">
-            <a href="#" class="dropdown-toggle"><i class="fa fa-edit"></i> Teologia <b class="caret"></b></a>    
+    <div class="collapse navbar-collapse navbar-ex1-collapse" >
+        <ul class="nav navbar-nav side-nav" ng-controller="SidebarController">
+            <li class="active">
+                <a href="#/"><i class="fa fa-home"></i> Início</a>
             </li>
-            <li><a href="#/pessoas">Alunos</a></li>
-            <li><a href="#/pessoas">Professores</a></li>
-            <li><a href="#/pessoas">Turmas</a></li>
-            <li><a href="#/pessoas">Inscrições</a></li>
-            <li class="dropdown">
-                <a href="#/" class="dropdown-toggle"><i class="fa fa-edit"></i> Cadastros <b class="caret"></b></a>
+            <li class="dropdown" >
+                <a href ng-click="isCollapsed = !isCollapsed" class="dropdown-toggle"><i class="fa fa-caret-square-o-down"></i> Catequese <b class="caret"></b></a>
+                <ul class="dropdown-menu" uib-collapse="isCollapsed">
+                    <li><a href="#/catequese/alunos">Alunos</a></li>
+                    <li><a href="#/catequese/catequistas">Catequistas</a></li>
+                    <li><a href="#/catequese/turmas">Turmas</a></li>
+                    <li><a href="#/catequese/inscricoes">Inscrições</a></li>
+                </ul>
             </li>
-            <li><a href="#/pessoas">Diocese</a></li>
-            <li><a href="#/pessoas">Paróquia</a></li>
-            <li><a href="#/pessoas">Comuniades</a></li>
-            <li><a href="#/pessoas">Escolas</a></li>
-            <li><a href="#/"><i class="fa fa-bar-chart-o"></i> Relatórios</a></li>
-            <li><a href="#/"><i class="fa fa-user"></i> Usuários</a></li>
+            <li class="dropdown" >
+                <a href ng-click="isColl = !isColl" class="dropdown-toggle"><i class="fa fa-caret-square-o-down"></i> Teologia <b class="caret"></b></a>
+                <ul class="dropdown-menu" uib-collapse="isColl">
+                    <li><a href="#/teologia/alunos">Alunos</a></li>
+                    <li><a href="#/teologia/professores">Professores</a></li>
+                    <li><a href="#/teologia/turmas">Turmas</a></li>
+                    <li><a href="#/teologia/inscricoes">Inscrições</a></li>
+                </ul>
+            </li>
+            <li class="dropdown" >
+                <a href ng-click="isCad = !isCad" class="dropdown-toggle"><i class="fa fa-caret-square-o-down"></i> Cadastros <b class="caret"></b></a>
+                <ul class="dropdown-menu" uib-collapse="isCad">
+                    <li><a href="#/dioceses">Diocese</a></li>
+                    <li><a href="#/paroquias">Paróquia</a></li>
+                    <li><a href="#/comunidades">Comunidades</a></li>
+                    <li><a href="#/escolas">Escolas</a></li>
+                    <li><a href="#/pessoas">Pessoas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#/"><i class="fa fa-bar-chart-o"></i> Relatórios</a>
+            </li>
+            <li>
+                <a href="#/"><i class="fa fa-user"></i> Usuários</a>
+            </li>
     </div>
-
-    
 </nav>

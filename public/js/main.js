@@ -9,7 +9,8 @@ angular.module('Genus', [
     'Home',
     'ngRoute',
     'ngCookies',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngAnimate'
 ])
  
 
