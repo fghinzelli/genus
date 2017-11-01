@@ -18,7 +18,6 @@ angular.module('Home',)
             $scope[value] = !$scope[value];
         };
 
-        $scope.municipios = {}
 
 
         // GET BY ID
@@ -36,8 +35,9 @@ angular.module('Home',)
     
         // SUBMIT DO FORM - CREATE AND UPDATE
         $scope.submeterForm = function() {
-            if ($scope.formulario.$valid) {
-                if ($routeParams.id) {
+            //if ($scope.formulario.$valid) {
+                $scope.pessoa.status = 1;
+                if ($routeParams.pessoaId) {
                     $http.put(serviceBase + 'pessoas/' + $scope.pessoa.id, $scope.pessoa)
                     .success(function() {
                         $scope.mensagem = 'Dados alterados com sucesso';
@@ -47,7 +47,7 @@ angular.module('Home',)
                         $scope.mensagem = 'Não foi possível alterar os dados';
                     });
                 } else {
-                    $http.post(serviceBase + 'pessoas/', $scope.pessoa)
+                    $http.post(serviceBase + 'pessoas', $scope.pessoa)
                     .success(function() {
                         $scope.pessoa = {};
                         $scope.mensagem = 'Pessoas adastrada com sucesso';
@@ -57,7 +57,7 @@ angular.module('Home',)
                         $scope.mensagem = 'Não foi possível cadastrar esta pessoa';
                     });
                 }
-            }
+            //}
         }
 
         // DELETE

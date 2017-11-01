@@ -74,11 +74,12 @@
 		$pessoa = new Pessoa(db::getInstance());
 		$pessoa->loadData(null, $data['nome'], $data['sexo'], $data['nomePai'], $data['nomeMae'],
 						  $data['dataNascimento'], $data['telefone1'], $data['telefone2'], $data['cpf'], $data['rg'], 
-					 	  $data['email'], $data['logradouro'], $data['numero'], $data['complemento'], 
-						  $data['bairro'], $data['municipioId'], $data['numeroDizimo'], $data['comunidadeId'],
+						  $data['rgEmissor'], $data['rgUF'], $data['passaporte'], $data['nacionalidade'], 
+						  $data['email'], $data['logradouro'], $data['numero'], $data['complemento'], 
+						  $data['bairro'], $data['municipioId'], $data['cep'], $data['numeroDizimo'], $data['comunidadeId'],
 						  $data['observacoes'], $data['batizado'], $data['localBatismo'], $data['primeiraEucaristia'],
 						  $data['localPrimeiraEucaristia'], $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
-						);
+						  );
 		$result = $pessoa->addPessoa();
 		return $response->write($result);
 	})->add($middleAuthorization);
@@ -89,8 +90,9 @@
 		$pessoa = new Pessoa(db::getInstance());
 		$pessoa->loadData($args['id'], $data['nome'], $data['sexo'], $data['nomePai'], $data['nomeMae'],
 						  $data['dataNascimento'], $data['telefone1'], $data['telefone2'], $data['cpf'], $data['rg'], 
-					 	  $data['email'], $data['logradouro'], $data['numero'], $data['complemento'], 
-						  $data['bairro'], $data['municipioId'], $data['numeroDizimo'], $data['comunidadeId'],
+						  $data['rgEmissor'], $data['rgUF'], $data['passaporte'], $data['nacionalidade'], 
+						  $data['email'], $data['logradouro'], $data['numero'], $data['complemento'], 
+						  $data['bairro'], $data['municipioId'], $data['cep'], $data['numeroDizimo'], $data['comunidadeId'],
 						  $data['observacoes'], $data['batizado'], $data['localBatismo'], $data['primeiraEucaristia'],
 						  $data['localPrimeiraEucaristia'], $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
 						);

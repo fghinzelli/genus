@@ -1,11 +1,12 @@
 angular.module('GenusDiretivas', []) 
-    .directive('showtab', function() {
+    .directive('accordion', function () {
         return {
-            link: function (scope, element, attrs) {
-                element.click(function(e) {
-                    e.preventDefault();
-                    $(element).tab('show');
-                });
+            restrict: 'E',
+            scope: { model: '='},
+            templateUrl: 'panelTemplate.html',
+            link: function (scope, element, attr) {
+                scope.parentId = attr.id;
             }
-        };
+
+        }
     });
