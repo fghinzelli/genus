@@ -3,6 +3,8 @@
 	require 'model/db.php';
 	require 'model/Pessoa.php';
 	require 'model/Usuario.php';
+	require 'model/Estado.php';
+	require 'model/Municipio.php';
 	
 	//require 'db_connection.php';
 
@@ -120,7 +122,40 @@
 		}
 	});
 
-	
+	/* ESTADOS */
+
+	// SELECT ALL
+	$app->get('/estados', function($request, $response, $args) {
+		$estado = new Estado(db::getInstance());
+		$result = $estado->getEstados();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	/* ESTADOS */
+
+	// SELECT BY UF
+	$app->get('/municipios/{uf}', function($request, $response, $args) {
+		$municipio = new Municipio(db::getInstance());
+		$result = $municipio->getMunicipio($args['uf']);
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
 
 	$app->run();
 

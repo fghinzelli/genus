@@ -4,7 +4,7 @@
 angular.module('Authentication', []);
 angular.module('Home', []);
 
-angular.module('BasicHttpAuthExample', [
+angular.module('Genus', [
     'Authentication',
     'Home',
     'ngRoute',
@@ -30,17 +30,17 @@ angular.module('BasicHttpAuthExample', [
         })
 
         .when('/pessoas', {
-            controller: 'PessoasController',
+            controller: 'PessoasListController',
             templateUrl: 'partials/pessoas_list.html'
         })
 
         .when('/pessoas/new', {
-            controller: 'PessoasController',
+            controller: 'PessoasEditController',
             templateUrl: 'partials/pessoas_form.html'
         })
 
         .when('/pessoas/edit/:pessoaId', {
-            controller: 'PessoasController',
+            controller: 'PessoasEditController',
             templateUrl: 'partials/pessoas_form.html'
         })
 

@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('Home',)
-
-.controller('PessoasController',
+.controller('PessoasEditController',
     ['$scope', '$http', '$cookieStore', '$routeParams',
     function ($scope, $http, $cookieStore, $routeParams) {
         
@@ -19,20 +18,15 @@ angular.module('Home',)
             $scope[value] = !$scope[value];
         };
 
-    
-        $http.get(serviceBase + 'pessoas')
-        .success(function(retorno) {
-            $scope.pessoas = retorno.pessoas;
-        })
-        .error(function(erro) {
-            console.log(erro)
-        });
+        $scope.municipios = {}
+
 
         // GET BY ID
         if ($routeParams.pessoaId) {
             $http.get(serviceBase + 'pessoas/' + $routeParams.pessoaId)
             .success(function(pessoa) {
                 $scope.pessoa = pessoa;
+                //console.log(pessoa);
             })
             .error(function(erro) {
                 console.log(erro);
@@ -73,12 +67,12 @@ angular.module('Home',)
             .success(function() {
                 var indiceDaPessoa = $scope.pessoas.indexOf(pessoa);
                 $scope.pessoas.splice(indiceDaPessoa, 1);
-                $scope.mensagem = pessoa.nome + ' removid(o)a com sucesso!';
+                $scope.mensagem = 'Registro removido com sucesso!';
     
             })
             .error(function(erro) {
                 console.log(erro);
-                $scope.mensagem = 'Não foi possível apagar ' + pessoa.nome;
+                $scope.mensagem = 'Não foi possível apagar o registro';
             });
         };
     }]);

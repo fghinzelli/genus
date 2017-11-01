@@ -67,11 +67,189 @@
                         </div>
                     </div>
                     <div class="row">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" data-target="#tab-endereco">Endereço</a></li>
-                                <li><a data-target="#tab-endereco">Contatos</a></li>
-                                <li><a data-target="#tab-endereco">Vida Cristã</a></li>
-                            </ul>
+                        <div class="col-lg-12">
+                            <uib-tabset active="activeForm">
+                                <uib-tab index="0" heading="Endereço">
+                                    <div class="tab-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>Logradouro</label>
+                                                        <input type="text" class="form-control" name="logradouro" ng-model="pessoa.logradouro">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Número</label>
+                                                        <input type="text" class="form-control" name="numero" ng-model="pessoa.numero">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Complemento</label>
+                                                        <input type="text" class="form-control" name="complemento" ng-model="pessoa.complemento">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Bairro</label>
+                                                        <input type="text" class="form-control" name="bairro" ng-model="pessoa.bairro">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" ng-controller="MunicipiosController" >
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>CEP</label>
+                                                        <input type="text" class="form-control" name="cep" ng-model="pessoa.cep">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>UF</label>
+                                                        <select name="estado" class="form-control" ng-change="atualizarMunicipios()" 
+                                                                ng-model="estado" ng-options="estado.uf as estado.nome for estado in estados">
+                                                            <option value="">Selecione</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <div class="form-group">
+                                                        <label>Município</label>
+                                                        <select name="municipio" class="form-control" 
+                                                                ng-model="pessoa.municipioId" ng-options="municipio.id as municipio.nome for municipio in municipios">
+                                                            <option value="">Selecione</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </uib-tab>
+                                <uib-tab index="1" heading="Contatos">
+                                    <div class="tab-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>Email</label>
+                                                        <input type="email" class="form-control" name="email" ng-model="pessoa.email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Telefone Principal</label>
+                                                        <input type="text" class="form-control" name="telefone1" ng-model="pessoa.telefone1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Telefone para Recados</label>
+                                                        <input type="text" class="form-control" name="telefone2" ng-model="pessoa.telefone2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </uib-tab>
+                                <uib-tab index="2" heading="Documentos">
+                                    <div class="tab-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>CPF</label>
+                                                        <input type="cpf" class="form-control" name="cpf" ng-model="pessoa.cpf">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>RG</label>
+                                                        <input type="text" class="form-control" name="rg" ng-model="pessoa.rg">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label>Emissor</label>
+                                                        <input type="text" class="form-control" name="rgEmissor" ng-model="pessoa.rgEmissor">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group" ng-controller="MunicipiosController">
+                                                        <label>UF</label>
+                                                        <select name="rgUF" class="form-control" 
+                                                                ng-model="pessoa.rgUF" ng-options="estado.uf for estado in estados">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </uib-tab>
+                                <uib-tab index="3" heading="Vida Cristã">
+                                    <div class="tab-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Número do Dízimo</label>
+                                                        <input type="text" class="form-control" name="numeroDizimo" ng-model="pessoa.numeroDizimo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Comunidade</label>
+                                                        <select name="comunidade" class="form-control"
+                                                                ng-model="pessoa.comunidade" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
+                                                            <option value="">Selecione</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" value="">
+                                                                Batizado
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Local do Batismo</label>
+                                                        <input type="text" class="form-control" name="localBatismo" ng-model="pessoa.localBatismo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" value="">
+                                                                Primeira Eucaristia
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Local da Primeira Eucaristia</label>
+                                                        <input type="text" class="form-control" name="localPrimeiraEucaristia" ng-model="pessoa.localPrimeiraEucaristia">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </uib-tab>
+                            </uib-tabset>
                         </div>
                     </div>
                     <div class="row">
@@ -83,17 +261,6 @@
                         </div>
                     </div>  
                 </form>
-                
-                <div class="tab-content">
-                    <div id="tab-endereco" class="tab-pane fade in active">
-                        <h3>EMDEREREÇOS</h3>
-                        <p>Some content.</p>
-                        <div class="form-group">
-                            <label>Telefone Fixo</label>
-                            <input class="form-control" placeholder="Enter text">
-                        </div>
-                    </div>
-                </div>
                     
                     
                         
