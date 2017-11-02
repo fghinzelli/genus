@@ -16,7 +16,7 @@
                         <input class="form-control" placeholder="Pesquisar Catequistas" ng-model="filtro">
                     </form>
                     <span class="input-group-btn">
-                        <a href="#/catequistas/new" class="btn btn-primary" type="button">
+                        <a href="#/catequese/catequistas/new" class="btn btn-primary" type="button">
                             Novo Catequista
                         </a>
                     </span>
@@ -49,7 +49,7 @@
                                         <td>{{catequista.dataNascimento | date:'dd/MM/yyyy' }}</td>
                                         <td>{{catequista.comunidade.nome}}</td>
                                         <td>
-                                            <a href="#/catequistas/edit/{{catequista.id}}" class="btn btn-sm btn-default" href="">Editar</a>
+                                            <a href="#/catequese/catequistas/edit/{{catequista.id}}" class="btn btn-sm btn-default" href="">Editar</a>
                                             <button class="btn btn-sm btn-default" ng-click="remover(catequista)">Remover</button>
                                         </td>
                                     </tr>

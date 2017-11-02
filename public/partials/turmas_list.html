@@ -16,7 +16,7 @@
                         <input class="form-control" placeholder="Pesquisar Turma" ng-model="filtro">
                     </form>
                     <span class="input-group-btn">
-                        <a href="#/turmas/new" class="btn btn-primary" type="button">
+                        <a href="#/catequese/turmas/new" class="btn btn-primary" type="button">
                             Novo Turma
                         </a>
                     </span>
@@ -51,7 +51,7 @@
                                         <td>{{turma.turno.descricao}}</td>
                                         <td>{{turma.horario}}</td>
                                         <td>
-                                            <a href="#/turmas/edit/{{turma.id}}" class="btn btn-sm btn-default" href="">Editar</a>
+                                            <a href="#/catequese/turmas/edit/{{turma.id}}" class="btn btn-sm btn-default" href="">Editar</a>
                                             <button class="btn btn-sm btn-default" ng-click="remover(turma)">Remover</button>
                                         </td>
                                     </tr>

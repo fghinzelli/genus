@@ -48,14 +48,34 @@ angular.module('Genus', [
 
         // CATEQUIZANDOS
         .when('/catequese/catequizandos', {
-            controller: 'CatequisadosListController',
+            controller: 'CatequizandosListController',
             templateUrl: 'partials/catequizandos_list.html'
+        })
+
+        .when('/catequese/catequizandos/new', {
+            controller: 'CatequizandosEditController',
+            templateUrl: 'partials/catequizandos_form.html'
+        })
+
+        .when('/catequese/catequizandos/edit/:catequizandoId', {
+            controller: 'CatequizandosEditController',
+            templateUrl: 'partials/catequizandos_form.html'
         })
 
         // CATEQUISTAS
         .when('/catequese/catequistas', {
             controller: 'CatequistasListController',
-            templateUrl: 'partials/catequizandos_list.html'
+            templateUrl: 'partials/catequistas_list.html'
+        })
+
+        .when('/catequese/catequistas/new', {
+            controller: 'CatequistasEditController',
+            templateUrl: 'partials/catequistas_form.html'
+        })
+
+        .when('/catequese/catequistas/edit/:catequistaId', {
+            controller: 'CatequistasEditController',
+            templateUrl: 'partials/catequistas_form.html'
         })
 
         // TURMAS CATEQUESE
@@ -64,10 +84,30 @@ angular.module('Genus', [
             templateUrl: 'partials/turmas_list.html'
         })
 
+        .when('/catequese/turmas/new', {
+            controller: 'TurmasEditController',
+            templateUrl: 'partials/turmas_form.html'
+        })
+
+        .when('/catequese/turmas/edit/:turmaId', {
+            controller: 'TurmaEditController',
+            templateUrl: 'partials/turmas_form.html'
+        })
+
         // INSCRIÇÕES CATEQUESE
         .when('/catequese/inscricoes', {
             controller: 'InscricoesListController',
             templateUrl: 'partials/inscricoes_list.html'
+        })
+
+        .when('/catequese/inscricoes/new', {
+            controller: 'InscricoesEditController',
+            templateUrl: 'partials/inscricoes_form.html'
+        })
+
+        .when('/catequese/inscricoes/edit/:turmaId', {
+            controller: 'InscricoesEditController',
+            templateUrl: 'partials/inscricoes_form.html'
         })
 
         .otherwise({ redirectTo: '/login' });

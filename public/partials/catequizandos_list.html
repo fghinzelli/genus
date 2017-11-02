@@ -16,7 +16,7 @@
                         <input class="form-control" placeholder="Pesquisar Catequizandos" ng-model="filtro">
                     </form>
                     <span class="input-group-btn">
-                        <a href="#/catequizando/new" class="btn btn-primary" type="button">
+                        <a href="#/catequese/catequizando/new" class="btn btn-primary" type="button">
                             Novo Catequizando
                         </a>
                     </span>
@@ -44,12 +44,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="catequisando in catequisandos | filter: filtro">
+                                    <tr ng-repeat="catequizando in catequizandos | filter: filtro">
                                         <td>{{catequizando.nome}}</td>
                                         <td>{{catequizando.nomeMae}}</td>
                                         <td>{{catequizando.dataNascimento | date:'dd/MM/yyyy' }}</td>
                                         <td>
-                                            <a href="#/catequizandos/edit/{{catequisando.id}}" class="btn btn-sm btn-default" href="">Editar</a>
+                                            <a href="#/catequese/catequizandos/edit/{{catequizando.id}}" class="btn btn-sm btn-default" href="">Editar</a>
                                             <button class="btn btn-sm btn-default" ng-click="remover(catequizando)">Remover</button>
                                         </td>
                                     </tr>
