@@ -1,13 +1,12 @@
 'use strict';
  
-angular.module('Home')
+angular.module('Home',)
 .controller('HomeController', [function ($scope) {
    
 }])
 .controller('SidebarController', ['$scope', function ($scope) {
-    $scope.isCollapsed = false;
-    $scope.isColl = false;
-    $scope.isCad = false;
-    console.log('xxxx');
+    $scope.isCollapsed = true;
+    $scope.isColl = true;
+    $scope.isCad = true;
 }]);
 

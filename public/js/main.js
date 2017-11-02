@@ -30,6 +30,7 @@ angular.module('Genus', [
             templateUrl: 'partials/home.html'
         })
 
+        // PESSOAS
         .when('/pessoas', {
             controller: 'PessoasListController',
             templateUrl: 'partials/pessoas_list.html'
@@ -43,6 +44,30 @@ angular.module('Genus', [
         .when('/pessoas/edit/:pessoaId', {
             controller: 'PessoasEditController',
             templateUrl: 'partials/pessoas_form.html'
+        })
+
+        // CATEQUIZANDOS
+        .when('/catequese/catequizandos', {
+            controller: 'CatequisadosListController',
+            templateUrl: 'partials/catequizandos_list.html'
+        })
+
+        // CATEQUISTAS
+        .when('/catequese/catequistas', {
+            controller: 'CatequistasListController',
+            templateUrl: 'partials/catequizandos_list.html'
+        })
+
+        // TURMAS CATEQUESE
+        .when('/catequese/turmas', {
+            controller: 'TurmasListController',
+            templateUrl: 'partials/turmas_list.html'
+        })
+
+        // INSCRIÇÕES CATEQUESE
+        .when('/catequese/inscricoes', {
+            controller: 'InscricoesListController',
+            templateUrl: 'partials/inscricoes_list.html'
         })
 
         .otherwise({ redirectTo: '/login' });

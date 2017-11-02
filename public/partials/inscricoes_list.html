@@ -1,0 +1,66 @@
+<div id="wrapper">  
+    <div ng-include="'partials/menu.html'"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Cadastro de Catequistas</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-home"></i> Início</a></li>
+                    <li><a href="#/catequese"><i class="fa fa-users"></i> Catequese</a></li>
+                    <li class="active"><i class="fa fa-user"></i> Catequistas</li>
+                </ol>
+                
+                <div class="input-group">
+                    <form>
+                        <input class="form-control" placeholder="Pesquisar Catequistas" ng-model="filtro">
+                    </form>
+                    <span class="input-group-btn">
+                        <a href="#/catequistas/new" class="btn btn-primary" type="button">
+                            Novo Catequista
+                        </a>
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div ng-show="mensagem.length" class="alert alert-warning alert-custom">
+                            <button type="button" class="close" data-ng-click="switchBool('mensagem')" >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{mensagem}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover tablesorter">
+                                <thead>
+                                    <tr>
+                                        <th>Nome <i class="fa fa-sort"></i></th>
+                                        <th>Data Nascimento <i class="fa fa-sort"></i></th>
+                                        <th>Comunidade <i class="fa fa-sort"></i></th>
+                                        <th>Ações <i class="fa fa-sort"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="catequista in catequistas | filter: filtro">
+                                        <td>{{catequista.nome}}</td>
+                                        <td>{{catequista.dataNascimento | date:'dd/MM/yyyy' }}</td>
+                                        <td>{{catequista.comunidade.nome}}</td>
+                                        <td>
+                                            <a href="#/catequistas/edit/{{catequista.id}}" class="btn btn-sm btn-default" href="">Editar</a>
+                                            <button class="btn btn-sm btn-default" ng-click="remover(catequista)">Remover</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+            </div>
+        </div>
+    </div>
+</div>
+    

@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="SidebarController">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -13,21 +13,21 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse" >
-        <ul class="nav navbar-nav side-nav" ng-controller="SidebarController">
+        <ul class="nav navbar-nav side-nav">
             <li class="active">
                 <a href="#/"><i class="fa fa-home"></i> Início</a>
             </li>
-            <li class="dropdown" >
-                <a href ng-click="isCollapsed = !isCollapsed" class="dropdown-toggle"><i class="fa fa-caret-square-o-down"></i> Catequese <b class="caret"></b></a>
+            <li class="dropdown">
+                <a href ng-click="isCollapsed = !isCollapsed" class="dropdown-toggle"><i class="fa fa-table"></i> Catequese <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-collapse="isCollapsed">
-                    <li><a href="#/catequese/alunos">Alunos</a></li>
+                    <li><a href="#/catequese/catequizandos">Catequizandos</a></li>
                     <li><a href="#/catequese/catequistas">Catequistas</a></li>
                     <li><a href="#/catequese/turmas">Turmas</a></li>
                     <li><a href="#/catequese/inscricoes">Inscrições</a></li>
                 </ul>
             </li>
             <li class="dropdown" >
-                <a href ng-click="isColl = !isColl" class="dropdown-toggle"><i class="fa fa-caret-square-o-down"></i> Teologia <b class="caret"></b></a>
+                <a href ng-click="isColl = !isColl" class="dropdown-toggle"><i class="fa fa-table"></i> Teologia <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-collapse="isColl">
                     <li><a href="#/teologia/alunos">Alunos</a></li>
                     <li><a href="#/teologia/professores">Professores</a></li>
@@ -36,7 +36,7 @@
                 </ul>
             </li>
             <li class="dropdown" >
-                <a href ng-click="isCad = !isCad" class="dropdown-toggle"><i class="fa fa-caret-square-o-down"></i> Cadastros <b class="caret"></b></a>
+                <a href ng-click="isCad = !isCad" class="dropdown-toggle"><i class="fa fa-edit"></i> Cadastros <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-collapse="isCad">
                     <li><a href="#/dioceses">Diocese</a></li>
                     <li><a href="#/paroquias">Paróquia</a></li>
@@ -46,10 +46,10 @@
                 </ul>
             </li>
             <li>
-                <a href="#/"><i class="fa fa-bar-chart-o"></i> Relatórios</a>
+                <a href="#/relatorios"><i class="fa fa-bar-chart-o"></i> Relatórios</a>
             </li>
             <li>
-                <a href="#/"><i class="fa fa-user"></i> Usuários</a>
+                <a href="#/usuarios"><i class="fa fa-user"></i> Usuários</a>
             </li>
     </div>
 </nav>
