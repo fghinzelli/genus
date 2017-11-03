@@ -1,10 +1,11 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1>Cadastro de Pessoas<small> Editar Registro</small></h1>
+            <h1>Dados do Catequista</h1>
             <ol class="breadcrumb">
                 <li><a href="#/"><i class="fa fa-home"></i> Início</a></li>
-                <li><a href="#/pessoas"><i class="fa fa-user"></i> Pessoas</a></li>
+                <li><a href="#/catequese"><i class="fa fa-users"></i> Catequese</a></li>
+                <li><a href="#/catequese"><i class="fa fa-user"></i> Catequistas</a></li>
                 <li class="active"> Editar</li>
             </ol>
         </div>
@@ -14,254 +15,91 @@
             <form novalidade role="form" ng-submit="submeterForm()">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Nome</label>
-                            <input class="form-control" ng-model="pessoa.nome">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Data de Nascimento</label>
-                            <input class="form-control" ng-model="pessoa.dataNascimento">
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <label>Sexo</label>
-                        <div class="form-group">
-                            <label class="radio-inline">
-                                <input type="radio" ng-model="pessoa.sexo" name="sexo" value="M" checked>
-                                Masculino
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" ng-model="pessoa.sexo" name="sexo" value="F">
-                                Feminino
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Nacionalidade</label>
-                            <input type="text" class="form-control" ng-model="pessoa.nacionalidade">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Nome do Pai</label>
-                            <input class="form-control" name="nomePai" ng-model="pessoa.nomePai">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Nome da Mãe</label>
-                            <input class="form-control" name="nomeMae" ng-model="pessoa.nomeMae">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <uib-tabset active="activeForm">
-                            <uib-tab index="0" heading="Endereço">
-                                <ng-form name="nestedForm">
-                                    <div class="tab-body">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label>Logradouro</label>
-                                                        <input type="text" class="form-control" name="logradouro" ng-model="pessoa.logradouro">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Número</label>
-                                                        <input type="text" class="form-control" name="numero" ng-model="pessoa.numero">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Complemento</label>
-                                                        <input type="text" class="form-control" name="complemento" ng-model="pessoa.complemento">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Bairro</label>
-                                                        <input type="text" class="form-control" name="bairro" ng-model="pessoa.bairro">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row" ng-controller="MunicipiosController" >
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>CEP</label>
-                                                        <input type="text" class="form-control" name="cep" ng-model="pessoa.cep">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>UF</label>
-                                                        <select name="estado" class="form-control" ng-change="atualizarMunicipios()" 
-                                                                ng-model="estado" ng-options="estado.uf as estado.nome for estado in estados">
-                                                            <option value="">Selecione</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <div class="form-group">
-                                                        <label>Município</label>
-                                                        <select name="municipio" class="form-control" 
-                                                                ng-model="pessoa.municipioId" ng-options="municipio.id as municipio.nome for municipio in municipios">
-                                                            <option value="">Selecione</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Dados Pessoais
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input placeholder="Digite o Nome ou clique no botão para pesquisar" class="form-control" ng-model="pessoa">
+                                            <span class="input-group-btn">
+                                                <a href="#/pessoas" class="btn btn-primary" type="button">...</a>
+                                            </span>
                                         </div>
                                     </div>
-                                </ng-form>
-                            </uib-tab>
-                            <uib-tab index="1" heading="Contatos">
-                                <ng-form name="nestedForm">
-                                    <div class="tab-body">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="email" class="form-control" name="email" ng-model="pessoa.email">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Telefone Principal</label>
-                                                        <input type="text" class="form-control" name="telefone1" ng-model="pessoa.telefone1">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Telefone para Recados</label>
-                                                        <input type="text" class="form-control" name="telefone2" ng-model="pessoa.telefone2">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <label>Nome</label>
+                                            <input type="text" class="form-control" ng-model="pessoa.nome" disabled>
                                         </div>
                                     </div>
-                                </ng-form>
-                            </uib-tab>
-                            <uib-tab index="2" heading="Documentos">
-                                <ng-form name="nestedForm">
-                                    <div class="tab-body">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>CPF</label>
-                                                        <input type="cpf" class="form-control" name="cpf" ng-model="pessoa.cpf">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>RG</label>
-                                                        <input type="text" class="form-control" name="rg" ng-model="pessoa.rg">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="form-group">
-                                                        <label>Emissor</label>
-                                                        <input type="text" class="form-control" name="rgEmissor" ng-model="pessoa.rgEmissor">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="form-group" ng-controller="MunicipiosController">
-                                                        <label>UF</label>
-                                                        <select name="rgUF" class="form-control" 
-                                                                ng-model="pessoa.rgUF" ng-options="estado.uf for estado in estados">
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <label>Comunidade</label>
+                                            <input type="text" class="form-control" ng-model="pessoa.comunidade.descricao" disabled>
                                         </div>
                                     </div>
-                                </ng-form>
-                            </uib-tab>
-                            <uib-tab index="3" heading="Vida Cristã">
-                                <ng-form name="nestedForm">
-                                    <div class="tab-body">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Número do Dízimo</label>
-                                                        <input type="text" class="form-control" name="numeroDizimo" ng-model="pessoa.numeroDizimo">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Comunidade</label>
-                                                        <select name="comunidade" class="form-control"
-                                                                ng-model="pessoa.comunidade" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
-                                                            <option value="">Selecione</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <div class="form-group">
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input type="checkbox" value="" ng-model="pessoa.batizado">
-                                                                Batizado
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Local do Batismo</label>
-                                                        <input type="text" class="form-control" name="localBatismo" ng-model="pessoa.localBatismo">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="form-group">
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input type="checkbox" value="" ng-model="pessoa.primeiraEucaristia">
-                                                                Primeira Eucaristia
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Local da Primeira Eucaristia</label>
-                                                        <input type="text" class="form-control" name="localPrimeiraEucaristia" ng-model="pessoa.localPrimeiraEucaristia">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label>Observações</label>
-                                                        <textarea type="text" class="form-control" rows="5" name="observacoes" ng-model="pessoa.observacoes"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <label>CPF</label>
+                                            <input type="cpf" class="form-control" name="cpf" ng-model="pessoa.cpf" disabled>
                                         </div>
                                     </div>
-                                </ng-form>
-                            </uib-tab>
-                        </uib-tabset>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" name="email" ng-model="pessoa.email" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Telefone Principal</label>
+                                            <input type="text" class="form-control" name="telefone1" ng-model="pessoa.telefone1" disabled>
+                                        </div>
+                                    </div>                      
+                                </div>
+                            </div>
+                        </div> <!-- FIM PANNEL PESSOA -->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Comunidade de Atuação</label>
+                                    <select name="comunidade" class="form-control"
+                                            ng-model="catequista.comunidade" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Data de Início da Atuação</label>
+                                    <input class="form-control" ng-model="catequista.dataInicio">
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select name="status" class="form-control" ng-model="catequista.status">
+                                            <option value="">Selecione</option>
+                                            <option value="1">Ativo</option>
+                                            <option value="0">Desativado</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Observações</label>
+                                    <textarea type="text" class="form-control" rows="5" name="observacoes" ng-model="catequista.observacoes"></textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -279,10 +117,36 @@
                         <button type="submit" class="btn btn-primary">
                             Salvar
                         </button>
-                        <a href="#/pessoas" class="btn btn-primary">Voltar</a>
+                        <a href="#/catequese/catequistas" class="btn btn-primary">Voltar</a>
                     </div>
                 </div>  
             </form>
         </div>
     </div><!-- /.row -->
+    <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <ul>
+                    <li ng-repeat="item in $ctrl.items">
+                        <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ $ctrl.selected.item }}</b>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+            </div>
+        </script>
+    
+        <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
+        <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div>
+        <div class="modal-parent">
+        </div>
+    </div>
 </div>
