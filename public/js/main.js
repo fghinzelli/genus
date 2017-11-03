@@ -27,7 +27,7 @@ angular.module('Genus', [
  
         .when('/', {
             controller: 'HomeController',
-            templateUrl: 'partials/home.html'
+            templateUrl: 'partials/home.html',
         })
 
         // PESSOAS
@@ -110,7 +110,7 @@ angular.module('Genus', [
             templateUrl: 'partials/inscricoes_form.html'
         })
 
-        .otherwise({ redirectTo: '/login' });
+        .otherwise({ redirectTo: '/' });
 }])
 
 .run(['$rootScope', '$location', '$cookieStore', '$http',

@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Paróquia N. Sra. Mãe de Deus</a>
+        <a class="navbar-brand" href="#/">Paróquia Nossa Senhora Mãe de Deus</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,7 +20,7 @@
             <li class="dropdown">
                 <a href ng-click="isCollapsed = !isCollapsed" class="dropdown-toggle"><i class="fa fa-table"></i> Catequese <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-collapse="isCollapsed">
-                    <li><a href="#/catequese/catequizandos">Catequizandos</a></li>
+                    <li><a ng-class="{ active: isActive('/catequese/catequisandos')}" href="#/catequese/catequizandos">Catequizandos</a></li>
                     <li><a href="#/catequese/catequistas">Catequistas</a></li>
                     <li><a href="#/catequese/turmas">Turmas</a></li>
                     <li><a href="#/catequese/inscricoes">Inscrições</a></li>

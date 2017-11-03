@@ -51,6 +51,7 @@
     <script src="js/controllers/turmas-list-controller.js"></script>
     <script src="js/controllers/inscricoes-list-controller.js"></script>
     <script src="js/controllers/municipios-controller.js"></script>
+    <script src="js/extra/extra.js"></script>
     <!--script src="js/directives/genus-diretivas.js"></script-->
 
     <!-- Page Specific Plugins -->
@@ -61,10 +62,10 @@
     <script src="js/lib/tablesorter/tables.js"></script-->
   </head>
 
-  <body>
-    <div ng-view>
-
-    </div>
-
-  </body>
+  <body ng-controller="HomeController"> 
+      <div id="wrapper">
+          <div ng-include="'partials/menu.html'"></div>
+          <div ng-view></div>
+      </div>
+  </body> 
 </html>
