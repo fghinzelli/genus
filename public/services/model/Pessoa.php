@@ -77,7 +77,7 @@ class Pessoa {
     } 
 
     function getPessoas() {
-        $sql = "SELECT * FROM Pessoa";
+        $sql = "SELECT * FROM Pessoa ORDER BY nome;";
         $query = $this->db->query($sql);
         $pessoas = $query->fetchAll(PDO::FETCH_OBJ);
         echo "{\"pessoas\":" . json_encode($pessoas) . "}";

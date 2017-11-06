@@ -10,7 +10,7 @@
             
             <div class="input-group">
                 <form>
-                    <input class="form-control" placeholder="Pesquisar Catequistas" ng-model="filtro">
+                    <input class="form-control" list="list-pessoas" placeholder="Pesquisar Catequistas" ng-model="filtro">
                 </form>
                 <span class="input-group-btn">
                     <a href="#/catequese/catequistas/new" class="btn btn-primary" type="button">
@@ -18,6 +18,10 @@
                     </a>
                 </span>
             </div>
+            <datalist id="list-pessoas">
+                <option value="aaaaa">
+                <option value="bbbbb">
+            </datalist>
             <div class="row">
                 <div class="col-lg-12">
                     <div ng-show="mensagem.length" class="alert alert-warning alert-custom">

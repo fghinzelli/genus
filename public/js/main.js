@@ -8,9 +8,10 @@ angular.module('Genus', [
     'Authentication',
     'Home',
     'ngRoute',
+    'ngAnimate',
+    'ngSanitize',
     'ngCookies',
-    'ui.bootstrap',
-    'ngAnimate'
+    'ui.bootstrap'
 ])
  
 

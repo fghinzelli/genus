@@ -22,10 +22,44 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="input-group">
-                                            <input placeholder="Digite o Nome ou clique no botão para pesquisar" class="form-control" ng-model="pessoa">
-                                            <span class="input-group-btn">
-                                                <a href="#/pessoas" class="btn btn-primary" type="button">...</a>
+                                        <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+                                            <script type="text/ng-template" id="myModalContent.html">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+                                                </div>
+                                                <div class="modal-body" id="modal-body">
+                                                    <div ng-include="'partials/pessoas_form_modal.html'"></div>    
+                                                    <!--
+                                                    <ul>
+                                                        <li ng-repeat="item in $ctrl.items">
+                                                            <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+                                                        </li>
+                                                    </ul>
+                                                    Selected: <b>{{ $ctrl.selected.item }}</b>
+                                                    -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                                                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                                                </div>
+                                            </script>
+                                            <div class="input-group" ng-controller="PessoasListController">
+                                                <!--input placeholder="Digite o Nome ou clique no botão para pesquisar" class="form-control" ng-model="pessoa"-->
+                                                <input tipe="form-control" list="lista">
+                                                <datalist ng-model="pessoa" ng-repeat="pessoa in pessoas">
+                                                    <option value="{{pessoa.nome}}">
+                                                </select>
+                                                <!--
+                                                <select name="pessoa" class="form-control" ng-change="atualizarDadosPessoa()" 
+                                                    ng-model="pessoa" ng-options="pessoa.id as pessoa.nome for pessoa in pessoas">
+                                                <option value="">Selecione</option>
+                                                </select>
+                                                -->
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Novo</button>
+                                                </span>
+                                        </div>
+                                                <!--a href="#/pessoas" class="btn btn-primary" type="button">...</a-->
                                             </span>
                                         </div>
                                     </div>
@@ -123,30 +157,6 @@
             </form>
         </div>
     </div><!-- /.row -->
-    <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
-        <script type="text/ng-template" id="myModalContent.html">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <ul>
-                    <li ng-repeat="item in $ctrl.items">
-                        <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
-                    </li>
-                </ul>
-                Selected: <b>{{ $ctrl.selected.item }}</b>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-            </div>
-        </script>
     
-        <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
-        <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
-        <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
-        <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div>
-        <div class="modal-parent">
-        </div>
-    </div>
+    
 </div>
