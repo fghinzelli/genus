@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS Comunidade (
 	padroeiro varchar(50) NULL,
 	paroquiaId int(10) NOT NULL,
 	dataFuncacao datetime,
-	responsaveCatequese varchar(50) NULL,
+	responsavelCatequese varchar(50) NULL,
 	logradouro varchar(50) NULL,
 	numero varchar(10) NULL,
 	complemento varchar(50) NULL,
