@@ -7,7 +7,10 @@
 	require 'model/Municipio.php';
 	require 'model/Comunidade.php';
 	require 'model/Catequista.php';
-	
+	require 'model/EtapaCatequese.php';
+	require 'model/Escola.php';
+	require 'model/Turno.php';
+
 	//require 'db_connection.php';
 
 	$app = new \Slim\App([
@@ -258,7 +261,56 @@
 		return $response->write($result);
 	})->add($middleAuthorization);
 
+	/* ETAPAS DA CATEQUESE */
 
+	// SELECT ALL
+	$app->get('/etapas-catequese', function($request, $response, $args) {
+		$etapaCatequese = new EtapaCatequese(db::getInstance());
+		$result = $etapaCatequese->getEtapasCatequese();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	/* ESCOLAS */
+
+	// SELECT ALL
+	$app->get('/escolas', function($request, $response, $args) {
+		$escola = new Escola(db::getInstance());
+		$result = $escola->getEscola();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	/* TURHOS */
+
+	// SELECT ALL
+	$app->get('/turnos', function($request, $response, $args) {
+		$turno = new Turno(db::getInstance());
+		$result = $turno->getTurnos();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
 
 	$app->run();
 

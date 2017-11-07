@@ -257,6 +257,7 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	turnoId INT NOT NULL,
 	paroquiaId INT NOT NULL,
 	situacaoDizimoId INT NOT NULL,
+	dataInscricao datetime,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,

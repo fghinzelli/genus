@@ -36,3 +36,31 @@ INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `obser
 (5, 6, 1, '2017-11-01 00:00:00', 'Observacoessss', 1, '2017-11-07 06:04:50', NULL),
 (6, 9, 1, '2017-11-01 00:00:00', 'Observacoessss', 1, '2017-11-07 06:04:39', NULL),
 (7, 5, 1, '2017-11-01 00:00:00', 'Observacoes', 1, '2017-11-07 06:06:44', NULL);
+
+
+-- etapas catequese
+
+INSERT INTO `EtapaCatequese` (`id`, `descricao`, `status`) 
+VALUES 
+(NULL, 'Primeira Etapa', '1'), 
+(NULL, 'Segunda Etapa', '1'), 
+(NULL, 'Terceira Etapa', '1'), 
+(NULL, 'Quarta Etapa', '1'),
+(NULL, 'Catequese de Adultos', '1');
+
+-- ESCOLAS
+
+INSERT INTO `Escola` (`id`, `nome`, `email`, `telefone`, `pessoaContato`, `observacoes`, `status`) VALUES 
+(NULL, 'Escola Municipal Antonia da Silva', 'antonia@escola.com.br', '23451234', 'Maria da Costa', 'observaçoes da escola teste', '1'),
+(NULL, 'Escola Estadual Santana', 'santana@escola.com.br', '23451234', 'Jose Panisson', 'observaçoes da escola teste', '1'),
+(NULL, 'Escola Estadual Ulisses Cabral', 'ulisses@escola.com.br', '23451234', 'Sonia da Costa', 'observaçoes da escola teste', '1'),
+(NULL, 'Escola Marista Santo Antonio', 'stoantonio@escola.com.br', '23451234', 'Ir Moacir', 'observaçoes da escola teste', '1');
+
+-- turnos
+
+INSERT INTO `Turno` (`id`, `descricao`, `status`) 
+VALUES
+(NULL, 'Manhã', '1'),
+(NULL, 'Tarde', '1'),
+(NULL, 'Vespertino', '1'),
+(NULL, 'Noite', '1');
