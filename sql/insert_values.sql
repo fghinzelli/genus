@@ -28,3 +28,6 @@ INSERT INTO `Usuario` (`id`, `username`, `senha`, `pessoaId`, `token`, `tokenExp
 
 -- AcessoParoquia 
 INSERT INTO `AcessoParoquia` (`id`, `paroquiaId`, `usuarioId`, `nivelAcessoId`) VALUES (NULL, '1', '1', '1');
+
+-- Catequistas
+INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, '3', '1', '2017-11-01 00:00:00', 'Observacoessss', '1', NULL, NULL);

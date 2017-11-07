@@ -1,5 +1,6 @@
 <?php
 
+
 class Pessoa {
     private $db;
     public $id;
@@ -66,6 +67,7 @@ class Pessoa {
         $this->cep = $cep;
         $this->numeroDizimo = $numeroDizimo;
         $this->comunidadeId = $comunidadeId;
+        $this->comunidade = 
         $this->observacoes = $observacoes;
         $this->batizado = $batizado;
         $this->localBatismo = $localBatismo;
@@ -80,7 +82,22 @@ class Pessoa {
         $sql = "SELECT * FROM Pessoa ORDER BY nome;";
         $query = $this->db->query($sql);
         $pessoas = $query->fetchAll(PDO::FETCH_OBJ);
-        echo "{\"pessoas\":" . json_encode($pessoas) . "}";
+        foreach ($pessoas as $pessoa) {
+            // Busca de dados relacionados
+            // COMUNIDADE
+            $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
+            $queryc = $this->db->prepare($sqlc);
+            $queryc->bindParam("id",$pessoa->comunidadeId);
+            $queryc->execute();
+            $pessoa->comunidade =  $queryc->fetchObject();
+            // MUNICIPIO
+            $sqlm = "SELECT * FROM Municipio WHERE id=:id";
+            $querym = $this->db->prepare($sqlm);
+            $querym->bindParam("id",$pessoa->municipioId);
+            $querym->execute();
+            $pessoa->municipio =  $querym->fetchObject();
+        }
+        echo json_encode($pessoas);
     }
     
     function getPessoa($id)
@@ -90,14 +107,23 @@ class Pessoa {
       $query->bindParam("id", $id);
       $query->execute();
       $pessoa = $query->fetchObject();
+
+      // COMUNIDADE
+      $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
+      $queryc = $this->db->prepare($sqlc);
+      $queryc->bindParam("id",$pessoa->comunidadeId);
+      $queryc->execute();
+      $pessoa->comunidade =  $queryc->fetchObject();
     
-      //municipio
-      $sql = "SELECT * FROM Municipio WHERE id=:id";
-      $query = $this->db->prepare($sql);
-      $query->bindParam("id",$pessoa->municipioId);
-      $query->execute();
-      $pessoa->municipio =  $query->fetchObject();
-    
+      //MUNICIPIO
+      $sqlm = "SELECT * FROM Municipio WHERE id=:id";
+      $querym = $this->db->prepare($sqlm);
+      $querym->bindParam("id",$pessoa->municipioId);
+      $querym->execute();
+      $pessoa->municipio =  $querym->fetchObject();
+
+
+      
       echo json_encode($pessoa);
     }
 

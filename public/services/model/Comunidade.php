@@ -48,22 +48,37 @@ class Comunidade {
     } 
 
     function getComunidades() {
-        $sql = "SELECT * FROM Comunidades ORDER BY nome";
+        $sql = "SELECT * FROM Comunidade ORDER BY nome";
         $query = $this->db->query($sql);
         $comunidades = $query->fetchAll(PDO::FETCH_OBJ);
+        foreach($comunidades as $comunidade) {
+            //paroquia
+            $sqlp = "SELECT * FROM Paroquia WHERE id=:id";
+            $queryp = $this->db->prepare($sqlp);
+            $queryp->bindParam("id",$comunidade->paroquiaId);
+            $queryp->execute();
+            $comunidade->paroquia =  $queryp->fetchObject();
+            //municipio
+            $sqlm = "SELECT * FROM Municipio WHERE id=:id";
+            $querym = $this->db->prepare($sqlm);
+            $querym->bindParam("id",$comunidade->municipioId);
+            $querym->execute();
+            $comunidade->municipio =  $querym->fetchObject();
+        }
+        
         echo json_encode($comunidades);
     }
     
     function getComunidade($id)
     {
-      $sql = "SELECT * FROM Comunidades WHERE id=:id";
+      $sql = "SELECT * FROM Comunidade WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
       $comunidade = $query->fetchObject();
     
       //paroquia
-      $sql = "SELECT * FROM Paroquias WHERE id=:id";
+      $sql = "SELECT * FROM Paroquia WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam("id",$comunidade->paroquiaId);
       $query->execute();
@@ -75,6 +90,8 @@ class Comunidade {
       $query->bindParam("id",$comunidade->municipioId);
       $query->execute();
       $comunidade->municipio =  $query->fetchObject();
+
+      
     
       echo json_encode($comunidade);
     }

@@ -34,7 +34,8 @@ function ($scope, $http, $cookieStore, $routeParams) {
     // SUBMIT DO FORM - CREATE AND UPDATE
     $scope.submeterForm = function() {
         //if ($scope.formulario.$valid) {
-            $scope.catequista.status = 1;
+            //console.log($scope.catequista);
+            $scope.catequista.pessoaId = $scope.catequista.pessoa.id;
             if ($routeParams.catequistaId) {
                 $http.put(serviceBase + 'catequistas/' + $scope.catequista.id, $scope.catequista)
                 .success(function() {

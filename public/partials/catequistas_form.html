@@ -12,87 +12,61 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <form novalidade role="form" ng-submit="submeterForm()">
+            <form novalidate role="form" ng-submit="submeterForm()">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Dados Pessoais
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body" ng-controller="PessoasListController">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
-                                            <script type="text/ng-template" id="myModalContent.html">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
-                                                </div>
-                                                <div class="modal-body" id="modal-body">
-                                                    <div ng-include="'partials/pessoas_form_modal.html'"></div>    
-                                                    <!--
-                                                    <ul>
-                                                        <li ng-repeat="item in $ctrl.items">
-                                                            <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
-                                                        </li>
-                                                    </ul>
-                                                    Selected: <b>{{ $ctrl.selected.item }}</b>
-                                                    -->
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-                                                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-                                                </div>
-                                            </script>
-                                            <div class="input-group" ng-controller="PessoasListController">
-                                                <!--input placeholder="Digite o Nome ou clique no botão para pesquisar" class="form-control" ng-model="pessoa"-->
-                                                <input tipe="form-control" list="lista">
-                                                <datalist ng-model="pessoa" ng-repeat="pessoa in pessoas">
-                                                    <option value="{{pessoa.nome}}">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                
+                                                <select name="pessoa" class="form-control" 
+                                                        ng-model="catequista.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
+                                                    <option value="">Selecione</option>
                                                 </select>
                                                 <!--
-                                                <select name="pessoa" class="form-control" ng-change="atualizarDadosPessoa()" 
-                                                    ng-model="pessoa" ng-options="pessoa.id as pessoa.nome for pessoa in pessoas">
-                                                <option value="">Selecione</option>
+                                                <select name="pessoa" class="form-control" ng-model="catequista.pessoaId">
+                                                        <option value="{{pessoa.id}}" ng-repeat="pessoa in pessoas">{{pessoa.nome}}</option>
                                                 </select>
-                                                -->
+                                            -->
+                                                </select>
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Novo</button>
+                                                    <a href="#/pessoas/new" class="btn btn-primary" type="button">
+                                                        Novo
+                                                    </a>
                                                 </span>
-                                        </div>
-                                                <!--a href="#/pessoas" class="btn btn-primary" type="button">...</a-->
-                                            </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Nome</label>
-                                            <input type="text" class="form-control" ng-model="pessoa.nome" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
                                             <label>Comunidade</label>
-                                            <input type="text" class="form-control" ng-model="pessoa.comunidade.descricao" disabled>
+                                            <input type="text" class="form-control" ng-model="catequista.pessoa.comunidade.nome" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input type="cpf" class="form-control" name="cpf" ng-model="pessoa.cpf" disabled>
+                                            <input type="cpf" class="form-control" name="cpf" ng-model="catequista.pessoa.cpf" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" ng-model="pessoa.email" disabled>
+                                            <input type="email" class="form-control" name="email" ng-model="catequista.pessoa.email" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Telefone Principal</label>
-                                            <input type="text" class="form-control" name="telefone1" ng-model="pessoa.telefone1" disabled>
+                                            <input type="text" class="form-control" name="telefone1" ng-model="catequista.pessoa.telefone1" disabled>
                                         </div>
                                     </div>                      
                                 </div>
@@ -100,10 +74,10 @@
                         </div> <!-- FIM PANNEL PESSOA -->
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group">
+                                <div class="form-group" ng-controller="ComunidadesListController">
                                     <label>Comunidade de Atuação</label>
                                     <select name="comunidade" class="form-control"
-                                            ng-model="catequista.comunidade" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
+                                            ng-model="catequista.comunidadeId" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
                                         <option value="">Selecione</option>
                                     </select>
                                 </div>

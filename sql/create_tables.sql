@@ -190,6 +190,20 @@ CREATE TABLE IF NOT EXISTS AcessoParoquia(
 	FOREIGN KEY (nivelAcessoId) REFERENCES AcessoNivel(id)
 );
 
+CREATE TABLE IF NOT EXISTS Catequista (
+	id int(11) NOT NULL AUTO_INCREMENT,
+	pessoaId int(10) NOT NULL,
+	comunidadeId INT NOT NULL,
+	dataInicio datetime NULL,
+	observacoes varchar(100) NOT NULL,
+	status int(1) NOT NULL,
+	dataUltimaAlteracao datetime,
+	usuarioUltimaAlteracaoId INT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (comunidadeId) REFERENCES Comunidade(id),
+	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
+);
+
 CREATE TABLE IF NOT EXISTS Professor (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	pessoaId int(10) NOT NULL,
@@ -253,7 +267,7 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 CREATE TABLE IF NOT EXISTS TurmaCatequese (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	etapaCatequeseId int(10) NOT NULL,
-	professorId int(10) NOT NULL,
+	catequistaId int(10) NOT NULL,
 	observacoes varchar(100) NOT NULL,
 	turnoId INT NOT NULL,
 	diaSemana INT NOT NULL,
@@ -263,7 +277,7 @@ CREATE TABLE IF NOT EXISTS TurmaCatequese (
 	horario varchar(30) NOT NULL,
 	paroquiaId INT NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (professorId) REFERENCES Professor(id),
+	FOREIGN KEY (catequistaId) REFERENCES Catequista(id),
 	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
 	FOREIGN KEY (paroquiaId) REFERENCES Paroquia(id),
 	FOREIGN KEY (turnoId) REFERENCES Turno(id)
