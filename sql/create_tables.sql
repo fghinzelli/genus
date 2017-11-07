@@ -90,6 +90,13 @@ CREATE TABLE IF NOT EXISTS SituacaoDizimo (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS SituacaoInscricao (
+	id int(11) NOT NULL AUTO_INCREMENT,
+	descricao varchar(30) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS Escola (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	nome varchar(50) NOT NULL,
@@ -218,22 +225,31 @@ CREATE TABLE IF NOT EXISTS Professor (
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
 );
 
-/*
-CREATE TABLE IF NOT EXISTS Aluno (
+CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	pessoaId int(10) NOT NULL,
-	observacoes varchar(100) NOT NULL,
+	etapaCatequeseId int(10) NOT NULL,
 	escolaId INT NULL,
 	etapaEscolaId INT NULL,
+	observacoes varchar(100) NOT NULL,
+	situacaoInscricaoId INT NOT NULL,
+	turnoId INT NOT NULL,
+	situacaoDizimoId INT NOT NULL,
+	comunidadeId INT NOT NULL,
+	dataInscricao datetime,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
-	FOREIGN KEY (escolaId) REFERENCES Escola(id),
-	FOREIGN KEY (etapaEscolaId) REFERENCES EtapaEscola(id)
+	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
+	FOREIGN KEY (etapaEscolaId) REFERENCES EtapaEscola(id),
+	FOREIGN KEY (comunidadeId) REFERENCES Comunidade(id),
+	FOREIGN KEY (situacaoDizimoId) REFERENCES SituacaoDizimo(id),
+	FOREIGN KEY (situacaoInscricaoId) REFERENCES SituacaoInscricao(id),
+	FOREIGN KEY (turnoId) REFERENCES Turno(id),
+	FOREIGN KEY (escolaId) REFERENCES Escola(id)
 );
-*/
 
 CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
 	id int(11) NOT NULL AUTO_INCREMENT,
@@ -244,29 +260,6 @@ CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaResponsavelId) REFERENCES Pessoa(id),
 	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id)
-);
-
-CREATE TABLE IF NOT EXISTS InscricaoCatequese (
-	id int(11) NOT NULL AUTO_INCREMENT,
-	pessoaId int(10) NOT NULL,
-	etapaCatequeseId int(10) NOT NULL,
-	escolaId INT NULL,
-	etapaEscolaId INT NULL,
-	observacoes varchar(100) NOT NULL,
-	situacaoInscricaoId INT NOT NULL,
-	turnoId INT NOT NULL,
-	paroquiaId INT NOT NULL,
-	situacaoDizimoId INT NOT NULL,
-	dataInscricao datetime,
-	status int(1) NOT NULL,
-	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (pessoaId) REFERENCES InscricaoCatequese(id),
-	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
-	FOREIGN KEY (paroquiaId) REFERENCES Paroquia(id),
-	FOREIGN KEY (situacaoDizimoId) REFERENCES SituacaoDizimo(id),
-	FOREIGN KEY (turnoId) REFERENCES Turno(id)
 );
 
 CREATE TABLE IF NOT EXISTS TurmaCatequese (

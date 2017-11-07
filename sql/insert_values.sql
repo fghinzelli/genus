@@ -5,7 +5,7 @@ INSERT INTO `Diocese` (`id`, `nome`, `cnpj`, `email`, `telefone`, `logradouro`, 
 INSERT INTO `Paroquia` (`id`, `nome`, `cnpj`, `email`, `telefone`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `dioceseId`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'Nossa Senhora Mãe de Deus', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', NULL, NULL);
 
 -- Comunidade
-INSERT INTO `Comunidade` (`id`, `nome`, `padroeiro`, `paroquiaId`, `dataFuncacao`, `responsaveCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'Igreja Matriz Nossa Senhora Mãe de Deus', 'Nossa Senhora Mãe de Deus', '1', NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL, '1', NULL, NULL);
+INSERT INTO `Comunidade` (`id`, `nome`, `padroeiro`, `paroquiaId`, `dataFuncacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'Igreja Matriz Nossa Senhora Mãe de Deus', 'Nossa Senhora Mãe de Deus', '1', NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL, '1', NULL, NULL);
 
 -- Nivel de acesso
 INSERT INTO `AcessoNivel` (`id`, `descricao`, `status`) VALUES (NULL, 'Administrador', '1');
@@ -31,11 +31,11 @@ INSERT INTO `AcessoParoquia` (`id`, `paroquiaId`, `usuarioId`, `nivelAcessoId`) 
 
 -- Catequistas
 INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 3, 1, '2017-11-01 00:00:00', 'Observacoes abc', 1, '2017-11-07 06:02:31', NULL),
-(2, 10, 1, '2017-11-01 00:00:00', 'Observacoes ALTERACAO', 1, '2017-11-07 06:05:00', NULL),
-(5, 6, 1, '2017-11-01 00:00:00', 'Observacoessss', 1, '2017-11-07 06:04:50', NULL),
-(6, 9, 1, '2017-11-01 00:00:00', 'Observacoessss', 1, '2017-11-07 06:04:39', NULL),
-(7, 5, 1, '2017-11-01 00:00:00', 'Observacoes', 1, '2017-11-07 06:06:44', NULL);
+(1, 1, 1, '2017-11-01 00:00:00', 'Observacoes abc', 1, '2017-11-07 06:02:31', NULL),
+(2, 2, 1, '2017-11-01 00:00:00', 'Observacoes ALTERACAO', 1, '2017-11-07 06:05:00', NULL),
+(3, 3, 1, '2017-11-01 00:00:00', 'Observacoessss', 1, '2017-11-07 06:04:50', NULL),
+(4, 4, 1, '2017-11-01 00:00:00', 'Observacoessss', 1, '2017-11-07 06:04:39', NULL),
+(5, 5, 1, '2017-11-01 00:00:00', 'Observacoes', 1, '2017-11-07 06:06:44', NULL);
 
 
 -- etapas catequese
@@ -47,6 +47,10 @@ VALUES
 (NULL, 'Terceira Etapa', '1'), 
 (NULL, 'Quarta Etapa', '1'),
 (NULL, 'Catequese de Adultos', '1');
+
+-- Etapas escola
+
+INSERT INTO `EtapaEscola` (`id`, `descricao`, `status`) VALUES (NULL, 'Primeiro Ano', '1');
 
 -- ESCOLAS
 
@@ -64,3 +68,18 @@ VALUES
 (NULL, 'Tarde', '1'),
 (NULL, 'Vespertino', '1'),
 (NULL, 'Noite', '1');
+
+-- Situacao dizimo
+
+INSERT INTO `SituacaoDizimo` (`id`, `descricao`, `status`) VALUES 
+(1, 'Pago', '1'), (2, 'Parcelado', '1');
+
+-- Situacao Inscricao
+
+INSERT INTO `SituacaoInscricao` (`id`, `descricao`, `status`) VALUES 
+(1, 'Cadastrada', '1'), (2, 'Pendente', '1');
+
+-- InscricaoCatequese
+
+INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+VALUES (NULL, '2', '3', '3', '1', 'xxxxx', '1', '2', '2', '1', '2017-11-07 00:00:00', '1', NULL, NULL);

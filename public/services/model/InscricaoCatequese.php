@@ -40,30 +40,36 @@ class InscricaoCatequese {
         $this->usuarioUltimaAlteracaoId = $usuarioUltimaAlteracaoId;
     } 
 
-    /////////// ALTERADO ATÉ AQUI !!!!!!!!!!!
-
     function getInscricoesCatequese() {
-        $sql = "SELECT C.* FROM Catequista C INNER JOIN Pessoa P ON C.pessoaId = P.id ORDER BY P.nome;";
+        $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id ORDER BY P.nome;";
         $query = $this->db->query($sql);
-        $catequistas = $query->fetchAll(PDO::FETCH_OBJ);
-        foreach ($catequistas as $catequista) {
+        $inscricoes = $query->fetchAll(PDO::FETCH_OBJ);
+        foreach ($inscricoes as $inscricao) {
             // Busca de dados relacionados
             // PESSOA
             $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
             $queryp = $this->db->prepare($sqlp);
-            $queryp->bindParam("id",$catequista->pessoaId);
+            $queryp->bindParam("id",$inscricao->pessoaId);
             $queryp->execute();
-            $catequista->pessoa =  $queryp->fetchObject();
+            $inscricao->pessoa =  $queryp->fetchObject();
             // COMUNIDADE
             $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
             $queryc = $this->db->prepare($sqlc);
-            $queryc->bindParam("id",$catequista->comunidadeId);
+            $queryc->bindParam("id",$inscricao->comunidadeId);
             $queryc->execute();
-            $catequista->comunidade =  $queryc->fetchObject();
+            $inscricao->comunidade =  $queryc->fetchObject();
+            // ETAPA CATEQUESE
+            $sqle = "SELECT * FROM EtapaCatequese WHERE id=:id";
+            $querye = $this->db->prepare($sqle);
+            $querye->bindParam("id",$inscricao->etapaCatequeseId);
+            $querye->execute();
+            $inscricao->etapaCatequese =  $querye->fetchObject();
         }
-        echo json_encode($catequistas);
+        echo json_encode($inscricoes);
     }
     
+     /////////// ALTERADO ATÉ AQUI !!!!!!!!!!!
+
     function getCatequista($id)
     {
       $sql = "SELECT * FROM Catequista WHERE id=:id";

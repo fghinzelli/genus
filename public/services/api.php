@@ -8,8 +8,11 @@
 	require 'model/Comunidade.php';
 	require 'model/Catequista.php';
 	require 'model/EtapaCatequese.php';
+	require 'model/InscricaoCatequese.php';
 	require 'model/Escola.php';
 	require 'model/Turno.php';
+	require 'model/SituacaoDizimo.php';
+	require 'model/SituacaoInscricao.php';
 
 	//require 'db_connection.php';
 
@@ -295,12 +298,63 @@
 		}
 	})->add($middleAuthorization);
 
-	/* TURHOS */
+	/* TURNOS */
 
 	// SELECT ALL
 	$app->get('/turnos', function($request, $response, $args) {
 		$turno = new Turno(db::getInstance());
 		$result = $turno->getTurnos();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	/* SITUACAO INSCRICAO */
+
+	// SELECT ALL
+	$app->get('/situacao-inscricao', function($request, $response, $args) {
+		$situacao = new SituacaoInscricao(db::getInstance());
+		$result = $situacao->getSituacoesInscricao();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	/* SITUACAO DIZIMO */
+
+	// SELECT ALL
+	$app->get('/situacao-dizimo', function($request, $response, $args) {
+		$situacao = new SituacaoDizimo(db::getInstance());
+		$result = $situacao->getSituacoesDizimo();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	/* INSCRICAO CATEQUESE */
+
+	// SELECT ALL
+	$app->get('/inscricoes-catequese', function($request, $response, $args) {
+		$inscricao = new InscricaoCatequese(db::getInstance());
+		$result = $inscricao->getInscricoesCatequese();
 		if($result === false) {
 			return $response->withStatus(200)
 				->withHeader('Content-Type', 'application/json;charset=utf-8')
