@@ -29,11 +29,6 @@
                                                         ng-model="catequista.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
                                                     <option value="">Selecione</option>
                                                 </select>
-                                                <!--
-                                                <select name="pessoa" class="form-control" ng-model="catequista.pessoaId">
-                                                        <option value="{{pessoa.id}}" ng-repeat="pessoa in pessoas">{{pessoa.nome}}</option>
-                                                </select>
-                                            -->
                                                 </select>
                                                 <span class="input-group-btn">
                                                     <a href="#/pessoas/new" class="btn btn-primary" type="button">
@@ -45,12 +40,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Comunidade</label>
-                                            <input type="text" class="form-control" ng-model="catequista.pessoa.comunidade.nome" disabled>
-                                        </div>
-                                    </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>CPF</label>

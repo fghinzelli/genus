@@ -218,6 +218,7 @@ CREATE TABLE IF NOT EXISTS Professor (
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
 );
 
+/*
 CREATE TABLE IF NOT EXISTS Aluno (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	pessoaId int(10) NOT NULL,
@@ -232,22 +233,25 @@ CREATE TABLE IF NOT EXISTS Aluno (
 	FOREIGN KEY (escolaId) REFERENCES Escola(id),
 	FOREIGN KEY (etapaEscolaId) REFERENCES EtapaEscola(id)
 );
+*/
 
-CREATE TABLE IF NOT EXISTS ResponsavelAluno (
+CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	pessoaResponsavelId int(10) NOT NULL,
-	alunoId int(10) NOT NULL,
+	inscricaoCatequeseId int(10) NOT NULL,
 	observacoes varchar(100) NOT NULL,
 	relacao INT(10) NOT NULL, 
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaResponsavelId) REFERENCES Pessoa(id),
-	FOREIGN KEY (alunoId) REFERENCES Aluno(id)
+	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id)
 );
 
 CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	id int(11) NOT NULL AUTO_INCREMENT,
-	alunoId int(10) NOT NULL,
+	pessoaId int(10) NOT NULL,
 	etapaCatequeseId int(10) NOT NULL,
+	escolaId INT NULL,
+	etapaEscolaId INT NULL,
 	observacoes varchar(100) NOT NULL,
 	situacaoInscricaoId INT NOT NULL,
 	turnoId INT NOT NULL,
@@ -257,7 +261,7 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (alunoId) REFERENCES Aluno(id),
+	FOREIGN KEY (pessoaId) REFERENCES InscricaoCatequese(id),
 	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
 	FOREIGN KEY (paroquiaId) REFERENCES Paroquia(id),
 	FOREIGN KEY (situacaoDizimoId) REFERENCES SituacaoDizimo(id),
@@ -283,7 +287,7 @@ CREATE TABLE IF NOT EXISTS TurmaCatequese (
 	FOREIGN KEY (turnoId) REFERENCES Turno(id)
 );
 
-CREATE TABLE IF NOT EXISTS TurmaCatequeseAluno (
+CREATE TABLE IF NOT EXISTS TurmaCatequeseInscricao (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	inscricaoCatequeseId int(10) NOT NULL,
 	turmaCatequeseId int(10) NOT NULL,
@@ -337,7 +341,7 @@ CREATE TABLE IF NOT EXISTS CursoEdicao (
 
 CREATE TABLE IF NOT EXISTS InscricaoCurso (
 	id int(11) NOT NULL AUTO_INCREMENT,
-	alunoId int(10) NOT NULL,
+	pessoaId int(10) NOT NULL,
 	cursoId int(10) NOT NULL,
 	observacoes varchar(100) NOT NULL,
 	situacao int(1) NOT NULL,
@@ -346,7 +350,7 @@ CREATE TABLE IF NOT EXISTS InscricaoCurso (
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (alunoId) REFERENCES Aluno(id),
+	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
 	FOREIGN KEY (cursoId) REFERENCES Curso(id),
 	FOREIGN KEY (paroquiaId) REFERENCES Paroquia(id)
 );
@@ -364,7 +368,7 @@ CREATE TABLE IF NOT EXISTS TurmaCurso (
 	FOREIGN KEY (cursoId) REFERENCES Curso(id)
 );
 
-CREATE TABLE IF NOT EXISTS TurmaCursoAluno (
+CREATE TABLE IF NOT EXISTS TurmaCursoInscricao (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	inscricaoCursoId int(10) NOT NULL,
 	turmaCursoId int(10) NOT NULL,

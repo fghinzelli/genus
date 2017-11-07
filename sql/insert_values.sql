@@ -30,4 +30,9 @@ INSERT INTO `Usuario` (`id`, `username`, `senha`, `pessoaId`, `token`, `tokenExp
 INSERT INTO `AcessoParoquia` (`id`, `paroquiaId`, `usuarioId`, `nivelAcessoId`) VALUES (NULL, '1', '1', '1');
 
 -- Catequistas
-INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, '3', '1', '2017-11-01 00:00:00', 'Observacoessss', '1', NULL, NULL);
+INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
+(1, 3, 1, '2017-11-01 00:00:00', 'Observacoes abc', 1, '2017-11-07 06:02:31', NULL),
+(2, 10, 1, '2017-11-01 00:00:00', 'Observacoes ALTERACAO', 1, '2017-11-07 06:05:00', NULL),
+(5, 6, 1, '2017-11-01 00:00:00', 'Observacoessss', 1, '2017-11-07 06:04:50', NULL),
+(6, 9, 1, '2017-11-01 00:00:00', 'Observacoessss', 1, '2017-11-07 06:04:39', NULL),
+(7, 5, 1, '2017-11-01 00:00:00', 'Observacoes', 1, '2017-11-07 06:06:44', NULL);

@@ -23,7 +23,8 @@ function ($scope, $http, $cookieStore, $routeParams) {
         $http.get(serviceBase + 'catequistas/' + $routeParams.catequistaId)
         .success(function(catequista) {
             $scope.catequista = catequista;
-            //console.log(catequista);
+            $scope.catequista.pessoa = catequista.pessoa;
+            console.log($scope.catequista.pessoa.cpf);
         })
         .error(function(erro) {
             console.log(erro);
