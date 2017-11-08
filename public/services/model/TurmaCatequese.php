@@ -1,14 +1,18 @@
 <?php
 
 
-
-class Catequista {
+class TurmaCatequese {
     private $db;
     public $id;
-    public $pessoaId;
+    public $etapaCatequeseId;
     public $comunidadeId;
-    public $dataInicio;
+    public $catequistaId;
     public $observacoes;
+    public $turnoId;
+    public $diaSemana;
+    public $horario;
+    public $dataInicio;
+    public $dataTermino;
     public $status;
     public $dataUltimaAlteracao;
     public $usuarioUltimaAlteracaoId;
@@ -16,64 +20,50 @@ class Catequista {
         $this->db = $db;
     }
 
-    function loadData($id, $pessoaId, $comunidadeId, $dataInicio, $observacoes, 
+    function loadData($id, $etapaCatequeseId, $comunidadeId, $catequistaId, $observacoes, 
+                      $turnoId, $diaSemana, $horario, $dataInicio, $dataTermino,
                       $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
         $this->id = $id;
-		$this->pessoaId = $pessoaId;
+		$this->etapaCatequeseId = $etapaCatequeseId;
         $this->comunidadeId = $comunidadeId;
-        $this->dataInicio = converterDataToISO($dataInicio);
+        $this->catequistaId = $catequistaId;
         $this->observacoes = $observacoes;
+        $this->turnoId = $turnoId;
+        $this->diaSemana = $diaSemana;
+        $this->horario = $horario;
+        $this->dataInicio = converterDataToISO($dataInicio);
+        $this->dataTermino = converterDataToISO($dataTermino);
         $this->status = $status;
         $this->dataUltimaAlteracao = $dataUltimaAlteracao;
         $this->usuarioUltimaAlteracaoId = $usuarioUltimaAlteracaoId;
     } 
 
-    function getCatequistas() {
-        $sql = "SELECT C.* FROM Catequista C INNER JOIN Pessoa P ON C.pessoaId = P.id ORDER BY P.nome;";
+    function getTurmasCatequese() {
+        $sql = "SELECT * FROM TurmaCatequese";
         $query = $this->db->query($sql);
-        $catequistas = $query->fetchAll(PDO::FETCH_OBJ);
-        foreach ($catequistas as $catequista) {
-            $catequista->dataInicio = converterDataFromISO($catequista->dataInicio);
-            $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
-            $queryp = $this->db->prepare($sqlp);
-            $queryp->bindParam("id",$catequista->pessoaId);
-            $queryp->execute();
-            $catequista->pessoa =  $queryp->fetchObject();
-            // COMUNIDADE
-            $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
-            $queryc = $this->db->prepare($sqlc);
-            $queryc->bindParam("id",$catequista->comunidadeId);
-            $queryc->execute();
-            $catequista->comunidade =  $queryc->fetchObject();
+        $turmas = $query->fetchAll(PDO::FETCH_OBJ);
+        foreach ($turmas as $turma) {
+            $turma->dataInicio = converterDataFromISO($turma->dataInicio);
+            $turma->dataTermino = converterDataFromISO($turma->dataTermino);
         }
-        echo json_encode($catequistas);
+        echo json_encode($turmas);
     }
     
-    function getCatequista($id)
+
+    function getTurmaCatequese($id)
     {
-      $sql = "SELECT * FROM Catequista WHERE id=:id";
+      $sql = "SELECT * FROM TurmaCatequese WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
-      $catequista = $query->fetchObject();
-      $catequista->dataInicio = converterDataFromISO($catequista->dataInicio);
-
-      // PESSOA
-      $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
-      $queryp = $this->db->prepare($sqlp);
-      $queryp->bindParam("id",$catequista->pessoaId);
-      $queryp->execute();
-      $catequista->pessoa =  $queryp->fetchObject();
-
-      // COMUNIDADE
-      $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
-      $queryc = $this->db->prepare($sqlc);
-      $queryc->bindParam("id",$catequista->comunidadeId);
-      $queryc->execute();
-      $catequista->comunidade =  $queryc->fetchObject();
-      
-      echo json_encode($catequista);
+      $turma = $query->fetchObject();
+      $turma->dataInicio = converterDataFromISO($turma->dataInicio);
+      $turma->dataTermino = converterDataFromISO($turma->dataTermino);    
+      echo json_encode($turma);
     }
+
+    //////////// CONTINUAR DAQUI
+
 
     function addCatequista() {
         $sql = "INSERT INTO Catequista (`pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, 

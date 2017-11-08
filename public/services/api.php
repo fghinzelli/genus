@@ -1,4 +1,5 @@
 <?php
+	
 	require 'vendor/autoload.php';
 	require 'model/db.php';
 	require 'model/Pessoa.php';
@@ -11,8 +12,10 @@
 	require 'model/InscricaoCatequese.php';
 	require 'model/Escola.php';
 	require 'model/Turno.php';
+	require 'model/TurmaCatequese.php';
 	require 'model/SituacaoDizimo.php';
 	require 'model/SituacaoInscricao.php';
+	require 'model/conversor.php';
 
 	//require 'db_connection.php';
 
@@ -218,7 +221,7 @@
 		}
 	})->add($middleAuthorization);
 
-	// SELECT BY UF
+	// SELECT BY id
 	$app->get('/catequistas/{id}', function($request, $response, $args) {
 		$catequista = new Catequista(db::getInstance());
 		$result = $catequista->getCatequista($args['id']);
@@ -236,7 +239,9 @@
 
 	// INSERT
 	$app->post('/catequistas', function($request, $response, $args) {
+		
 		$data = $request->getParsedBody();
+		//return $data;
 		$catequista = new Catequista(db::getInstance());
 		$catequista->loadData(null, $data['pessoaId'], $data['comunidadeId'], $data['dataInicio'],
 						  $data['observacoes'], $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
@@ -338,6 +343,38 @@
 	$app->get('/situacao-dizimo', function($request, $response, $args) {
 		$situacao = new SituacaoDizimo(db::getInstance());
 		$result = $situacao->getSituacoesDizimo();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	/* TURMAS CATEQUESE */
+
+	// SELECT ALL
+	$app->get('/turmas-catequese', function($request, $response, $args) {
+		$turma = new TurmaCatequese(db::getInstance());
+		$result = $turma->getTurmasCatequese();
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	// SELECT BY id
+	$app->get('/turmas-catequese/{id}', function($request, $response, $args) {
+		$turma = new TurmaCatequese(db::getInstance());
+		$result = $turma->getTurmaCatequese($args['id']);
 		if($result === false) {
 			return $response->withStatus(200)
 				->withHeader('Content-Type', 'application/json;charset=utf-8')

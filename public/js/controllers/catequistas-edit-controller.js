@@ -9,6 +9,7 @@ function ($scope, $http, $cookieStore, $routeParams) {
     var globals = $cookieStore.get('globals');
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
     
+    $scope.catequista = {};
     $scope.filtro = '';
     $scope.mensagem = '';
     $scope.showSuccessAlert = true;
@@ -16,15 +17,13 @@ function ($scope, $http, $cookieStore, $routeParams) {
         $scope[value] = !$scope[value];
     };
 
-
-
     // GET BY ID
     if ($routeParams.catequistaId) {
         $http.get(serviceBase + 'catequistas/' + $routeParams.catequistaId)
         .success(function(catequista) {
             $scope.catequista = catequista;
             $scope.catequista.pessoa = catequista.pessoa;
-            console.log($scope.catequista.pessoa.cpf);
+            console.log($scope.catequista);
         })
         .error(function(erro) {
             console.log(erro);
@@ -35,8 +34,7 @@ function ($scope, $http, $cookieStore, $routeParams) {
     // SUBMIT DO FORM - CREATE AND UPDATE
     $scope.submeterForm = function() {
         //if ($scope.formulario.$valid) {
-            //console.log($scope.catequista);
-            $scope.catequista.pessoaId = $scope.catequista.pessoa.id;
+            console.log($scope.catequista);         
             if ($routeParams.catequistaId) {
                 $http.put(serviceBase + 'catequistas/' + $scope.catequista.id, $scope.catequista)
                 .success(function() {
@@ -47,7 +45,13 @@ function ($scope, $http, $cookieStore, $routeParams) {
                     $scope.mensagem = 'Não foi possível alterar os dados';
                 });
             } else {
-                $http.post(serviceBase + 'catequistas', $scope.catequista)
+                $scope.catequista.pessoaId = $scope.catequista.pessoa.id;
+                console.log($scope.catequista);
+                $http({method: "POST",
+                       url: serviceBase + 'catequistas', 
+                       data: $scope.catequista,
+                       headers: {'Content-Type': 'application/json'}
+                      })
                 .success(function() {
                     $scope.catequista = {};
                     $scope.mensagem = 'Catequista adastrada com sucesso';

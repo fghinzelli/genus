@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Comunidade (
 	nome varchar(50) NOT NULL,
 	padroeiro varchar(50) NULL,
 	paroquiaId int(10) NOT NULL,
-	dataFuncacao datetime,
+	dataFuncacao date,
 	responsavelCatequese varchar(50) NULL,
 	logradouro varchar(50) NULL,
 	numero varchar(10) NULL,
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS Pessoa (
 	sexo char(1) NOT NULL,
 	nomePai varchar(50) NULL,
 	nomeMae varchar(50) NULL,
-	dataNascimento datetime NOT NULL,
+	dataNascimento date NOT NULL,
 	telefone1 varchar(12) NULL,
 	telefone2 varchar(12) NULL,
 	cpf varchar(11) NULL,
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS Catequista (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	pessoaId int(10) NOT NULL,
 	comunidadeId INT NOT NULL,
-	dataInicio datetime NULL,
+	dataInicio date NULL,
 	observacoes varchar(100) NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS Professor (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	pessoaId int(10) NOT NULL,
 	comunidadeId INT NOT NULL,
-	dataInicio datetime NULL,
+	dataInicio date NULL,
 	observacoes varchar(100) NOT NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
@@ -225,18 +225,40 @@ CREATE TABLE IF NOT EXISTS Professor (
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
 );
 
+CREATE TABLE IF NOT EXISTS TurmaCatequese (
+	id int(11) NOT NULL AUTO_INCREMENT,
+	etapaCatequeseId int(10) NOT NULL,
+	catequistaId int(10) NOT NULL,
+	observacoes varchar(100) NOT NULL,
+	turnoId INT NOT NULL,
+	diaSemana INT NOT NULL,
+	dataInicio date NULL,
+	dataTermino date NULL,
+	status int(1) NOT NULL,
+	dataUltimaAlteracao datetime,
+	usuarioUltimaAlteracaoId INT NULL,
+	horario varchar(30) NOT NULL,
+	comunidadeId INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (catequistaId) REFERENCES Catequista(id),
+	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
+	FOREIGN KEY (comunidadeId) REFERENCES Comunidade(id),
+	FOREIGN KEY (turnoId) REFERENCES Turno(id)
+);
+
 CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	pessoaId int(10) NOT NULL,
-	etapaCatequeseId int(10) NOT NULL,
+	etapaCatequeseId int(10) NULL,
 	escolaId INT NULL,
+	turmaId INT NULL,
 	etapaEscolaId INT NULL,
-	observacoes varchar(100) NOT NULL,
-	situacaoInscricaoId INT NOT NULL,
-	turnoId INT NOT NULL,
-	situacaoDizimoId INT NOT NULL,
-	comunidadeId INT NOT NULL,
-	dataInscricao datetime,
+	observacoes varchar(100) NULL,
+	situacaoInscricaoId INT NULL,
+	turnoId INT NULL,
+	situacaoDizimoId INT NULL,
+	comunidadeId INT NULL,
+	dataInscricao date,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
@@ -248,7 +270,8 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	FOREIGN KEY (situacaoDizimoId) REFERENCES SituacaoDizimo(id),
 	FOREIGN KEY (situacaoInscricaoId) REFERENCES SituacaoInscricao(id),
 	FOREIGN KEY (turnoId) REFERENCES Turno(id),
-	FOREIGN KEY (escolaId) REFERENCES Escola(id)
+	FOREIGN KEY (escolaId) REFERENCES Escola(id),
+	FOREIGN KEY (turmaId) REFERENCES TurmaCatequese(id)
 );
 
 CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
@@ -262,24 +285,7 @@ CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
 	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id)
 );
 
-CREATE TABLE IF NOT EXISTS TurmaCatequese (
-	id int(11) NOT NULL AUTO_INCREMENT,
-	etapaCatequeseId int(10) NOT NULL,
-	catequistaId int(10) NOT NULL,
-	observacoes varchar(100) NOT NULL,
-	turnoId INT NOT NULL,
-	diaSemana INT NOT NULL,
-	status int(1) NOT NULL,
-	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NULL,
-	horario varchar(30) NOT NULL,
-	paroquiaId INT NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (catequistaId) REFERENCES Catequista(id),
-	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
-	FOREIGN KEY (paroquiaId) REFERENCES Paroquia(id),
-	FOREIGN KEY (turnoId) REFERENCES Turno(id)
-);
+
 
 CREATE TABLE IF NOT EXISTS TurmaCatequeseInscricao (
 	id int(11) NOT NULL AUTO_INCREMENT,
@@ -316,8 +322,8 @@ CREATE TABLE IF NOT EXISTS SituacaoEdicaoCurso (
 CREATE TABLE IF NOT EXISTS CursoEdicao (
 	id INT NOT NULL AUTO_INCREMENT,
 	cursoId INT NOT NULL,
-	dataInicio datetime,
-	dataConclusao datetime,
+	dataInicio date,
+	dataConclusao date,
 	diaSemana INT NOT NULL,
 	turnoId INT NOT NULL,
 	horario varchar(30) NULL,
