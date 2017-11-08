@@ -11,7 +11,8 @@ angular.module('Genus', [
     'ngAnimate',
     'ngSanitize',
     'ngCookies',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.mask'
 ])
  
 

@@ -3,7 +3,7 @@
 angular.module('Home',)
 .controller('CatequistasEditController',
 ['$scope', '$http', '$cookieStore', '$routeParams',
-function ($scope, $http, $cookieStore, $routeParams) {
+function ($scope, $http, $cookieStore, $routeParams,) {
     
     var serviceBase = '/genus/services/';
     var globals = $cookieStore.get('globals');
