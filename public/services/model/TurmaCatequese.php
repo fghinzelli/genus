@@ -62,19 +62,27 @@ class TurmaCatequese {
       echo json_encode($turma);
     }
 
-    //////////// CONTINUAR DAQUI
+    //////////// TESTADO ATE AQUI
 
 
-    function addCatequista() {
-        $sql = "INSERT INTO Catequista (`pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, 
-                                    `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
-                VALUES (:pessoaId, :comunidadeId, :dataInicio, :observacoes, :status, NOW(), :usuarioUltimaAlteracaoId)";
+    function addTurmaCatequese() {
+        $sql = "INSERT INTO TurmaCatequese (`etapaCatequeseId`, `comunidadeId`, `catequistaId`, `observacoes`,
+                                            `turnoId`, `diaSemana`, `horario`, `dataInicio`, `dataTermino`, 
+                                            `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+                VALUES (:etapaCatequeseId, :comunidadeId, :catequistaId, :observacoes,
+                        :turnoId, :diaSemana, :horario, :dataInicio, :dataTermino, 
+                        :status, NOW(), :usuarioUltimaAlteracaoId)";
         
         $query = $this->db->prepare($sql);
-        $query->bindParam(":pessoaId",$this->pessoaId);
+        $query->bindParam(":etapaCatequeseId",$this->etapaCatequeseId);
         $query->bindParam(":comunidadeId",$this->comunidadeId);
-        $query->bindParam(":dataInicio",$this->dataInicio);
+        $query->bindParam(":catequistaId",$this->catequistaId);
         $query->bindParam(":observacoes",$this->observacoes);
+        $query->bindParam(":turnoId",$this->turnoId);
+        $query->bindParam(":diaSemana",$this->diaSemana);
+        $query->bindParam(":horario",$this->horario);
+        $query->bindParam(":dataInicio",$this->dataInicio);
+        $query->bindParam(":dataTermino",$this->dataTermino);
         $query->bindParam(":status",$this->status);
         $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
         $query->execute();
@@ -82,30 +90,36 @@ class TurmaCatequese {
         echo json_encode($this);
     }
     
-    function saveCatequista()
+    function saveTurmaCatequese()
     {
-        $sql = "UPDATE Catequista SET pessoaId=:pessoaId, comunidadeId=:comunidadeId, dataInicio=:dataInicio, observacoes=:observacoes, 
-                                  status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
+        $sql = "UPDATE TurmaCatequese SET etapaCatequeseId=:etapaCatequeseId, comunidadeId=:comunidadeId, catequistaId=:catequistaId, :observacoes,
+                                          turnoId=:turnoId, diaSemana=:diaSemana, horario=:horario, dataInicio=:dataInicio, dataTermino=:dataTermino, 
+                                          status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
                 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
-      $query->bindParam(":pessoaId",$this->pessoaId);
+      $query->bindParam(":etapaCatequeseId",$this->etapaCatequeseId);
       $query->bindParam(":comunidadeId",$this->comunidadeId);
+      $query->bindParam(":catequistaId",$this->catequistaId);
+      $query->bindParam(":observacoes",$this->observacoes);
+      $query->bindParam(":turnoId",$this->turnoId);
+      $query->bindParam(":diaSemana",$this->diaSemana);
+      $query->bindParam(":horario",$this->horario);
       $query->bindParam(":dataInicio",$this->dataInicio);
-      $query->bindParam(":observacoes", $this->observacoes);
+      $query->bindParam(":dataTermino",$this->dataTermino);
       $query->bindParam(":status",$this->status);
       $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
       $query->execute();
       echo json_encode($this);
     }
     
-    function deleteCatequista()
+    function deleteTurmaCatequese()
     {
-      $sql = "DELETE FROM Catequista WHERE id=:id";
+      $sql = "DELETE FROM TurmaCatequese WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();
-      echo json_encode("{'message': 'Catequista apagado'}");
+      echo json_encode("{'message': 'Turma apagada'}");
     }
 }
 ?>
