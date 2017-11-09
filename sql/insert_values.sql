@@ -13,14 +13,14 @@
     -- Pessoa
     INSERT INTO `Pessoa` (`id`, `nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, `cpf`, `rg`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, `primeiraEucaristia`, `localPrimeiraEucaristia`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
     VALUES 
-    (NULL, 'Fulano de Tal', 'M', 'Adão de Tal', 'Eva de Tal', '2017-08-14 00:00:00', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
-    (NULL, 'Maria da Silva', 'F', 'Mario da Silva', 'Isabel da Silva', '2017-06-11 00:00:00', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
-    (NULL, 'Antônio de Jesus', 'M', 'João de Jesus', 'Marta de Jesus', '2017-08-14 00:00:00', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
-    (NULL, 'Salete da Costa', 'F', 'Mario da Costa', 'Teresa da Costa', '2017-06-11 00:00:00', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
-    (NULL, 'Rafael Gonçalves', 'M', 'Jose Gonçalves', 'Lourdes Gonçalves', '2017-08-14 00:00:00', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
-    (NULL, 'Simone da Cruz', 'F', 'Mario da Cruz', 'Salete da Cruz', '2017-06-11 00:00:00', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
-    (NULL, 'Gabriel da Costa', 'M', 'Douglas da Costa', 'Maria da Costa', '2017-08-14 00:00:00', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
-    (NULL, 'Jéssica Antunes', 'F', 'Mario Antunes', 'Maria Antunes', '2017-06-11 00:00:00', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL);
+    (NULL, 'Fulano de Tal', 'M', 'Adão de Tal', 'Eva de Tal', '2017-08-14', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
+    (NULL, 'Maria da Silva', 'F', 'Mario da Silva', 'Isabel da Silva', '2017-06-11', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
+    (NULL, 'Antônio de Jesus', 'M', 'João de Jesus', 'Marta de Jesus', '2017-08-14', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
+    (NULL, 'Salete da Costa', 'F', 'Mario da Costa', 'Teresa da Costa', '2017-06-11', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
+    (NULL, 'Rafael Gonçalves', 'M', 'Jose Gonçalves', 'Lourdes Gonçalves', '2017-08-14', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
+    (NULL, 'Simone da Cruz', 'F', 'Mario da Cruz', 'Salete da Cruz', '2017-06-11', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
+    (NULL, 'Gabriel da Costa', 'M', 'Douglas da Costa', 'Maria da Costa', '2017-08-14', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL),
+    (NULL, 'Jéssica Antunes', 'F', 'Mario Antunes', 'Maria Antunes', '2017-06-11', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, '12345', 1,  NULL, 1, NULL, NULL, NULL, 1, NULL, NULL);
 
 
     -- Usuario
@@ -79,14 +79,19 @@
     INSERT INTO `SituacaoInscricao` (`id`, `descricao`, `status`) VALUES 
     (1, 'Cadastrada', '1'), (2, 'Pendente', '1');
 
-    -- InscricaoCatequese
-
-    INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
-    VALUES (NULL, '2', '3', '3', '1', 'xxxxx', '1', '2', '2', '1', '2017-11-07 00:00:00', '1', NULL, NULL);
 
     -- TurmasCatequese
 
     INSERT INTO `TurmaCatequese` (`id`, `etapaCatequeseId`, `catequistaId`, `observacoes`, `turnoId`, `diaSemana`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `horario`, `comunidadeId`, `dataInicio`, `dataTermino`) 
     VALUES 
-    (NULL, '1', '1', 'obs', '1', '1', '1', NULL, NULL, '13:00', '1', '2017-11-08', NULL),
-    (NULL, '2', '2', 'obs', '2', '2', '1', NULL, NULL, '13:00', '1', '2017-11-08', NULL);
+    (1, '1', '1', 'obs', '1', '1', '1', NULL, NULL, '13:00', '1', '2017-11-08', NULL),
+    (2, '2', '2', 'obs', '2', '2', '1', NULL, NULL, '13:00', '1', '2017-11-08', NULL);
+
+
+    -- InscricaoCatequese
+
+    INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `turmaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+    VALUES
+    (NULL, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL),
+    (NULL, 2, 3, 1, 2, 1, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:42:57', NULL),
+    (NULL, 2, 3, 1, 2, NULL, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:43:32', NULL);

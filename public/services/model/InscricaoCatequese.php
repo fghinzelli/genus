@@ -30,6 +30,7 @@ class InscricaoCatequese {
         $this->id = $id;
         $this->pessoaId = $pessoaId;
         $this->etapaCatequeseId = $etapaCatequeseId;
+        $this->escolaId = $escolaId;
         $this->etapaEscolaId = $etapaEscolaId;
         $this->turmaId = $turmaId;
         $this->observacoes = $observacoes;
@@ -71,12 +72,10 @@ class InscricaoCatequese {
         echo json_encode($inscricoes);
     }
     
-     
-    /////////// TESTADO ATÉ AQUI !!!!!!!!!!!
 
     function getInscricaoCatequese($id)
     {
-      $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id WHERE id=:id";
+      $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id WHERE I.id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
@@ -108,11 +107,11 @@ class InscricaoCatequese {
 
 
     function addInscricaoCatequese() {
-        $sql = "INSERT INTO InscricaoCatequese (`pessoaId`, `etapaCatequeseId`, `escolaId`, `turmaId`, 
+        $sql = "INSERT INTO InscricaoCatequese (`pessoaId`, `etapaCatequeseId`, `escolaId`, `etapaEscolaId`, `turmaId`, 
                                                 `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`,
                                                 `comunidadeId`, `dataInscricao`,
                                                 `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
-                VALUES (:pessoaId, :etapaCatequeseId, :escolaId, :turmaId, 
+                VALUES (:pessoaId, :etapaCatequeseId, :escolaId, :etapaEscolaId, :turmaId, 
                         :observacoes, :situacaoInscricaoId, :turnoId, :situacaoDizimoId, 
                         :comunidadeId, :dataInscricao,
                         :status, NOW(), :usuarioUltimaAlteracaoId)";
@@ -121,6 +120,7 @@ class InscricaoCatequese {
         $query->bindParam(":pessoaId",$this->pessoaId);
         $query->bindParam(":etapaCatequeseId",$this->etapaCatequeseId);
         $query->bindParam(":escolaId",$this->escolaId);
+        $query->bindParam(":etapaEscolaId",$this->etapaEscolaId);
         $query->bindParam(":turmaId",$this->turmaId);
         $query->bindParam(":observacoes",$this->observacoes);
         $query->bindParam(":situacaoInscricaoId",$this->situacaoInscricaoId);
@@ -137,7 +137,7 @@ class InscricaoCatequese {
 
     function saveInscricaoCatequese()
     {
-        $sql = "UPDATE InscricaoCatequese SET pessoaId=:pessoaId, etapaCatequeseId=:etapaCatequeseId, escolaId=:escolaId, turmaId=:turmaId, 
+        $sql = "UPDATE InscricaoCatequese SET pessoaId=:pessoaId, etapaCatequeseId=:etapaCatequeseId, escolaId=:escolaId, etapaEscolaId=:etapaEscolaId, turmaId=:turmaId, 
                                               observacoes=:observacoes, situacaoInscricaoId=:situacaoInscricaoId, turnoId=:turnoId, situacaoDizimoId=:situacaoDizimoId, 
                                               comunidadeId=:comunidadeId, dataInscricao=:dataInscricao,
                                               status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
@@ -161,7 +161,7 @@ class InscricaoCatequese {
       echo json_encode($this);
     }
     
-    function deleteCatequista()
+    function deleteInscricaoCatequese()
     {
       $sql = "DELETE FROM InscricaoCatequese WHERE id=:id";
       $query = $this->db->prepare($sql);

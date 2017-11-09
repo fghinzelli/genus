@@ -24,7 +24,6 @@ angular.module('Genus', [
         .when('/login', {
             controller: 'LoginController',
             templateUrl: 'partials/login.html',
-            hideMenus: true
         })
  
         .when('/', {

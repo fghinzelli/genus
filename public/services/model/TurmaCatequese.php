@@ -62,7 +62,6 @@ class TurmaCatequese {
       echo json_encode($turma);
     }
 
-    //////////// TESTADO ATE AQUI
 
 
     function addTurmaCatequese() {
@@ -92,7 +91,7 @@ class TurmaCatequese {
     
     function saveTurmaCatequese()
     {
-        $sql = "UPDATE TurmaCatequese SET etapaCatequeseId=:etapaCatequeseId, comunidadeId=:comunidadeId, catequistaId=:catequistaId, :observacoes,
+        $sql = "UPDATE TurmaCatequese SET etapaCatequeseId=:etapaCatequeseId, comunidadeId=:comunidadeId, catequistaId=:catequistaId, observacoes=:observacoes,
                                           turnoId=:turnoId, diaSemana=:diaSemana, horario=:horario, dataInicio=:dataInicio, dataTermino=:dataTermino, 
                                           status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
                 WHERE id=:id";
