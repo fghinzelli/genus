@@ -21,7 +21,7 @@ angular.module('Home',)
 
     
         // LISTAGEM DE INSCRICOES
-        $http.get(serviceBase + 'inscricoes')
+        $http.get(serviceBase + 'inscricoes-catequese')
         .success(function(inscricoes) {
             $scope.inscricoes = inscricoes;
         })
@@ -31,7 +31,7 @@ angular.module('Home',)
 
         // DELETE
         $scope.remover = function(pessoa) {
-            $http.delete(serviceBase + 'inscricoes/' + inscricao.id)
+            $http.delete(serviceBase + 'inscricoes-catequese/' + inscricao.id)
             .success(function() {
                 var indiceDaInscricao = $scope.inscricoes.indexOf(inscricao);
                 $scope.inscricoes.splice(indiceDaInscricao, 1);

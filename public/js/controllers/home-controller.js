@@ -11,10 +11,10 @@ angular.module('Home',)
 
 angular.module('Genus')
 .controller('SidebarController', ['$scope', '$rootScope', function ($scope, $rootScope) {
-        $scope.isCollapsed = true;
+        $scope.isCollapsed = false;
         $scope.isColl = true;
         $scope.isCad = true;
 
-        //$rootScope.showMenus = true;
+        $rootScope.showMenus = true;
 }]);    
 

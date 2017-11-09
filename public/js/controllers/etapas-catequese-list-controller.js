@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Home',)
-.controller('TurmasListController',
+.controller('EtapasCatequeseListController',
     ['$scope', '$http', '$cookieStore', '$routeParams',
     function ($scope, $http, $cookieStore, $routeParams) {
         
@@ -11,7 +11,7 @@ angular.module('Home',)
         
         
         // MENSAGEM DE ALERTA
-        $scope.turmas = [];
+        $scope.etapasCatequese = [];
         $scope.filtro = '';
         $scope.mensagem = '';
         $scope.showSuccessAlert = true;
@@ -20,21 +20,21 @@ angular.module('Home',)
         };
 
     
-        // LISTAGEM DE TURMAS
-        $http.get(serviceBase + 'turmas-catequese')
-        .success(function(turmas) {
-            $scope.turmas = turmas;
+        // LISTAGEM DE ETAPAS
+        $http.get(serviceBase + 'etapas-catequese')
+        .success(function(etapasCatequese) {
+            $scope.etapasCatequese = etapasCatequese;
         })
         .error(function(erro) {
             console.log(erro)
         });
 
         // DELETE
-        $scope.remover = function(turma) {
-            $http.delete(serviceBase + 'turmas-catequese/' + turma.id)
+        $scope.remover = function(etapaCatequese) {
+            $http.delete(serviceBase + 'etapas-catequese/' + etapaCatequese.id)
             .success(function() {
-                var indiceDoTurma = $scope.turmas.indexOf(turma);
-                $scope.turmas.splice(indiceDoTurma, 1);
+                var indiceDaEtapa = $scope.etapasCatequese.indexOf(etapaCatequese);
+                $scope.etapasCatequese.splice(indiceDaEtapa, 1);
                 $scope.mensagem = 'Registro removido com sucesso!';
     
             })

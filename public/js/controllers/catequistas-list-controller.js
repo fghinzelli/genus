@@ -33,7 +33,7 @@ angular.module('Home',)
         $scope.remover = function(catequista) {
             $http.delete(serviceBase + 'catequistas/' + catequista.id)
             .success(function() {
-                var indiceDoCatequista = $scope.catequista.indexOf(catequista);
+                var indiceDoCatequista = $scope.catequistas.indexOf(catequista);
                 $scope.catequistas.splice(indiceDoCatequista, 1);
                 $scope.mensagem = 'Registro removido com sucesso!';
     

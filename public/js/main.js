@@ -91,7 +91,7 @@ angular.module('Genus', [
         })
 
         .when('/catequese/turmas/edit/:turmaId', {
-            controller: 'TurmaEditController',
+            controller: 'TurmasEditController',
             templateUrl: 'partials/turmas_form.html'
         })
 
