@@ -2,14 +2,18 @@
 
 angular.module('Home',)
 .controller('CatequistasEditController',
-['$scope', '$http', '$cookieStore', '$routeParams',
-function ($scope, $http, $cookieStore, $routeParams,) {
+['$scope', '$http', '$cookieStore', '$routeParams', '$rootScope',
+function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
     
     var serviceBase = '/genus/services/';
     var globals = $cookieStore.get('globals');
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
     
     $scope.catequista = {};
+    console.log("Pessoa" + $rootScope.pessoa);
+    if ($rootScope.pessoa) {
+        $scope.catequista = $rootScope.pessoa;
+    }
     $scope.filtro = '';
     $scope.mensagem = '';
     $scope.showSuccessAlert = true;

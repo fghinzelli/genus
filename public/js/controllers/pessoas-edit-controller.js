@@ -2,8 +2,8 @@
 
 angular.module('Home',)
 .controller('PessoasEditController',
-    ['$scope', '$http', '$cookieStore', '$routeParams', '$location',
-    function ($scope, $http, $cookieStore, $routeParams, $location) {
+    ['$scope', '$http', '$cookieStore', '$routeParams', '$location', '$rootScope',
+    function ($scope, $http, $cookieStore, $routeParams, $location, $rootScope) {
         
         var serviceBase = '/genus/services/';
         var globals = $cookieStore.get('globals');
@@ -15,8 +15,8 @@ angular.module('Home',)
         // Valores default
         $scope.pessoa.nacionalidade = "Brasileira";
         $scope.pessoa.cep = "95185000";
-        $scope.estado = "RS";
-        $scope.atualizarMunicipios;
+        //$scope.estado = "RS";
+        //$scope.atualizarMunicipios;
         //$scope.pessoa.municipioId = "4697";
         
 
@@ -46,11 +46,12 @@ angular.module('Home',)
         $scope.submeterForm = function() {
             //if ($scope.formulario.$valid) {
                 $scope.pessoa.status = 1;
+                //console.log($scope.pessoa);
                 if ($routeParams.pessoaId) {
                     $http.put(serviceBase + 'pessoas/' + $scope.pessoa.id, $scope.pessoa)
                     .success(function() {
                         $scope.mensagem = 'Dados alterados com sucesso';
-                        window.history.back();
+                        //window.history.back();
                     })
                     .error(function(error) {
                         console.log(error);
@@ -59,7 +60,8 @@ angular.module('Home',)
                 } else {
                     $http.post(serviceBase + 'pessoas', $scope.pessoa)
                     .success(function() {
-                        $scope.pessoa = {};
+                        $rootScope.pessoa = $scope.pessoa;
+                        //$scope.pessoa = {};
                         $scope.mensagem = 'Pessoas adastrada com sucesso';
                         window.history.back();
                     })
