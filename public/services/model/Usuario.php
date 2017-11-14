@@ -38,7 +38,7 @@
             // Verifica se o token é valido
             $sql = "SELECT username 
                     FROM Usuario 
-                    WHERE token = :token AND TIMESTAMPDIFF(MINUTE, tokenExpiracao, CURRENT_TIMESTAMP) < 30";
+                    WHERE token = :token"; //AND TIMESTAMPDIFF(MINUTE, tokenExpiracao, CURRENT_TIMESTAMP) < 30";
             $query = $this->db->prepare($sql);
             $query->bindParam(':token', $token, PDO::PARAM_STR);
             $query->execute();

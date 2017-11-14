@@ -2,8 +2,8 @@
 
 angular.module('Home',)
 .controller('PessoasEditController',
-    ['$scope', '$http', '$cookieStore', '$routeParams',
-    function ($scope, $http, $cookieStore, $routeParams) {
+    ['$scope', '$http', '$cookieStore', '$routeParams', '$location',
+    function ($scope, $http, $cookieStore, $routeParams, $location) {
         
         var serviceBase = '/genus/services/';
         var globals = $cookieStore.get('globals');
@@ -41,6 +41,7 @@ angular.module('Home',)
                     $http.put(serviceBase + 'pessoas/' + $scope.pessoa.id, $scope.pessoa)
                     .success(function() {
                         $scope.mensagem = 'Dados alterados com sucesso';
+                        window.history.back();
                     })
                     .error(function(error) {
                         console.log(error);
@@ -51,6 +52,7 @@ angular.module('Home',)
                     .success(function() {
                         $scope.pessoa = {};
                         $scope.mensagem = 'Pessoas adastrada com sucesso';
+                        window.history.back();
                     })
                     .error(function(erro) { 
                         console.log(erro);
@@ -75,4 +77,11 @@ angular.module('Home',)
                 $scope.mensagem = 'Não foi possível apagar o registro';
             });
         };
+
+        //Funcao executada no clique do botão voltar
+        $scope.$back = function() { 
+            window.history.back();
+        };
+        
+
     }]);
