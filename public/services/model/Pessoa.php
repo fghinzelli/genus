@@ -49,7 +49,7 @@ class Pessoa {
         $this->sexo = $sexo;
         $this->nomePai = $nomePai;
         $this->nomeMae = $nomeMae;
-		$this->dataNascimento = $dataNascimento;
+		$this->dataNascimento = converterDataToISO($dataNascimento);
 		$this->telefone1 = $telefone1;
 		$this->telefone2 = $telefone2;
 		$this->cpf = $cpf;
@@ -141,7 +141,6 @@ class Pessoa {
                         :primeiraEucaristia, :localPrimeiraEucaristia, 
                         :status, NOW(), :usuarioUltimaAlteracaoId)";
         $query = $this->db->prepare($sql);
-        return $this;
         $query->bindParam(":nome",$this->nome);
         $query->bindParam(":sexo",$this->sexo);
         $query->bindParam(":nomePai",$this->nomePai);

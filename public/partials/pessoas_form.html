@@ -24,7 +24,8 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Data de Nascimento</label>
-                                <input class="form-control" ng-model="pessoa.dataNascimento">
+                                <!--input class="form-control" ng-model="pessoa.dataNascimento"-->
+                                <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="pessoa.dataNascimento">
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -102,7 +103,7 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>CEP</label>
-                                                            <input type="text" class="form-control" name="cep" ng-model="pessoa.cep">
+                                                            <input type="text" class="form-control" ui-mask="99999-999" model-view-value="true" name="cep" ng-model="pessoa.cep">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
@@ -136,7 +137,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label>Email</label>
-                                                            <input type="email" class="form-control" name="email" ng-model="pessoa.email">
+                                                            <input type="email" class="form-control" placeholder="email@gmail.com" name="email" ng-model="pessoa.email">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -144,13 +145,13 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label>Telefone Principal</label>
-                                                            <input type="text" class="form-control" name="telefone1" ng-model="pessoa.telefone1">
+                                                            <input type="text" class="form-control" ui-mask="(99)99999-9999" model-view-value="true" name="telefone1" ng-model="pessoa.telefone1">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label>Telefone para Recados</label>
-                                                            <input type="text" class="form-control" name="telefone2" ng-model="pessoa.telefone2">
+                                                            <input type="text" class="form-control" ui-mask="(99)99999-9999" model-view-value="true" name="telefone2" ng-model="pessoa.telefone2">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -166,7 +167,7 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>CPF</label>
-                                                            <input type="cpf" class="form-control" name="cpf" ng-model="pessoa.cpf">
+                                                            <input type="cpf" class="form-control" ui-mask="999.999.999-00" model-view-value="true" name="cpf" ng-model="pessoa.cpf">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
@@ -206,10 +207,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <div class="form-group">
+                                                        <div class="form-group" ng-controller="ComunidadesListController">
                                                             <label>Comunidade</label>
                                                             <select name="comunidade" class="form-control"
-                                                                    ng-model="pessoa.comunidade" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
+                                                                    ng-model="pessoa.comunidadeId" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
                                                                 <option value="">Selecione</option>
                                                             </select>
                                                         </div>

@@ -10,14 +10,23 @@ angular.module('Home',)
         $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
         
         
-        $scope.pessoas = [];
-        $scope.filtro = '';
+        $scope.pessoa = {};
+
+        // Valores default
+        $scope.pessoa.nacionalidade = "Brasileira";
+        $scope.pessoa.cep = "95185000";
+        $scope.estado = "RS";
+        $scope.atualizarMunicipios;
+        //$scope.pessoa.municipioId = "4697";
+        
+
         $scope.mensagem = '';
         $scope.showSuccessAlert = true;
         $scope.switchBool = function(value) {
             $scope[value] = !$scope[value];
         };
 
+        
 
 
         // GET BY ID

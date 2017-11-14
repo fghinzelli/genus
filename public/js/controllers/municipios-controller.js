@@ -8,6 +8,13 @@ angular.module('Home')
     var globals = $cookieStore.get('globals');
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
 
+    /*
+    $scope.$watch('estados', function(){
+        console.log("atualizar municipios");
+        $scope.atualizarMunicipios;
+    });
+    */
+
     $http.get(serviceBase + 'estados')
         .success(function(estados) {
             $scope.estados = estados;
