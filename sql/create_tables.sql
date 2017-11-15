@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS Pessoa (
 	numeroDizimo VARCHAR(20) NULL,
 	comunidadeId int(10) NOT NULL,
 	observacoes varchar(50) NULL,
-	batizado int(1) NOT NULL,
+	batizado int(1) NULL,
 	localBatismo varchar(30) NULL,
 	primeiraEucaristia int(1) NULL,
 	localPrimeiraEucaristia varchar(30) NULL,

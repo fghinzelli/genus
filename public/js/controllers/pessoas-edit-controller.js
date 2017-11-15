@@ -46,7 +46,6 @@ angular.module('Home',)
         $scope.submeterForm = function() {
             //if ($scope.formulario.$valid) {
                 $scope.pessoa.status = 1;
-                //console.log($scope.pessoa);
                 if ($routeParams.pessoaId) {
                     $http.put(serviceBase + 'pessoas/' + $scope.pessoa.id, $scope.pessoa)
                     .success(function() {
@@ -59,10 +58,11 @@ angular.module('Home',)
                     });
                 } else {
                     $http.post(serviceBase + 'pessoas', $scope.pessoa)
-                    .success(function() {
-                        $rootScope.pessoa = $scope.pessoa;
-                        //$scope.pessoa = {};
-                        $scope.mensagem = 'Pessoas adastrada com sucesso';
+                    .success(function(pessoa) {
+                        $rootScope.pessoa = pessoa;
+                        console.log(pessoa);
+                        $scope.pessoa = {};
+                        $scope.mensagem = 'Pessoa cadastrada com sucesso';
                         window.history.back();
                     })
                     .error(function(erro) { 

@@ -10,10 +10,11 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
     
     $scope.catequista = {};
-    console.log("Pessoa" + $rootScope.pessoa);
     if ($rootScope.pessoa) {
-        $scope.catequista = $rootScope.pessoa;
+        $scope.catequista.pessoa = $rootScope.pessoa;
+        $rootScope.pessoa = {};
     }
+
     $scope.filtro = '';
     $scope.mensagem = '';
     $scope.showSuccessAlert = true;
@@ -27,7 +28,7 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
         .success(function(catequista) {
             $scope.catequista = catequista;
             $scope.catequista.pessoa = catequista.pessoa;
-            console.log($scope.catequista);
+            console.log(catequista.pessoa);
         })
         .error(function(erro) {
             console.log(erro);

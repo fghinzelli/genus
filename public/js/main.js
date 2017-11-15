@@ -124,7 +124,7 @@ angular.module('Genus', [
  
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in
-            console.log(current);
+            //console.log(current);
             $rootScope.lastPage = current;
             if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
                 $location.path('/login');
