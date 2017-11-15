@@ -13,14 +13,14 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse" >
+    <div class="collapse navbar-collapse" >
         <ul class="nav navbar-nav side-nav">
             <li class="active">
                 <a href="#/"><i class="fa fa-home"></i> Início</a>
             </li>
             <li class="dropdown">
-                <a href ng-click="isCollapsed = !isCollapsed" class="dropdown-toggle"><i class="fa fa-table"></i> Catequese <b class="caret"></b></a>
-                <ul class="dropdown-menu" uib-collapse="isCollapsed">
+                <a href ng-click="isCollapsed = !isCollapsed"><i class="fa fa-table"></i> Catequese <b class="caret"></b></a>
+                <ul uib-collapse="isCollapsed">
                     <li><a href="#/catequese/catequistas">Catequistas</a></li>
                     <li><a href="#/catequese/turmas">Turmas</a></li>
                     <li><a href="#/catequese/inscricoes">Inscrições</a></li>
