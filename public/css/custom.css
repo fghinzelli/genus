@@ -6,6 +6,30 @@
     margin: 20px 20px;
 }
 
-.side-nav>li.dropdown>ul.dropdown-menu {
+.side-nav>li.dropdown>ul{
     background-color: #383838;
+    padding-left: 0px;
+}
+
+.side-nav>li.dropdown>ul>li>a {
+    color: #999999;
+    padding: 15px 15px 15px 30px;
+    display: block;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    white-space: nowrap;
+}
+
+
+.side-nav>li.dropdown>ul>li>a:active,
+.side-nav>li.dropdown>ul>li>a:visited {
+    background-color: #080808;
+}
+
+.side-nav>li.dropdown>ul>li>a:hover,
+.side-nav>li.dropdown>ul>li>a:focus {
+    background-color: #404040;
+    text-decoration: none;
+    color: #fff;
 }
