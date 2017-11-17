@@ -1,25 +1,37 @@
 <!-- Sidebar -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" 
-    ng-show="showMenus" ng-controller="SidebarController">
+    ng-show="showMenus" ng-controller="NavController">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <button type="button" class="navbar-toggle" ng-click="menuResponsivo = !menuResponsivo">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#/">Paróquia Nossa Senhora Mãe de Deus</a>
+        <a class="navbar-brand" href="#/">Paróquia Mãe de Deus</a>
     </div>
 
-    <div class="collapse navbar-collapse" >
+    <div class="collapse navbar-collapse" uib-collapse="menuResponsivo">
+        <ul class="nav navbar-nav navbar-right navbar-user">
+            <li class="dropdown user-dropdown">
+                <a href ng-click="menuUsuario = !menuUsuario"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                <ul class="dropdown-menu" uib-collapse="menuUsuario">
+                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
+                <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
         <ul class="nav navbar-nav side-nav">
             <li class="active">
                 <a href="#/"><i class="fa fa-home"></i> Início</a>
             </li>
             <li class="dropdown">
-                <a href ng-click="isCollapsed = !isCollapsed"><i class="fa fa-table"></i> Catequese <b class="caret"></b></a>
-                <ul uib-collapse="isCollapsed">
+                <a href ng-click="menuCatequese = !menuCatequese"><i class="fa fa-table"></i> Catequese <b class="caret"></b></a>
+                <ul uib-collapse="menuCatequese">
                     <li><a href="#/catequese/catequistas">Catequistas</a></li>
                     <li><a href="#/catequese/turmas">Turmas</a></li>
                     <li><a href="#/catequese/inscricoes">Inscrições</a></li>
@@ -29,8 +41,8 @@
             </li>
             <!--
             <li class="dropdown" >
-                <a href ng-click="isColl = !isColl" class="dropdown-toggle"><i class="fa fa-table"></i> Teologia <b class="caret"></b></a>
-                <ul uib-collapse="isColl">
+                <a href ng-click="menuTeologia = !menuTeologia" class="dropdown-toggle"><i class="fa fa-table"></i> Teologia <b class="caret"></b></a>
+                <ul uib-collapse="menuTeologia">
                     <li><a href="#/teologia/professores">Professores</a></li>
                     <li><a href="#/teologia/turmas">Turmas</a></li>
                     <li><a href="#/teologia/inscricoes">Inscrições</a></li>
@@ -39,8 +51,8 @@
             </li>
             -->
             <li class="dropdown" >
-                <a href ng-click="isCad = !isCad" class="dropdown-toggle"><i class="fa fa-edit"></i> Cadastros <b class="caret"></b></a>
-                <ul uib-collapse="isCad">
+                <a href ng-click="menuCadastros = !menuCadastros" class="dropdown-toggle"><i class="fa fa-edit"></i> Cadastros <b class="caret"></b></a>
+                <ul uib-collapse="menuCadastros">
                     <!--<li><a href="#/dioceses">Diocese</a></li>-->
                     <li><a href="#/paroquias">Paróquias</a></li>
                     <li><a href="#/comunidades">Comunidades</a></li>
@@ -48,70 +60,11 @@
                     <li><a href="#/usuarios"></i> Usuários</a></li>
                 </ul>
             </li>
-            <li>
-                
-            </li>
+        </ul>
     </div>
 
-    <ul class="nav navbar-nav navbar-right navbar-user">
-        <li class="dropdown messages-dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Messages <span class="badge">7</span> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-            <li class="dropdown-header">7 New Messages</li>
-            <li class="message-preview">
-                <a href="#">
-                <span class="avatar"><img src="http://placehold.it/50x50"></span>
-                <span class="name">John Smith:</span>
-                <span class="message">Hey there, I wanted to ask you something...</span>
-                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li class="message-preview">
-                <a href="#">
-                <span class="avatar"><img src="http://placehold.it/50x50"></span>
-                <span class="name">John Smith:</span>
-                <span class="message">Hey there, I wanted to ask you something...</span>
-                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li class="message-preview">
-                <a href="#">
-                <span class="avatar"><img src="http://placehold.it/50x50"></span>
-                <span class="name">John Smith:</span>
-                <span class="message">Hey there, I wanted to ask you something...</span>
-                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li><a href="#">View Inbox <span class="badge">7</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown alerts-dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Alerts <span class="badge">3</span> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-            <li><a href="#">Default <span class="label label-default">Default</span></a></li>
-            <li><a href="#">Primary <span class="label label-primary">Primary</span></a></li>
-            <li><a href="#">Success <span class="label label-success">Success</span></a></li>
-            <li><a href="#">Info <span class="label label-info">Info</span></a></li>
-            <li><a href="#">Warning <span class="label label-warning">Warning</span></a></li>
-            <li><a href="#">Danger <span class="label label-danger">Danger</span></a></li>
-            <li class="divider"></li>
-            <li><a href="#">View All</a></li>
-            </ul>
-        </li>
-        <li class="dropdown user-dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-            <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
-            <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
-            <li class="divider"></li>
-            <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
-            </ul>
-        </li>
-    </ul>
+    <!-- MENU SUPERIOR -->
+    
 </nav>
 
 

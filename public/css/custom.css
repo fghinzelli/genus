@@ -33,3 +33,13 @@
     text-decoration: none;
     color: #fff;
 }
+
+.main-content {
+    padding-left: 0px;
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        padding-left: 225px;
+    }
+}

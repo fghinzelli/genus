@@ -5,22 +5,19 @@ angular.module('Home')
    
 }])
 .controller('DashboardController', ['$scope', '$rootScope', function ($scop, $rootScope) {
-        document.querySelector('#wrapper').style.paddingLeft = '225px';
+        //document.querySelector('#wrapper').style.paddingLeft = '225px';
+        document.querySelector('#wrapper').classList.add('main-content');
         $rootScope.showMenus = true;
 }]);
 
 angular.module('Home')
-.controller('SidebarController', ['$scope', '$rootScope', function ($scope, $rootScope) {
-        $scope.isCollapsed = false;
-        $scope.isColl = true;
-        $scope.isCad = true;
+.controller('NavController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        $scope.menuResponsivo = false;
+        $scope.menuCatequese = false;
+        $scope.menuTeologia = true;
+        $scope.menuCadastros = true;
+        $scope.menuUsuario = true;
 
         $rootScope.showMenus = true;
 }]);   
 
-angular.module('Home').
-controller('CollapseDemoCtrl', function ($scope) {
-  $scope.isNavCollapsed = true;
-  $scope.isCollapsed = false;
-  $scope.isCollapsedHorizontal = false;
-});
