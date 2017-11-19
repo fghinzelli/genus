@@ -38,6 +38,10 @@
     padding-left: 0px;
 }
 
+.main-content-login {
+    padding-left: 0px !important;
+}
+
 @media (min-width: 768px) {
     .main-content {
         padding-left: 225px;

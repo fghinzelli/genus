@@ -5,7 +5,7 @@ angular.module('Home')
    
 }])
 .controller('DashboardController', ['$scope', '$rootScope', function ($scop, $rootScope) {
-        //document.querySelector('#wrapper').style.paddingLeft = '225px';
+        document.querySelector('#wrapper').classList.remove('main-content-login');
         document.querySelector('#wrapper').classList.add('main-content');
         $rootScope.showMenus = true;
 }]);

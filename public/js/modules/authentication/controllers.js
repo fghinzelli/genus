@@ -9,7 +9,8 @@ angular.module('Authentication')
  
         // Oculta o menu
         $rootScope.showMenus = false;
-        document.querySelector('#wrapper').style.paddingLeft = '0px';
+        document.querySelector('#wrapper').classList.remove('main-content');
+        document.querySelector('#wrapper').classList.add('main-content-login');
 
         $scope.login = function () {
             $scope.dataLoading = true;
