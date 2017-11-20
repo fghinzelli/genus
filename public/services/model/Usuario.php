@@ -1,10 +1,77 @@
 <?php
     class Usuario {
         private $db;
-        private $username;
+        public $id;
+        public $username;
+        public $senha;
+        public $pessoaId;
+        public $token;
+        public $tokenExpiracao;
+        public $status;
+        public $paroquiaSelecionada;
+        public $dataUltimaAlteracao;
+        public $usuarioUltimaAlteracaoId;
         
         function __construct($db) {
             $this->db = $db;
+        }
+
+        function loadData($id, $username, $senha, $pessoaId, $token, $tokenExpiracao,  
+        $status, $paroquiaSelecionada, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
+        $this->id = $id;
+        $this->username = $username;
+        $this->senha = $senha;
+        $this->pessoaId = $pessoaId;
+        $this->token = $token;
+        $this->tokenExpiracao = $tokenExpiracao;
+        $this->status = $status;
+        $this->paroquiaSelecionada = $paroquiaSelecionada;
+        $this->dataUltimaAlteracao = $dataUltimaAlteracao;
+        $this->usuarioUltimaAlteracaoId = $usuarioUltimaAlteracaoId;
+        }
+
+        function getUsuarios() {
+        $sql = "SELECT U.* FROM Usuario U INNER JOIN Pessoa P ON U.pessoaId = P.id ORDER BY P.nome;";
+        $query = $this->db->query($sql);
+        $usuarios = $query->fetchAll(PDO::FETCH_OBJ);
+        foreach ($usuarios as $usuario) {
+            $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
+            $queryp = $this->db->prepare($sqlp);
+            $queryp->bindParam("id",$usuario->pessoaId);
+            $queryp->execute();
+            $usuario->pessoa =  $queryp->fetchObject();
+            // PAROQUIA SELECIONADA
+            $sqlpa = "SELECT * FROM Paroquia WHERE id=:id";
+            $querypa = $this->db->prepare($sqlpa);
+            $querypa->bindParam("id",$usuario->paroquiaSelecionada);
+            $querypa->execute();
+            $usuario->paroquia =  $querypa->fetchObject();
+        }
+        echo json_encode($usuarios);
+        }
+
+        function getUsuario($id) {
+          $sql = "SELECT * FROM Usuario WHERE id=:id";
+          $query = $this->db->prepare($sql);
+          $query->bindParam("id", $id);
+          $query->execute();
+          $usuario = $query->fetchObject();
+    
+          // PESSOA
+          $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
+          $queryp = $this->db->prepare($sqlp);
+          $queryp->bindParam("id",$usuario->pessoaId);
+          $queryp->execute();
+          $usuario->pessoa =  $queryp->fetchObject();
+    
+          // PAROQUIA
+          $sqlpa = "SELECT * FROM Paroquia WHERE id=:id";
+          $querypa = $this->db->prepare($sqlpa);
+          $querypa->bindParam("id",$paroquia->paroquiaSelecionada);
+          $querypa->execute();
+          $usuario->paroquia =  $querypa->fetchObject();
+          
+          echo json_encode($usuario);
         }
 
         function checkUser($username, $senha) {
@@ -99,6 +166,7 @@
             return password_verify($senha, $dbPasswordHash);
         }
 
+        
         function addUser($username, $senha, $pessoaId, $status, $usuarioAlteracao) {
             // Adiciona um novo registro de usuario se o username ainda não existir
             if ($this->userExists($username)) return false;
@@ -106,22 +174,51 @@
             return $this->insertUser($username, $hashedPassword, $pessoaId, $status, $usuarioAlteracao);
         }
 
-        private function insertUser($username, $hashedPassword, $pessoaId, $status, $usuarioAlteracao) {
-            // Insere um novo usuario no db
-            try {
-                $sql = "INSERT INTO Usuario (username, senha, pessoaId, status, usuarioAlteracao)
-                        VALUES (:username, :senha, :pessoaId, :status, :usuarioAlteracao)";
-                $query = $this->db->prepare($sql);
-                $query->bindParam(':username', $username);
-                $query->bindParam(':senha', $senha);
-                $query->bindParam(':pessoaId', $pessoaId);
-                $query->bindParam(':status', $status);
-                $query->bindParam(':usuarioAlteracao', $usuarioAlteracao);
-                $query->execute();
-                return true;
-            } catch(PDOException $e) {
-                return $e;
-            }
+        function addUsuario() {
+            $sql = "INSERT INTO Usuario (`username`, `senha`, `pessoaId`, `token`, `tokenExpiracao`, 
+                                        `status`, `paroquiaSelecionada`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+                    VALUES (:username, :senha, :pessoaId, :token, :tokenExpiracao, :status, :paroquiaSelecionada, NOW(), :usuarioUltimaAlteracaoId)";
+            $query = $this->db->prepare($sql);
+            $query->bindParam(":username",$this->username);
+            $query->bindParam(":senha",$this->senha);
+            $query->bindParam(":pessoaId",$this->pessoaId);
+            $query->bindParam(":token",$this->token);
+            $query->bindParam(":tokenExpiracao",$this->tokenExpiracao);
+            $query->bindParam(":status",$this->status);
+            $query->bindParam(":paroquiaSelecionada",$this->paroquiaSelecionada);
+            $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
+            $query->execute();
+            $this->id = $this->db->lastInsertId();
+            echo json_encode($this);
+        }
+
+
+        function saveUsuario()
+        {
+            $sql = "UPDATE Usuario SET username=:username, senha=:senha, pessoaId=:pessoaId, token=:token, tokenExpiracao=:tokenExpiracao, 
+                                      status=:status, paroquiaSelecionada=:paroquiaSelecionada, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
+                    WHERE id=:id";
+          $query = $this->db->prepare($sql);
+          $query->bindParam(":id",$this->id);
+          $query->bindParam(":username",$this->username);
+          $query->bindParam(":senha",$this->senha);
+          $query->bindParam(":pessoaId",$this->pessoaId);
+          $query->bindParam(":token",$this->token);
+          $query->bindParam(":tokenExpiracao",$this->tokenExpiracao);
+          $query->bindParam(":status",$this->status);
+          $query->bindParam(":paroquiaSelecionada",$this->paroquiaSelecionada);
+          $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
+          $query->execute();
+          echo json_encode($this);
+        }
+        
+        function deleteUsuario()
+        {
+          $sql = "DELETE FROM Usuario WHERE id=:id";
+          $query = $this->db->prepare($sql);
+          $query->bindParam(":id",$this->id);
+          $query->execute();
+          echo json_encode("{'message': 'Usuario apagado'}");
         }
 
     }

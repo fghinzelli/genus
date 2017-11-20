@@ -180,10 +180,12 @@ CREATE TABLE IF NOT EXISTS Usuario (
 	token CHAR(16) NULL,
 	tokenExpiracao DATETIME NULL,
 	status int(1) NOT NULL,
+	paroquiaSelecionada int(10) NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
+	FOREIGN KEY (paroquiaSelecionada) REFERENCES Paroquia(id)
 );
 
 CREATE TABLE IF NOT EXISTS AcessoParoquia(
