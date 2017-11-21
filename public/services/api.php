@@ -257,6 +257,19 @@
 		}
 	})->add($middleAuthorization);
 
+	// ADD
+	$app->post('/comunidades', function($request, $response, $args) {
+		$data = $request->getParsedBody();
+		$comunidade = new Comunidade(db::getInstance());
+		$comunidade->loadData(null, $data['nome'], $data['padroeiro'], $data['paroquiaId'], $data['dataFundacao'],
+							$data['responsavelCatequese'], $data['email'], $data['telefone'], $data['logradouro'],
+							$data['numero'], $data['complemento'], $data['bairro'], $data['municipioId'], $data['cep'],
+						   	$data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
+						  );
+		$result = $comunidade->addComunidade();
+		return $response->write($result);
+	})->add($middleAuthorization);
+
 	/* ESTADOS */
 
 	// SELECT BY UF

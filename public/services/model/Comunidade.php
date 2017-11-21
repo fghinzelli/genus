@@ -97,17 +97,17 @@ class Comunidade {
     }
 
     function addComunidade() {
-        $sql = "INSERT INTO Comunidade (`nome`, `padroeiro`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `email`, `telefone`, `logradouro`, `numero`, `complemento`, 
-                                    `complemento`, `bairro`, `municipioId`, `cep`, 
-                                    `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+        $sql = "INSERT INTO Comunidade (`nome`, `padroeiro`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `email`, `telefone`, 
+                                        `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, 
+                                        `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
                 VALUES (:nome, :padroeiro, :paroquiaId, :dataFundacao, :responsavelCatequese, :email, :telefone, :logradouro, :numero, :complemento, :bairro, :municipioId,
                         :cep, :status, :dataUltimaAlteracao, :usuarioUltimaAlteracaoId)";
         $query = $this->db->prepare($sql);
         $query->bindParam(":nome",$this->nome);
         $query->bindParam(":padroeiro",$this->padroeiro);
-        $query->bindParam(":paroquiaId",$this->paroquiaIdcnpj);
+        $query->bindParam(":paroquiaId",$this->paroquiaId);
         $query->bindParam(":dataFundacao",$this->dataFundacao);
-        $query->bindParam(":responsavelCatequesecnpj",$this->responsavelCatequese);
+        $query->bindParam(":responsavelCatequese",$this->responsavelCatequese);
         $query->bindParam(":email",$this->email);
         $query->bindParam(":telefone",$this->telefone);
         $query->bindParam(":logradouro",$this->logradouro);
