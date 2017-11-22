@@ -46,7 +46,7 @@ class Paroquia {
         $sql = "SELECT * FROM Paroquia";
         $query = $this->db->query($sql);
         $paroquias = $query->fetchAll(PDO::FETCH_OBJ);
-        echo "{\"paroquias\":" . json_encode($paroquias) . "}";
+        echo json_encode($paroquias);
     }
     
     function getParoquia($id)
@@ -74,12 +74,13 @@ class Paroquia {
       echo json_encode($paroquia);
     }
 
+
     function addParoquia() {
-        $sql = "INSERT INTO Paroquia (`nome`, `cnpj`, `email`, `telefone`, `logradouro`, `numero`, `complemento`, 
+        $sql = "INSERT INTO Paroquia (`nome`, `cnpj`, `email`, `telefone`, `logradouro`, `numero`,
                                     `complemento`, `bairro`, `municipioId`, `cep`, `dioceseId`,
                                     `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
                 VALUES (:nome, :cnpj, :email, :telefone, :logradouro, :numero, :complemento, :bairro, :municipioId,
-                        :cep, :status, :dataUltimaAlteracao, :usuarioUltimaAlteracaoId)";
+                        :cep, :dioceseId, :status, :dataUltimaAlteracao, :usuarioUltimaAlteracaoId)";
         $query = $this->db->prepare($sql);
         $query->bindParam(":nome",$this->nome);
         $query->bindParam(":cnpj",$this->cnpj);
@@ -109,6 +110,7 @@ class Paroquia {
                 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
+      $query->bindParam(":nome",$this->nome); 
       $query->bindParam(":cnpj",$this->cnpj);
       $query->bindParam(":email",$this->email);
       $query->bindParam(":telefone",$this->telefone);
@@ -119,9 +121,9 @@ class Paroquia {
       $query->bindParam(":municipioId", $this->municipioId);
       $query->bindParam(":cep", $this->cep);
       $query->bindParam(":dioceseId", $this->dioceseId);
-      $query->bindParam("status",$this->status);
-      $query->bindParam("dataUltimaAlteracao", $this->dataUltimaAlteracao);
-      $query->bindParam("usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
+      $query->bindParam(":status",$this->status);
+      $query->bindParam(":dataUltimaAlteracao", $this->dataUltimaAlteracao);
+      $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
       $query->execute();
       echo json_encode($this);
     }

@@ -31,6 +31,38 @@ angular.module('Genus', [
             templateUrl: 'partials/home.html',
         })
 
+        // PAROQUIAS
+        .when('/paroquias', {
+            controller: 'ParoquiasListController',
+            templateUrl: 'partials/paroquias_list.html'
+        })
+
+        .when('/paroquias/new', {
+            controller: 'ParoquiasEditController',
+            templateUrl: 'partials/paroquias_form.html'
+        })
+
+        .when('/paroquias/edit/:paroquiaId', {
+            controller: 'ParoquiasEditController',
+            templateUrl: 'partials/paroquias_form.html'
+        })
+
+        // COMUNIDADES
+        .when('/comunidades', {
+            controller: 'ComunidadesListController',
+            templateUrl: 'partials/comunidades_list.html'
+        })
+
+        .when('/comunidades/new', {
+            controller: 'ComunidadesEditController',
+            templateUrl: 'partials/comunidades_form.html'
+        })
+
+        .when('/comunidades/edit/:comunidadeId', {
+            controller: 'ComunidadesEditController',
+            templateUrl: 'partials/comunidades_form.html'
+        })
+
         // PESSOAS
         .when('/pessoas', {
             controller: 'PessoasListController',
@@ -45,6 +77,22 @@ angular.module('Genus', [
         .when('/pessoas/edit/:pessoaId', {
             controller: 'PessoasEditController',
             templateUrl: 'partials/pessoas_form.html'
+        })
+
+        // USUÁRIOS
+        .when('/usuarios', {
+            controller: 'UsuariosListController',
+            templateUrl: 'partials/usuarios_list.html'
+        })
+
+        .when('/usuarios/new', {
+            controller: 'UsuariosEditController',
+            templateUrl: 'partials/usuarios_form.html'
+        })
+
+        .when('/usuarios/edit/:usuarioId', {
+            controller: 'UsuariosEditController',
+            templateUrl: 'partials/usuarios_form.html'
         })
 
         // CATEQUIZANDOS

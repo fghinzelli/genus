@@ -32,7 +32,7 @@ class Comunidade {
 		$this->nome = $nome;
         $this->padroeiro = $padroeiro;
         $this->paroquiaId = $paroquiaId;
-        $this->dataFundacao = $dataFundacao;
+        $this->dataFundacao = converterDataToISO($dataFundacao);
         $this->responsavelCatequese = $responsavelCatequese;
         $this->email = $email;
         $this->telefone = $telefone;
@@ -53,6 +53,7 @@ class Comunidade {
         $comunidades = $query->fetchAll(PDO::FETCH_OBJ);
         foreach($comunidades as $comunidade) {
             //paroquia
+            $comunidade->dataFundacao = converterDataFromISO($comunidade->dataFundacao);
             $sqlp = "SELECT * FROM Paroquia WHERE id=:id";
             $queryp = $this->db->prepare($sqlp);
             $queryp->bindParam("id",$comunidade->paroquiaId);
@@ -76,6 +77,7 @@ class Comunidade {
       $query->bindParam("id", $id);
       $query->execute();
       $comunidade = $query->fetchObject();
+      $comunidade->dataFundacao = converterDataFromISO($comunidade->dataFundacao);
     
       //paroquia
       $sql = "SELECT * FROM Paroquia WHERE id=:id";
@@ -133,10 +135,11 @@ class Comunidade {
                 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
+      $query->bindParam(":nome",$this->nome);
       $query->bindParam(":padroeiro",$this->padroeiro);
-      $query->bindParam(":paroquiaId",$this->paroquiaIdcnpj);
+      $query->bindParam(":paroquiaId",$this->paroquiaId);
       $query->bindParam(":dataFundacao",$this->dataFundacao);
-      $query->bindParam(":responsavelCatequesecnpj",$this->responsavelCatequese);
+      $query->bindParam(":responsavelCatequese",$this->responsavelCatequese);
       $query->bindParam(":email",$this->email);
       $query->bindParam(":telefone",$this->telefone);
       $query->bindParam(":logradouro",$this->logradouro);

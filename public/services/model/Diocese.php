@@ -44,7 +44,7 @@ class Diocese {
         $sql = "SELECT * FROM Diocese";
         $query = $this->db->query($sql);
         $dioceses = $query->fetchAll(PDO::FETCH_OBJ);
-        echo "{\"dioceses\":" . json_encode($dioceses) . "}";
+        echo json_encode($dioceses);
     }
     
     function getDiocese($id)

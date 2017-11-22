@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Home',)
-.controller('ComunidadesListController',
+.controller('UsuariosListController',
     ['$scope', '$http', '$cookieStore', '$routeParams',
     function ($scope, $http, $cookieStore, $routeParams) {
         
@@ -11,7 +11,7 @@ angular.module('Home',)
         
         
         // MENSAGEM DE ALERTA
-        $scope.comunidades = [];
+        $scope.usuarios = [];
         $scope.filtro = '';
         $scope.mensagem = '';
         $scope.showSuccessAlert = true;
@@ -20,21 +20,21 @@ angular.module('Home',)
         };
 
     
-        // LISTAGEM DE COMUNIDADES
-        $http.get(serviceBase + 'comunidades')
-        .success(function(comunidades) {
-            $scope.comunidades = comunidades;
+        // LISTAGEM DE USUARIOS
+        $http.get(serviceBase + 'usuarios')
+        .success(function(usuarios) {
+            $scope.usuarios = usuarios;
         })
         .error(function(erro) {
             console.log(erro)
         });
 
         // DELETE
-        $scope.remover = function(comunidade) {
-            $http.delete(serviceBase + 'comunidades/' + comunidade.id)
+        $scope.remover = function(usuario) {
+            $http.delete(serviceBase + 'usuarios/' + usuario.id)
             .success(function() {
-                var indiceDaComunidade = $scope.comunidades.indexOf(comunidade);
-                $scope.comunidades.splice(indiceDaComunidade, 1);
+                var indiceDoUsuario = $scope.usuarios.indexOf(usuario);
+                $scope.usuarios.splice(indiceDoUsuario, 1);
                 $scope.mensagem = 'Registro removido com sucesso!';
     
             })

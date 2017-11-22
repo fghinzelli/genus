@@ -1,11 +1,10 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h3>Inscrições para a Catequese</h3>
+            <h3>Comunidades</h3>
             <ol class="breadcrumb">
                 <li><a href="#/"><i class="fa fa-home"></i> Início</a></li>
-                <li><a href="#/catequese"><i class="fa fa-users"></i> Catequese</a></li>
-                <li class="active"><i class="fa fa-user"></i> Inscrições</li>
+                <li class="active"><i class="fa fa-user"></i> Comunidades</li>
             </ol>
             
             <div class="row">
@@ -16,13 +15,13 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <a href="#/catequese/inscricoes/new" class="btn btn-primary" type="button">
-                        Nova Inscrição
+                    <a href="#/comunidades/new" class="btn btn-primary" type="button">
+                        Nova Comunidade
                     </a>
                 </div>
             </div>
             <hr />
-
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div ng-show="mensagem.length" class="alert alert-warning alert-custom">
@@ -40,19 +39,17 @@
                             <thead>
                                 <tr>
                                     <th>Nome <i class="fa fa-sort"></i></th>
-                                    <th>Comunidade <i class="fa fa-sort"></i></th>
-                                    <th>Etapa <i class="fa fa-sort"></i></th>
+                                    <th>Telefone <i class="fa fa-sort"></i></th>
                                     <th>Ações <i class="fa fa-sort"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="inscricao in inscricoes | filter: filtro">
-                                    <td>{{inscricao.pessoa.nome}}</td>
-                                    <td>{{inscricao.comunidade.nome }}</td>
-                                    <td>{{inscricao.etapaCatequese.descricao}}</td>
+                                <tr ng-repeat="comunidade in comunidades | filter: filtro">
+                                    <td>{{comunidade.nome}}</td>
+                                    <td>{{comunidade.telefone}}</td>
                                     <td>
-                                        <a href="#/catequese/inscricoes/edit/{{inscricao.id}}" class="btn btn-sm btn-default" href="">Editar</a>
-                                        <button class="btn btn-sm btn-default" ng-click="remover(inscricao)">Remover</button>
+                                        <a href="#/comunidades/edit/{{comunidade.id}}" class="btn btn-sm btn-default" href="">Editar</a>
+                                        <button class="btn btn-sm btn-default" ng-click="remover(comunidade)">Remover</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -64,3 +61,4 @@
         </div>
     </div>
 </div>
+

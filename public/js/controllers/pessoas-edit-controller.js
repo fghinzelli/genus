@@ -34,6 +34,7 @@ angular.module('Home',)
             $http.get(serviceBase + 'pessoas/' + $routeParams.pessoaId)
             .success(function(pessoa) {
                 $scope.pessoa = pessoa;
+                $scope.estado = pessoa.municipio.uf;
                 //console.log(pessoa);
             })
             .error(function(erro) {

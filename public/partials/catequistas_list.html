@@ -8,20 +8,21 @@
                 <li class="active"><i class="fa fa-user"></i> Catequistas</li>
             </ol>
             
-            <div class="input-group">
-                <form>
-                    <input class="form-control" list="list-pessoas" placeholder="Pesquisar Catequistas" ng-model="filtro">
-                </form>
-                <span class="input-group-btn">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Pesquisar" ng-model="filtro">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+                <div class="col-lg-2">
                     <a href="#/catequese/catequistas/new" class="btn btn-primary" type="button">
                         Novo Catequista
                     </a>
-                </span>
+                </div>
             </div>
-            <datalist id="list-pessoas">
-                <option value="aaaaa">
-                <option value="bbbbb">
-            </datalist>
+            <hr />
+
             <div class="row">
                 <div class="col-lg-12">
                     <div ng-show="mensagem.length" class="alert alert-warning alert-custom">
@@ -45,7 +46,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="catequista in catequistas | filter: filtro">
-                                    <td>{{catequista.pessoa.nome}}</td>
+                                    <td>{{catequista.pessoa.nome }}</td>
                                     <td>{{catequista.comunidade.nome}}</td>
                                     <td>
                                         <a href="#/catequese/catequistas/edit/{{catequista.id}}" class="btn btn-sm btn-default" href="">Editar</a>

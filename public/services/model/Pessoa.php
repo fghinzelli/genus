@@ -85,6 +85,7 @@ class Pessoa {
         foreach ($pessoas as $pessoa) {
             // Busca de dados relacionados
             // COMUNIDADE
+            $pessoa->dataNascimento = converterDataFromISO($pessoa->dataNascimento);
             $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
             $queryc = $this->db->prepare($sqlc);
             $queryc->bindParam("id",$pessoa->comunidadeId);
@@ -107,6 +108,7 @@ class Pessoa {
       $query->bindParam("id", $id);
       $query->execute();
       $pessoa = $query->fetchObject();
+      $pessoa->dataNascimento = converterDataFromISO($pessoa->dataNascimento);
 
       // COMUNIDADE
       $sqlc = "SELECT * FROM Comunidade WHERE id=:id";

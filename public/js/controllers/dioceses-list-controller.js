@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Home',)
-.controller('ComunidadesListController',
+.controller('DiocesesListController',
     ['$scope', '$http', '$cookieStore', '$routeParams',
     function ($scope, $http, $cookieStore, $routeParams) {
         
@@ -11,7 +11,7 @@ angular.module('Home',)
         
         
         // MENSAGEM DE ALERTA
-        $scope.comunidades = [];
+        $scope.dioceses = [];
         $scope.filtro = '';
         $scope.mensagem = '';
         $scope.showSuccessAlert = true;
@@ -20,21 +20,21 @@ angular.module('Home',)
         };
 
     
-        // LISTAGEM DE COMUNIDADES
-        $http.get(serviceBase + 'comunidades')
-        .success(function(comunidades) {
-            $scope.comunidades = comunidades;
+        // LISTAGEM DE DIOCESES
+        $http.get(serviceBase + 'dioceses')
+        .success(function(dioceses) {
+            $scope.dioceses = dioceses;
         })
         .error(function(erro) {
             console.log(erro)
         });
 
         // DELETE
-        $scope.remover = function(comunidade) {
-            $http.delete(serviceBase + 'comunidades/' + comunidade.id)
+        $scope.remover = function(diocese) {
+            $http.delete(serviceBase + 'dioceses/' + diocese.id)
             .success(function() {
-                var indiceDaComunidade = $scope.comunidades.indexOf(comunidade);
-                $scope.comunidades.splice(indiceDaComunidade, 1);
+                var indiceDaDiocese = $scope.dioceses.indexOf(dioceses);
+                $scope.dioceses.splice(indiceDaDiocese, 1);
                 $scope.mensagem = 'Registro removido com sucesso!';
     
             })
