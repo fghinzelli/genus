@@ -35,6 +35,8 @@ angular.module('Home',)
             .success(function(pessoa) {
                 $scope.pessoa = pessoa;
                 $scope.estado = pessoa.municipio.uf;
+                //$scope.rgEstado = $scope.pessoa.rgUF;
+                //$scope.pessoa.rgUF = pessoa.rgUF;
                 //console.log(pessoa);
             })
             .error(function(erro) {
@@ -45,8 +47,9 @@ angular.module('Home',)
     
         // SUBMIT DO FORM - CREATE AND UPDATE
         $scope.submeterForm = function() {
-            //if ($scope.formulario.$valid) {
-                $scope.pessoa.status = 1;
+            if ($scope.formulario.$valid) {
+                //$scope.pessoa.rgUF = $scope.pessoa.rgUF.uf;
+                //console.log($scope.pessoa);
                 if ($routeParams.pessoaId) {
                     $http.put(serviceBase + 'pessoas/' + $scope.pessoa.id, $scope.pessoa)
                     .success(function() {
@@ -71,7 +74,7 @@ angular.module('Home',)
                         $scope.mensagem = 'Não foi possível cadastrar esta pessoa';
                     });
                 }
-            //}
+            }
         }
 
         // DELETE

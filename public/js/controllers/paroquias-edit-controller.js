@@ -33,7 +33,7 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
 
     // SUBMIT DO FORM - CREATE AND UPDATE
     $scope.submeterForm = function() {
-        //if ($scope.formulario.$valid) {
+        if ($scope.formulario.$valid) {
             if ($routeParams.paroquiaId) {
                 $http.put(serviceBase + 'paroquias/' + $scope.paroquia.id, $scope.paroquia)
                 .success(function() {
@@ -58,7 +58,7 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
                     $scope.mensagem = 'Não foi possível cadastrar esta paroquia';
                 });
             }
-        //}
+        }
     }
 
 }]);
