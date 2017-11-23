@@ -5,7 +5,7 @@ angular.module('Home',)
     ['$scope', '$http', '$cookieStore', '$routeParams', '$location', '$rootScope',
     function ($scope, $http, $cookieStore, $routeParams, $location, $rootScope) {
         
-        var serviceBase = '/genus/services/';
+        var serviceBase = 'services/';
         var globals = $cookieStore.get('globals');
         $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
         
