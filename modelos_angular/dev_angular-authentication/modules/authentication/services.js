@@ -9,7 +9,7 @@ angular.module('Authentication')
 
         service.Login = function (username, password, callback) {
 
-            $http.post('/genus/services/login', { username: username, password: password })
+            $http.post('services/login', { username: username, password: password })
                 .success(function (response) {
                     callback(response);
                 });

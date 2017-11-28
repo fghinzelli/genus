@@ -12,22 +12,17 @@ angular.module('Home',)
         
         $scope.pessoa = {};
 
-        // Valores default
-        $scope.pessoa.nacionalidade = "Brasileira";
-        $scope.pessoa.cep = "95185000";
-        //$scope.estado = "RS";
-        //$scope.atualizarMunicipios;
-        //$scope.pessoa.municipioId = "4697";
-        
-
         $scope.mensagem = '';
         $scope.showSuccessAlert = true;
         $scope.switchBool = function(value) {
             $scope[value] = !$scope[value];
         };
 
-        
-
+        // Valores default
+        $scope.pessoa.nacionalidade = "Brasileira";
+        $scope.pessoa.cep = "95185000";
+        $scope.estado = "RS";
+        $scope.pessoa.municipioId = "4697";
 
         // GET BY ID
         if ($routeParams.pessoaId) {
@@ -35,9 +30,6 @@ angular.module('Home',)
             .success(function(pessoa) {
                 $scope.pessoa = pessoa;
                 $scope.estado = pessoa.municipio.uf;
-                //$scope.rgEstado = $scope.pessoa.rgUF;
-                //$scope.pessoa.rgUF = pessoa.rgUF;
-                //console.log(pessoa);
             })
             .error(function(erro) {
                 console.log(erro);

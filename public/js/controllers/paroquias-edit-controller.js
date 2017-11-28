@@ -10,12 +10,16 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
     
     $scope.paroquia = {};
-    $scope.estado = "RS";
     $scope.mensagem = '';
     $scope.showSuccessAlert = true;
     $scope.switchBool = function(value) {
         $scope[value] = !$scope[value];
     };
+
+    // Valores default para o endereço
+    $scope.paroquia.cep = "95185000";
+    $scope.estado = "RS";
+    $scope.paroquia.municipioId = "4697";
 
     // GET BY ID
     if ($routeParams.paroquiaId) {
@@ -23,7 +27,6 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
         .success(function(paroquia) {
             $scope.paroquia = paroquia;
             $scope.estado = paroquia.municipio.uf;
-            //$scope.atualizarMunicipios;
         })
         .error(function(erro) {
             console.log(erro);

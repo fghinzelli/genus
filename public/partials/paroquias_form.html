@@ -46,7 +46,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Telefone</label>
-                            <input type="text" class="form-control" ui-mask="(99)99999-9999" model-view-value="false" name="telefone1" ng-model="paroquia.telefone">
+                            <input type="text" class="form-control" ui-mask="(99)9999-9999" model-view-value="false" name="telefone1" ng-model="paroquia.telefone">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -91,16 +91,16 @@
                             <input type="text" class="form-control" ui-mask="99999-999" model-view-value="false" name="cep" ng-model="paroquia.cep">
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <div class="form-group">
                             <label>UF</label>
                             <select name="estado" class="form-control" ng-change="atualizarMunicipios()" 
-                                    ng-model="estado" ng-options="estado.uf as estado.nome for estado in estados">
+                                    ng-model="estado" ng-options="estado.uf as estado.uf for estado in estados">
                                 <option value="">Selecione</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label>Município</label>
                             <select name="municipio" class="form-control" 
@@ -109,8 +109,6 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Status</label>

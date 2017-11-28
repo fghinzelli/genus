@@ -4,7 +4,6 @@ class Comunidade {
     private $db;
     public $id;
     public $nome;
-    public $padroeiro;
     public $paroquiaId;
     public $dataFundacao;
     public $responsavelCatequese;
@@ -24,13 +23,12 @@ class Comunidade {
         $this->db = $db;
     }
 
-    function loadData($id, $nome, $padroeiro, $paroquiaId, $dataFundacao, 
+    function loadData($id, $nome, $paroquiaId, $dataFundacao, 
                       $responsavelCatequese, $email, $telefone, $logradouro, 
                       $numero, $complemento, $bairro, $municipioId,
                       $cep, $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
         $this->id = $id;
 		$this->nome = $nome;
-        $this->padroeiro = $padroeiro;
         $this->paroquiaId = $paroquiaId;
         $this->dataFundacao = converterDataToISO($dataFundacao);
         $this->responsavelCatequese = $responsavelCatequese;
@@ -99,14 +97,13 @@ class Comunidade {
     }
 
     function addComunidade() {
-        $sql = "INSERT INTO Comunidade (`nome`, `padroeiro`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `email`, `telefone`, 
+        $sql = "INSERT INTO Comunidade (`nome`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `email`, `telefone`, 
                                         `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, 
                                         `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
-                VALUES (:nome, :padroeiro, :paroquiaId, :dataFundacao, :responsavelCatequese, :email, :telefone, :logradouro, :numero, :complemento, :bairro, :municipioId,
+                VALUES (:nome, :paroquiaId, :dataFundacao, :responsavelCatequese, :email, :telefone, :logradouro, :numero, :complemento, :bairro, :municipioId,
                         :cep, :status, :dataUltimaAlteracao, :usuarioUltimaAlteracaoId)";
         $query = $this->db->prepare($sql);
         $query->bindParam(":nome",$this->nome);
-        $query->bindParam(":padroeiro",$this->padroeiro);
         $query->bindParam(":paroquiaId",$this->paroquiaId);
         $query->bindParam(":dataFundacao",$this->dataFundacao);
         $query->bindParam(":responsavelCatequese",$this->responsavelCatequese);
@@ -128,7 +125,7 @@ class Comunidade {
     
     function saveComunidade()
     {
-        $sql = "UPDATE Comunidade SET nome=:nome, padroeiro=:padroeiro, paroquiaId=:paroquiaId, dataFundacao=:dataFundacao, responsavelCatequese=:responsavelCatequese, email=:email, telefone=:telefone, 
+        $sql = "UPDATE Comunidade SET nome=:nome, paroquiaId=:paroquiaId, dataFundacao=:dataFundacao, responsavelCatequese=:responsavelCatequese, email=:email, telefone=:telefone, 
                                   logradouro=:logradouro, numero=:numero, complemento=:complemento, bairro=:bairro, 
                                   municipioId=:municipioId, cep=:cep, status=:status, 
                                   dataUltimaAlteracao=:dataUltimaAlteracao, usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
@@ -136,7 +133,6 @@ class Comunidade {
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->bindParam(":nome",$this->nome);
-      $query->bindParam(":padroeiro",$this->padroeiro);
       $query->bindParam(":paroquiaId",$this->paroquiaId);
       $query->bindParam(":dataFundacao",$this->dataFundacao);
       $query->bindParam(":responsavelCatequese",$this->responsavelCatequese);

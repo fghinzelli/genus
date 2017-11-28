@@ -5,7 +5,7 @@
     INSERT INTO `Paroquia` (`id`, `nome`, `cnpj`, `email`, `telefone`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `dioceseId`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'Nossa Senhora Mãe de Deus', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', NULL, NULL);
 
     -- Comunidade
-    INSERT INTO `Comunidade` (`id`, `nome`, `padroeiro`, `paroquiaId`, `dataFuncacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'Igreja Matriz Nossa Senhora Mãe de Deus', 'Nossa Senhora Mãe de Deus', '1', NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL, '1', NULL, NULL);
+    INSERT INTO `Comunidade` (`id`, `nome`, `paroquiaId`, `dataFuncacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES (NULL, 'Igreja Matriz Nossa Senhora Mãe de Deus', '1', NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL, '1', NULL, NULL);
 
     -- Nivel de acesso
     INSERT INTO `AcessoNivel` (`id`, `descricao`, `status`) VALUES (NULL, 'Administrador', '1');

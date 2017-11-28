@@ -11,6 +11,7 @@ angular.module('Home')
     $http.get(serviceBase + 'estados')
         .success(function(estados) {
             $scope.estados = estados;
+            $scope.atualizarMunicipios();
         })
         .error(function(erro) {
             console.log(erro);
@@ -26,6 +27,5 @@ angular.module('Home')
             console.log(erro);
         });
     };
-
 });
 

@@ -29,10 +29,10 @@ INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `obser
 -- Dumping data for table `Comunidade`
 --
 
-INSERT INTO `Comunidade` (`id`, `nome`, `padroeiro`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 'Santana', 'Santa Ana', 1, '2000-01-01', NULL, NULL, NULL, NULL, NULL, 1, NULL, 'email@santana.com.br', NULL, 1, NULL, NULL),
-(2, 'Igreja Matriz', 'Nossa Senhora Mãe de Deus', 1, '1981-08-14', 'Responsavel', 'Endereço', '46545', 'Complemento', 'bairro', 4697, 79854654, 'email@teste.com', '54989479854', 1, NULL, NULL),
-(4, 'São Roque', 'São Roque', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `Comunidade` (`id`, `nome`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
+(1, 'Santana', 1, '2000-01-01', NULL, NULL, NULL, NULL, NULL, 1, NULL, 'email@santana.com.br', NULL, 1, NULL, NULL),
+(2, 'Igreja Matriz', 1, '1981-08-14', 'Responsavel', 'Endereço', '46545', 'Complemento', 'bairro', 4697, 79854654, 'email@teste.com', '54989479854', 1, NULL, NULL),
+(4, 'São Roque', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL);
 
 --
 -- Dumping data for table `Diocese`

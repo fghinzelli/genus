@@ -13,9 +13,9 @@ angular.module('Home')
 angular.module('Home')
 .controller('NavController', ['$scope', '$rootScope', function ($scope, $rootScope) {
         $scope.menuResponsivo = false;
-        $scope.menuCatequese = false;
+        $scope.menuCatequese = true;
         $scope.menuTeologia = true;
-        $scope.menuCadastros = true;
+        $scope.menuCadastros = false;
         $scope.menuUsuario = true;
 
         $rootScope.showMenus = true;

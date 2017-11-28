@@ -123,7 +123,7 @@
                                                         <div class="form-group">
                                                             <label>UF</label>
                                                             <select name="estado" class="form-control" ng-change="atualizarMunicipios()" 
-                                                                    ng-model="estado" ng-options="estado.uf as estado.nome for estado in estados">
+                                                                    ng-model="estado" ng-options="estado.uf as estado.uf for estado in estados">
                                                                 <option value="">Selecione</option>
                                                             </select>
                                                         </div>
@@ -157,13 +157,13 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label>Telefone Principal</label>
-                                                            <input type="text" class="form-control" ui-mask="(99)99999-9999" model-view-value="false" name="telefone1" ng-model="pessoa.telefone1">
+                                                            <label>Telefone Residencial</label>
+                                                            <input type="text" class="form-control" ui-mask="(99)9999-9999" model-view-value="false" name="telefone1" ng-model="pessoa.telefone1">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label>Telefone para Recados</label>
+                                                            <label>Telefone Celular</label>
                                                             <input type="text" class="form-control" ui-mask="(99)99999-9999" model-view-value="false" name="telefone2" ng-model="pessoa.telefone2">
                                                         </div>
                                                     </div>

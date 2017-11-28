@@ -17,6 +17,11 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
         $scope[value] = !$scope[value];
     };
 
+    // Valores default para o endereço
+    $scope.comunidade.cep = "95185000";
+    $scope.estado = "RS";
+    $scope.comunidade.municipioId = "4697";
+
     // GET BY ID
     if ($routeParams.comunidadeId) {
         $http.get(serviceBase + 'comunidades/' + $routeParams.comunidadeId)

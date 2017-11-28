@@ -36,7 +36,7 @@
 	$app->post('/comunidades', function($request, $response, $args) {
 		$data = $request->getParsedBody();
 		$comunidade = new Comunidade(db::getInstance());
-		$comunidade->loadData(null, $data['nome'], $data['padroeiro'], $data['paroquiaId'], $data['dataFundacao'],
+		$comunidade->loadData(null, $data['nome'], $data['paroquiaId'], $data['dataFundacao'],
 							  $data['responsavelCatequese'], $data['email'], $data['telefone'], $data['logradouro'],
 							  $data['numero'], $data['complemento'], $data['bairro'], $data['municipioId'], $data['cep'],
 						   	  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
@@ -49,7 +49,7 @@
 	$app->put('/comunidades/{id}', function($request, $response, $args) {
 		$data = $request->getParsedBody();
 		$comunidade = new Comunidade(db::getInstance());
-		$comunidade->loadData($args['id'], $data['nome'], $data['padroeiro'], $data['paroquiaId'], $data['dataFundacao'],
+		$comunidade->loadData($args['id'], $data['nome'], $data['paroquiaId'], $data['dataFundacao'],
 							  $data['responsavelCatequese'], $data['email'], $data['telefone'], $data['logradouro'],
 							  $data['numero'], $data['complemento'], $data['bairro'], $data['municipioId'], $data['cep'],
 		   					  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']

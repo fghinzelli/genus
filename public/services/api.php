@@ -23,7 +23,9 @@
 			//$token = explode('Basic ', $request->getHeader('Authorization')[0])[1];
 			$token = $request->getHeader('Authorization')[0];
 			$user = new Usuario(db::getInstance());
-			$result = $user->isValidToken($token);
+			// Token temporariamente desativado
+			//$result = $user->isValidToken($token);
+			$result = true;
 			if($result === true) {
 				$response = $next($request, $response);
 				return $response;

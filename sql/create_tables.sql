@@ -63,7 +63,6 @@ CREATE TABLE IF NOT EXISTS Paroquia(
 CREATE TABLE IF NOT EXISTS Comunidade (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	nome varchar(50) NOT NULL,
-	padroeiro varchar(50) NOT NULL,
 	paroquiaId int(10) NULL,
 	dataFundacao date,
 	responsavelCatequese varchar(50) NULL,
