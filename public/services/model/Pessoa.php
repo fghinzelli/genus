@@ -69,9 +69,9 @@ class Pessoa {
         $this->comunidadeId = $comunidadeId;
         $this->comunidade = 
         $this->observacoes = $observacoes;
-        $this->batizado = $batizado;
+        $this->batizado = (int)$batizado;
         $this->localBatismo = $localBatismo;
-        $this->primeiraEucaristia = $primeiraEucaristia;
+        $this->primeiraEucaristia = (int)$primeiraEucaristia;
         $this->localPrimeiraEucaristia = $localPrimeiraEucaristia;
         $this->status = $status;
         $this->dataUltimaAlteracao = $dataUltimaAlteracao;
