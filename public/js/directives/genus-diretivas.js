@@ -1,4 +1,4 @@
-angular.module('Genus', [])
+angular.module('Home')
     .directive('cpfValido', function () {
         return {
             restrict: 'A',
@@ -10,10 +10,17 @@ angular.module('Genus', [])
                     if (elem[0].value.length == 0)
                         ctrl.$setValidity('cpfValido', true);
                     else if (elem[0].value.length < 11) {
-                        //aplicar o algoritmo de validação completo do CPF
                         ctrl.$setValidity('cpfValido', false);
                     }
-                    else ctrl.$setValidity('cpfValido', true);
+                    else {
+                        var vlr = elem[0].value;
+                        vlr  = vlr.replace( /\./g,'').replace('-', '').replace('_', '');
+                        if(validaCPF(vlr)) {
+                            ctrl.$setValidity('cpfValido', true);
+                        } else {
+                            ctrl.$setValidity('cpfValido', false);
+                        }
+                    }
                 });
             }
         };

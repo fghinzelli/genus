@@ -14,10 +14,10 @@
                 <form novalidate name="formulario" role="form" ng-submit="submeterForm()">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : formulario.nome.$invalid && !formulario.nome.$pristine && formulario.$submitted }">
                                 <label>Nome</label>
-                                <input name="nome" class="form-control" ng-model="pessoa.nome" required>
-                                <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.nome.$error.required">
+                                <input name="nome" ng-class="" class="form-control" ng-model="pessoa.nome" required>
+                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.nome.$error.required">
                                     Este campo é obrigatório
                                 </span>
                             </div>
@@ -29,10 +29,10 @@
                                 <label>Data de Nascimento</label>
                                 <!--input class="form-control" ng-model="pessoa.dataNascimento"-->
                                 <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="pessoa.dataNascimento">
-                                <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.dataNascimento.$error.required">
+                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataNascimento.$error.required">
                                     Este campo é obrigatório
                                 </span>
-                                <span class="form-control alert-danger" ng-show="formulario.$submitted && $scope.dataInvalida()">
+                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && $scope.dataInvalida()">
                                     A data informada é inválida
                                 </span>
                             </div>
@@ -189,8 +189,8 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>CPF</label>
-                                                            <input type="cpf" class="form-control" ui-mask="999.999.999-99" model-view-value="false" name="cpf" ng-model="pessoa.cpf" cpf-valido>
-                                                            <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.cpf.$error.cpfValido">
+                                                            <input type="text" class="form-control" ui-mask="999.999.999-99" model-view-value="false" name="cpf" ng-model="pessoa.cpf" cpf-valido>
+                                                            <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.$error.cpfValido">
                                                                 O CPF é inválido
                                                             </span>
                                                         </div>

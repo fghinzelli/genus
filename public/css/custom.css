@@ -47,3 +47,7 @@
         padding-left: 225px;
     }
 }
+
+.field-error {
+    border: 2px solid #ebccd1;
+}

@@ -18,6 +18,7 @@ angular.module('Home',)
             $scope[value] = !$scope[value];
         };
 
+
         // $scope.dataInvalida = function() {
         //     data = $scope.pessoa.dataNascimento;
         //     var bits = data.split('/');
@@ -35,7 +36,7 @@ angular.module('Home',)
         if ($routeParams.pessoaId) {
             $http.get(serviceBase + 'pessoas/' + $routeParams.pessoaId)
             .success(function(pessoa) {
-                console.log(pessoa);
+                //console.log(pessoa);
                 $scope.pessoa = pessoa;
                 $scope.estado = pessoa.municipio.uf;
                 $scope.pessoa.batizado = (pessoa.batizado === '1');
@@ -51,7 +52,7 @@ angular.module('Home',)
         $scope.submeterForm = function() {
             if ($scope.formulario.$valid) {
                 //$scope.pessoa.rgUF = $scope.pessoa.rgUF.uf;
-                console.log($scope.pessoa);
+                //console.log($scope.pessoa);
                 if ($routeParams.pessoaId) {
                     $http.put(serviceBase + 'pessoas/' + $scope.pessoa.id, $scope.pessoa)
                     .success(function() {
@@ -77,6 +78,10 @@ angular.module('Home',)
                     });
                 }
             }
+        }
+
+        function dataValida(str) {
+            return !!new Date(str).getTime();
         }
 
         // DELETE
