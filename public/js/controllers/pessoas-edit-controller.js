@@ -18,6 +18,13 @@ angular.module('Home',)
             $scope[value] = !$scope[value];
         };
 
+        // $scope.dataInvalida = function() {
+        //     data = $scope.pessoa.dataNascimento;
+        //     var bits = data.split('/');
+        //     var d = new Date(bits[2], bits[1] - 1, bits[0]);
+        //     return d && (d.getMonth() + 1) == bits[1];
+        // }
+
         // Valores default
         $scope.pessoa.nacionalidade = "Brasileira";
         $scope.pessoa.cep = "95185000";
