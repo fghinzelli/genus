@@ -25,14 +25,14 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : formulario.dataNascimento.$invalid && !formulario.dataNascimento.$pristine && formulario.$submitted }">
                                 <label>Data de Nascimento</label>
                                 <!--input class="form-control" ng-model="pessoa.dataNascimento"-->
-                                <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="pessoa.dataNascimento">
+                                <input type="text" name="dataNascimento" ui-mask="99/99/9999" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$" model-view-value="true" class="form-control" ng-model="pessoa.dataNascimento" required>
                                 <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataNascimento.$error.required">
                                     Este campo é obrigatório
                                 </span>
-                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && $scope.dataInvalida()">
+                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataNascimento.$error.pattern">
                                     A data informada é inválida
                                 </span>
                             </div>

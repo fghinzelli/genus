@@ -11,7 +11,6 @@ angular.module('Home',)
         
         
         $scope.pessoa = {};
-
         $scope.mensagem = '';
         $scope.showSuccessAlert = true;
         $scope.switchBool = function(value) {
