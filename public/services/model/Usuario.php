@@ -167,14 +167,17 @@
         }
 
         
-        function addUser($username, $senha, $pessoaId, $status, $usuarioAlteracao) {
+        function addUsuario() {
             // Adiciona um novo registro de usuario se o username ainda não existir
-            if ($this->userExists($username)) return false;
-            $hashedPassword = $this->getHash($senha);
-            return $this->insertUser($username, $hashedPassword, $pessoaId, $status, $usuarioAlteracao);
+            if ($this->userExists($username)) {
+                echo json_encode('"erro": "Usuário já existe"');
+            } else {
+                $this->senha = $this->getHash($this->senha);
+                $this->insertUser();
+            }
         }
 
-        function addUsuario() {
+        function insertUser() {
             $sql = "INSERT INTO Usuario (`username`, `senha`, `pessoaId`, `token`, `tokenExpiracao`, 
                                         `status`, `paroquiaSelecionada`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
                     VALUES (:username, :senha, :pessoaId, :token, :tokenExpiracao, :status, :paroquiaSelecionada, NOW(), :usuarioUltimaAlteracaoId)";
@@ -201,6 +204,7 @@
           $query = $this->db->prepare($sql);
           $query->bindParam(":id",$this->id);
           $query->bindParam(":username",$this->username);
+          $this->senha = $this->getHash($this->senha);
           $query->bindParam(":senha",$this->senha);
           $query->bindParam(":pessoaId",$this->pessoaId);
           $query->bindParam(":token",$this->token);

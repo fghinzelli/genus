@@ -21,11 +21,14 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
         $scope[value] = !$scope[value];
     };
 
+    $scope.limparSenha = function() {
+        $scope.usuario.senha = '';
+    }
+
     // GET BY ID
     if ($routeParams.usuarioId) {
         $http.get(serviceBase + 'usuarios/' + $routeParams.usuarioId)
         .success(function(usuario) {
-            console.log(usuario);
             $scope.usuario = usuario;
             $scope.usuario.pessoa = usuario.pessoa;
         })
@@ -37,7 +40,7 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
 
     // SUBMIT DO FORM - CREATE AND UPDATE
     $scope.submeterForm = function() {
-        //if ($scope.formulario.$valid) {
+        if ($scope.formulario.$valid) {
             $scope.usuario.pessoaId = $scope.usuario.pessoa.id;
             if ($routeParams.usuarioId) {
                 $http.put(serviceBase + 'usuarios/' + $scope.usuario.id, $scope.usuario)
@@ -65,7 +68,7 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
                     $scope.mensagem = 'Não foi possível cadastrar este usuario';
                 });
             }
-        //}
+        }
     }
 
 }]);

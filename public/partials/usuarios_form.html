@@ -62,15 +62,21 @@
                         </div> <!-- FIM PANNEL PESSOA -->
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{ 'has-error' : formulario.username.$invalid && !formulario.username.$pristine && formulario.$submitted }">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" name="username" ng-model="usuario.username">
+                                    <input type="text" class="form-control" name="username" ng-model="usuario.username" required>
+                                    <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.username.$error.required">
+                                        Este campo é obrigatório
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="form-group">
+                                <div class="form-group"  ng-class="{ 'has-error' : formulario.senha.$invalid && !formulario.senha.$pristine && formulario.$submitted }">
                                     <label>Senha</label>
-                                    <input type="password" class="form-control" name="senha" ng-model="usuario.senha">
+                                    <input type="password" class="form-control" ng-click="limparSenha();" name="senha" ng-model="usuario.senha" required>
+                                    <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.senha.$error.required">
+                                        Este campo é obrigatório
+                                    </span>
                                 </div>
                             </div>
                         </div>
