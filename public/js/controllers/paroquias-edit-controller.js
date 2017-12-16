@@ -40,7 +40,8 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
             if ($routeParams.paroquiaId) {
                 $http.put(serviceBase + 'paroquias/' + $scope.paroquia.id, $scope.paroquia)
                 .success(function() {
-                    $scope.mensagem = 'Dados alterados com sucesso';
+                    $rootScope.mensagem = 'Paróquia alterada com sucesso';
+                    window.history.back();
                 })
                 .error(function(error) {
                     console.log(error);
@@ -54,7 +55,8 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
                       })
                 .success(function() {
                     $scope.paroquia = {};
-                    $scope.mensagem = 'Paróquia cadastrada com sucesso';
+                    $rootScope.mensagem = 'Paróquia cadastrada com sucesso';
+                    window.history.back();
                 })
                 .error(function(erro) { 
                     console.log(erro);

@@ -2,8 +2,8 @@
 
 angular.module('Home',)
 .controller('TurmasEditController',
-['$scope', '$http', '$cookieStore', '$routeParams',
-function ($scope, $http, $cookieStore, $routeParams,) {
+['$scope', '$rootScope', '$http', '$cookieStore', '$routeParams',
+function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
     
     var serviceBase = 'services/';
     var globals = $cookieStore.get('globals');
@@ -39,12 +39,12 @@ function ($scope, $http, $cookieStore, $routeParams,) {
 
     // SUBMIT DO FORM - CREATE AND UPDATE
     $scope.submeterForm = function() {
-        //if ($scope.formulario.$valid) {
-            //console.log($scope.turma);         
+        if ($scope.formulario.$valid) {   
             if ($routeParams.turmaId) {
                 $http.put(serviceBase + 'turmas-catequese/' + $scope.turma.id, $scope.turma)
                 .success(function() {
-                    $scope.mensagem = 'Dados alterados com sucesso';
+                    $rootScope.mensagem = 'Turma alterada com sucesso';
+                    window.history.back();
                 })
                 .error(function(error) {
                     console.log(error);
@@ -55,7 +55,6 @@ function ($scope, $http, $cookieStore, $routeParams,) {
                 $scope.turma.catequistaId = $scope.turma.catequista.id;
                 $scope.turma.turnoId = $scope.turma.turno.id;
                 $scope.turma.comunidadeId = $scope.turma.comunidade.id;
-                //console.log($scope.catequista);
                 $http({method: "POST",
                        url: serviceBase + 'turmas-catequese', 
                        data: $scope.turma,
@@ -63,14 +62,15 @@ function ($scope, $http, $cookieStore, $routeParams,) {
                       })
                 .success(function() {
                     $scope.turma = {};
-                    $scope.mensagem = 'Turma cadastrada com sucesso';
+                    $rootScope.mensagem = 'Turma cadastrada com sucesso';
+                    window.history.back();
                 })
                 .error(function(erro) { 
                     console.log(erro);
                     $scope.mensagem = 'Não foi possível cadastrar esta turma';
                 });
             }
-        //}
+        }
     }
 
 }]);

@@ -22,10 +22,10 @@
                             <div class="panel-body" ng-controller="PessoasListController">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
+                                        <div class="form-group" ng-class="{ 'has-error' : formulario.pessoa.$invalid && !formulario.pessoa.$pristine && formulario.$submitted }">
                                             <div class="input-group">
                                                 
-                                                <select name="pessoa" class="form-control" 
+                                                <select name="pessoa" class="form-control" required
                                                         ng-model="catequista.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
                                                     <option value="">Selecione</option>
                                                 </select>
@@ -36,6 +36,9 @@
                                                     </a>
                                                 </span>
                                             </div>
+                                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.pessoa.$error.required">
+                                                Este campo é obrigatório
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -63,28 +66,38 @@
                         </div> <!-- FIM PANNEL PESSOA -->
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group" ng-controller="ComunidadesListController">
+                                <div class="form-group" ng-controller="ComunidadesListController" ng-class="{ 'has-error' : formulario.comunidade.$invalid && !formulario.comunidade.$pristine && formulario.$submitted }">
                                     <label>Comunidade de Atuação</label>
-                                    <select name="comunidade" class="form-control"
+                                    <select name="comunidade" class="form-control" required
                                             ng-model="catequista.comunidadeId" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
                                         <option value="">Selecione</option>
                                     </select>
+                                    <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.comunidade.$error.required">
+                                        Este campo é obrigatório
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{ 'has-error' : formulario.dataInicio.$invalid && !formulario.dataInicio.$pristine && formulario.$submitted }">
                                     <label>Data de Início da Atuação</label>
-                                    <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="catequista.dataInicio">
+                                    <input type="text" name="dataInicio" ui-mask="99/99/9999" model-view-value="true" 
+                                            class="form-control" ng-model="catequista.dataInicio" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
+                                    <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataInicio.$error.pattern">
+                                        A data informada é inválida
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{ 'has-error' : formulario.status.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                                     <label>Status</label>
-                                    <select name="status" class="form-control" ng-model="catequista.status">
+                                    <select name="status" class="form-control" ng-model="catequista.status" required>
                                         <option value="">Selecione</option>
                                         <option value="1">Ativo</option>
                                         <option value="0">Desativado</option>
                                     </select>
+                                    <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.status.$error.required">
+                                        Este campo é obrigatório
+                                    </span>
                                 </div>
                             </div>
                         </div>

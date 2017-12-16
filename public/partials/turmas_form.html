@@ -12,41 +12,50 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <form novalidade role="form" ng-submit="submeterForm()">
+            <form novalidate name="formulario" role="form" ng-submit="submeterForm()">
                 <div class="row" >
                     <div class="col-md-6">
-                        <div class="form-group" ng-controller="EtapasCatequeseListController">
+                        <div class="form-group" ng-controller="EtapasCatequeseListController" ng-class="{ 'has-error' : formulario.etapaCatequese.$invalid && !formulario.etapaCatequese.$pristine && formulario.$submitted }">
                             <label>Etapa</label>
-                            <select name="etapaCatequese" class="form-control" 
+                            <select name="etapaCatequese" class="form-control" required 
                                     ng-model="turma.etapaCatequese" ng-options="etapaCatequese as etapaCatequese.descricao for etapaCatequese in etapasCatequese track by etapaCatequese.id">
                                 <option value="">Selecione</option>
                             </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.etapaCatequese.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="form-group" ng-controller="ComunidadesListController">
+                        <div class="form-group" ng-controller="ComunidadesListController" ng-class="{ 'has-error' : formulario.comunidade.$invalid && !formulario.comunidade.$pristine && formulario.$submitted }">
                             <label>Comunidade</label>
-                            <select name="comunidade" class="form-control"
+                            <select name="comunidade" class="form-control" required
                                     ng-model="turma.comunidade" ng-options="comunidade as comunidade.nome for comunidade in comunidades">
                                 <option value="">Selecione</option>
                             </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.comunidade.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="form-group" ng-controller="TurnosListController">
+                        <div class="form-group" ng-controller="TurnosListController" ng-class="{ 'has-error' : formulario.turno.$invalid && !formulario.turno.$pristine && formulario.$submitted }">
                             <label>Turno</label>
-                            <select name="turno" class="form-control"
+                            <select name="turno" class="form-control" required
                                     ng-model="turma.turno" ng-options="turno as turno.descricao for turno in turnos">
                                 <option value="">Selecione</option>
                             </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.turno.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formulario.diaSemana.$invalid && !formulario.diaSemana.$pristine && formulario.$submitted }">
                             <label>Dia da Semana</label>
-                            <select name="diaSemana" class="form-control" ng-model="turma.diaSemana">
+                            <select name="diaSemana" class="form-control" ng-model="turma.diaSemana" required>
                                 <option value="">Selecione</option>
                                 <option value="0">Domingo</option>
                                 <option value="1">Segunda-Feira</option>
@@ -56,47 +65,70 @@
                                 <option value="5">Sexta-Feira</option>
                                 <option value="6">Sábado</option>
                             </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.diaSemana.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="form-group" ng-controller="TurnosListController">
+                        <div class="form-group" ng-controller="TurnosListController" ng-controller="CatequistasListController" ng-class="{ 'has-error' : formulario.horario.$invalid && !formulario.horario.$pristine && formulario.$submitted }">
                             <label>Horário</label>
-                            <input type="text" ng-model="turma.horario" class="form-control">
+                            <input type="text" name="horario" ui-mask="99:99" model-view-value="true" ng-model="turma.horario" class="form-control" required>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.horario.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="row" >
                     <div class="col-md-6">
-                        <div class="form-group" ng-controller="CatequistasListController">
+                        <div class="form-group" ng-controller="CatequistasListController" ng-class="{ 'has-error' : formulario.catequista.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                             <label>Catequista</label>
-                            <select name="catequista" class="form-control" 
+                            <select name="catequista" class="form-control" required
                                     ng-model="turma.catequista" ng-options="catequista as catequista.pessoa.nome for catequista in catequistas track by catequista.id">
                                 <option value="">Selecione</option>
                             </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.catequista.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formulario.dataInicio.$invalid && !formulario.dataInicio.$pristine && formulario.$submitted }">
                             <label>Data de Início</label>
-                            <input type="text" ui-mask="99/99/9999" model-view-value="true" placeholder="dd/mm/aaaa" class="form-control" ng-model="turma.dataInicio">
+                            <input type="text" name="dataInicio" ui-mask="99/99/9999" model-view-value="true" class="form-control" 
+                                    ng-model="turma.dataInicio" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataInicio.$error.pattern">
+                                A data informada é inválida
+                            </span>
                         </div>
+                        
                     </div>
                     <div class="col-lg-3">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formulario.dataTermino.$invalid && !formulario.dataTermino.$pristine && formulario.$submitted }">
                             <label>Data de Início</label>
-                            <input type="text" ui-mask="99/99/9999" model-view-value="true" placeholder="dd/mm/aaaa" class="form-control" ng-model="turma.dataTermino">
+                            <input type="text" name="dataTermino" ui-mask="99/99/9999" model-view-value="true" class="form-control" 
+                                    ng-model="turma.dataTermino" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataTermino.$error.pattern">
+                                A data informada é inválida
+                            </span>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formulario.status.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                             <label>Status</label>
-                            <select name="status" class="form-control" ng-model="turma.status">
+                            <select name="status" class="form-control" ng-model="turma.status" required>
                                 <option value="">Selecione</option>
                                 <option value="1">Ativo</option>
                                 <option value="0">Desativado</option>
                             </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.status.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
                     </div>
                 </div>

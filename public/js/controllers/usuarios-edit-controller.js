@@ -45,15 +45,14 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
             if ($routeParams.usuarioId) {
                 $http.put(serviceBase + 'usuarios/' + $scope.usuario.id, $scope.usuario)
                 .success(function() {
-                    $scope.mensagem = 'Dados alterados com sucesso';
+                    $rootScope.mensagem = 'Usuário alterado com sucesso';
+                    window.history.back();
                 })
                 .error(function(error) {
                     console.log(error);
                     $scope.mensagem = 'Não foi possível alterar os dados';
                 });
             } else {
-                //$scope.catequista.pessoaId = $scope.catequista.pessoa.id;
-                //console.log($scope.catequista);
                 $http({method: "POST",
                        url: serviceBase + 'usuarios', 
                        data: $scope.usuario,
@@ -61,7 +60,8 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
                       })
                 .success(function() {
                     $scope.usuario = {};
-                    $scope.mensagem = 'Usuario cadastrado com sucesso';
+                    $rootScope.mensagem = 'Usuario cadastrado com sucesso';
+                    window.history.back();
                 })
                 .error(function(erro) { 
                     console.log(erro);

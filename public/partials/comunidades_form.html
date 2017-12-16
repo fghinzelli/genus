@@ -15,10 +15,10 @@
             <form novalidate name="formulario" role="form" ng-submit="submeterForm()">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formulario.nome.$invalid && !formulario.nome.$pristine && formulario.$submitted }">
                             <label>Nome</label>
                             <input name="nome" class="form-control" ng-model="comunidade.nome" required>
-                            <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.nome.$error.required">
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.nome.$error.required">
                                 Este campo é obrigatório
                             </span>
                         </div>
@@ -26,18 +26,24 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formulario.dataFundacao.$invalid && !formulario.dataFundacao.$pristine && formulario.$submitted }">
                             <label>Data de Fundação</label>
-                            <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="comunidade.dataFundacao">
+                            <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" name="dataFundacao" 
+                                   ng-model="comunidade.dataFundacao" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataFundacao.$error.pattern">
+                                A data informada é inválida
+                            </span>
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        <div class="form-group" ng-controller="ParoquiasListController">
+                        <div class="form-group" ng-controller="ParoquiasListController" ng-class="{ 'has-error' : formulario.paroquia.$invalid && !formulario.paroquia.$pristine && formulario.$submitted }"> 
                             <label>Paroquia</label>
-                            <select name="paroquia" class="form-control"
-                                    ng-model="comunidade.paroquiaId" ng-options="paroquia.id as paroquia.nome for paroquia in paroquias">
+                            <select name="paroquia" class="form-control" required ng-model="comunidade.paroquiaId" ng-options="paroquia.id as paroquia.nome for paroquia in paroquias">
                                 <option value="">Selecione</option>
                             </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.paroquia.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -117,13 +123,16 @@
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formulario.status.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                             <label>Status</label>
-                            <select name="status" class="form-control" ng-model="comunidade.status">
+                            <select name="status" class="form-control" ng-model="comunidade.status" required>
                                 <option value="">Selecione</option>
                                 <option value="1">Ativo</option>
                                 <option value="0">Desativado</option>
                             </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.status.$error.required">
+                                Este campo é obrigatório
+                            </span>
                         </div>
                     </div>
                 </div>

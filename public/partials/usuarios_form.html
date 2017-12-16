@@ -21,13 +21,14 @@
                             <div class="panel-body" ng-controller="PessoasListController">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
+                                        <div class="form-group" ng-class="{ 'has-error' : formulario.status.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                                             <div class="input-group">
                                                 
-                                                <select name="pessoa" class="form-control" 
+                                                <select name="pessoa" class="form-control" required
                                                         ng-model="usuario.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
                                                     <option value="">Selecione</option>
                                                 </select>
+
                                                 </select>
                                                 <span class="input-group-btn">
                                                     <a href="#/pessoas/new" class="btn btn-primary" type="button">
@@ -35,6 +36,9 @@
                                                     </a>
                                                 </span>
                                             </div>
+                                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.pessoa.$error.required">
+                                                Este campo é obrigatório
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +65,7 @@
                             </div>
                         </div> <!-- FIM PANNEL PESSOA -->
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <div class="form-group" ng-class="{ 'has-error' : formulario.username.$invalid && !formulario.username.$pristine && formulario.$submitted }">
                                     <label>Username</label>
                                     <input type="text" class="form-control" name="username" ng-model="usuario.username" required>
@@ -70,7 +74,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <div class="form-group"  ng-class="{ 'has-error' : formulario.senha.$invalid && !formulario.senha.$pristine && formulario.$submitted }">
                                     <label>Senha</label>
                                     <input type="password" class="form-control" ng-click="limparSenha();" name="senha" ng-model="usuario.senha" required>
@@ -79,16 +83,17 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-lg-2">
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{ 'has-error' : formulario.status.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                                     <label>Status</label>
-                                    <select name="status" class="form-control" ng-model="usuario.status">
+                                    <select name="status" class="form-control" ng-model="usuario.status" required>
                                         <option value="">Selecione</option>
                                         <option value="1">Ativo</option>
                                         <option value="0">Desativado</option>
                                     </select>
+                                    <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.status.$error.required">
+                                        Este campo é obrigatório
+                                    </span>
                                 </div>
                             </div>
                         </div>

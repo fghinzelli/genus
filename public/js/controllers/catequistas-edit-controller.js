@@ -28,7 +28,6 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
         .success(function(catequista) {
             $scope.catequista = catequista;
             $scope.catequista.pessoa = catequista.pessoa;
-            //console.log(catequista.pessoa);
         })
         .error(function(erro) {
             console.log(erro);
@@ -38,21 +37,19 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
 
     // SUBMIT DO FORM - CREATE AND UPDATE
     $scope.submeterForm = function() {
-        //if ($scope.formulario.$valid) {
-            //console.log($scope.catequista);
+        if ($scope.formulario.$valid) {
             $scope.catequista.pessoaId = $scope.catequista.pessoa.id;
             if ($routeParams.catequistaId) {
                 $http.put(serviceBase + 'catequistas/' + $scope.catequista.id, $scope.catequista)
                 .success(function() {
-                    $scope.mensagem = 'Dados alterados com sucesso';
+                    $rootScope.mensagem = 'Catequista alterado(a) com sucesso';
+                    window.history.back();
                 })
                 .error(function(error) {
                     console.log(error);
                     $scope.mensagem = 'Não foi possível alterar os dados';
                 });
             } else {
-                //$scope.catequista.pessoaId = $scope.catequista.pessoa.id;
-                //console.log($scope.catequista);
                 $http({method: "POST",
                        url: serviceBase + 'catequistas', 
                        data: $scope.catequista,
@@ -60,14 +57,15 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
                       })
                 .success(function() {
                     $scope.catequista = {};
-                    $scope.mensagem = 'Catequista adastrada com sucesso';
+                    $rootScope.mensagem = 'Catequista cadastrado(a) com sucesso';
+                    window.history.back();
                 })
                 .error(function(erro) { 
                     console.log(erro);
                     $scope.mensagem = 'Não foi possível cadastrar este catequista';
                 });
             }
-        //}
+        }
     }
 
 }]);

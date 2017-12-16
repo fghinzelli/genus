@@ -18,13 +18,6 @@ angular.module('Home',)
         };
 
 
-        // $scope.dataInvalida = function() {
-        //     data = $scope.pessoa.dataNascimento;
-        //     var bits = data.split('/');
-        //     var d = new Date(bits[2], bits[1] - 1, bits[0]);
-        //     return d && (d.getMonth() + 1) == bits[1];
-        // }
-
         // Valores default
         $scope.pessoa.nacionalidade = "Brasileira";
         $scope.pessoa.cep = "95185000";
@@ -35,7 +28,6 @@ angular.module('Home',)
         if ($routeParams.pessoaId) {
             $http.get(serviceBase + 'pessoas/' + $routeParams.pessoaId)
             .success(function(pessoa) {
-                //console.log(pessoa);
                 $scope.pessoa = pessoa;
                 $scope.estado = pessoa.municipio.uf;
                 $scope.pessoa.batizado = (pessoa.batizado === '1');
@@ -49,14 +41,12 @@ angular.module('Home',)
     
         // SUBMIT DO FORM - CREATE AND UPDATE
         $scope.submeterForm = function() {
-            if ($scope.formulario.$valid) {
-                //$scope.pessoa.rgUF = $scope.pessoa.rgUF.uf;
-                //console.log($scope.pessoa);
+            if ($scope.formulario.$valid) {;
                 if ($routeParams.pessoaId) {
                     $http.put(serviceBase + 'pessoas/' + $scope.pessoa.id, $scope.pessoa)
                     .success(function() {
-                        $scope.mensagem = 'Dados alterados com sucesso';
-                        //window.history.back();
+                        $rootScope.mensagem = 'Pessoa alterada com sucesso';
+                        window.history.back();
                     })
                     .error(function(error) {
                         console.log(error);
@@ -66,9 +56,8 @@ angular.module('Home',)
                     $http.post(serviceBase + 'pessoas', $scope.pessoa)
                     .success(function(pessoa) {
                         $rootScope.pessoa = pessoa;
-                        console.log(pessoa);
                         $scope.pessoa = {};
-                        $scope.mensagem = 'Pessoa cadastrada com sucesso';
+                        $rootScope.mensagem = 'Pessoa cadastrada com sucesso';
                         window.history.back();
                     })
                     .error(function(erro) { 

@@ -2,7 +2,7 @@
 
 angular.module('Home',)
 .controller('ComunidadesEditController',
-['$scope', '$http', '$cookieStore', '$routeParams', '$rootScope',
+['$scope', '$http', '$cookieStore', '$routeParams', '$rootScope', 
 function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
     
     var serviceBase = 'services/';
@@ -42,7 +42,8 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
             if ($routeParams.comunidadeId) {
                 $http.put(serviceBase + 'comunidades/' + $scope.comunidade.id, $scope.comunidade)
                 .success(function() {
-                    $scope.mensagem = 'Dados alterados com sucesso';
+                    $rootScope.mensagem = 'Comunidade alterada com sucesso';
+                    window.history.back();
                 })
                 .error(function(error) {
                     console.log(error);
@@ -56,7 +57,8 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
                       })
                 .success(function() {
                     $scope.comunidade = {};
-                    $scope.mensagem = 'Comunidade cadastrada com sucesso';
+                    $rootScope.mensagem = 'Comunidade cadastrada com sucesso';
+                    window.history.back();
                 })
                 .error(function(erro) { 
                     console.log(erro);

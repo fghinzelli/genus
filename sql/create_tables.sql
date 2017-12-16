@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS Catequista (
 	pessoaId int(10) NOT NULL,
 	comunidadeId INT NOT NULL,
 	dataInicio date NULL,
-	observacoes varchar(100) NOT NULL,
+	observacoes varchar(100) NULL,
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,

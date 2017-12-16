@@ -2,8 +2,8 @@
 
 angular.module('Home',)
 .controller('ComunidadesListController',
-    ['$scope', '$http', '$cookieStore', '$routeParams',
-    function ($scope, $http, $cookieStore, $routeParams) {
+    ['$rootScope', '$scope', '$http', '$cookieStore', '$routeParams',
+    function ($rootScope, $scope, $http, $cookieStore, $routeParams) {
         
         var serviceBase = 'services/';
         var globals = $cookieStore.get('globals');
@@ -14,6 +14,13 @@ angular.module('Home',)
         $scope.comunidades = [];
         $scope.filtro = '';
         $scope.mensagem = '';
+
+        // Exibe a mensagem ao retornar do formulário de edição
+        if($rootScope.mensagem) {
+            $scope.mensagem = $rootScope.mensagem;
+            $rootScope.mensagem = '';
+        }
+        
         $scope.showSuccessAlert = true;
         $scope.switchBool = function(value) {
             $scope[value] = !$scope[value];
