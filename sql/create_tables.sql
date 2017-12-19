@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
+	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
 	FOREIGN KEY (paroquiaSelecionada) REFERENCES Paroquia(id)
 );
 
@@ -285,8 +285,6 @@ CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
 	FOREIGN KEY (pessoaResponsavelId) REFERENCES Pessoa(id),
 	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id)
 );
-
-
 
 CREATE TABLE IF NOT EXISTS TurmaCatequeseInscricao (
 	id int(11) NOT NULL AUTO_INCREMENT,

@@ -1,56 +1,5 @@
 -- Database: `genus`
 
--- Dumping data for table `AcessoNivel`
---
-
-INSERT INTO `AcessoNivel` (`id`, `descricao`, `status`) VALUES
-(1, 'Administrador', 1);
-
---
--- Dumping data for table `AcessoParoquia`
---
-
-INSERT INTO `AcessoParoquia` (`id`, `paroquiaId`, `usuarioId`, `nivelAcessoId`) VALUES
-(1, 1, 1, 1);
-
---
--- Dumping data for table `Catequista`
---
-
-INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 1, 1, '2017-11-01', 'Observacoes', 1, '2017-11-07 06:02:31', NULL),
-(2, 2, 1, '2017-11-01', 'Observacoes', 1, '2017-11-15 00:09:18', NULL),
-(3, 13, 1, '2017-11-01', 'Observacoes', 1, '2017-11-16 21:06:02', NULL),
-(6, 7, 1, '2010-10-23', 'Observacoes', 1, '2017-11-09 00:20:05', NULL),
-(7, 26, 2, '2001-10-11', 'Observações do Catequista', 1, '2017-11-21 21:46:30', NULL),
-(9, 29, 1, '2000-01-01', 'Observacoes', 1, '2017-11-19 08:52:45', NULL);
-
---
--- Dumping data for table `Comunidade`
---
-
-INSERT INTO `Comunidade` (`id`, `nome`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 'Santana', 1, '2000-01-01', NULL, NULL, NULL, NULL, NULL, 1, NULL, 'email@santana.com.br', NULL, 1, NULL, NULL),
-(2, 'Igreja Matriz', 1, '1981-08-14', 'Responsavel', 'Endereço', '46545', 'Complemento', 'bairro', 4697, 79854654, 'email@teste.com', '54989479854', 1, NULL, NULL),
-(4, 'São Roque', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL);
-
---
--- Dumping data for table `Diocese`
---
-
-INSERT INTO `Diocese` (`id`, `nome`, `cnpj`, `email`, `telefone`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 'Diocese de Caxias do Sul', '12345649687', 'diocese@diocese.com.br', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 1);
-
---
--- Dumping data for table `Escola`
---
-
-INSERT INTO `Escola` (`id`, `nome`, `email`, `telefone`, `pessoaContato`, `observacoes`, `status`) VALUES
-(1, 'Escola Municipal Antonia da Silva', 'antonia@escola.com.br', '23451234', 'Maria da Costa', 'observaçoes da escola teste', 1),
-(2, 'Escola Estadual Santana', 'santana@escola.com.br', '23451234', 'Jose Panisson', 'observaçoes da escola teste', 1),
-(3, 'Escola Estadual Ulisses Cabral', 'ulisses@escola.com.br', '23451234', 'Sonia da Costa', 'observaçoes da escola teste', 1),
-(4, 'Escola Marista Santo Antonio', 'stoantonio@escola.com.br', '23451234', 'Ir Moacir', 'observaçoes da escola teste', 1);
-
 --
 -- Dumping data for table `Estado`
 --
@@ -83,35 +32,6 @@ INSERT INTO `Estado` (`id`, `codigoUf`, `nome`, `uf`, `regiao`) VALUES
 (25, 35, 'São Paulo', 'SP', 3),
 (26, 28, 'Sergipe', 'SE', 2),
 (27, 17, 'Tocantins', 'TO', 1);
-
---
--- Dumping data for table `EtapaCatequese`
---
-
-INSERT INTO `EtapaCatequese` (`id`, `descricao`, `status`) VALUES
-(1, 'Primeira Etapa', 1),
-(2, 'Segunda Etapa', 1),
-(3, 'Terceira Etapa', 1),
-(4, 'Quarta Etapa', 1),
-(5, 'Catequese de Adultos', 1);
-
---
--- Dumping data for table `EtapaEscola`
---
-
-INSERT INTO `EtapaEscola` (`id`, `descricao`, `status`) VALUES
-(1, 'Primeiro Ano', 1);
-
---
--- Dumping data for table `InscricaoCatequese`
---
-
-INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `turmaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL),
-(2, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL),
-(3, 2, 3, 1, 2, 1, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:42:57', NULL),
-(4, 2, 3, 1, 2, NULL, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:43:32', NULL),
-(5, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, '2017-11-09 02:18:59', NULL);
 
 --
 -- Dumping data for table `Municipio`
@@ -5693,6 +5613,73 @@ INSERT INTO `Municipio` (`id`, `codigo`, `nome`, `uf`) VALUES
 (5569, 5222302, 'Vila Propício', 'GO'),
 (5570, 5300108, 'Brasília', 'DF');
 
+-- Dumping data for table `AcessoNivel`
+--
+
+INSERT INTO `AcessoNivel` (`id`, `descricao`, `status`) VALUES
+(1, 'Administrador', 1);
+
+--
+-- Dumping data for table `Turno`
+--
+
+INSERT INTO `Turno` (`id`, `descricao`, `status`) VALUES
+(1, 'Manhã', 1),
+(2, 'Tarde', 1),
+(3, 'Vespertino', 1),
+(4, 'Noite', 1);
+
+--
+-- Dumping data for table `EtapaCatequese`
+--
+
+INSERT INTO `EtapaCatequese` (`id`, `descricao`, `status`) VALUES
+(1, 'Primeira Etapa', 1),
+(2, 'Segunda Etapa', 1),
+(3, 'Terceira Etapa', 1),
+(4, 'Quarta Etapa', 1),
+(5, 'Catequese de Adultos', 1);
+
+--
+-- Dumping data for table `EtapaEscola`
+--
+
+INSERT INTO `EtapaEscola` (`id`, `descricao`, `status`) VALUES
+(1, 'Primeiro Ano', 1);
+
+--
+-- Dumping data for table `SituacaoDizimo`
+--
+
+INSERT INTO `SituacaoDizimo` (`id`, `descricao`, `status`) VALUES
+(1, 'Pago', 1),
+(2, 'Parcelado', 1);
+
+--
+-- Dumping data for table `SituacaoInscricao`
+--
+
+INSERT INTO `SituacaoInscricao` (`id`, `descricao`, `status`) VALUES
+(1, 'Cadastrada', 1),
+(2, 'Pendente', 1);
+
+--
+-- Dumping data for table `Diocese`
+--
+
+INSERT INTO `Diocese` (`id`, `nome`, `cnpj`, `email`, `telefone`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
+(1, 'Diocese de Caxias do Sul', '12345649687', 'diocese@diocese.com.br', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 1);
+
+--
+-- Dumping data for table `Escola`
+--
+
+INSERT INTO `Escola` (`id`, `nome`, `email`, `telefone`, `pessoaContato`, `observacoes`, `status`) VALUES
+(1, 'Escola Municipal Antonia da Silva', 'antonia@escola.com.br', '23451234', 'Maria da Costa', 'observaçoes da escola teste', 1),
+(2, 'Escola Estadual Santana', 'santana@escola.com.br', '23451234', 'Jose Panisson', 'observaçoes da escola teste', 1),
+(3, 'Escola Estadual Ulisses Cabral', 'ulisses@escola.com.br', '23451234', 'Sonia da Costa', 'observaçoes da escola teste', 1),
+(4, 'Escola Marista Santo Antonio', 'stoantonio@escola.com.br', '23451234', 'Ir Moacir', 'observaçoes da escola teste', 1);
+
 --
 -- Dumping data for table `Paroquia`
 --
@@ -5701,6 +5688,15 @@ INSERT INTO `Paroquia` (`id`, `nome`, `cnpj`, `email`, `telefone`, `logradouro`,
 (1, 'Paróquia Nossa Senhora de Mãe de Deus', '99879879879878', 'email@teste.com', '54198498984', 'Endereço', '1234', 'complemento', 'bairro', 4697, 95580000, 1, 1, NULL, NULL),
 (2, 'Sagrado Coração de Jesus', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL),
 (3, 'Santa Catarina', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL);
+
+--
+-- Dumping data for table `Comunidade`
+--
+
+INSERT INTO `Comunidade` (`id`, `nome`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
+(1, 'Santana', 1, '2000-01-01', NULL, NULL, NULL, NULL, NULL, 1, NULL, 'email@santana.com.br', NULL, 1, NULL, NULL),
+(2, 'Igreja Matriz', 1, '1981-08-14', 'Responsavel', 'Endereço', '46545', 'Complemento', 'bairro', 4697, 79854654, 'email@teste.com', '54989479854', 1, NULL, NULL),
+(4, 'São Roque', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL);
 
 --
 -- Dumping data for table `Pessoa`
@@ -5728,20 +5724,31 @@ INSERT INTO `Pessoa` (`id`, `nome`, `sexo`, `nomePai`, `nomeMae`, `dataNasciment
 (30, 'teste', 'M', '', NULL, '2000-04-14', '', '', '', '2342342342', 'ssp', 'DF', NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, 4697, 95185000, NULL, 2, NULL, NULL, NULL, NULL, NULL, 1, '2017-11-23 01:02:21', NULL);
 
 --
--- Dumping data for table `SituacaoDizimo`
+-- Dumping data for table `Usuario`
 --
 
-INSERT INTO `SituacaoDizimo` (`id`, `descricao`, `status`) VALUES
-(1, 'Pago', 1),
-(2, 'Parcelado', 1);
+INSERT INTO `Usuario` (`id`, `username`, `senha`, `pessoaId`, `token`, `tokenExpiracao`, `status`, `paroquiaSelecionada`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
+(1, 'admin', '$2y$10$K/V0l5OwEQH59sZiNLoG4eRWAhcGIgHgDiR2/tVNeWvJRNEGFmwDO', 1, 'b0729c9d43d1881f', '2017-11-23 02:02:29', 1, 1, '2017-11-22 00:24:33', NULL),
+(4, 'teste', '$2y$10$K/V0l5OwEQH59sZiNLoG4eRWAhcGIgHgDiR2/tVNeWvJRNEGFmwDO', 29, NULL, NULL, 1, NULL, '2017-11-22 20:13:49', NULL);
 
 --
--- Dumping data for table `SituacaoInscricao`
+-- Dumping data for table `AcessoParoquia`
 --
 
-INSERT INTO `SituacaoInscricao` (`id`, `descricao`, `status`) VALUES
-(1, 'Cadastrada', 1),
-(2, 'Pendente', 1);
+INSERT INTO `AcessoParoquia` (`id`, `paroquiaId`, `usuarioId`, `nivelAcessoId`) VALUES
+(1, 1, 1, 1);
+
+--
+-- Dumping data for table `Catequista`
+--
+
+INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
+(1, 1, 1, '2017-11-01', 'Observacoes', 1, '2017-11-07 06:02:31', NULL),
+(2, 2, 1, '2017-11-01', 'Observacoes', 1, '2017-11-15 00:09:18', NULL),
+(3, 13, 1, '2017-11-01', 'Observacoes', 1, '2017-11-16 21:06:02', NULL),
+(6, 7, 1, '2010-10-23', 'Observacoes', 1, '2017-11-09 00:20:05', NULL),
+(7, 26, 2, '2001-10-11', 'Observações do Catequista', 1, '2017-11-21 21:46:30', NULL),
+(9, 29, 1, '2000-01-01', 'Observacoes', 1, '2017-11-19 08:52:45', NULL);
 
 --
 -- Dumping data for table `TurmaCatequese`
@@ -5755,32 +5762,13 @@ INSERT INTO `TurmaCatequese` (`id`, `etapaCatequeseId`, `catequistaId`, `observa
 (5, 2, 2, 'obs', 2, 2, '2017-10-08', '2017-12-08', 2, '2017-11-19 23:47:05', NULL, '14:00', 1);
 
 --
--- Dumping data for table `Turno`
+-- Dumping data for table `InscricaoCatequese`
 --
 
-INSERT INTO `Turno` (`id`, `descricao`, `status`) VALUES
-(1, 'Manhã', 1),
-(2, 'Tarde', 1),
-(3, 'Vespertino', 1),
-(4, 'Noite', 1);
+INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `turmaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
+(1, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL),
+(2, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL),
+(3, 2, 3, 1, 2, 1, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:42:57', NULL),
+(4, 2, 3, 1, 2, NULL, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:43:32', NULL),
+(5, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, '2017-11-09 02:18:59', NULL);
 
---
--- Dumping data for table `Usuario`
---
-
-INSERT INTO `Usuario` (`id`, `username`, `senha`, `pessoaId`, `token`, `tokenExpiracao`, `status`, `paroquiaSelecionada`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 'admin', '$2y$10$K/V0l5OwEQH59sZiNLoG4eRWAhcGIgHgDiR2/tVNeWvJRNEGFmwDO', 1, 'b0729c9d43d1881f', '2017-11-23 02:02:29', 1, 1, '2017-11-22 00:24:33', NULL),
-(4, 'teste', '$2y$10$K/V0l5OwEQH59sZiNLoG4eRWAhcGIgHgDiR2/tVNeWvJRNEGFmwDO', 29, NULL, NULL, 1, NULL, '2017-11-22 20:13:49', NULL);
-
--- --------------------------------------------------------
-
---
--- Structure for view `ViewUsuario`
---
-DROP TABLE IF EXISTS `ViewUsuario`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ViewUsuario`  AS  (select `u`.`id` AS `id`,`u`.`username` AS `username`,`u`.`senha` AS `senha`,`p`.`nome` AS `nome` from (`Usuario` `u` join `Pessoa` `p` on((`p`.`id` = `u`.`pessoaId`)))) ;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
