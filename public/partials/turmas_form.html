@@ -120,7 +120,7 @@
                         <div class="form-group" ng-controller="AnosLetivosCatequeseListController" ng-class="{ 'has-error' : formulario.anoLetivo.$invalid && !formulario.anoLetivo.$pristine && formulario.$submitted }">
                             <label>Ano Letivo</label>
                             <select name="anoLetivo" class="form-control" required
-                                    ng-model="turma.anoLetivo" ng-options="anoLetivo as anoLetivo.descricao for anoLetivo in anosLetivos">
+                                    ng-model="turma.anoLetivoId" ng-options="anoLetivo.id as anoLetivo.descricao for anoLetivo in anosLetivos">
                                 <option value="">Selecione</option>
                             </select>
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.anoLetivo.$error.required">
