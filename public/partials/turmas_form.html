@@ -30,7 +30,7 @@
                         <div class="form-group" ng-controller="ComunidadesListController" ng-class="{ 'has-error' : formulario.comunidade.$invalid && !formulario.comunidade.$pristine && formulario.$submitted }">
                             <label>Comunidade</label>
                             <select name="comunidade" class="form-control" required
-                                    ng-model="turma.comunidade" ng-options="comunidade as comunidade.nome for comunidade in comunidades">
+                                    ng-model="turma.comunidadeId" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
                                 <option value="">Selecione</option>
                             </select>
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.comunidade.$error.required">
@@ -44,7 +44,7 @@
                         <div class="form-group" ng-controller="TurnosListController" ng-class="{ 'has-error' : formulario.turno.$invalid && !formulario.turno.$pristine && formulario.$submitted }">
                             <label>Turno</label>
                             <select name="turno" class="form-control" required
-                                    ng-model="turma.turno" ng-options="turno as turno.descricao for turno in turnos">
+                                    ng-model="turma.turnoId" ng-options="turno.id as turno.descricao for turno in turnos">
                                 <option value="">Selecione</option>
                             </select>
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.turno.$error.required">
@@ -103,21 +103,31 @@
                                 A data informada é inválida
                             </span>
                         </div>
-                        
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group" ng-class="{ 'has-error' : formulario.dataTermino.$invalid && !formulario.dataTermino.$pristine && formulario.$submitted }">
-                            <label>Data de Início</label>
+                            <label>Data de Término</label>
                             <input type="text" name="dataTermino" ui-mask="99/99/9999" model-view-value="true" class="form-control" 
                                     ng-model="turma.dataTermino" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataTermino.$error.pattern">
                                 A data informada é inválida
                             </span>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group" ng-controller="AnosLetivosCatequeseListController" ng-class="{ 'has-error' : formulario.anoLetivo.$invalid && !formulario.anoLetivo.$pristine && formulario.$submitted }">
+                            <label>Ano Letivo</label>
+                            <select name="anoLetivo" class="form-control" required
+                                    ng-model="turma.anoLetivo" ng-options="anoLetivo as anoLetivo.descricao for anoLetivo in anosLetivos">
+                                <option value="">Selecione</option>
+                            </select>
+                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.anoLetivo.$error.required">
+                                Este campo é obrigatório
+                            </span>
+                        </div>
+                    </div>
                     <div class="col-lg-2">
                         <div class="form-group" ng-class="{ 'has-error' : formulario.status.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                             <label>Status</label>
@@ -131,6 +141,7 @@
                             </span>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-lg-12">

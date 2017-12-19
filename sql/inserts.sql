@@ -5751,24 +5751,31 @@ INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `obser
 (9, 29, 1, '2000-01-01', 'Observacoes', 1, '2017-11-19 08:52:45', NULL);
 
 --
+-- Dumping data for table `AnoLetivoCatequese`
+--
+
+INSERT INTO `AnoLetivoCatequese` (`id`, `descricao`, `status`) VALUES
+(1, '2017/2018', 1);
+
+--
 -- Dumping data for table `TurmaCatequese`
 --
 
-INSERT INTO `TurmaCatequese` (`id`, `etapaCatequeseId`, `catequistaId`, `observacoes`, `turnoId`, `diaSemana`, `dataInicio`, `dataTermino`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `horario`, `comunidadeId`) VALUES
-(1, 1, 1, 'obs', 1, 3, '2017-11-08', NULL, 1, '2017-11-09 02:12:31', NULL, '13:00', 1),
-(2, 2, 2, 'obs', 2, 2, '2017-11-08', NULL, 1, NULL, NULL, '13:00', 1),
-(3, 2, 1, 'obs', 3, 0, NULL, NULL, 0, '2017-11-09 02:12:48', NULL, '16:00', 1),
-(4, 4, 6, 'obs', 3, 2, '2010-10-10', '2010-01-28', 1, '2017-11-16 21:09:54', NULL, '10:00', 1),
-(5, 2, 2, 'obs', 2, 2, '2017-10-08', '2017-12-08', 2, '2017-11-19 23:47:05', NULL, '14:00', 1);
+INSERT INTO `TurmaCatequese` (`id`, `etapaCatequeseId`, `catequistaId`, `observacoes`, `turnoId`, `diaSemana`, `dataInicio`, `dataTermino`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `horario`, `comunidadeId`, `anoLetivoId`) VALUES
+(1, 1, 1, 'obs', 1, 3, '2017-11-08', NULL, 1, '2017-11-09 02:12:31', NULL, '13:00', 1, 1),
+(2, 2, 2, 'obs', 2, 2, '2017-11-08', NULL, 1, NULL, NULL, '13:00', 1, 1),
+(3, 2, 1, 'obs', 3, 0, NULL, NULL, 0, '2017-11-09 02:12:48', NULL, '16:00', 1, 1),
+(4, 4, 6, 'obs', 3, 2, '2010-10-10', '2010-01-28', 1, '2017-11-16 21:09:54', NULL, '10:00', 1, 1),
+(5, 2, 2, 'obs', 2, 2, '2017-10-08', '2017-12-08', 2, '2017-11-19 23:47:05', NULL, '14:00', 1, 1);
 
 --
 -- Dumping data for table `InscricaoCatequese`
 --
 
-INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `turmaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL),
-(2, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL),
-(3, 2, 3, 1, 2, 1, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:42:57', NULL),
-(4, 2, 3, 1, 2, NULL, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:43:32', NULL),
-(5, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, '2017-11-09 02:18:59', NULL);
+INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `turmaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `anoLetivoId`) VALUES
+(1, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL, 1),
+(2, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, NULL, NULL, 1),
+(3, 2, 3, 1, 2, 1, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:42:57', NULL, 1),
+(4, 2, 3, 1, 2, NULL, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:43:32', NULL, 1),
+(5, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, '2017-11-09 02:18:59', NULL, 1);
 

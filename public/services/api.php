@@ -46,6 +46,7 @@
 	require 'view/paroquia.php';
 	require 'view/comunidade.php';
 	require 'view/catequista.php';
+	require 'view/anoLetivoCatequese.php';
 	require 'view/etapaCatequese.php';
 	require 'view/escola.php';
 	require 'view/turno.php';
@@ -53,6 +54,7 @@
 	require 'view/inscricaoCatequese.php';
 	require 'view/situacaoInscricao.php';
 	require 'view/situacaoDizimo.php';
+	
 
 	$app->post('/login', function($request, $response, $args) { 
 		$data = $request->getParsedBody();

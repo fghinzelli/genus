@@ -18,6 +18,7 @@ class InscricaoCatequese {
     public $status;
     public $dataUltimaAlteracao;
     public $usuarioUltimaAlteracaoId;
+    public $anoLetivoId;
     function __construct($db) {
         $this->db = $db;
     }
@@ -26,7 +27,7 @@ class InscricaoCatequese {
     function loadData($id, $pessoaId, $etapaCatequeseId, $escolaId, $etapaEscolaId, $turmaId,
                       $observacoes, $situacaoInscricaoId, $turnoId, $situacaoDizimoId,
                       $comunidadeId, $dataInscricao,
-                      $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
+                      $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId, $anoLetivoId) {
         $this->id = $id;
         $this->pessoaId = $pessoaId;
         $this->etapaCatequeseId = $etapaCatequeseId;
@@ -42,6 +43,7 @@ class InscricaoCatequese {
         $this->status = $status;
         $this->dataUltimaAlteracao = $dataUltimaAlteracao;
         $this->usuarioUltimaAlteracaoId = $usuarioUltimaAlteracaoId;
+        $this->anoLetivoId = $anoLetivoId;
     } 
 
     function getInscricoesCatequese() {
@@ -68,6 +70,12 @@ class InscricaoCatequese {
             $querye->bindParam("id",$inscricao->etapaCatequeseId);
             $querye->execute();
             $inscricao->etapaCatequese =  $querye->fetchObject();
+            // ANO LETIVO
+            $sqlt = "SELECT * FROM AnoLetivoCatequese WHERE id=:id";
+            $queryt = $this->db->prepare($sqlt);
+            $queryt->bindParam("id",$inscricao->anoLetivoId);
+            $queryt->execute();
+            $inscricao->anoLetivo =  $queryt->fetchObject();
         }
         echo json_encode($inscricoes);
     }
@@ -102,6 +110,13 @@ class InscricaoCatequese {
       $querye->execute();
       $inscricao->etapaCatequese =  $querye->fetchObject();
 
+      // ANO LETIVO
+      $sqlt = "SELECT * FROM AnoLetivoCatequese WHERE id=:id";
+      $queryt = $this->db->prepare($sqlt);
+      $queryt->bindParam("id",$inscricao->anoLetivoId);
+      $queryt->execute();
+      $inscricao->anoLetivo =  $queryt->fetchObject();
+
       echo json_encode($inscricao);
     }
 
@@ -114,7 +129,7 @@ class InscricaoCatequese {
                 VALUES (:pessoaId, :etapaCatequeseId, :escolaId, :etapaEscolaId, :turmaId, 
                         :observacoes, :situacaoInscricaoId, :turnoId, :situacaoDizimoId, 
                         :comunidadeId, :dataInscricao,
-                        :status, NOW(), :usuarioUltimaAlteracaoId)";
+                        :status, NOW(), :usuarioUltimaAlteracaoId, :anoLetivoId)";
         
         $query = $this->db->prepare($sql);
         $query->bindParam(":pessoaId",$this->pessoaId);
@@ -130,6 +145,7 @@ class InscricaoCatequese {
         $query->bindParam(":dataInscricao",$this->dataInscricao);
         $query->bindParam(":status",$this->status);
         $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
+        $query->bindParam(":anoLetivoId", $this->anoLetivoId);
         $query->execute();
         $this->id = $this->db->lastInsertId();
         echo json_encode($this);
@@ -140,7 +156,7 @@ class InscricaoCatequese {
         $sql = "UPDATE InscricaoCatequese SET pessoaId=:pessoaId, etapaCatequeseId=:etapaCatequeseId, escolaId=:escolaId, etapaEscolaId=:etapaEscolaId, turmaId=:turmaId, 
                                               observacoes=:observacoes, situacaoInscricaoId=:situacaoInscricaoId, turnoId=:turnoId, situacaoDizimoId=:situacaoDizimoId, 
                                               comunidadeId=:comunidadeId, dataInscricao=:dataInscricao,
-                                              status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
+                                              status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId, anoLetivoId=:anoLetivoId
                 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
@@ -157,6 +173,7 @@ class InscricaoCatequese {
       $query->bindParam(":dataInscricao",$this->dataInscricao);
       $query->bindParam(":status",$this->status);
       $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
+      $query->bindParam(":anoLetivoId", $this->anoLetivoId);
       $query->execute();
       echo json_encode($this);
     }
