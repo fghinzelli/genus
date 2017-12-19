@@ -22,10 +22,6 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
         $http.get(serviceBase + 'turmas-catequese/' + $routeParams.turmaId)
         .success(function(turma) {
             $scope.turma = turma;
-            //$scope.turma.etapaCatequese = turma.etapaCatequese;
-            //$scope.turma.comunidade = turma.comunidade;
-            //$scope.turma.catequista = turma.catequista;
-            //$scope.turma.turno = turma.turno;
         })
         .error(function(erro) {
             console.log(erro);

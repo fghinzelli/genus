@@ -5779,3 +5779,10 @@ INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaI
 (4, 2, 3, 1, 2, NULL, 'abcde', 1, 2, 2, 1, '2017-11-07', 2, '2017-11-08 21:43:32', NULL, 1),
 (5, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 2, 1, '2017-11-07', 1, '2017-11-09 02:18:59', NULL, 1);
 
+
+
+INSERT INTO `TurmaCatequeseInscricao` (`id`, `inscricaoCatequeseId`, `turmaCatequeseId`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+VALUES 
+(NULL, '1', '1', '1', NULL, NULL),
+(NULL, '2', '1', '1', NULL, NULL),
+(NULL, '3', '1', '1', NULL, NULL);

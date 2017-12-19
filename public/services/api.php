@@ -51,6 +51,7 @@
 	require 'view/escola.php';
 	require 'view/turno.php';
 	require 'view/turmaCatequese.php';
+	require 'view/turmaCatequeseInscricao.php';
 	require 'view/inscricaoCatequese.php';
 	require 'view/situacaoInscricao.php';
 	require 'view/situacaoDizimo.php';
