@@ -121,6 +121,13 @@ CREATE TABLE IF NOT EXISTS EtapaCatequese (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS AnoLetivoCatequese (
+	id int(11) NOT NULL AUTO_INCREMENT,
+	descricao varchar(50) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS Turno (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	descricao varchar(50) NOT NULL,
@@ -183,7 +190,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id)
+	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
 	FOREIGN KEY (paroquiaSelecionada) REFERENCES Paroquia(id)
 );
 
@@ -240,11 +247,13 @@ CREATE TABLE IF NOT EXISTS TurmaCatequese (
 	usuarioUltimaAlteracaoId INT NULL,
 	horario varchar(30) NOT NULL,
 	comunidadeId INT NOT NULL,
+	anoLetivoId INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (catequistaId) REFERENCES Catequista(id),
 	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
 	FOREIGN KEY (comunidadeId) REFERENCES Comunidade(id),
-	FOREIGN KEY (turnoId) REFERENCES Turno(id)
+	FOREIGN KEY (turnoId) REFERENCES Turno(id),
+	FOREIGN KEY (anoLetivoId) REFERENCES AnoLetivoCatequese(id)
 );
 
 CREATE TABLE IF NOT EXISTS InscricaoCatequese (
@@ -263,6 +272,7 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
+	anoLetivoId INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
 	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
@@ -272,7 +282,8 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	FOREIGN KEY (situacaoInscricaoId) REFERENCES SituacaoInscricao(id),
 	FOREIGN KEY (turnoId) REFERENCES Turno(id),
 	FOREIGN KEY (escolaId) REFERENCES Escola(id),
-	FOREIGN KEY (turmaId) REFERENCES TurmaCatequese(id)
+	FOREIGN KEY (turmaId) REFERENCES TurmaCatequese(id),
+	FOREIGN KEY (anoLetivoId) REFERENCES AnoLetivoCatequese(id)
 );
 
 CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
@@ -285,8 +296,6 @@ CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
 	FOREIGN KEY (pessoaResponsavelId) REFERENCES Pessoa(id),
 	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id)
 );
-
-
 
 CREATE TABLE IF NOT EXISTS TurmaCatequeseInscricao (
 	id int(11) NOT NULL AUTO_INCREMENT,

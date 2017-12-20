@@ -23,11 +23,6 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
         .success(function(turma) {
             console.log(turma)
             $scope.turma = turma;
-            $scope.turma.diaSemana = turma.diaSemana;
-            //$scope.turma.etapaCatequese = turma.etapaCatequese;
-            //$scope.comunidade = turma.comunidade;
-            //$scope.turma.catequista = turma.catequista;
-            //$scope.turma.turno = turma.turno;
         })
         .error(function(erro) {
             console.log(erro);

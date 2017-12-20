@@ -14,6 +14,57 @@
             <div class="col-lg-12">
                 <form novalidade role="form" ng-submit="submeterForm()">
                     <div class="row" >
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Dados Pessoais
+                                </div>
+                                <div class="panel-body" ng-controller="PessoasListController">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group" ng-class="{ 'has-error' : formulario.pessoa.$invalid && !formulario.pessoa.$pristine && formulario.$submitted }">
+                                                <div class="input-group">
+                                                    
+                                                    <select name="pessoa" class="form-control" required
+                                                            ng-model="catequista.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
+                                                        <option value="">Selecione</option>
+                                                    </select>
+                                                    </select>
+                                                    <span class="input-group-btn">
+                                                        <a href="#/pessoas/new" class="btn btn-primary" type="button">
+                                                            Novo
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.pessoa.$error.required">
+                                                    Este campo é obrigatório
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>CPF</label>
+                                                <input type="cpf" class="form-control" name="cpf" ng-model="catequista.pessoa.cpf" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="email" class="form-control" name="email" ng-model="catequista.pessoa.email" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Telefone</label>
+                                                <input type="text" class="form-control" name="telefone1" ng-model="catequista.pessoa.telefone1" disabled>
+                                            </div>
+                                        </div>                      
+                                    </div>
+                                </div>
+                            </div> <!-- FIM PANNEL PESSOA -->
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group" ng-controller="EtapasCatequeseListController">
                                 <label>Etapa</label>
@@ -77,14 +128,14 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label>Data de Início</label>
-                                <input type="text" ui-mask="99/99/9999" model-view-value="true" placeholder="dd/mm/aaaa" class="form-control" ng-model="turma.dataInicio">
+                                <label>Data da Inscrição</label>
+                                <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="turma.dataInicio">
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label>Data de Início</label>
-                                <input type="text" ui-mask="99/99/9999" model-view-value="true" placeholder="dd/mm/aaaa" class="form-control" ng-model="turma.dataTermino">
+                                <label>Data de Término</label>
+                                <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="turma.dataTermino">
                             </div>
                         </div>
                     </div>

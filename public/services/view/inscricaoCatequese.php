@@ -42,7 +42,7 @@
 		$inscricao->loadData(null, $data['pessoaId'], $data['etapaCatequeseId'], $data['escolaId'], $data['etapaEscolaId'],
 							$data['turmaId'], $data['observacoes'], $data['situacaoInscricaoId'], $data['turnoId'], 
 							$data['situacaoDizimoId'], $data['comunidadeId'], $data['dataInscricao'],
-							$data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
+							$data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
 						  );
 		$result = $inscricao->addInscricaoCatequese();
 		return $response->write($result);
@@ -56,7 +56,7 @@
 		$inscricao->loadData($args['id'], $data['pessoaId'], $data['etapaCatequeseId'], $data['escolaId'], $data['etapaEscolaId'],
 							  $data['turmaId'], $data['observacoes'], $data['situacaoInscricaoId'], $data['turnoId'], 
 							  $data['situacaoDizimoId'], $data['comunidadeId'], $data['dataInscricao'],
-							  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
+							  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
 							);
 		$result = $inscricao->saveInscricaoCatequese();
 		return $response->write($result);

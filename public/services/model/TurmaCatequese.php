@@ -15,13 +15,14 @@ class TurmaCatequese {
     public $status;
     public $dataUltimaAlteracao;
     public $usuarioUltimaAlteracaoId;
+    public $anoLetivoId;
     function __construct($db) {
         $this->db = $db;
     }
 
     function loadData($id, $etapaCatequeseId, $comunidadeId, $catequistaId, $observacoes, 
                       $turnoId, $diaSemana, $horario, $dataInicio, $dataTermino,
-                      $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
+                      $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId, $anoLetivoId) {
         $this->id = $id;
 		$this->etapaCatequeseId = $etapaCatequeseId;
         $this->comunidadeId = $comunidadeId;
@@ -35,6 +36,7 @@ class TurmaCatequese {
         $this->status = $status;
         $this->dataUltimaAlteracao = $dataUltimaAlteracao;
         $this->usuarioUltimaAlteracaoId = $usuarioUltimaAlteracaoId;
+        $this->anoLetivoId = $anoLetivoId;
     } 
 
     function getTurmasCatequese() {
@@ -76,6 +78,12 @@ class TurmaCatequese {
             $queryt->bindParam("id",$turma->turnoId);
             $queryt->execute();
             $turma->turno =  $queryt->fetchObject();
+            // ANO LETIVO
+            $sqlt = "SELECT * FROM AnoLetivoCatequese WHERE id=:id";
+            $queryt = $this->db->prepare($sqlt);
+            $queryt->bindParam("id",$turma->anoLetivoId);
+            $queryt->execute();
+            $turma->anoLetivo =  $queryt->fetchObject();
 
             $turma->diaSemana = $semana[$turma->diaSemana];
         }
@@ -124,6 +132,12 @@ class TurmaCatequese {
       $queryt->bindParam("id", $turma->turnoId);
       $queryt->execute();
       $turma->turno =  $queryt->fetchObject();
+      // ANO LETIVO
+      $sqlt = "SELECT * FROM AnoLetivoCatequese WHERE id=:id";
+      $queryt = $this->db->prepare($sqlt);
+      $queryt->bindParam("id",$turma->anoLetivoId);
+      $queryt->execute();
+      $turma->anoLetivo =  $queryt->fetchObject();
 
       //$turma->diaSemana = $semana[$turma->diaSemana];
       
@@ -135,10 +149,10 @@ class TurmaCatequese {
     function addTurmaCatequese() {
         $sql = "INSERT INTO TurmaCatequese (`etapaCatequeseId`, `comunidadeId`, `catequistaId`, `observacoes`,
                                             `turnoId`, `diaSemana`, `horario`, `dataInicio`, `dataTermino`, 
-                                            `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
+                                            `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `anoLetivoId`) 
                 VALUES (:etapaCatequeseId, :comunidadeId, :catequistaId, :observacoes,
                         :turnoId, :diaSemana, :horario, :dataInicio, :dataTermino, 
-                        :status, NOW(), :usuarioUltimaAlteracaoId)";
+                        :status, NOW(), :usuarioUltimaAlteracaoId, :anoLetivoId)";
         
         $query = $this->db->prepare($sql);
         $query->bindParam(":etapaCatequeseId",$this->etapaCatequeseId);
@@ -152,6 +166,7 @@ class TurmaCatequese {
         $query->bindParam(":dataTermino",$this->dataTermino);
         $query->bindParam(":status",$this->status);
         $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
+        $query->bindParam(":anoLetivoId", $this->anoLetivoId);
         $query->execute();
         $this->id = $this->db->lastInsertId();
         echo json_encode($this);
@@ -161,7 +176,7 @@ class TurmaCatequese {
     {
         $sql = "UPDATE TurmaCatequese SET etapaCatequeseId=:etapaCatequeseId, comunidadeId=:comunidadeId, catequistaId=:catequistaId, observacoes=:observacoes,
                                           turnoId=:turnoId, diaSemana=:diaSemana, horario=:horario, dataInicio=:dataInicio, dataTermino=:dataTermino, 
-                                          status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
+                                          status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId, anoLetivoId=:anoLetivoId 
                 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
@@ -176,6 +191,7 @@ class TurmaCatequese {
       $query->bindParam(":dataTermino",$this->dataTermino);
       $query->bindParam(":status",$this->status);
       $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
+      $query->bindParam(":anoLetivoId", $this->anoLetivoId);
       $query->execute();
       echo json_encode($this);
     }

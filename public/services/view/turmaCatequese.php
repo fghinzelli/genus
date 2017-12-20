@@ -40,7 +40,7 @@
 		$turma = new TurmaCatequese(db::getInstance());
 		$turma->loadData(null, $data['etapaCatequeseId'], $data['comunidadeId'], $data['catequistaId'], $data['observacoes'],
 						 $data['turnoId'], $data['diaSemana'], $data['horario'], $data['dataInicio'], $data['dataTermino'], 
-						 $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
+						 $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
 						);
 		$result = $turma->addTurmaCatequese();
 		return $response->write($result);
@@ -53,7 +53,7 @@
 		$turma = new TurmaCatequese(db::getInstance());
 		$turma->loadData($args['id'], $data['etapaCatequeseId'], $data['comunidadeId'], $data['catequistaId'], $data['observacoes'],
 						 $data['turnoId'], $data['diaSemana'], $data['horario'], $data['dataInicio'], $data['dataTermino'], 
-						 $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
+						 $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
 						);
 		$result = $turma->saveTurmaCatequese();
 		return $response->write($result);
