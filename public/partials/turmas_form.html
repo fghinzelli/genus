@@ -18,7 +18,7 @@
                         <div class="form-group" ng-controller="EtapasCatequeseListController" ng-class="{ 'has-error' : formulario.etapaCatequese.$invalid && !formulario.etapaCatequese.$pristine && formulario.$submitted }">
                             <label>Etapa</label>
                             <select name="etapaCatequese" class="form-control" required 
-                                    ng-model="turma.etapaCatequese" ng-options="etapaCatequese as etapaCatequese.descricao for etapaCatequese in etapasCatequese track by etapaCatequese.id">
+                                    ng-model="turma.etapaCatequeseId" ng-options="etapaCatequese.id as etapaCatequese.descricao for etapaCatequese in etapasCatequese">
                                 <option value="">Selecione</option>
                             </select>
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.etapaCatequese.$error.required">
@@ -30,7 +30,7 @@
                         <div class="form-group" ng-controller="ComunidadesListController" ng-class="{ 'has-error' : formulario.comunidade.$invalid && !formulario.comunidade.$pristine && formulario.$submitted }">
                             <label>Comunidade</label>
                             <select name="comunidade" class="form-control" required
-                                    ng-model="turma.comunidade" ng-options="comunidade as comunidade.nome for comunidade in comunidades">
+                                    ng-model="turma.comunidadeId" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
                                 <option value="">Selecione</option>
                             </select>
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.comunidade.$error.required">
@@ -44,7 +44,7 @@
                         <div class="form-group" ng-controller="TurnosListController" ng-class="{ 'has-error' : formulario.turno.$invalid && !formulario.turno.$pristine && formulario.$submitted }">
                             <label>Turno</label>
                             <select name="turno" class="form-control" required
-                                    ng-model="turma.turno" ng-options="turno as turno.descricao for turno in turnos">
+                                    ng-model="turma.turnoId" ng-options="turno.id as turno.descricao for turno in turnos">
                                 <option value="">Selecione</option>
                             </select>
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.turno.$error.required">
@@ -86,7 +86,7 @@
                         <div class="form-group" ng-controller="CatequistasListController" ng-class="{ 'has-error' : formulario.catequista.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                             <label>Catequista</label>
                             <select name="catequista" class="form-control" required
-                                    ng-model="turma.catequista" ng-options="catequista as catequista.pessoa.nome for catequista in catequistas track by catequista.id">
+                                    ng-model="turma.catequistaId" ng-options="catequista.id as catequista.pessoa.nome for catequista in catequistas">
                                 <option value="">Selecione</option>
                             </select>
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.catequista.$error.required">

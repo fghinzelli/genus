@@ -21,11 +21,13 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
     if ($routeParams.turmaId) {
         $http.get(serviceBase + 'turmas-catequese/' + $routeParams.turmaId)
         .success(function(turma) {
+            console.log(turma)
             $scope.turma = turma;
-            $scope.turma.etapaCatequese = turma.etapaCatequese;
-            $scope.turma.comunidade = turma.comunidade;
-            $scope.turma.catequista = turma.catequista;
-            $scope.turma.turno = turma.turno;
+            $scope.turma.diaSemana = turma.diaSemana;
+            //$scope.turma.etapaCatequese = turma.etapaCatequese;
+            //$scope.comunidade = turma.comunidade;
+            //$scope.turma.catequista = turma.catequista;
+            //$scope.turma.turno = turma.turno;
         })
         .error(function(erro) {
             console.log(erro);
@@ -51,7 +53,7 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
                     $scope.mensagem = 'Não foi possível alterar os dados';
                 });
             } else {
-                $scope.turma.etapaCatequeseId = $scope.turma.etapaCatequese.id;
+                //$scope.turma.etapaCatequeseId = $scope.turma.etapaCatequese.id;
                 $scope.turma.catequistaId = $scope.turma.catequista.id;
                 $scope.turma.turnoId = $scope.turma.turno.id;
                 $scope.turma.comunidadeId = $scope.turma.comunidade.id;

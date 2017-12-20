@@ -125,7 +125,7 @@ class TurmaCatequese {
       $queryt->execute();
       $turma->turno =  $queryt->fetchObject();
 
-      $turma->diaSemana = $semana[$turma->diaSemana];
+      //$turma->diaSemana = $semana[$turma->diaSemana];
       
       echo json_encode($turma);
     }
