@@ -23,8 +23,11 @@ class TurmaCatequeseInscricao {
     } 
 
     function getTurmaCatequeseInscricoes($idTurma) {
-        $sql = "SELECT * FROM TurmaCatequeseInscricao";
-        $query = $this->db->query($sql);
+        $sql = "SELECT * FROM TurmaCatequeseInscricao WHERE turmaCatequeseId=:idTurma";
+        $query = $this->db->prepare($sql);
+        $query->bindParam("idTurma", $idTurma);
+        $query->execute();
+       // $query = $this->db->query($sql);
         $inscricoes = $query->fetchAll(PDO::FETCH_OBJ);
         foreach ($inscricoes as $inscricao) {
             // Busca de dados relacionados

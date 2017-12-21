@@ -28,7 +28,7 @@ angular.module('Home',)
 
     
         // LISTAGEM DE INSCRICOES
-        $http.get(serviceBase + 'turmas-catequese-inscricoes/turma/' + $scope.turma.id)
+        $http.get(serviceBase + 'turmas-catequese-inscricoes/turma/' +$routeParams.turmaId)
         .success(function(inscricoes) {
             $scope.inscricoes = inscricoes;
         })

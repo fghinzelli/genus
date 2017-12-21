@@ -1,4 +1,4 @@
-angular.module('Genus').controller('ModalDemoCtrl', function ($uibModal, $log, $document) {
+angular.module('Genus').controller('ModalCtrl', function ($uibModal, $log, $document) {
   var $ctrl = this;
   
   $ctrl.items = ['item1', 'item2', 'item3'];
