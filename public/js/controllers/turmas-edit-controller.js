@@ -17,6 +17,10 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
         $scope[value] = !$scope[value];
     };
 
+    $scope.incluirInscricao = function() {
+        console.log("Incluir inscrição");
+    }
+
     // GET BY ID
     if ($routeParams.turmaId) {
         $http.get(serviceBase + 'turmas-catequese/' + $routeParams.turmaId)
