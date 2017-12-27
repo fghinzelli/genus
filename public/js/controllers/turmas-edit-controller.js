@@ -21,12 +21,17 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
         console.log("Incluir inscrição");
     }
 
+    $scope.setEtapa = function() {
+        $rootScope.etapaCatequeseId = $scope.turma.etapaCatequeseId;
+    };
+
     // GET BY ID
     if ($routeParams.turmaId) {
         $http.get(serviceBase + 'turmas-catequese/' + $routeParams.turmaId)
         .success(function(turma) {
-            console.log(turma)
             $scope.turma = turma;
+            $rootScope.etapaCatequeseId = $scope.turma.etapaCatequeseId;
+            $rootScope.turmaId = $scope.turma.id;
         })
         .error(function(erro) {
             console.log(erro);

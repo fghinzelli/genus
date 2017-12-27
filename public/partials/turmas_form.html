@@ -18,7 +18,7 @@
                         <div class="form-group" ng-controller="EtapasCatequeseListController" ng-class="{ 'has-error' : formulario.etapaCatequese.$invalid && !formulario.etapaCatequese.$pristine && formulario.$submitted }">
                             <label>Etapa</label>
                             <select name="etapaCatequese" class="form-control" required 
-                                    ng-model="turma.etapaCatequeseId" ng-options="etapaCatequese.id as etapaCatequese.descricao for etapaCatequese in etapasCatequese">
+                                    ng-model="turma.etapaCatequeseId" ng-change="setEtapa()" ng-options="etapaCatequese.id as etapaCatequese.descricao for etapaCatequese in etapasCatequese">
                                 <option value="">Selecione</option>
                             </select>
                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.etapaCatequese.$error.required">
@@ -192,14 +192,15 @@
                                                     <h3 class="modal-title" id="modal-title">Incluir inscrição</h3>
                                                 </div>
                                                 <div class="modal-body" id="modal-body">
-                                                    
-                                                    <div class="form-group" ng-controller="InscricoesListController">
-                                                        <label>Inscrição</label>
-                                                        <select name="inscricao" class="form-control" 
-                                                                ng-model="inscricao" ng-options="inscricao as inscricao.pessoa.nome for inscricao in inscricoes">
-                                                            <option value="">Selecione</option>
-                                                        </select>
-                                                    </div>
+                                                    <form novalidate name="form-inscricao">
+                                                        <div class="form-group" ng-controller="TurmaCatequeseInscricaoListModalController">
+                                                            <label>Inscrição</label>
+                                                            <select name="inscricao" class="form-control" 
+                                                                    ng-model="turmaCatequeseInscricao.inscricao" ng-options="inscricao as inscricao.pessoa.nome for inscricao in inscricoes">
+                                                                <option value="">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-primary" type="button" ng-click="$ctrl.ok();">OK</button>

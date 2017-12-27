@@ -154,7 +154,7 @@ angular.module('Genus', [
             templateUrl: 'partials/inscricoes_form.html'
         })
 
-        .when('/catequese/inscricoes/edit/:turmaId', {
+        .when('/catequese/inscricoes/edit/:inscricaoId', {
             controller: 'InscricoesEditController',
             templateUrl: 'partials/inscricoes_form.html'
         })

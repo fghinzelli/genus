@@ -24,8 +24,9 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
 
     // GET BY ID
     if ($routeParams.inscricaoId) {
-        $http.get(serviceBase + 'inscricoes/' + $routeParams.inscricaoId)
+        $http.get(serviceBase + 'inscricoes-catequese/' + $routeParams.inscricaoId)
         .success(function(inscricao) {
+            console.log(inscricao);
             $scope.inscricao = inscricao;
             $scope.inscricao.pessoa = inscricao.pessoa;
         })
@@ -40,7 +41,7 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
         if ($scope.formulario.$valid) {
             $scope.inscricao.pessoaId = $scope.inscricao.pessoa.id;
             if ($routeParams.inscricaoId) {
-                $http.put(serviceBase + 'inscricoes/' + $scope.inscricao.id, $scope.inscricao)
+                $http.put(serviceBase + 'inscricoes-catequese/' + $scope.inscricao.id, $scope.inscricao)
                 .success(function() {
                     $rootScope.mensagem = 'Inscrição alterada com sucesso';
                     window.history.back();

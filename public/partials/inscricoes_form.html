@@ -26,7 +26,7 @@
                                                 <div class="input-group">
                                                     
                                                     <select name="pessoa" class="form-control" required
-                                                            ng-model="catequista.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
+                                                            ng-model="inscricao.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
                                                         <option value="">Selecione</option>
                                                     </select>
                                                     </select>
@@ -46,19 +46,19 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>CPF</label>
-                                                <input type="cpf" class="form-control" name="cpf" ng-model="catequista.pessoa.cpf" disabled>
+                                                <input type="cpf" class="form-control" name="cpf" ng-model="inscricao.pessoa.cpf" disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input type="email" class="form-control" name="email" ng-model="catequista.pessoa.email" disabled>
+                                                <input type="email" class="form-control" name="email" ng-model="inscricao.pessoa.email" disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" class="form-control" name="telefone1" ng-model="catequista.pessoa.telefone1" disabled>
+                                                <input type="text" class="form-control" name="telefone1" ng-model="inscricao.pessoa.telefone1" disabled>
                                             </div>
                                         </div>                      
                                     </div>
@@ -69,7 +69,7 @@
                             <div class="form-group" ng-controller="EtapasCatequeseListController">
                                 <label>Etapa</label>
                                 <select name="etapaCatequese" class="form-control" 
-                                        ng-model="turma.etapaCatequese" ng-options="etapaCatequese as etapaCatequese.descricao for etapaCatequese in etapasCatequese track by etapaCatequese.id">
+                                        ng-model="inscricao.etapaCatequeseId" ng-options="etapaCatequese as etapaCatequese.descricao for etapaCatequese in etapasCatequese">
                                     <option value="">Selecione</option>
                                 </select>
                             </div>
@@ -78,7 +78,7 @@
                             <div class="form-group" ng-controller="ComunidadesListController">
                                 <label>Comunidade</label>
                                 <select name="comunidade" class="form-control"
-                                        ng-model="turma.comunidade" ng-options="comunidade as comunidade.nome for comunidade in comunidades">
+                                        ng-model="inscricao.comunidadeId" ng-options="comunidade as comunidade.nome for comunidade in comunidades">
                                     <option value="">Selecione</option>
                                 </select>
                             </div>
@@ -87,17 +87,17 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group" ng-controller="TurnosListController">
-                                <label>Turno</label>
+                                <label>Turno Preferencial</label>
                                 <select name="turno" class="form-control"
-                                        ng-model="turma.turno" ng-options="turno as turno.descricao for turno in turnos">
+                                        ng-model="inscricao.turnoId" ng-options="turno as turno.descricao for turno in turnos">
                                     <option value="">Selecione</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label>Dia da Semana</label>
-                                <select name="diaSemana" class="form-control" ng-model="turma.diaSemana">
+                                <label>Dia da Semana Preferencial</label>
+                                <select name="diaSemana" class="form-control" ng-model="inscricao.diaSemana">
                                     <option value="">Selecione</option>
                                     <option value="0">Domingo</option>
                                     <option value="1">Segunda-Feira</option>
@@ -110,44 +110,64 @@
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="form-group" ng-controller="TurnosListController">
-                                <label>Horário</label>
-                                <input type="text" ng-model="turma.horario" class="form-control">
+                            <div class="form-group">
+                                <label>Data da Inscrição</label>
+                                <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="inscricao.dataInicio">
                             </div>
                         </div>
                     </div>
                     <div class="row" >
-                        <div class="col-md-6">
-                            <div class="form-group" ng-controller="CatequistasListController">
-                                <label>Catequista</label>
-                                <select name="catequista" class="form-control" 
-                                        ng-model="turma.catequista" ng-options="catequista as catequista.pessoa.nome for catequista in catequistas track by catequista.id">
+                        <div class="col-lg-4">
+                            <div class="form-group" ng-controller="EscolasListController">
+                                <label>Escola</label>
+                                <select name="escola" class="form-control"
+                                        ng-model="inscricao.escolaId" ng-options="escola as escola.nome for escola in escolas">
                                     <option value="">Selecione</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label>Data da Inscrição</label>
-                                <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="turma.dataInicio">
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>Data de Término</label>
-                                <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="turma.dataTermino">
+                                <label>Etapa Escolar</label>
+                                <select name="etapaEscola" class="form-control" ng-model="inscricao.etapaEscola">
+                                    <option value="">Selecione</option>
+                                    <option value="1">Primeiro Ano</option>
+                                    <option value="2">Segundo Ano</option>
+                                    <option value="3">Terceiro Ano</option>
+                                    <option value="4">Quarto Ano</option>
+                                    <option value="5">Quinto Ano</option>
+                                    <option value="6">Sexto Ano</option>
+                                    <option value="7">Sétimo Ano</option>
+                                    <option value="8">Oitavo Ano</option>
+                                    <option value="9">Nono Ano</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-2">
-                            <div class="form-group">
+                            <div class="form-group" ng-controller="AnosLetivosCatequeseListController" ng-class="{ 'has-error' : formulario.anoLetivo.$invalid && !formulario.anoLetivo.$pristine && formulario.$submitted }">
+                                <label>Ano Letivo</label>
+                                <select name="anoLetivo" class="form-control" required
+                                        ng-model="inscricao.anoLetivoId" ng-options="anoLetivo.id as anoLetivo.descricao for anoLetivo in anosLetivos">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.anoLetivo.$error.required">
+                                    Este campo é obrigatório
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group" ng-class="{ 'has-error' : formulario.status.$invalid && !formulario.status.$pristine && formulario.$submitted }">
                                 <label>Status</label>
-                                <select name="status" class="form-control" ng-model="turma.status">
+                                <select name="status" class="form-control" ng-model="inscricao.status" required>
                                     <option value="">Selecione</option>
                                     <option value="1">Ativo</option>
                                     <option value="0">Desativado</option>
                                 </select>
+                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.status.$error.required">
+                                    Este campo é obrigatório
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -155,7 +175,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Observações</label>
-                                <textarea type="text" class="form-control" rows="5" name="observacoes" ng-model="turma.observacoes"></textarea>
+                                <textarea type="text" class="form-control" rows="5" name="observacoes" ng-model="inscricao.observacoes"></textarea>
                             </div>
                         </div>
                     </div>
@@ -174,7 +194,7 @@
                             <button type="submit" class="btn btn-primary">
                                 Salvar
                             </button>
-                            <a href="#/catequese/turmas" class="btn btn-primary">Voltar</a>
+                            <a href="#/catequese/inscricoes-catequese" class="btn btn-primary">Voltar</a>
                         </div>
                     </div>  
                 </form>

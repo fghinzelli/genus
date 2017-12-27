@@ -16,6 +16,20 @@
 		}
 	})->add($middleAuthorization);
 
+	// SELECT ALL BY IDETAPA
+	$app->get('/inscricoes-catequese/etapa/{idEtapa}', function($request, $response, $args) {
+		$inscricao = new InscricaoCatequese(db::getInstance());
+		$result = $inscricao->getInscricoesCatequeseByEtapa($args['idEtapa']);
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
 
 	// SELECT BY id
 	$app->get('/inscricoes-catequese/{id}', function($request, $response, $args) {
@@ -32,6 +46,7 @@
 		}
 	})->add($middleAuthorization);
 
+	
 
 	// INSERT
 	$app->post('/inscricoes-catequese', function($request, $response, $args) {

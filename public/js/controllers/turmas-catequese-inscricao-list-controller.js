@@ -3,7 +3,7 @@
 angular.module('Home',)
 .controller('TurmaCatequeseInscricaoListController',
     ['$scope', '$rootScope', '$http', '$cookieStore', '$routeParams',
-    function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
+    function ($scope, $rootScope, $http, $cookieStore, $routeParams) {  
         
         var serviceBase = 'services/';
         var globals = $cookieStore.get('globals');
@@ -50,4 +50,24 @@ angular.module('Home',)
                 $scope.mensagem = 'Não foi possível apagar o registro';
             });
         };
+    }])
+    .controller('TurmaCatequeseInscricaoListModalController',
+        ['$scope', '$rootScope', '$http', '$cookieStore', '$routeParams',
+        function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
+            
+            var serviceBase = 'services/';
+            var globals = $cookieStore.get('globals');
+            $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
+
+            var etapaCatequeseId = $rootScope.etapaCatequeseId;
+
+            // LISTAGEM DE INSCRICOES DA ETAPA 
+            $http.get(serviceBase + 'inscricoes-catequese/etapa/' + etapaCatequeseId)
+            .success(function(inscricoes) {
+                $scope.inscricoes = inscricoes;
+                //console.log(inscricoes);
+            })
+            .error(function(erro) {
+                console.log(erro)
+            });
     }]);

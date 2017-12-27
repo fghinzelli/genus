@@ -1,9 +1,10 @@
-angular.module('Genus').controller('ModalInscricoesCtrl', function ($uibModal, $log, $document) {
+angular.module('Genus').controller('ModalInscricoesCtrl', function ($rootScope, $http, $uibModal, $log, $document) {
   var $ctrl = this;
   
   //$ctrl.items = ['item1', 'item2', 'item3'];
 
   $ctrl.animationsEnabled = true;
+  $ctrl.turmaCatequeseInscricao = {}
 
   $ctrl.open = function (size, parentSelector) {
     var parentElem = parentSelector ? 
@@ -30,11 +31,25 @@ angular.module('Genus').controller('ModalInscricoesCtrl', function ($uibModal, $
     // Retorno
     modalInstance.result.then(function () {
       //$ctrl.selected = selectedItem;
-      $scope.inscricao = inscricao;
-      $log.info('OK');
+      console.log($ctrl);
+      /*
+      $http({method: "POST",
+        url: serviceBase + 'turmas-catequese-inscricoes', 
+        data: $scope.turmaCatequeseInscricao,
+        headers: {'Content-Type': 'application/json'}
+      })
+      .success(function() {
+        $scope.turmaCatequeseInscricao = {};
+      })
+      .error(function(erro) { 
+        console.log(erro);
+      });
+      //$log.info('OK');
     }, function () {
-      $log.info('CANCELAR');
+      //$log.info('CANCELAR');
+      */
     });
+    
   };
 
   

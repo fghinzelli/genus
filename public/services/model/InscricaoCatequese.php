@@ -120,6 +120,80 @@ class InscricaoCatequese {
       echo json_encode($inscricao);
     }
 
+    function getInscricoesCatequeseByEtapa($idEtapaCatequese) {
+        $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id WHERE I.etapaCatequeseId=:idEtapaCatequese ORDER BY P.nome;";
+        
+        $query = $this->db->prepare($sql);
+        $query->bindParam("idEtapaCatequese", $idEtapaCatequese);
+        $query->execute();
+        $inscricoes = $query->fetchAll(PDO::FETCH_OBJ);
+        //$query = $this->db->query($sql);
+        //$inscricoes = $query->fetchAll(PDO::FETCH_OBJ);
+        foreach ($inscricoes as $inscricao) {
+            // Busca de dados relacionados
+            // PESSOA
+            $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
+            $queryp = $this->db->prepare($sqlp);
+            $queryp->bindParam("id",$inscricao->pessoaId);
+            $queryp->execute();
+            $inscricao->pessoa =  $queryp->fetchObject();
+            // COMUNIDADE
+            $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
+            $queryc = $this->db->prepare($sqlc);
+            $queryc->bindParam("id",$inscricao->comunidadeId);
+            $queryc->execute();
+            $inscricao->comunidade =  $queryc->fetchObject();
+            // ETAPA CATEQUESE
+            $sqle = "SELECT * FROM EtapaCatequese WHERE id=:id";
+            $querye = $this->db->prepare($sqle);
+            $querye->bindParam("id",$inscricao->etapaCatequeseId);
+            $querye->execute();
+            $inscricao->etapaCatequese =  $querye->fetchObject();
+            // ANO LETIVO
+            $sqlt = "SELECT * FROM AnoLetivoCatequese WHERE id=:id";
+            $queryt = $this->db->prepare($sqlt);
+            $queryt->bindParam("id",$inscricao->anoLetivoId);
+            $queryt->execute();
+            $inscricao->anoLetivo =  $queryt->fetchObject();
+        }
+        echo json_encode($inscricoes);
+    }
+
+    /*
+    function getTurmaCatequeseInscricao($id) {
+        $sql = "SELECT * FROM TurmaCatequeseInscricao WHERE id=:id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam("id", $id);
+        $query->execute();
+        $inscricao = $query->fetchObject();
+        
+        // Busca de dados relacionados
+        //TURMA 
+        $sqlx = "SELECT * FROM TurmaCatequese WHERE id=:id";
+        $queryx = $this->db->prepare($sqlx);
+        $queryx->bindParam("id", $inscricao->turmaCatequeseId);
+        $queryx->execute();
+        $inscricao->turmaCatequese =  $queryx->fetchObject();
+        //Inscricao 
+        $sqlx = "SELECT * FROM InscricaoCatequese WHERE id=:id";
+        $queryx = $this->db->prepare($sqlx);
+        $queryx->bindParam("id", $inscricao->inscricaoCatequeseId);
+        $queryx->execute();
+        $inscricao->inscricaoCatequese =  $queryx->fetchObject();
+        // Inscricao pessoa
+        $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
+        $queryp = $this->db->prepare($sqlp);
+        $queryp->bindParam("id", $inscricao->inscricaoCatequese->pessoaId);
+        $queryp->execute();
+        $inscricao->inscricaoCatequese->pessoa =  $queryp->fetchObject();
+        
+        echo json_encode($inscricao);
+    }
+
+    */
+
+
+
 
     function addInscricaoCatequese() {
         $sql = "INSERT INTO InscricaoCatequese (`pessoaId`, `etapaCatequeseId`, `escolaId`, `etapaEscolaId`, `turmaId`, 
