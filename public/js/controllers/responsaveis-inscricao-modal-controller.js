@@ -4,7 +4,7 @@ angular.module('Genus').controller('ModalResponsaveisCtrl', function ($rootScope
   //$ctrl.items = ['item1', 'item2', 'item3'];
 
   $ctrl.animationsEnabled = true;
-  $ctrl.turmaCatequeseInscricao = {}
+  $ctrl.ResponsavelInscricao = {}
 
   $ctrl.open = function (size, parentSelector) {
     var parentElem = parentSelector ? 
@@ -29,9 +29,9 @@ angular.module('Genus').controller('ModalResponsaveisCtrl', function ($rootScope
     });
 
     // Retorno
-    modalInstance.result.then(function () {
+    modalInstance.result.then(function (response) {
       //$ctrl.selected = selectedItem;
-      console.log($ctrl);
+      console.log(response);
       /*
       $http({method: "POST",
         url: serviceBase + 'turmas-catequese-inscricoes', 

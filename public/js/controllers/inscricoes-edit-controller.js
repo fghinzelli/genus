@@ -2,8 +2,8 @@
 
 angular.module('Home',)
 .controller('InscricoesEditController',
-['$scope', '$http', '$cookieStore', '$routeParams', '$rootScope',
-function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
+['$scope', '$http', '$cookieStore', '$routeParams', '$rootScope', '$uibModal',
+function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
     
     var serviceBase = 'services/';
     var globals = $cookieStore.get('globals');
@@ -68,6 +68,37 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
             }
         }
     }
+
+    var modalInstance = '';
+    $scope.incluirResponsavel = function (task) {
+        modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'partials/responsavel_form.html',
+            controller: 'ResponsaveisCtrl',
+            scope: $scope,
+            size: 'lg',
+            backdrop: 'static',
+            // Parametros enviados para o modal controller       
+            resolve: {
+                responsavel: function () {
+                    //return $scope.responsavel;
+                    return 'xxxxxx abacaxi xxxxxx';
+                }
+            }
+        });
+    }
+
+    $scope.open = function (size) {        
+        
+        modalInstance.result.then(function (response) {
+            debugger;            
+            $scope.currentResponsavel = response;
+            //$state.go('customer.detail', { 'customerId': response.CustomerId });            
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+    
 
 }]);
     

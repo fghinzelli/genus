@@ -1,0 +1,45 @@
+<div class="modal-content">
+        <form name="form" >
+            <div class="modal-header">
+                <button type="button" 
+                        class="close" 
+                        ng-click="cancel()"
+                        data-dismiss="modal" 
+                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Incluir Responsável</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-controller="PessoasListController">
+                    <label>Responsável</label>
+                    <select name="pessoa" class="form-control" required
+                            ng-model="responsavel.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="form-group" ng-controller="ParentescoListController">
+                    <label>Parentesco</label>
+                    <select name="parentesco" class="form-control" required
+                            ng-model="responsavel.parentesco" ng-options="parentesco.id as parentesco.descricao for parentesco in parentescos">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        ng-click="save()"
+                        ng-disabled="form.$invalid"
+                        class="btn btn-success">
+                    Salvar
+                </button>
+                <button type="button"
+                        ng-click="cancel()"
+                        class="btn btn-danger"
+                        data-dismiss="modal">
+                    Cancelar
+                </button>
+    
+                <div class="alert-danger" ng-if="error.length > 0 " ng-bind="error"></div>
+    
+            </div>
+        </form>
+    </div>

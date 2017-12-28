@@ -190,44 +190,22 @@
                                     </div>
                                 </div>
                                 <div class="panel-footer">
+                                    
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <div ng-controller="ModalResponsaveisCtrl as $ctrl" class="modal-demo">
-                                                <script type="text/ng-template" id="myModalResponsaveisContent.html">
-                                                    <div class="modal-header">
-                                                        <h3 class="modal-title" id="modal-title">Incluir responsável</h3>
-                                                    </div>
-                                                    <div class="modal-body" id="modal-body">
-                                                        <form novalidate name="form-responsavel">
-                                                            <div class="form-group" ng-controller="PessoasListController">
-                                                                <label>Responsável</label>
-                                                                <select name="pessoa" class="form-control" required
-                                                                        ng-model="responsavel.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
-                                                                    <option value="">Selecione</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group" ng-controller="ParentescoListController">
-                                                                <label>Parentesco</label>
-                                                                <select name="parentesco" class="form-control" required
-                                                                        ng-model="responsavel.parentesco" ng-options="parentesco.id as parentesco.descricao for parentesco in parentescos">
-                                                                    <option value="">Selecione</option>
-                                                                </select>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok();">OK</button>
-                                                        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-                                                    </div>
-                                                </script>                                         
-                                                <button type="button" class="btn btn-sm btn-primary pull-right" ng-click="$ctrl.open('lg')">Incluir</button>
-                                            </div>
+                                            <button ng-click="incluirResponsavel()" 
+                                                    type="button"
+                                                    class="btn btn-sm btn-primary pull-right">
+                                                Incluir
+                                            </button>
                                         </div>
                                     </div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /.row -->
+                    </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div ng-show="mensagem.length" class="alert alert-warning alert-custom">

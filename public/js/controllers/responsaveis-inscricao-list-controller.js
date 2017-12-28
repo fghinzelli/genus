@@ -15,7 +15,7 @@ angular.module('Home',)
         $http.get(serviceBase + 'responsaveis/inscricao/' +$routeParams.inscricaoId)
         .success(function(responsaveis) {
             $scope.responsaveis = responsaveis;
-            console.log(responsaveis);
+            //console.log(responsaveis);
         })
         .error(function(erro) {
             console.log(erro)
