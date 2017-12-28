@@ -26,7 +26,7 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope) {
     if ($routeParams.inscricaoId) {
         $http.get(serviceBase + 'inscricoes-catequese/' + $routeParams.inscricaoId)
         .success(function(inscricao) {
-            console.log(inscricao);
+            //console.log(inscricao);
             $scope.inscricao = inscricao;
             $scope.inscricao.pessoa = inscricao.pessoa;
         })

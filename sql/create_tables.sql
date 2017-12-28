@@ -135,6 +135,13 @@ CREATE TABLE IF NOT EXISTS Turno (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS Parentesco (
+	id int(11) NOT NULL AUTO_INCREMENT,
+	descricao varchar(50) NOT NULL,
+	status int(1) NOT NULL,
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS Pessoa (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	nome varchar(70) NOT NULL,
@@ -265,7 +272,6 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	etapaEscolaId INT NULL,
 	observacoes varchar(100) NULL,
 	situacaoInscricaoId INT NULL,
-	turnoId INT NULL,
 	situacaoDizimoId INT NULL,
 	comunidadeId INT NULL,
 	dataInscricao date,
@@ -280,7 +286,6 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	FOREIGN KEY (comunidadeId) REFERENCES Comunidade(id),
 	FOREIGN KEY (situacaoDizimoId) REFERENCES SituacaoDizimo(id),
 	FOREIGN KEY (situacaoInscricaoId) REFERENCES SituacaoInscricao(id),
-	FOREIGN KEY (turnoId) REFERENCES Turno(id),
 	FOREIGN KEY (escolaId) REFERENCES Escola(id),
 	FOREIGN KEY (turmaId) REFERENCES TurmaCatequese(id),
 	FOREIGN KEY (anoLetivoId) REFERENCES AnoLetivoCatequese(id)
@@ -291,10 +296,14 @@ CREATE TABLE IF NOT EXISTS ResponsavelInscricao (
 	pessoaResponsavelId int(10) NOT NULL,
 	inscricaoCatequeseId int(10) NOT NULL,
 	observacoes varchar(100) NOT NULL,
-	relacao INT(10) NOT NULL, 
+	parentescoId INT(10) NOT NULL,
+	status int(1) NOT NULL,
+	dataUltimaAlteracao datetime,
+	usuarioUltimaAlteracaoId INT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaResponsavelId) REFERENCES Pessoa(id),
-	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id)
+	FOREIGN KEY (inscricaoCatequeseId) REFERENCES InscricaoCatequese(id),
+	FOREIGN KEY (parentescoId) REFERENCES Parentesco(id)
 );
 
 CREATE TABLE IF NOT EXISTS TurmaCatequeseInscricao (

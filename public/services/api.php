@@ -49,7 +49,10 @@
 	require 'view/anoLetivoCatequese.php';
 	require 'view/etapaCatequese.php';
 	require 'view/escola.php';
+	require 'view/etapaEscola.php';
 	require 'view/turno.php';
+	require 'view/parentesco.php';
+	require 'view/responsavelInscricao.php';
 	require 'view/turmaCatequese.php';
 	require 'view/turmaCatequeseInscricao.php';
 	require 'view/inscricaoCatequese.php';

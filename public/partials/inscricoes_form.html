@@ -5,14 +5,14 @@
                 <ol class="breadcrumb">
                         <li><a href="#/"><i class="fa fa-home"></i> Início</a></li>
                         <li><a href="#/catequese"><i class="fa fa-users"></i> Catequese</a></li>
-                        <li><a href="#/catequese/inscricoes"><i class="fa fa-user"></i> Inscrição</a></li>
+                        <li><a href="#/catequese/inscricoes"><i class="fa fa-user"></i> Inscrições</a></li>
                         <li class="active"> Editar</li>
                 </ol>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <form novalidade role="form" ng-submit="submeterForm()">
+                <form novalidade name="formulario" role="form" ng-submit="submeterForm()">
                     <div class="row" >
                         <div class="col-md-12">
                             <div class="panel panel-default">
@@ -28,7 +28,6 @@
                                                     <select name="pessoa" class="form-control" required
                                                             ng-model="inscricao.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
                                                         <option value="">Selecione</option>
-                                                    </select>
                                                     </select>
                                                     <span class="input-group-btn">
                                                         <a href="#/pessoas/new" class="btn btn-primary" type="button">
@@ -69,7 +68,7 @@
                             <div class="form-group" ng-controller="EtapasCatequeseListController">
                                 <label>Etapa</label>
                                 <select name="etapaCatequese" class="form-control" 
-                                        ng-model="inscricao.etapaCatequeseId" ng-options="etapaCatequese as etapaCatequese.descricao for etapaCatequese in etapasCatequese">
+                                        ng-model="inscricao.etapaCatequeseId" ng-options="etapaCatequese.id as etapaCatequese.descricao for etapaCatequese in etapasCatequese">
                                     <option value="">Selecione</option>
                                 </select>
                             </div>
@@ -78,41 +77,9 @@
                             <div class="form-group" ng-controller="ComunidadesListController">
                                 <label>Comunidade</label>
                                 <select name="comunidade" class="form-control"
-                                        ng-model="inscricao.comunidadeId" ng-options="comunidade as comunidade.nome for comunidade in comunidades">
+                                        ng-model="inscricao.comunidadeId" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
                                     <option value="">Selecione</option>
                                 </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group" ng-controller="TurnosListController">
-                                <label>Turno Preferencial</label>
-                                <select name="turno" class="form-control"
-                                        ng-model="inscricao.turnoId" ng-options="turno as turno.descricao for turno in turnos">
-                                    <option value="">Selecione</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Dia da Semana Preferencial</label>
-                                <select name="diaSemana" class="form-control" ng-model="inscricao.diaSemana">
-                                    <option value="">Selecione</option>
-                                    <option value="0">Domingo</option>
-                                    <option value="1">Segunda-Feira</option>
-                                    <option value="2">Terça-Feira</option>
-                                    <option value="3">Quarta-Feira</option>
-                                    <option value="4">Quinta-Feira</option>
-                                    <option value="5">Sexta-Feira</option>
-                                    <option value="6">Sábado</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Data da Inscrição</label>
-                                <input type="text" ui-mask="99/99/9999" model-view-value="true" class="form-control" ng-model="inscricao.dataInicio">
                             </div>
                         </div>
                     </div>
@@ -121,30 +88,19 @@
                             <div class="form-group" ng-controller="EscolasListController">
                                 <label>Escola</label>
                                 <select name="escola" class="form-control"
-                                        ng-model="inscricao.escolaId" ng-options="escola as escola.nome for escola in escolas">
+                                        ng-model="inscricao.escolaId" ng-options="escola.id as escola.nome for escola in escolas">
                                     <option value="">Selecione</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="form-group">
+                            <div class="form-group" ng-controller="EtapasEscolaListController">
                                 <label>Etapa Escolar</label>
-                                <select name="etapaEscola" class="form-control" ng-model="inscricao.etapaEscola">
+                                <select name="etapaEscola" class="form-control" ng-model="inscricao.etapaEscolaId" ng-options="etapaEscola.id as etapaEscola.descricao for etapaEscola in etapasEscola">
                                     <option value="">Selecione</option>
-                                    <option value="1">Primeiro Ano</option>
-                                    <option value="2">Segundo Ano</option>
-                                    <option value="3">Terceiro Ano</option>
-                                    <option value="4">Quarto Ano</option>
-                                    <option value="5">Quinto Ano</option>
-                                    <option value="6">Sexto Ano</option>
-                                    <option value="7">Sétimo Ano</option>
-                                    <option value="8">Oitavo Ano</option>
-                                    <option value="9">Nono Ano</option>
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-2">
                             <div class="form-group" ng-controller="AnosLetivosCatequeseListController" ng-class="{ 'has-error' : formulario.anoLetivo.$invalid && !formulario.anoLetivo.$pristine && formulario.$submitted }">
                                 <label>Ano Letivo</label>
@@ -155,6 +111,28 @@
                                 <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.anoLetivo.$error.required">
                                     Este campo é obrigatório
                                 </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group" ng-class="{ 'has-error' : formulario.dataInscricao.$invalid && !formulario.dataInscricao.$pristine && formulario.$submitted }">
+                                <label>Data da Inscrição</label>
+                                <input type="text" name="dataInscricao" ui-mask="99/99/9999" model-view-value="true" 
+                                        class="form-control" ng-model="inscricao.dataInscricao" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
+                                <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataInscricao.$error.pattern">
+                                    A data informada é inválida
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group" ng-controller="SituacoesInscricaoListController">
+                                <label>Situação da Inscrição</label>
+                                <select name="situacaoInscricao" class="form-control" ng-model="inscricao.situacaoInscricaoId"
+                                        ng-options="situacaoInscricao.id as situacaoInscricao.descricao for situacaoInscricao in situacoesInscricao">
+                                    <option value="">Selecione</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -181,6 +159,80 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5>Responsáveis</h5>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive" ng-controller="ResponsaveisInscricaoListController">
+                                                <table class="table table-hover table-striped tablesorter">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nome <i class="fa fa-sort"></i></th>
+                                                            <th>Relação <i class="fa fa-sort"></i></th>
+                                                            <th>Ações <i class="fa fa-sort"></i></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="responsavel in responsaveis | filter: filtro">
+                                                            <td>{{responsavel.pessoa.nome}}</td>
+                                                            <td>{{responsavel.parentesco.descricao }}</td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-default" ng-click="remover(inscricao)">Remover</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                    <!--
+                                        <div class="col-lg-12">
+                                            <div ng-controller="ModalResponsaveisCtrl as $ctrl" class="modal-demo">
+                                                <script type="text/ng-template" id="myModalResponsaveisContent.html">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="modal-title">Incluir responsável</h3>
+                                                    </div>
+                                                    <div class="modal-body" id="modal-body">
+                                                        <form novalidate name="form-responsavel">
+                                                            <div class="form-group" ng-controller="PessoasListController">
+                                                                <label>Responsável</label>
+                                                                <select name="pessoa" class="form-control" required
+                                                                        ng-model="responsavel.pessoa" ng-options="pessoa as pessoa.nome for pessoa in pessoas track by pessoa.id">
+                                                                    <option value="">Selecione</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group" ng-controller="ParentescoListController">
+                                                                <label>Parentesco</label>
+                                                                <select name="parentesco" class="form-control" required
+                                                                        ng-model="responsavel.parentesco" ng-options="parentesco.id as parentesco.description for parentesco in parentescos">
+                                                                    <option value="">Selecione</option>
+                                                                </select>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok();">OK</button>
+                                                        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                                                    </div>
+                                                </script>
+                                            
+                                                <button type="button" class="btn btn-sm btn-primary pull-right" ng-click="$ctrl.open('lg')">Incluir</button>
+                                            </div>
+                                        </div>
+                                    -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
                             <div ng-show="mensagem.length" class="alert alert-warning alert-custom">
                                 <button type="button" class="close" data-ng-click="switchBool('mensagem')" >
                                     <span aria-hidden="true">&times;</span>
@@ -194,7 +246,7 @@
                             <button type="submit" class="btn btn-primary">
                                 Salvar
                             </button>
-                            <a href="#/catequese/inscricoes-catequese" class="btn btn-primary">Voltar</a>
+                            <a href="#/catequese/inscricoes" class="btn btn-primary">Voltar</a>
                         </div>
                     </div>  
                 </form>

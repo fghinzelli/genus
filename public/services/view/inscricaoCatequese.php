@@ -55,7 +55,7 @@
 		//return $data;
 		$inscricao = new InscricaoCatequese(db::getInstance());
 		$inscricao->loadData(null, $data['pessoaId'], $data['etapaCatequeseId'], $data['escolaId'], $data['etapaEscolaId'],
-							$data['turmaId'], $data['observacoes'], $data['situacaoInscricaoId'], $data['turnoId'], 
+							$data['turmaId'], $data['observacoes'], $data['situacaoInscricaoId'], 
 							$data['situacaoDizimoId'], $data['comunidadeId'], $data['dataInscricao'],
 							$data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
 						  );
@@ -69,7 +69,7 @@
 		$data = $request->getParsedBody();
 		$inscricao = new InscricaoCatequese(db::getInstance());
 		$inscricao->loadData($args['id'], $data['pessoaId'], $data['etapaCatequeseId'], $data['escolaId'], $data['etapaEscolaId'],
-							  $data['turmaId'], $data['observacoes'], $data['situacaoInscricaoId'], $data['turnoId'], 
+							  $data['turmaId'], $data['observacoes'], $data['situacaoInscricaoId'], 
 							  $data['situacaoDizimoId'], $data['comunidadeId'], $data['dataInscricao'],
 							  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
 							);

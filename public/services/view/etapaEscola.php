@@ -1,10 +1,10 @@
 <?php
-	require 'model/SituacaoInscricao.php';
+    require 'model/EtapaEscola.php';
 
-    // SELECT ALL
-	$app->get('/situacoes-inscricao', function($request, $response, $args) {
-		$situacao = new SituacaoInscricao(db::getInstance());
-		$result = $situacao->getSituacoesInscricao();
+	// SELECT ALL
+	$app->get('/etapas-escola', function($request, $response, $args) {
+		$etapaEscola = new EtapaEscola(db::getInstance());
+		$result = $etapaEscola->getEtapasEscola();
 		if($result === false) {
 			return $response->withStatus(200)
 				->withHeader('Content-Type', 'application/json;charset=utf-8')

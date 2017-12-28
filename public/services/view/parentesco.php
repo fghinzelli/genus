@@ -1,10 +1,10 @@
 <?php
-	require 'model/SituacaoInscricao.php';
+    require 'model/Parentesco.php';
 
-    // SELECT ALL
-	$app->get('/situacoes-inscricao', function($request, $response, $args) {
-		$situacao = new SituacaoInscricao(db::getInstance());
-		$result = $situacao->getSituacoesInscricao();
+	// SELECT ALL
+	$app->get('/parentescos', function($request, $response, $args) {
+		$parentesco = new Parentesco(db::getInstance());
+		$result = $parentesco->getParentescos();
 		if($result === false) {
 			return $response->withStatus(200)
 				->withHeader('Content-Type', 'application/json;charset=utf-8')
