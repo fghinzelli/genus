@@ -17,9 +17,9 @@
 	})->add($middleAuthorization);
 
 	// SELECT ALL BY IDETAPA
-	$app->get('/inscricoes-catequese/etapa/{idEtapa}', function($request, $response, $args) {
+	$app->get('/inscricoes-catequese/etapa/{idEtapa}/{idAnoLetivo}', function($request, $response, $args) {
 		$inscricao = new InscricaoCatequese(db::getInstance());
-		$result = $inscricao->getInscricoesCatequeseByEtapa($args['idEtapa']);
+		$result = $inscricao->getInscricoesCatequeseByEtapa($args['idEtapa'], $args['idAnoLetivo']);
 		if($result === false) {
 			return $response->withStatus(200)
 				->withHeader('Content-Type', 'application/json;charset=utf-8')
@@ -55,8 +55,8 @@
 		//return $data;
 		$inscricao = new InscricaoCatequese(db::getInstance());
 		$inscricao->loadData(null, $data['pessoaId'], $data['etapaCatequeseId'], $data['escolaId'], $data['etapaEscolaId'],
-							$data['turmaId'], $data['observacoes'], $data['situacaoInscricaoId'], 
-							$data['situacaoDizimoId'], $data['comunidadeId'], $data['dataInscricao'],
+							$data['observacoes'], $data['situacaoInscricaoId'], 
+							$data['comunidadeId'], $data['dataInscricao'],
 							$data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
 						  );
 		$result = $inscricao->addInscricaoCatequese();
@@ -69,8 +69,8 @@
 		$data = $request->getParsedBody();
 		$inscricao = new InscricaoCatequese(db::getInstance());
 		$inscricao->loadData($args['id'], $data['pessoaId'], $data['etapaCatequeseId'], $data['escolaId'], $data['etapaEscolaId'],
-							  $data['turmaId'], $data['observacoes'], $data['situacaoInscricaoId'], 
-							  $data['situacaoDizimoId'], $data['comunidadeId'], $data['dataInscricao'],
+							  $data['observacoes'], $data['situacaoInscricaoId'], 
+							  $data['comunidadeId'], $data['dataInscricao'],
 							  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
 							);
 		$result = $inscricao->saveInscricaoCatequese();

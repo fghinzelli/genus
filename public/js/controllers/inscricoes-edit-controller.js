@@ -10,6 +10,10 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
     
     $scope.inscricao = {};
+    $scope.inscricao.dataUltimaAlteracao = null;
+    $scope.inscricao.usuarioUltimaAlteracaoId = null;
+    $scope.inscricao.responsaveis = [];
+    
     if ($rootScope.pessoa) {
         $scope.inscricao.pessoa = $rootScope.pessoa;
         $rootScope.pessoa = {};
@@ -52,14 +56,18 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
                 });
             } else {
                 $http({method: "POST",
-                       url: serviceBase + 'inscrições', 
+                       url: serviceBase + 'inscricoes-catequese', 
                        data: $scope.inscricao,
                        headers: {'Content-Type': 'application/json'}
                       })
-                .success(function() {
-                    $scope.inscricao = {};
-                    $rootScope.mensagem = 'Inscrição cadastrado(a) com sucesso';
-                    window.history.back();
+                .success(function(data) {
+                    //$scope.inscricao = {};
+                    //$rootScope.mensagem = 'Inscrição cadastrado(a) com sucesso';
+                    $scope.inscricao.id = data.id;
+                    //console.log($scope.inscricao.id);
+                    $scope.countResponsaveis = 0;
+                    $scope.gravarResponsaveis();
+                    //window.history.back();
                 })
                 .error(function(erro) { 
                     console.log(erro);
@@ -68,6 +76,53 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
             }
         }
     }
+
+    $scope.gravarResponsaveis = function() {
+        if($scope.countResponsaveis < $scope.inscricao.responsaveis.length) {
+            $scope.inscricao.responsaveis[$scope.countResponsaveis].inscricaoCatequeseId = $scope.inscricao.id;
+            $http({method: "POST",
+                url: serviceBase + 'responsaveis',
+                data: $scope.inscricao.responsaveis[$scope.countResponsaveis],
+                headers: {'Content-Type': 'application/json'}
+            })
+            .success(function() {
+                $scope.countResponsaveis += 1;
+                $scope.gravarResponsaveis();
+            })
+            .error(function(erro) { 
+                console.log(erro);
+                $scope.mensagem = 'Não foi possível cadastrar esta inscrição';
+            })
+        } else {
+            $rootScope.mensagem = 'Inscrição cadastrado(a) com sucesso';
+            window.history.back();
+        }
+        /*
+        $scope.inscricao.responsaveis.forEach(function(element) {
+            ;         
+        });
+        
+          
+        */  
+    }
+
+    // DELETE RESPONSAVEL
+    $scope.removerResponsavel = function(responsavel) {
+        var indiceDaLista = $scope.inscricao.responsaveis.indexOf(responsavel);
+        if ($routeParams.inscricaoId) {
+            $http.delete(serviceBase + 'responsaveis/' + responsavel.id)
+            .success(function() {
+                $scope.inscricao.responsaveis.splice(indiceDaLista, 1);
+            })
+            .error(function(erro) {
+                console.log(erro);
+                $scope.mensagem = 'Não foi possível remover o responsável';
+            });
+        } else {
+            $scope.inscricao.responsaveis.splice(indiceDaLista, 1);
+        }
+        
+    };
 
     var modalInstance = '';
     $scope.incluirResponsavel = function (task) {
@@ -82,23 +137,26 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
             resolve: {
                 responsavel: function () {
                     //return $scope.responsavel;
-                    return 'xxxxxx abacaxi xxxxxx';
+                    return {'inscricao': 1};
                 }
             }
         });
-    }
 
-    $scope.open = function (size) {        
-        
         modalInstance.result.then(function (response) {
-            debugger;            
-            $scope.currentResponsavel = response;
+            //console.log(response);
+            $scope.inscricao.responsaveis.push(response);
             //$state.go('customer.detail', { 'customerId': response.CustomerId });            
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+            console.info('Modal dismissed at: ' + new Date());
         });
-    };
-    
+    }
 
+    $scope.cancelModal = function() {
+        modalInstance.dismiss('cancel');
+    }
+
+    $scope.saveModal = function(result) {
+        modalInstance.close(result);
+    }
 }]);
     

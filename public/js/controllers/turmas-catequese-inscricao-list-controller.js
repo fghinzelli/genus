@@ -60,9 +60,10 @@ angular.module('Home',)
             $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
 
             var etapaCatequeseId = $rootScope.etapaCatequeseId;
+            var anoLetivoId = $rootScope.anoLetivoId;
 
             // LISTAGEM DE INSCRICOES DA ETAPA 
-            $http.get(serviceBase + 'inscricoes-catequese/etapa/' + etapaCatequeseId)
+            $http.get(serviceBase + 'inscricoes-catequese/etapa/' + etapaCatequeseId + '/' + anoLetivoId)
             .success(function(inscricoes) {
                 $scope.inscricoes = inscricoes;
                 //console.log(inscricoes);

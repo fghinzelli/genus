@@ -17,6 +17,17 @@ class Parentesco {
         $parentescos = $query->fetchAll(PDO::FETCH_OBJ);
         echo json_encode($parentescos);
     }
+
+    function getParentesco($id)
+    {
+      $sql = "SELECT * FROM Parentesco WHERE id=:id";
+      $query = $this->db->prepare($sql);
+      $query->bindParam("id", $id);
+      $query->execute();
+      $parentesco = $query->fetchObject();
+    
+      echo json_encode($parentesco);
+    }
 }
 
 ?>

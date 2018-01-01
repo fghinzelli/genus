@@ -5681,7 +5681,8 @@ INSERT INTO `SituacaoDizimo` (`id`, `descricao`, `status`) VALUES
 
 INSERT INTO `SituacaoInscricao` (`id`, `descricao`, `status`) VALUES
 (1, 'Cadastrada', 1),
-(2, 'Pendente', 1);
+(2, 'Pendente', 1),
+(3, 'Dízimo Pendente', 1);
 
 --
 -- Dumping data for table `Diocese`

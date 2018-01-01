@@ -166,21 +166,24 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="table-responsive" ng-controller="ResponsaveisInscricaoListController">
+                                            <!--div class="table-responsive" ng-controller="ResponsaveisInscricaoListController"-->
+                                            <div class="table-responsive">
                                                 <table class="table table-hover table-striped tablesorter">
                                                     <thead>
                                                         <tr>
-                                                            <th>Nome <i class="fa fa-sort"></i></th>
-                                                            <th>Relação <i class="fa fa-sort"></i></th>
-                                                            <th>Ações <i class="fa fa-sort"></i></th>
+                                                            <th>Nome</th>
+                                                            <th>Parentesco</th>
+                                                            <th>Contato</th>
+                                                            <th>Ações</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="responsavel in responsaveis | filter: filtro">
+                                                        <tr ng-repeat="responsavel in inscricao.responsaveis">
                                                             <td>{{responsavel.pessoa.nome}}</td>
                                                             <td>{{responsavel.parentesco.descricao }}</td>
+                                                            <td>{{responsavel.pessoa.telefone1 }}</td>
                                                             <td>
-                                                                <button class="btn btn-sm btn-default" ng-click="remover(inscricao)">Remover</button>
+                                                                <button type="button" class="btn btn-sm btn-default" ng-click="removerResponsavel(responsavel)">Remover</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>

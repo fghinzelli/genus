@@ -138,7 +138,25 @@ class TurmaCatequese {
       $queryt->bindParam("id",$turma->anoLetivoId);
       $queryt->execute();
       $turma->anoLetivo =  $queryt->fetchObject();
+      // INSCRICOES
+      $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id WHERE I.etapaCatequeseId=:idEtapaCatequese ORDER BY P.nome;";
+      $query = $this->db->prepare($sql);
+      $query->bindParam("idEtapaCatequese", $turma->etapaCatequeseId);
+      $query->execute();
+      $inscricoes = $query->fetchAll(PDO::FETCH_OBJ);
+      foreach ($inscricoes as $inscricao) {
+          // Busca de dados relacionados
+          // PESSOA
+          $inscricao->dataInscricao = converterDataFromISO($inscricao->dataInscricao);
+          $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
+          $queryp = $this->db->prepare($sqlp);
+          $queryp->bindParam("id",$inscricao->pessoaId);
+          $queryp->execute();
+          $inscricao->pessoa =  $queryp->fetchObject();
+          $inscricao->pessoa->dataNascimento = converterDataFromISO($inscricao->pessoa->dataNascimento);
+      }
 
+      $turma->inscricoes = $inscricoes;
       //$turma->diaSemana = $semana[$turma->diaSemana];
       
       echo json_encode($turma);

@@ -2,14 +2,15 @@
 
 angular.module('Home',)
 .controller('TurmasEditController',
-['$scope', '$rootScope', '$http', '$cookieStore', '$routeParams',
-function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
+['$scope', '$http', '$cookieStore', '$routeParams', '$rootScope', '$uibModal',
+function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
     
     var serviceBase = 'services/';
     var globals = $cookieStore.get('globals');
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
     
     $scope.turma = {};
+    $scope.turma.inscricoes = [];
     $scope.filtro = '';
     $scope.mensagem = '';
     $scope.showSuccessAlert = true;
@@ -17,12 +18,12 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
         $scope[value] = !$scope[value];
     };
 
-    $scope.incluirInscricao = function() {
-        console.log("Incluir inscrição");
-    }
-
     $scope.setEtapa = function() {
         $rootScope.etapaCatequeseId = $scope.turma.etapaCatequeseId;
+    };
+
+    $scope.setAnoLetivo = function() {
+        $rootScope.anoLetivoId = $scope.turma.anoLetivoId;
     };
 
     // GET BY ID
@@ -31,6 +32,7 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
         .success(function(turma) {
             $scope.turma = turma;
             $rootScope.etapaCatequeseId = $scope.turma.etapaCatequeseId;
+            $rootScope.anoLetivoId = $scope.turma.anoLetivoId;
             $rootScope.turmaId = $scope.turma.id;
         })
         .error(function(erro) {
@@ -66,10 +68,15 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
                        data: $scope.turma,
                        headers: {'Content-Type': 'application/json'}
                       })
-                .success(function() {
-                    $scope.turma = {};
-                    $rootScope.mensagem = 'Turma cadastrada com sucesso';
-                    window.history.back();
+                .success(function(data) {
+                    console.log(data);
+                    $scope.inscricao.id = data.id;
+                    //console.log($scope.inscricao.id);
+                    $scope.countInscricoes = 0;
+                    $scope.gravarInscricoes();
+                    //$scope.turma = {};
+                    //$rootScope.mensagem = 'Turma cadastrada com sucesso';
+                    //window.history.back();
                 })
                 .error(function(erro) { 
                     console.log(erro);
@@ -77,6 +84,84 @@ function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
                 });
             }
         }
+    }
+
+    $scope.gravarInscricoes = function() {
+        if($scope.countInscricoes < $scope.turma.inscricoes.length) {
+            $scope.turma.inscricoes[$scope.countInscricoes].turmaId = $scope.turma.id;
+            $http({method: "POST",
+                url: serviceBase + 'turmas-catequese-inscricoes',
+                data: $scope.turma.inscricoes[$scope.countInscricoes],
+                headers: {'Content-Type': 'application/json'}
+            })
+            .success(function() {
+                $scope.countInscricoes += 1;
+                $scope.gravarInscricoes();
+            })
+            .error(function(erro) { 
+                console.log(erro);
+                $scope.mensagem = 'Não foi possível cadastrar esta turma';
+            })
+        } else {
+            $rootScope.mensagem = 'Turma cadastrado(a) com sucesso';
+            window.history.back();
+        }
+    }
+
+    // DELETE RESPONSAVEL
+    $scope.removerInscricao = function(inscricao) {
+        var indiceDaLista = $scope.turma.inscricoes.indexOf(inscricao);
+        if ($routeParams.turmaId) {
+            $http.delete(serviceBase + 'turmas-catequese-inscricoes/' + inscricao.id)
+            .success(function() {
+                $scope.turma.inscricoes.splice(indiceDaLista, 1);
+            })
+            .error(function(erro) {
+                console.log(erro);
+                $scope.mensagem = 'Não foi possível remover o responsável';
+            });
+        } else {
+            $scope.turma.inscricoes.splice(indiceDaLista, 1);
+        }
+        
+    };
+
+    var modalInstance = '';
+    $scope.incluirInscricao = function (task) {
+        modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'partials/turmas_catequese_inscricoes_form.html',
+            controller: 'TurmasCatequeseInscricoesEditCtrl',
+            scope: $scope,
+            size: 'lg',
+            backdrop: 'static',
+            // Parametros enviados para o modal controller       
+            resolve: {
+
+                /*
+                inscricao: function () {
+                    //return $scope.responsavel;
+                    return {'inscricao': 1};
+                }
+                */
+            }
+        });
+
+        modalInstance.result.then(function (response) {
+            //console.log(response);
+            $scope.turma.inscricoes.push(response);
+            //$state.go('customer.detail', { 'customerId': response.CustomerId });            
+        }, function () {
+            console.info('Modal dismissed at: ' + new Date());
+        });
+    }
+
+    $scope.cancelModal = function() {
+        modalInstance.dismiss('cancel');
+    }
+
+    $scope.saveModal = function(result) {
+        modalInstance.close(result);
     }
 
 }]);

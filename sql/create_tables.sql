@@ -268,11 +268,9 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	pessoaId int(10) NOT NULL,
 	etapaCatequeseId int(10) NULL,
 	escolaId INT NULL,
-	turmaId INT NULL,
 	etapaEscolaId INT NULL,
 	observacoes varchar(100) NULL,
 	situacaoInscricaoId INT NULL,
-	situacaoDizimoId INT NULL,
 	comunidadeId INT NULL,
 	dataInscricao date,
 	status int(1) NOT NULL,
@@ -284,10 +282,8 @@ CREATE TABLE IF NOT EXISTS InscricaoCatequese (
 	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),
 	FOREIGN KEY (etapaEscolaId) REFERENCES EtapaEscola(id),
 	FOREIGN KEY (comunidadeId) REFERENCES Comunidade(id),
-	FOREIGN KEY (situacaoDizimoId) REFERENCES SituacaoDizimo(id),
 	FOREIGN KEY (situacaoInscricaoId) REFERENCES SituacaoInscricao(id),
 	FOREIGN KEY (escolaId) REFERENCES Escola(id),
-	FOREIGN KEY (turmaId) REFERENCES TurmaCatequese(id),
 	FOREIGN KEY (anoLetivoId) REFERENCES AnoLetivoCatequese(id)
 );
 

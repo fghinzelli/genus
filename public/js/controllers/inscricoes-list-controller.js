@@ -38,7 +38,7 @@ angular.module('Home',)
         });
 
         // DELETE
-        $scope.remover = function(pessoa) {
+        $scope.remover = function(inscricao) {
             $http.delete(serviceBase + 'inscricoes-catequese/' + inscricao.id)
             .success(function() {
                 var indiceDaInscricao = $scope.inscricoes.indexOf(inscricao);

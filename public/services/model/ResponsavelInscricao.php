@@ -64,6 +64,20 @@ class ResponsavelInscricao {
         $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
         $query->execute();
         $this->id = $this->db->lastInsertId();
+        // Busca de dados relacionados
+        // PARENTESCO 
+        $sqlx = "SELECT * FROM Parentesco WHERE id=:id";
+        $queryx = $this->db->prepare($sqlx);
+        $queryx->bindParam("id", $this->parentescoId);
+        $queryx->execute();
+        $this->parentesco =  $queryx->fetchObject();
+        // PESSOA
+        $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
+        $queryp = $this->db->prepare($sqlp);
+        $queryp->bindParam("id", $this->pessoaResponsavelId);
+        $queryp->execute();
+        $this->pessoa =  $queryp->fetchObject();
+
         echo json_encode($this);
     }
     
