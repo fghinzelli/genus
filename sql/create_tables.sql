@@ -98,8 +98,8 @@ CREATE TABLE IF NOT EXISTS SituacaoInscricao (
 
 CREATE TABLE IF NOT EXISTS Escola (
 	id int(11) NOT NULL AUTO_INCREMENT,
-	nome varchar(50) NOT NULL,
-	email varchar(50) NOT NULL,
+	nome varchar(100) NOT NULL,
+	email varchar(50) NULL,
 	telefone varchar(15) NULL,
 	pessoaContato varchar(30) NULL,
 	observacoes varchar(50) NULL,
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS TurmaCatequese (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	etapaCatequeseId int(10) NOT NULL,
 	catequistaId int(10) NOT NULL,
-	observacoes varchar(100) NOT NULL,
+	observacoes varchar(100) NULL,
 	turnoId INT NOT NULL,
 	diaSemana INT NOT NULL,
 	dataInicio date NULL,
@@ -263,20 +263,24 @@ CREATE TABLE IF NOT EXISTS TurmaCatequese (
 	FOREIGN KEY (anoLetivoId) REFERENCES AnoLetivoCatequese(id)
 );
 
-CREATE TABLE IF NOT EXISTS InscricaoCatequese (
-	id int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `InscricaoCatequese` (
+	id int(11) NOT NULL,
 	pessoaId int(10) NOT NULL,
-	etapaCatequeseId int(10) NULL,
-	escolaId INT NULL,
-	etapaEscolaId INT NULL,
-	observacoes varchar(100) NULL,
-	situacaoInscricaoId INT NULL,
-	comunidadeId INT NULL,
-	dataInscricao date,
+	etapaCatequeseId int(10) DEFAULT NULL,
+	escolaId int(11) DEFAULT NULL,
+	turmaId int(11) DEFAULT NULL,
+	etapaEscolaId int(11) DEFAULT NULL,
+	observacoes varchar(100) DEFAULT NULL,
+	situacaoInscricaoId int(11) DEFAULT NULL,
+	comunidadeId int(11) DEFAULT NULL,
+	dataInscricao date DEFAULT NULL,
 	status int(1) NOT NULL,
-	dataUltimaAlteracao datetime,
-	usuarioUltimaAlteracaoId INT NULL,
-	anoLetivoId INT NOT NULL,
+	dataUltimaAlteracao datetime DEFAULT NULL,
+	usuarioUltimaAlteracaoId int(11) DEFAULT NULL,
+	anoLetivoId int(11) NOT NULL
+	livroPago int(1) NULL,
+	inscricaoPaga int(1) NULL,
+	inscricaoDataPagamento date NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
 	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),

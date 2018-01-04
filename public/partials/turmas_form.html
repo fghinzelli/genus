@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="form-group" ng-controller="AnosLetivosCatequeseListController" ng-class="{ 'has-error' : formulario.anoLetivo.$invalid && !formulario.anoLetivo.$pristine && formulario.$submitted }">
-                            <label>Ano Letivo</label>
+                            <label>Ano</label>
                             <select name="anoLetivo" class="form-control" ng-change="setAnoLetivo()" required
                                     ng-model="turma.anoLetivoId" ng-options="anoLetivo.id as anoLetivo.descricao for anoLetivo in anosLetivos">
                                 <option value="">Selecione</option>
@@ -175,7 +175,7 @@
                                                         <td>{{inscricao.pessoa.nome}}</td>
                                                         <td>{{inscricao.pessoa.dataNascimento  | date:'dd/MM/yyyy'}}</td>
                                                         <td>
-                                                            <button type="button" class="btn btn-sm btn-default" ng-click="removerInscricao(inscricao)">Remover</button>
+                                                            <button type="button" class="btn btn-sm btn-default" ng-click="removerInscricao (inscricao)">Remover</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>

@@ -8,7 +8,7 @@ angular.module('Home').controller('TurmasCatequeseInscricoesEditCtrl',
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
     
     $scope.turmaCatequeseInscricao = {};
-    $scope.turmaCatequeseInscricao.turmaId = $routeParams.turmaId;
+    $scope.turmaCatequeseInscricao.turmaCatequeseId = $routeParams.turmaId;
     $scope.turmaCatequeseInscricao.status = 1;
     $scope.turmaCatequeseInscricao.dataUltimaAlteracao = null;
     $scope.turmaCatequeseInscricao.usuarioUltimaAlteracaoId = null;
@@ -20,14 +20,15 @@ angular.module('Home').controller('TurmasCatequeseInscricoesEditCtrl',
     }
 
     $scope.salvar = function() {
-        if($scope.turmaCatequeseInscricao.inscricao.turmaId) {
+        $scope.turmaCatequeseInscricao.inscricaoCatequeseId = $scope.turmaCatequeseInscricao.inscricao.id;
+        if($scope.turmaCatequeseInscricao.turmaCatequeseId) {
             $http({method: "POST",
                 url: serviceBase + 'turmas-catequese-inscricoes', 
-                data: $scope.turmaCatequeseInscricao.inscricao,
+                data: $scope.turmaCatequeseInscricao,
                 headers: {'Content-Type': 'application/json'}
             })
             .success(function(data) {
-                $scope.saveModal(data);[]
+                $scope.saveModal($scope.turmaCatequeseInscricao.inscricao);
             })
             .error(function(erro) { 
                 console.log(erro);

@@ -10,6 +10,8 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
     $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
     
     $scope.turma = {};
+    $scope.turma.dataUltimaAlteracao = null;
+    $scope.turma.usuarioUltimaAlteracaoId = null;
     $scope.turma.inscricoes = [];
     $scope.filtro = '';
     $scope.mensagem = '';
@@ -60,17 +62,17 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
                 });
             } else {
                 //$scope.turma.etapaCatequeseId = $scope.turma.etapaCatequese.id;
-                $scope.turma.catequistaId = $scope.turma.catequista.id;
-                $scope.turma.turnoId = $scope.turma.turno.id;
-                $scope.turma.comunidadeId = $scope.turma.comunidade.id;
+                //$scope.turma.catequistaId = $scope.turma.catequista.id;
+                //$scope.turma.turnoId = $scope.turma.turno.id;
+                //$scope.turma.comunidadeId = $scope.turma.comunidade.id;
                 $http({method: "POST",
                        url: serviceBase + 'turmas-catequese', 
                        data: $scope.turma,
                        headers: {'Content-Type': 'application/json'}
                       })
                 .success(function(data) {
-                    console.log(data);
-                    $scope.inscricao.id = data.id;
+                    //console.log(data);
+                    $scope.turma.id = data.id;
                     //console.log($scope.inscricao.id);
                     $scope.countInscricoes = 0;
                     $scope.gravarInscricoes();
@@ -88,10 +90,13 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
 
     $scope.gravarInscricoes = function() {
         if($scope.countInscricoes < $scope.turma.inscricoes.length) {
-            $scope.turma.inscricoes[$scope.countInscricoes].turmaId = $scope.turma.id;
+            var turmaCatequeseInscricao = {};
+            turmaCatequeseInscricao.turmaCatequeseId = $scope.turma.id;
+            turmaCatequeseInscricao.inscricaoCatequeseId = $scope.turma.inscricoes[$scope.countInscricoes].id;
+            turmaCatequeseInscricao.status = 1;
             $http({method: "POST",
                 url: serviceBase + 'turmas-catequese-inscricoes',
-                data: $scope.turma.inscricoes[$scope.countInscricoes],
+                data: turmaCatequeseInscricao,
                 headers: {'Content-Type': 'application/json'}
             })
             .success(function() {

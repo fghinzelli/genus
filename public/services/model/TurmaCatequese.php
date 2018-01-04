@@ -139,9 +139,14 @@ class TurmaCatequese {
       $queryt->execute();
       $turma->anoLetivo =  $queryt->fetchObject();
       // INSCRICOES
-      $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id WHERE I.etapaCatequeseId=:idEtapaCatequese ORDER BY P.nome;";
+      
+      $sql = "SELECT I.* FROM TurmaCatequeseInscricao TC 
+              INNER JOIN InscricaoCatequese I ON I.id = TC.inscricaoCatequeseId
+              INNER JOIN Pessoa P ON I.pessoaId = P.id
+              WHERE TC.turmaCatequeseId=:idTurma
+              ORDER BY P.nome;";
       $query = $this->db->prepare($sql);
-      $query->bindParam("idEtapaCatequese", $turma->etapaCatequeseId);
+      $query->bindParam("idTurma", $turma->id);
       $query->execute();
       $inscricoes = $query->fetchAll(PDO::FETCH_OBJ);
       foreach ($inscricoes as $inscricao) {
@@ -155,9 +160,8 @@ class TurmaCatequese {
           $inscricao->pessoa =  $queryp->fetchObject();
           $inscricao->pessoa->dataNascimento = converterDataFromISO($inscricao->pessoa->dataNascimento);
       }
-
       $turma->inscricoes = $inscricoes;
-      //$turma->diaSemana = $semana[$turma->diaSemana];
+      
       
       echo json_encode($turma);
     }

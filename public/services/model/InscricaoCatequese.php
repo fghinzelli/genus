@@ -16,6 +16,9 @@ class InscricaoCatequese {
     public $dataUltimaAlteracao;
     public $usuarioUltimaAlteracaoId;
     public $anoLetivoId;
+    public $livroPago;
+    public $inscricaoPaga;
+    public $inscricaoDataPagamento;
     function __construct($db) {
         $this->db = $db;
     }
@@ -24,7 +27,8 @@ class InscricaoCatequese {
     function loadData($id, $pessoaId, $etapaCatequeseId, $escolaId, $etapaEscolaId,
                       $observacoes, $situacaoInscricaoId,
                       $comunidadeId, $dataInscricao,
-                      $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId, $anoLetivoId) {
+                      $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId, $anoLetivoId,
+                      $livroPago, $inscricaoPaga, $inscricaoDataPagamento) {
         $this->id = $id;
         $this->pessoaId = $pessoaId;
         $this->etapaCatequeseId = $etapaCatequeseId;
@@ -38,16 +42,24 @@ class InscricaoCatequese {
         $this->dataUltimaAlteracao = $dataUltimaAlteracao;
         $this->usuarioUltimaAlteracaoId = $usuarioUltimaAlteracaoId;
         $this->anoLetivoId = $anoLetivoId;
+        $this->livroPago = (int)$livroPago;
+        $this->inscricaoPaga = (int)$inscricaoPaga;
+        $this->inscricaoDataPagamento = converterDataToISO($inscricaoDataPagamento);
     } 
 
     function getInscricoesCatequese() {
-        $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id ORDER BY P.nome;";
+        $sql = "SELECT I.* 
+                FROM InscricaoCatequese I 
+                INNER JOIN Pessoa P ON I.pessoaId = P.id
+                WHERE I.status = 1
+                ORDER BY P.nome;";
         $query = $this->db->query($sql);
         $inscricoes = $query->fetchAll(PDO::FETCH_OBJ);
         foreach ($inscricoes as $inscricao) {
             // Busca de dados relacionados
             // PESSOA
             $inscricao->dataInscricao = converterDataFromISO($inscricao->dataInscricao);
+            $inscricao->inscricaoDataPagamento = converterDataFromISO($inscricao->inscricaoDataPagamento);
             $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
             $queryp = $this->db->prepare($sqlp);
             $queryp->bindParam("id",$inscricao->pessoaId);
@@ -78,13 +90,14 @@ class InscricaoCatequese {
 
     function getInscricaoCatequese($id)
     {
-      $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id WHERE I.id=:id";
+      $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id WHERE I.id=:id and I.status=1";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
       $inscricao = $query->fetchObject();
 
       $inscricao->dataInscricao = converterDataFromISO($inscricao->dataInscricao);
+      $inscricao->inscricaoDataPagamento = converterDataFromISO($inscricao->inscricaoDataPagamento);
       // PESSOA
       $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
       $queryp = $this->db->prepare($sqlp);
@@ -141,7 +154,7 @@ class InscricaoCatequese {
 
     function getInscricoesCatequeseByEtapa($idEtapaCatequese, $idAnoLetivo) {
         $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id 
-                WHERE I.etapaCatequeseId=:idEtapaCatequese AND I.anoLetivoId=:idAnoLetivo
+                WHERE I.etapaCatequeseId=:idEtapaCatequese AND I.anoLetivoId=:idAnoLetivo AND WHERE I.status = 1
                 ORDER BY P.nome;";
         
         $query = $this->db->prepare($sql);
@@ -154,6 +167,7 @@ class InscricaoCatequese {
         foreach ($inscricoes as $inscricao) {
             // Busca de dados relacionados
             $inscricao->dataInscricao = converterDataFromISO($inscricao->dataInscricao);
+            $inscricao->inscricaoDataPagamento = converterDataFromISO($inscricao->inscricaoDataPagamento);
             // PESSOA
             $sqlp = "SELECT * FROM Pessoa WHERE id=:id";
             $queryp = $this->db->prepare($sqlp);
@@ -186,11 +200,13 @@ class InscricaoCatequese {
         $sql = "INSERT INTO InscricaoCatequese (`pessoaId`, `etapaCatequeseId`, `escolaId`, `etapaEscolaId`, 
                                                 `observacoes`, `situacaoInscricaoId`,
                                                 `comunidadeId`, `dataInscricao`,
-                                                `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `anoLetivoId`) 
+                                                `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `anoLetivoId`,
+                                                `livroPago`, `inscricaoPaga`, `inscricaoDataPagamento`) 
                 VALUES (:pessoaId, :etapaCatequeseId, :escolaId, :etapaEscolaId,
                         :observacoes, :situacaoInscricaoId, 
                         :comunidadeId, :dataInscricao,
-                        :status, NOW(), :usuarioUltimaAlteracaoId, :anoLetivoId)";
+                        :status, NOW(), :usuarioUltimaAlteracaoId, :anoLetivoId,
+                        :livroPago, :inscricaoPaga, :inscricaoDataPagamento)";
         
         $query = $this->db->prepare($sql);
         $query->bindParam(":pessoaId",$this->pessoaId);
@@ -204,6 +220,9 @@ class InscricaoCatequese {
         $query->bindParam(":status",$this->status);
         $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
         $query->bindParam(":anoLetivoId", $this->anoLetivoId);
+        $query->bindParam(":livroPago", $this->livroPago);
+        $query->bindParam(":inscricaoPaga", $this->inscricaoPaga);
+        $query->bindParam(":inscricaoDataPagamento", $this->inscricaoDataPagamento);
         $query->execute();
         $this->id = $this->db->lastInsertId();
         echo json_encode($this);
@@ -214,7 +233,8 @@ class InscricaoCatequese {
         $sql = "UPDATE InscricaoCatequese SET pessoaId=:pessoaId, etapaCatequeseId=:etapaCatequeseId, escolaId=:escolaId, etapaEscolaId=:etapaEscolaId, 
                                               observacoes=:observacoes, situacaoInscricaoId=:situacaoInscricaoId, 
                                               comunidadeId=:comunidadeId, dataInscricao=:dataInscricao,
-                                              status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId, anoLetivoId=:anoLetivoId
+                                              status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId, anoLetivoId=:anoLetivoId,
+                                              livroPago=:livroPago, inscricaoPaga=:inscricaoPaga, inscricaoDataPagamento=:inscricaoDataPagamento
                 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
@@ -229,13 +249,17 @@ class InscricaoCatequese {
       $query->bindParam(":status",$this->status);
       $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
       $query->bindParam(":anoLetivoId", $this->anoLetivoId);
+      $query->bindParam(":livroPago", $this->livroPago);
+      $query->bindParam(":inscricaoPaga", $this->inscricaoPaga);
+      $query->bindParam(":inscricaoDataPagamento", $this->inscricaoDataPagamento);
       $query->execute();
       echo json_encode($this);
     }
     
     function deleteInscricaoCatequese()
     {
-      $sql = "DELETE FROM InscricaoCatequese WHERE id=:id";
+      //$sql = "DELETE FROM InscricaoCatequese WHERE id=:id";
+      $sql = "UPDATE InscricaoCatequese SET status=0 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();

@@ -33,6 +33,8 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
             //console.log(inscricao);
             $scope.inscricao = inscricao;
             $scope.inscricao.pessoa = inscricao.pessoa;
+            $scope.inscricao.livroPago = (inscricao.livroPago === '1');
+            $scope.inscricao.inscricaoPaga = (inscricao.inscricaoPaga === '1');
         })
         .error(function(erro) {
             console.log(erro);

@@ -57,7 +57,8 @@
 		$inscricao->loadData(null, $data['pessoaId'], $data['etapaCatequeseId'], $data['escolaId'], $data['etapaEscolaId'],
 							$data['observacoes'], $data['situacaoInscricaoId'], 
 							$data['comunidadeId'], $data['dataInscricao'],
-							$data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
+							$data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId'],
+							$data['livroPago'], $data['inscricaoPaga'], $data['inscricaoDataPagamento'] 
 						  );
 		$result = $inscricao->addInscricaoCatequese();
 		return $response->write($result);
@@ -71,7 +72,8 @@
 		$inscricao->loadData($args['id'], $data['pessoaId'], $data['etapaCatequeseId'], $data['escolaId'], $data['etapaEscolaId'],
 							  $data['observacoes'], $data['situacaoInscricaoId'], 
 							  $data['comunidadeId'], $data['dataInscricao'],
-							  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId']
+							  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId'],
+							  $data['livroPago'], $data['inscricaoPaga'], $data['inscricaoDataPagamento']
 							);
 		$result = $inscricao->saveInscricaoCatequese();
 		return $response->write($result);

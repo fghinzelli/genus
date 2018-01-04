@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <form novalidade name="formulario" role="form" ng-submit="submeterForm()">
+                <form novalidate name="formulario" role="form" ng-submit="submeterForm()">
                     <div class="row" >
                         <div class="col-md-12">
                             <div class="panel panel-default">
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="row" >
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="form-group" ng-controller="EscolasListController">
                                 <label>Escola</label>
                                 <select name="escola" class="form-control"
@@ -103,7 +103,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group" ng-controller="AnosLetivosCatequeseListController" ng-class="{ 'has-error' : formulario.anoLetivo.$invalid && !formulario.anoLetivo.$pristine && formulario.$submitted }">
-                                <label>Ano Letivo</label>
+                                <label>Ano</label>
                                 <select name="anoLetivo" class="form-control" required
                                         ng-model="inscricao.anoLetivoId" ng-options="anoLetivo.id as anoLetivo.descricao for anoLetivo in anosLetivos">
                                     <option value="">Selecione</option>
@@ -146,6 +146,47 @@
                                 <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.status.$error.required">
                                     Este campo é obrigatório
                                 </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <label>Pagamentos</label>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" ng-model="inscricao.livroPago">
+                                                    Livro
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" ng-model="inscricao.inscricaoPaga">
+                                                    Taxa de Inscrição
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group" ng-class="{ 'has-error' : formulario.inscricaoDataPagamento.$invalid && !formulario.inscricaoDataPagamento.$pristine && formulario.$submitted }">
+                                            <label>Data de Pagamento</label>
+                                            <input type="text" name="inscricaoDataPagamento" ui-mask="99/99/9999" model-view-value="true" 
+                                                    class="form-control" ng-model="inscricao.inscricaoDataPagamento" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
+                                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.inscricaoDataPagamento.$error.pattern">
+                                                A data informada é inválida
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

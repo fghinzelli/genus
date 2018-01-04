@@ -5643,11 +5643,15 @@ INSERT INTO `EtapaCatequese` (`id`, `descricao`, `status`) VALUES
 
 INSERT INTO `Parentesco` (`id`, `descricao`, `status`) 
 VALUES 
-(1, 'Pai/Mãe', '1'),
-(2, 'Irmão/Irmã', '1'),
-(3, 'Tio/Tia', '1'),
-(4, 'Avô/Avó', '1'),
-(5, 'Outro', '1');
+(1, 'Pai', '1'),
+(2, 'Mãe', '1'),
+(3, 'Padrasto', '1'),
+(4, 'Madrastra', '1'),
+(5, 'Irmão/Irmã', '1'),
+(6, 'Tio/Tia', '1'),
+(7, 'Avô', '1'),
+(8, 'Avó', '1'),
+(9, 'Outro', '1');
 
 --
 -- Dumping data for table `EtapaEscola`
@@ -5696,11 +5700,18 @@ INSERT INTO `Diocese` (`id`, `nome`, `cnpj`, `email`, `telefone`, `logradouro`, 
 --
 
 INSERT INTO `Escola` (`id`, `nome`, `email`, `telefone`, `pessoaContato`, `observacoes`, `status`) VALUES
-(1, 'Escola Municipal Antonia da Silva', 'antonia@escola.com.br', '23451234', 'Maria da Costa', 'observaçoes da escola teste', 1),
-(2, 'Escola Estadual Santana', 'santana@escola.com.br', '23451234', 'Jose Panisson', 'observaçoes da escola teste', 1),
-(3, 'Escola Estadual Ulisses Cabral', 'ulisses@escola.com.br', '23451234', 'Sonia da Costa', 'observaçoes da escola teste', 1),
-(4, 'Escola Marista Santo Antonio', 'stoantonio@escola.com.br', '23451234', 'Ir Moacir', 'observaçoes da escola teste', 1);
-
+(1, 'Escola de Tempo Integral Santa Luzia - Santa Luiza', NULL, NULL, NULL, NULL, 1),
+(2, 'Escola Nossa Senhora Aparecida - Bairro Aparecida', NULL, NULL, NULL, NULL, 1),
+(3, 'Escola Padre Pedro Piccoli - Bairro Aurora', NULL, NULL, NULL, NULL, 1),
+(4, 'Escola Prefeito José Chies - Bairro Triângulo', NULL, NULL, NULL, NULL, 1),
+(5, 'Escola Salvador Bordini - Cinco da Boa Vista', NULL, NULL, NULL, NULL, 1),
+(6, 'Escola Antônio Adriano Guerra - Sto Antônio de Castro', NULL, NULL, NULL, NULL, 1),
+(7, 'Escola Cardeal Arcoverde - Arcoverde', NULL, NULL, NULL, NULL, 1),
+(8, 'Escola Carlos Barbosa - Centro', NULL, NULL, NULL, NULL, 1),
+(9, 'Escola Dom Vital - Torino', NULL, NULL, NULL, NULL, 1),
+(10, 'Escola Elisa Tramontina - Bairro Vila Nova', NULL, NULL, NULL, NULL, 1),
+(11, 'Escola São Roque - Bairro Ponte Seca', NULL, NULL, NULL, NULL, 1),
+(12, 'Colégio Santa Rosa - Centro', NULL, NULL, NULL, NULL, 1);
 --
 -- Dumping data for table `Paroquia`
 --
@@ -5793,12 +5804,16 @@ INSERT INTO `TurmaCatequese` (`id`, `etapaCatequeseId`, `catequistaId`, `observa
 -- Dumping data for table `InscricaoCatequese`
 --
 
-INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `turmaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `turnoId`, `situacaoDizimoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `anoLetivoId`) VALUES
-(1, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 1, '2017-11-07', 1, NULL, NULL, 1),
-(2, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 1, '2017-11-07', 1, NULL, NULL, 1),
-(3, 2, 3, 1, 2, 1, 'abcde', 1, 2, 1, '2017-11-07', 2, '2017-11-08 21:42:57', NULL, 1),
-(4, 2, 3, 1, 2, NULL, 'abcde', 1, 2, 1, '2017-11-07', 2, '2017-11-08 21:43:32', NULL, 1),
-(5, 2, 3, 3, NULL, 1, 'xxxxx', 1, 2, 1, '2017-11-07', 1, '2017-11-09 02:18:59', NULL, 1);
+
+INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `anoLetivoId`, `livroPago`, `inscricaoPaga`, `inscricaoDataPagamento`) VALUES
+(12, 29, 1, 1, 1, 'abcdef', 1, 2, '2000-01-01', 1, '2017-12-30 11:54:15', NULL, 1, NULL, NULL, NULL),
+(18, 25, 1, 2, 6, 'santana', 1, 1, '2000-01-01', 1, '2017-12-30 12:34:23', NULL, 1, NULL, NULL, NULL),
+(1, 2, 2, 3, 1, 'xxxxx', 1, 1, '2017-11-07', 1, NULL, NULL, 1, NULL, NULL, NULL),
+(9, 26, 2, 2, 2, 'eeeee', 1, 2, '2000-01-01', 1, '2017-12-30 11:49:29', NULL, 1, NULL, NULL, NULL),
+(2, 3, 3, 2, 2, 'xxxxxab', 1, 1, '2018-11-07', 1, '2017-12-30 10:24:17', NULL, 1, NULL, NULL, NULL),
+(17, 11, 3, 1, 1, 'ffffff', 1, 2, '2000-01-01', 1, '2017-12-30 12:33:08', NULL, 2, NULL, NULL, NULL),
+(3, 4, 4, 1, 1, 'abcde', 1, 1, '2017-11-07', 1, '2018-01-02 00:15:54', NULL, 1, NULL, NULL, NULL);
+
 
 INSERT INTO `ResponsavelInscricao` VALUES 
 (NULL, '1', '2', 'ABCCDE', '1', '1', NULL, NULL),
