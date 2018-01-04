@@ -29,7 +29,7 @@ class Catequista {
     } 
 
     function getCatequistas() {
-        $sql = "SELECT C.* FROM Catequista C INNER JOIN Pessoa P ON C.pessoaId = P.id ORDER BY P.nome;";
+        $sql = "SELECT C.* FROM Catequista C INNER JOIN Pessoa P ON C.pessoaId = P.id WHERE C.status = 1 ORDER BY P.nome;";
         $query = $this->db->query($sql);
         $catequistas = $query->fetchAll(PDO::FETCH_OBJ);
         foreach ($catequistas as $catequista) {
@@ -51,7 +51,7 @@ class Catequista {
     
     function getCatequista($id)
     {
-      $sql = "SELECT * FROM Catequista WHERE id=:id";
+      $sql = "SELECT * FROM Catequista WHERE id=:id AND C.status = 1";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
@@ -111,7 +111,8 @@ class Catequista {
     
     function deleteCatequista()
     {
-      $sql = "DELETE FROM Catequista WHERE id=:id";
+      //$sql = "DELETE FROM Catequista WHERE id=:id";
+      $sql = "UPDATE Catequista SET status=1 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();

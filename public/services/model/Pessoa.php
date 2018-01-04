@@ -79,7 +79,7 @@ class Pessoa {
     } 
 
     function getPessoas() {
-        $sql = "SELECT * FROM Pessoa ORDER BY nome;";
+        $sql = "SELECT * FROM Pessoa WHERE status = 1 ORDER BY nome;";
         $query = $this->db->query($sql);
         $pessoas = $query->fetchAll(PDO::FETCH_OBJ);
         foreach ($pessoas as $pessoa) {
@@ -103,7 +103,7 @@ class Pessoa {
     
     function getPessoa($id)
     {
-      $sql = "SELECT * FROM Pessoa WHERE id=:id";
+      $sql = "SELECT * FROM Pessoa WHERE status = 1 AND id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
@@ -228,7 +228,8 @@ class Pessoa {
     
     function deletePessoa()
     {
-      $sql = "DELETE FROM Pessoa WHERE id=:id";
+      //$sql = "DELETE FROM Pessoa WHERE id=:id";
+      $sql = "UPDATE Pessoa SET status = 1 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();
