@@ -16,6 +16,23 @@
 		}
 	})->add($middleAuthorization);
 
+	// SELECT ALL BY COMUNIDADE
+	$app->get('/turmas-catequese/comunidade/{idComunidade}', function($request, $response, $args) {
+		$turma = new TurmaCatequese(db::getInstance());
+		$result = $turma->getTurmasCatequeseByComunidade($args['idComunidade']);
+		if($result === false) {
+			return $response->withStatus(200)
+				->withHeader('Content-Type', 'application/json;charset=utf-8')
+				->write(json_encode(array('error'=> array('message' => 'No records found.' ))));
+		} else {
+			return $response->withStatus(200)
+			->withHeader('Content-Type', 'application/json;charset=utf-8')
+			->write($result);
+		}
+	})->add($middleAuthorization);
+
+	
+
 	// SELECT BY id
 	$app->get('/turmas-catequese/{id}', function($request, $response, $args) {
 		$turma = new TurmaCatequese(db::getInstance());

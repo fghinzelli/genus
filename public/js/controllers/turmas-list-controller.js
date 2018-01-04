@@ -13,6 +13,7 @@ angular.module('Home',)
         // MENSAGEM DE ALERTA
         $scope.turmas = [];
         $scope.filtro = '';
+        $scope.filtroComunidade = {};
         $scope.mensagem = '';
 
         // Exibe a mensagem ao retornar do formulário de edição
@@ -35,6 +36,17 @@ angular.module('Home',)
         .error(function(erro) {
             console.log(erro)
         });
+
+        $scope.filtrarPorComunidade = function(id) {
+            //var comunidade = $scope.formulario.filtroComunidade;
+            $http.get(serviceBase + 'turmas-catequese/comunidade/' + id)
+            .success(function(turmas) {
+                $scope.turmas = turmas;
+            })
+            .error(function(erro) {
+                console.log(erro)
+            });
+        };
 
         // DELETE
         $scope.remover = function(turma) {

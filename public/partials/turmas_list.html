@@ -21,6 +21,19 @@
                     </a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <br>
+                    <div class="form-group" ng-controller="ComunidadesListController">
+                        <label>Comunidade</label>
+                        <select name="comunidade" class="form-control"
+                                ng-change="filtrarPorComunidade(filtroComunidade)"
+                                ng-model="filtroComunidade" ng-options="comunidade.id as comunidade.nome for comunidade in comunidades">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <hr />
 
             <div class="row">
