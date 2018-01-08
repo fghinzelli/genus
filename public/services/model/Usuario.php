@@ -31,7 +31,7 @@
         }
 
         function getUsuarios() {
-        $sql = "SELECT U.* FROM Usuario U INNER JOIN Pessoa P ON U.pessoaId = P.id ORDER BY P.nome;";
+        $sql = "SELECT U.* FROM Usuario U INNER JOIN Pessoa P ON U.pessoaId = P.id WHERE U.status = 1 ORDER BY P.nome;";
         $query = $this->db->query($sql);
         $usuarios = $query->fetchAll(PDO::FETCH_OBJ);
         foreach ($usuarios as $usuario) {
@@ -51,7 +51,7 @@
         }
 
         function getUsuario($id) {
-          $sql = "SELECT * FROM Usuario WHERE id=:id";
+          $sql = "SELECT * FROM Usuario WHERE status = 1 AND id=:id";
           $query = $this->db->prepare($sql);
           $query->bindParam("id", $id);
           $query->execute();
@@ -94,7 +94,7 @@
             // Testa se ja existe o username 
             $sql = "SELECT username
                     FROM Usuario
-                    WHERE username = :username";
+                    WHERE status = 1 AND username = :username";
             $query = $this->db->prepare($sql);
             $query->bindParam(':username', $username);
             $query->execute();
@@ -218,7 +218,8 @@
         
         function deleteUsuario()
         {
-          $sql = "DELETE FROM Usuario WHERE id=:id";
+          //$sql = "DELETE FROM Usuario WHERE id=:id";
+          $sql = "UPDATE Usuario SET status = 0 WHERE id=:id";
           $query = $this->db->prepare($sql);
           $query->bindParam(":id",$this->id);
           $query->execute();

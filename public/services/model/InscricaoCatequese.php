@@ -154,7 +154,9 @@ class InscricaoCatequese {
 
     function getInscricoesCatequeseByEtapa($idEtapaCatequese, $idAnoLetivo) {
         $sql = "SELECT I.* FROM InscricaoCatequese I INNER JOIN Pessoa P ON I.pessoaId = P.id 
-                WHERE I.etapaCatequeseId=:idEtapaCatequese AND I.anoLetivoId=:idAnoLetivo AND WHERE I.status = 1
+                WHERE I.etapaCatequeseId=:idEtapaCatequese AND I.anoLetivoId=:idAnoLetivo AND I.status = 1
+                AND I.id NOT IN (SELECT id FROM view_inscricoesCatequese_incluidas_em_turmas
+                                 WHERE anoLetivoId=:idAnoLetivo)
                 ORDER BY P.nome;";
         
         $query = $this->db->prepare($sql);

@@ -23,7 +23,7 @@ class TurmaCatequeseInscricao {
     } 
 
     function getTurmaCatequeseInscricoes($idTurma) {
-        $sql = "SELECT * FROM TurmaCatequeseInscricao WHERE turmaCatequeseId=:idTurma";
+        $sql = "SELECT * FROM TurmaCatequeseInscricao WHERE turmaCatequeseId=:idTurma WHERE status = 1";
         $query = $this->db->prepare($sql);
         $query->bindParam("idTurma", $idTurma);
         $query->execute();
@@ -55,7 +55,7 @@ class TurmaCatequeseInscricao {
     
 
     function getTurmaCatequeseInscricao($id) {
-        $sql = "SELECT * FROM TurmaCatequeseInscricao WHERE id=:id";
+        $sql = "SELECT * FROM TurmaCatequeseInscricao WHERE id=:id AND status = 1";
         $query = $this->db->prepare($sql);
         $query->bindParam("id", $id);
         $query->execute();
@@ -116,7 +116,8 @@ class TurmaCatequeseInscricao {
     
     function deleteTurmaCatequeseInscricao()
     {
-      $sql = "DELETE FROM TurmaCatequeseInscricao WHERE id=:id";
+      //$sql = "DELETE FROM TurmaCatequeseInscricao WHERE id=:id";
+      $sql = "UPDATE TurmaCatequeseInscricao SET status = 0 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();

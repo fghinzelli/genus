@@ -117,7 +117,7 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
     $scope.removerInscricao = function(inscricao) {
         var indiceDaLista = $scope.turma.inscricoes.indexOf(inscricao);
         if ($routeParams.turmaId) {
-            $http.delete(serviceBase + 'turmas-catequese-inscricoes/' + inscricao.id)
+            $http.delete(serviceBase + 'turmas-catequese-inscricoes/' + inscricao.idInscricaoTurma)
             .success(function() {
                 $scope.turma.inscricoes.splice(indiceDaLista, 1);
             })

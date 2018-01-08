@@ -229,7 +229,7 @@ class Pessoa {
     function deletePessoa()
     {
       //$sql = "DELETE FROM Pessoa WHERE id=:id";
-      $sql = "UPDATE Pessoa SET status = 1 WHERE id=:id";
+      $sql = "UPDATE Pessoa SET status = 0 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();

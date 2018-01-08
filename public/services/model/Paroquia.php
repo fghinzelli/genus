@@ -43,7 +43,7 @@ class Paroquia {
     } 
 
     function getParoquias() {
-        $sql = "SELECT * FROM Paroquia";
+        $sql = "SELECT * FROM Paroquia WHERE status = 1";
         $query = $this->db->query($sql);
         $paroquias = $query->fetchAll(PDO::FETCH_OBJ);
         echo json_encode($paroquias);
@@ -51,7 +51,7 @@ class Paroquia {
     
     function getParoquia($id)
     {
-      $sql = "SELECT * FROM Paroquia WHERE id=:id";
+      $sql = "SELECT * FROM Paroquia WHERE id=:id AND status = 1";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
@@ -130,7 +130,8 @@ class Paroquia {
     
     function deleteParoquia()
     {
-      $sql = "DELETE FROM Paroquia WHERE id=:id";
+      //$sql = "DELETE FROM Paroquia WHERE id=:id";
+      $sql = "UPDATE Paroquia SET status = 0 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();

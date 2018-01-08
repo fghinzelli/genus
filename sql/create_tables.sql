@@ -397,5 +397,9 @@ CREATE TABLE IF NOT EXISTS TurmaCursoInscricao (
 	FOREIGN KEY (turmaCursoId) REFERENCES TurmaCurso(id)
 );
 
-
+CREATE VIEW view_inscricoesCatequese_incluidas_em_turmas AS
+	SELECT I.id, I.anoLetivoId FROM TurmaCatequeseInscricao TCI
+	INNER JOIN InscricaoCatequese I ON I.id = TCI.inscricaoCatequeseId
+	WHERE TCI.status = 1 AND I.status = 1
+	ORDER BY I.id
 	

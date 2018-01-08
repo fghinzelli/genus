@@ -46,7 +46,7 @@ class Comunidade {
     } 
 
     function getComunidades() {
-        $sql = "SELECT * FROM Comunidade ORDER BY nome";
+        $sql = "SELECT * FROM Comunidade WHERE status = 1 ORDER BY nome";
         $query = $this->db->query($sql);
         $comunidades = $query->fetchAll(PDO::FETCH_OBJ);
         foreach($comunidades as $comunidade) {
@@ -70,7 +70,7 @@ class Comunidade {
     
     function getComunidade($id)
     {
-      $sql = "SELECT * FROM Comunidade WHERE id=:id";
+      $sql = "SELECT * FROM Comunidade WHERE id=:id AND status = 1";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
@@ -153,7 +153,8 @@ class Comunidade {
     
     function deleteComunidade()
     {
-      $sql = "DELETE FROM Comunidade WHERE id=:id";
+      //$sql = "DELETE FROM Comunidade WHERE id=:id";
+      $sql = "UPDATE Comunidade SET status = 0 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
       $query->execute();

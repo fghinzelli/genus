@@ -147,7 +147,7 @@ class TurmaCatequese {
 
     function getTurmaCatequese($id) {
         $semana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
-      $sql = "SELECT * FROM TurmaCatequese WHERE WHERE status = 1 AND id=:id";
+      $sql = "SELECT * FROM TurmaCatequese WHERE status = 1 AND id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam("id", $id);
       $query->execute();
@@ -194,10 +194,10 @@ class TurmaCatequese {
       $turma->anoLetivo =  $queryt->fetchObject();
       // INSCRICOES
       
-      $sql = "SELECT I.* FROM TurmaCatequeseInscricao TC 
+      $sql = "SELECT I.*, TC.id AS idInscricaoTurma FROM TurmaCatequeseInscricao TC 
               INNER JOIN InscricaoCatequese I ON I.id = TC.inscricaoCatequeseId
               INNER JOIN Pessoa P ON I.pessoaId = P.id
-              WHERE TC.turmaCatequeseId=:idTurma
+              WHERE TC.turmaCatequeseId=:idTurma AND I.status = 1 AND TC.status = 1
               ORDER BY P.nome;";
       $query = $this->db->prepare($sql);
       $query->bindParam("idTurma", $turma->id);
