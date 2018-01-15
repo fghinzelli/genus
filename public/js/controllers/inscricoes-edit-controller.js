@@ -46,6 +46,9 @@ function ($scope, $http, $cookieStore, $routeParams, $rootScope, $uibModal) {
     $scope.submeterForm = function() {
         if ($scope.formulario.$valid) {
             $scope.inscricao.pessoaId = $scope.inscricao.pessoa.id;
+            if ($scope.inscricao.etapaCatequeseId != 4){
+                $scope.inscricao.nomePadrinho = '';
+            }
             if ($routeParams.inscricaoId) {
                 $http.put(serviceBase + 'inscricoes-catequese/' + $scope.inscricao.id, $scope.inscricao)
                 .success(function() {

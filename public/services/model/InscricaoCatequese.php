@@ -19,6 +19,7 @@ class InscricaoCatequese {
     public $livroPago;
     public $inscricaoPaga;
     public $inscricaoDataPagamento;
+    public $nomePadrinho;
     function __construct($db) {
         $this->db = $db;
     }
@@ -28,7 +29,7 @@ class InscricaoCatequese {
                       $observacoes, $situacaoInscricaoId,
                       $comunidadeId, $dataInscricao,
                       $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId, $anoLetivoId,
-                      $livroPago, $inscricaoPaga, $inscricaoDataPagamento) {
+                      $livroPago, $inscricaoPaga, $inscricaoDataPagamento, $nomePadrinho) {
         $this->id = $id;
         $this->pessoaId = $pessoaId;
         $this->etapaCatequeseId = $etapaCatequeseId;
@@ -45,6 +46,7 @@ class InscricaoCatequese {
         $this->livroPago = (int)$livroPago;
         $this->inscricaoPaga = (int)$inscricaoPaga;
         $this->inscricaoDataPagamento = converterDataToISO($inscricaoDataPagamento);
+        $this->nomePadrinho = $nomePadrinho;
     } 
 
     function getInscricoesCatequese() {
@@ -203,12 +205,12 @@ class InscricaoCatequese {
                                                 `observacoes`, `situacaoInscricaoId`,
                                                 `comunidadeId`, `dataInscricao`,
                                                 `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `anoLetivoId`,
-                                                `livroPago`, `inscricaoPaga`, `inscricaoDataPagamento`) 
+                                                `livroPago`, `inscricaoPaga`, `inscricaoDataPagamento`, `nomePadrinho`) 
                 VALUES (:pessoaId, :etapaCatequeseId, :escolaId, :etapaEscolaId,
                         :observacoes, :situacaoInscricaoId, 
                         :comunidadeId, :dataInscricao,
                         :status, NOW(), :usuarioUltimaAlteracaoId, :anoLetivoId,
-                        :livroPago, :inscricaoPaga, :inscricaoDataPagamento)";
+                        :livroPago, :inscricaoPaga, :inscricaoDataPagamento, :nomePadrinho)";
         
         $query = $this->db->prepare($sql);
         $query->bindParam(":pessoaId",$this->pessoaId);
@@ -225,6 +227,7 @@ class InscricaoCatequese {
         $query->bindParam(":livroPago", $this->livroPago);
         $query->bindParam(":inscricaoPaga", $this->inscricaoPaga);
         $query->bindParam(":inscricaoDataPagamento", $this->inscricaoDataPagamento);
+        $query->bindParam(":nomePadrinho", $this->nomePadrinho);
         $query->execute();
         $this->id = $this->db->lastInsertId();
         echo json_encode($this);
@@ -236,7 +239,7 @@ class InscricaoCatequese {
                                               observacoes=:observacoes, situacaoInscricaoId=:situacaoInscricaoId, 
                                               comunidadeId=:comunidadeId, dataInscricao=:dataInscricao,
                                               status=:status, dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId, anoLetivoId=:anoLetivoId,
-                                              livroPago=:livroPago, inscricaoPaga=:inscricaoPaga, inscricaoDataPagamento=:inscricaoDataPagamento
+                                              livroPago=:livroPago, inscricaoPaga=:inscricaoPaga, inscricaoDataPagamento=:inscricaoDataPagamento, nomePadrinho=:nomePadrinho
                 WHERE id=:id";
       $query = $this->db->prepare($sql);
       $query->bindParam(":id",$this->id);
@@ -254,6 +257,7 @@ class InscricaoCatequese {
       $query->bindParam(":livroPago", $this->livroPago);
       $query->bindParam(":inscricaoPaga", $this->inscricaoPaga);
       $query->bindParam(":inscricaoDataPagamento", $this->inscricaoDataPagamento);
+      $query->bindParam(":nomePadrinho", $this->nomePadrinho);
       $query->execute();
       echo json_encode($this);
     }

@@ -43,8 +43,8 @@
 						  getAtt('nacionalidade', $data), getAtt('email', $data), getAtt('logradouro', $data),
 						  getAtt('numero', $data), getAtt('complemento', $data), getAtt('bairro', $data),
 						  getAtt('municipioId', $data), getAtt('cep', $data), getAtt('numeroDizimo', $data),
-						  getAtt('comunidadeId', $data), getAtt('observacoes', $data), getAtt('batizado', $data), getAtt('localBatismo', $data),
-						  getAtt('primeiraEucaristia', $data), getAtt('localPrimeiraEucaristia', $data),
+						  getAtt('comunidadeId', $data), getAtt('observacoes', $data), getAtt('batizado', $data), getAtt('localBatismo', $data), getAtt('dataBatismo', $data),
+						  getAtt('primeiraEucaristia', $data), getAtt('localPrimeiraEucaristia', $data), getAtt('dataPrimeiraEucaristia', $data),
 						  getAtt('status', $data), getAtt('dataUltimaAlteracao', $data), getAtt('usuarioUltimaAlteracaoId', $data)
 						  );
 		$result = $pessoa->addPessoa();
@@ -61,8 +61,8 @@
 						  $data['rgEmissor'], $data['rgUF'], $data['passaporte'], $data['nacionalidade'], 
 						  $data['email'], $data['logradouro'], $data['numero'], $data['complemento'], 
 						  $data['bairro'], $data['municipioId'], $data['cep'], $data['numeroDizimo'], $data['comunidadeId'],
-						  $data['observacoes'], $data['batizado'], $data['localBatismo'], $data['primeiraEucaristia'],
-						  $data['localPrimeiraEucaristia'], $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
+						  $data['observacoes'], $data['batizado'], $data['localBatismo'], $data['dataBatismo'], $data['primeiraEucaristia'],
+						  $data['localPrimeiraEucaristia'], $data['dataPrimeiraEucaristia'], $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId']
 						);
 		$result = $pessoa->savePessoa();
 		return $response->write($result);

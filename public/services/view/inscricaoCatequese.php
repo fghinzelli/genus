@@ -58,7 +58,7 @@
 							$data['observacoes'], $data['situacaoInscricaoId'], 
 							$data['comunidadeId'], $data['dataInscricao'],
 							$data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId'],
-							$data['livroPago'], $data['inscricaoPaga'], $data['inscricaoDataPagamento'] 
+							$data['livroPago'], $data['inscricaoPaga'], $data['inscricaoDataPagamento'], $data['nomePadrinho'] 
 						  );
 		$result = $inscricao->addInscricaoCatequese();
 		return $response->write($result);
@@ -73,7 +73,7 @@
 							  $data['observacoes'], $data['situacaoInscricaoId'], 
 							  $data['comunidadeId'], $data['dataInscricao'],
 							  $data['status'], $data['dataUltimaAlteracao'], $data['usuarioUltimaAlteracaoId'], $data['anoLetivoId'],
-							  $data['livroPago'], $data['inscricaoPaga'], $data['inscricaoDataPagamento']
+							  $data['livroPago'], $data['inscricaoPaga'], $data['inscricaoDataPagamento'], $data['nomePadrinho']
 							);
 		$result = $inscricao->saveInscricaoCatequese();
 		return $response->write($result);

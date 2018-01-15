@@ -32,6 +32,20 @@ angular.module('Home',)
                 $scope.estado = pessoa.municipio.uf;
                 $scope.pessoa.batizado = (pessoa.batizado === '1');
                 $scope.pessoa.primeiraEucaristia = (pessoa.primeiraEucaristia === '1');
+
+                if (($scope.pessoa.localBatismo != null) &&
+                    ($scope.pessoa.localBatismo != 'Nossa Senhora Mãe de Deus - Carlos Barbosa') &&
+                    ($scope.pessoa.localBatismo != 'Nossa Senhora das Graças - Arcoverde - Carlos Barbosa')) {
+                    $scope.pessoa.localBatismoOutro = $scope.pessoa.localBatismo;
+                    $scope.pessoa.localBatismo = 'Outro';   
+                }
+
+                if (($scope.pessoa.localPrimeiraEucaristia != null) &&
+                    ($scope.pessoa.localPrimeiraEucaristia != 'Nossa Senhora Mãe de Deus - Carlos Barbosa') &&
+                    ($scope.pessoa.localPrimeiraEucaristia != 'Nossa Senhora das Graças - Arcoverde - Carlos Barbosa')) {
+                    $scope.pessoa.localPrimeiraEucaristiaOutro = $scope.pessoa.localPrimeiraEucaristia;
+                    $scope.pessoa.localPrimeiraEucaristia = 'Outro';  
+                }
             })
             .error(function(erro) {
                 console.log(erro);
@@ -41,7 +55,13 @@ angular.module('Home',)
     
         // SUBMIT DO FORM - CREATE AND UPDATE
         $scope.submeterForm = function() {
-            if ($scope.formulario.$valid) {;
+            if ($scope.formulario.$valid) {
+                if ($scope.pessoa.localBatismo == 'Outro') {
+                    $scope.pessoa.localBatismo = $scope.pessoa.localBatismoOutro;
+                }
+                if ($scope.pessoa.localPrimeiraEucaristia == 'Outro') {
+                    $scope.pessoa.localPrimeiraEucaristia = $scope.pessoa.localPrimeiraEucaristiaOutro;
+                }
                 if ($routeParams.pessoaId) {
                     $http.put(serviceBase + 'pessoas/' + $scope.pessoa.id, $scope.pessoa)
                     .success(function() {

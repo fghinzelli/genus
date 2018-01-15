@@ -168,9 +168,11 @@ CREATE TABLE IF NOT EXISTS Pessoa (
 	comunidadeId int(10) NULL,
 	observacoes varchar(50) NULL,
 	batizado int(1) NULL,
-	localBatismo varchar(30) NULL,
+	localBatismo varchar(150) NULL,
+	dataBatismo date NULL,
 	primeiraEucaristia int(1) NULL,
-	localPrimeiraEucaristia varchar(30) NULL,
+	localPrimeiraEucaristia varchar(150) NULL,
+	dataPrimeiraEucaristia date NULL,
 	status int(1) NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,
@@ -264,7 +266,7 @@ CREATE TABLE IF NOT EXISTS TurmaCatequese (
 );
 
 CREATE TABLE `InscricaoCatequese` (
-	id int(11) NOT NULL,
+	id int(11) NOT NULL AUTO_INCREMENT,,
 	pessoaId int(10) NOT NULL,
 	etapaCatequeseId int(10) DEFAULT NULL,
 	escolaId int(11) DEFAULT NULL,
@@ -277,10 +279,11 @@ CREATE TABLE `InscricaoCatequese` (
 	status int(1) NOT NULL,
 	dataUltimaAlteracao datetime DEFAULT NULL,
 	usuarioUltimaAlteracaoId int(11) DEFAULT NULL,
-	anoLetivoId int(11) NOT NULL
+	anoLetivoId int(11) NOT NULL,
 	livroPago int(1) NULL,
 	inscricaoPaga int(1) NULL,
 	inscricaoDataPagamento date NULL,
+	nomePadrinho varchar(150) NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (pessoaId) REFERENCES Pessoa(id),
 	FOREIGN KEY (etapaCatequeseId) REFERENCES EtapaCatequese(id),

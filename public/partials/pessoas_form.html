@@ -187,7 +187,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-4">
-                                                        <div class="form-group">
+                                                        <div class="form-group" ng-class="{ 'has-error' : formulario.cpf.$invalid && !formulario.cpf.$pristine && formulario.$submitted }">
                                                             <label>CPF</label>
                                                             <input type="text" class="form-control" ui-mask="999.999.999-99" model-view-value="false" name="cpf" ng-model="pessoa.cpf" cpf-valido>
                                                             <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.$error.cpfValido">
@@ -252,12 +252,35 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label>Local do Batismo</label>
-                                                            <input type="text" class="form-control" name="localBatismo" ng-model="pessoa.localBatismo">
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group" ng-class="{ 'has-error' : formulario.dataBatismo.$invalid && !formulario.dataBatismo.$pristine && formulario.$submitted }">
+                                                            <label>Data de Batismo</label>
+                                                            <input type="text" name="dataBatismo" ui-mask="99/99/9999" model-view-value="true" 
+                                                                    class="form-control" ng-model="pessoa.dataBatismo" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
+                                                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataBatismo.$error.pattern">
+                                                                A data informada é inválida
+                                                            </span>
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>Paróquia/Cidade do Batismo</label>
+                                                            <select name="localBatismo" class="form-control" ng-model="pessoa.localBatismo">
+                                                                <option value="">Selecione</option>
+                                                                <option value="Nossa Senhora Mãe de Deus - Carlos Barbosa">N. Sra Mãe de Deus - Carlos Barbosa</option>
+                                                                <option value="Nossa Senhora das Graças - Arcoverde - Carlos Barbosa">N. Sra das Graças - Arcoverde/Carlos Barbosa</option>
+                                                                <option value="Outro">Outro</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group" ng-if="pessoa.localBatismo == 'Outro'">
+                                                            <label>Outro</label>
+                                                            <input type="text" class="form-control" name="localBatismoOutro" ng-model="pessoa.localBatismoOutro">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-lg-2">
                                                         <div class="form-group">
                                                             <div class="checkbox">
@@ -268,10 +291,31 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group" ng-class="{ 'has-error' : formulario.dataPrimeiraEucaristia.$invalid && !formulario.dataPrimeiraEucaristia.$pristine && formulario.$submitted }">
+                                                            <label>Data da Primeira Eucaristia</label>
+                                                            <input type="text" name="dataPrimeiraEucaristia" ui-mask="99/99/9999" model-view-value="true" 
+                                                                    class="form-control" ng-model="pessoa.dataPrimeiraEucaristia" pattern="^([012][0-9]|[3][01])\/(0[1-9]|1[0-2])\/[12][0-9]{3}$">
+                                                            <span class="label list-group-item-danger" ng-show="formulario.$submitted && formulario.dataPrimeiraEucaristia.$error.pattern">
+                                                                A data informada é inválida
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label>Local da Primeira Eucaristia</label>
-                                                            <input type="text" class="form-control" name="localPrimeiraEucaristia" ng-model="pessoa.localPrimeiraEucaristia">
+                                                            <label>Paróquia/Cidade da Primeira Eucaristia</label>
+                                                            <select name="localPrimeiraEucaristia" class="form-control" ng-model="pessoa.localPrimeiraEucaristia">
+                                                                <option value="">Selecione</option>
+                                                                <option value="Nossa Senhora Mãe de Deus - Carlos Barbosa">N. Sra Mãe de Deus - Carlos Barbosa</option>
+                                                                <option value="Nossa Senhora das Graças - Arcoverde - Carlos Barbosa">N. Sra das Graças - Arcoverde/Carlos Barbosa</option>
+                                                                <option value="Outro">Outro</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group" ng-if="pessoa.localPrimeiraEucaristia == 'Outro'">
+                                                            <label>Outro</label>
+                                                            <input type="text" class="form-control" name="localPrimeiraEucaristiaOutro" ng-model="pessoa.localPrimeiraEucaristiaOutro">
                                                         </div>
                                                     </div>
                                                 </div>

@@ -29,8 +29,10 @@ class Pessoa {
     public $observacoes;
     public $batizado;
     public $localBatismo;
+    public $dataBatismo;
     public $primeiraEucaristia;
     public $localPrimeiraEucaristia;
+    public $dataPrimeiraEucaristia;
     public $status;
     public $dataUltimaAlteracao;
     public $usuarioUltimaAlteracaoId;
@@ -42,8 +44,8 @@ class Pessoa {
     function loadData($id, $nome, $sexo, $nomePai, $nomeMae, $dataNascimento, $telefone1, $telefone2,
                       $cpf, $rg, $rgEmissor, $rgUF, $passaporte, $nacionalidade, $email, $logradouro, 
                       $numero, $complemento, $bairro, $municipioId, $cep,
-                      $numeroDizimo, $comunidadeId, $observacoes, $batizado, $localBatismo, $primeiraEucaristia,
-                      $localPrimeiraEucaristia, $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
+                      $numeroDizimo, $comunidadeId, $observacoes, $batizado, $localBatismo, $dataBatismo, $primeiraEucaristia,
+                      $localPrimeiraEucaristia, $dataPrimeiraEucaristia, $status, $dataUltimaAlteracao, $usuarioUltimaAlteracaoId) {
         $this->id = $id;
 		$this->nome = $nome;
         $this->sexo = $sexo;
@@ -71,8 +73,10 @@ class Pessoa {
         $this->observacoes = $observacoes;
         $this->batizado = (int)$batizado;
         $this->localBatismo = $localBatismo;
+        $this->dataBatismo = converterDataToISO($dataBatismo);
         $this->primeiraEucaristia = (int)$primeiraEucaristia;
         $this->localPrimeiraEucaristia = $localPrimeiraEucaristia;
+        $this->dataPrimeiraEucaristia = converterDataToISO($dataPrimeiraEucaristia);
         $this->status = $status;
         $this->dataUltimaAlteracao = $dataUltimaAlteracao;
         $this->usuarioUltimaAlteracaoId = $usuarioUltimaAlteracaoId;
@@ -86,6 +90,8 @@ class Pessoa {
             // Busca de dados relacionados
             // COMUNIDADE
             $pessoa->dataNascimento = converterDataFromISO($pessoa->dataNascimento);
+            $pessoa->dataBatismo = converterDataFromISO($pessoa->dataBatismo);
+            $pessoa->dataPrimeiraEucaristia = converterDataFromISO($pessoa->dataPrimeiraEucaristia);
             $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
             $queryc = $this->db->prepare($sqlc);
             $queryc->bindParam("id",$pessoa->comunidadeId);
@@ -109,6 +115,8 @@ class Pessoa {
       $query->execute();
       $pessoa = $query->fetchObject();
       $pessoa->dataNascimento = converterDataFromISO($pessoa->dataNascimento);
+      $pessoa->dataBatismo = converterDataFromISO($pessoa->dataBatismo);
+      $pessoa->dataPrimeiraEucaristia = converterDataFromISO($pessoa->dataPrimeiraEucaristia);
 
       // COMUNIDADE
       $sqlc = "SELECT * FROM Comunidade WHERE id=:id";
@@ -133,14 +141,14 @@ class Pessoa {
         $sql = "INSERT INTO Pessoa (`nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, 
                                     `cpf`, `rg`, `rgEmissor`, `rgUF`, `passaporte`, `nacionalidade`, `email`, `logradouro`, 
                                     `numero`, `complemento`, `bairro`, `municipioId`, `cep`, 
-                                    `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, 
-                                    `primeiraEucaristia`, `localPrimeiraEucaristia`, 
+                                    `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, `dataBatismo`,
+                                    `primeiraEucaristia`, `localPrimeiraEucaristia`, `dataPrimeiraEucaristia`,
                                     `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
                 VALUES (:nome, :sexo, :nomePai, :nomeMae, :dataNascimento, :telefone1, :telefone2, 
                         :cpf, :rg, :rgEmissor, :rgUF, :passaporte, :nacionalidade, :email, :logradouro, :numero, 
                         :complemento, :bairro, :municipioId, :cep, 
-                        :numeroDizimo, :comunidadeId, :observacoes, :batizado, :localBatismo,
-                        :primeiraEucaristia, :localPrimeiraEucaristia, 
+                        :numeroDizimo, :comunidadeId, :observacoes, :batizado, :localBatismo, :dataBatismo,
+                        :primeiraEucaristia, :localPrimeiraEucaristia, :dataPrimeiraEucaristia,
                         :status, NOW(), :usuarioUltimaAlteracaoId)";
         $query = $this->db->prepare($sql);
         $query->bindParam(":nome",$this->nome);
@@ -168,8 +176,10 @@ class Pessoa {
         $query->bindParam(":observacoes", $this->observacoes);
         $query->bindParam(":batizado", $this->batizado);
         $query->bindParam(":localBatismo", $this->localBatismo);
+        $query->bindParam(":dataBatismo",$this->dataBatismo);
         $query->bindParam(":primeiraEucaristia", $this->primeiraEucaristia);
         $query->bindParam(":localPrimeiraEucaristia", $this->localPrimeiraEucaristia);
+        $query->bindParam(":dataPrimeiraEucaristia",$this->dataPrimeiraEucaristia);
         $query->bindParam(":status",$this->status);
         //$query->bindParam(":dataUltimaAlteracao", $this->dataUltimaAlteracao);
         $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);
@@ -186,8 +196,8 @@ class Pessoa {
                                   email=:email, logradouro=:logradouro, numero=:numero, 
                                   complemento=:complemento, bairro=:bairro, municipioId=:municipioId, cep=:cep,
                                   numeroDizimo=:numeroDizimo, comunidadeId=:comunidadeId, observacoes=:observacoes, 
-                                  batizado=:batizado, localBatismo=:localBatismo, primeiraEucaristia=:primeiraEucaristia, 
-                                  localPrimeiraEucaristia=:localPrimeiraEucaristia, status=:status, 
+                                  batizado=:batizado, localBatismo=:localBatismo, dataBatismo=:dataBatismo, primeiraEucaristia=:primeiraEucaristia, 
+                                  localPrimeiraEucaristia=:localPrimeiraEucaristia, dataPrimeiraEucaristia=:dataPrimeiraEucaristia, status=:status, 
                                   dataUltimaAlteracao=NOW(), usuarioUltimaAlteracaoId=:usuarioUltimaAlteracaoId 
                 WHERE id=:id";
       $query = $this->db->prepare($sql);
@@ -217,8 +227,10 @@ class Pessoa {
       $query->bindParam(":observacoes", $this->observacoes);
       $query->bindParam(":batizado", $this->batizado);
       $query->bindParam(":localBatismo", $this->localBatismo);
+      $query->bindParam(":dataBatismo",$this->dataBatismo);
       $query->bindParam(":primeiraEucaristia", $this->primeiraEucaristia);
       $query->bindParam(":localPrimeiraEucaristia", $this->localPrimeiraEucaristia);
+      $query->bindParam(":dataPrimeiraEucaristia", $this->dataPrimeiraEucaristia);
       $query->bindParam(":status",$this->status);
       //$query->bindParam(":dataUltimaAlteracao", $this->dataUltimaAlteracao);
       $query->bindParam(":usuarioUltimaAlteracaoId", $this->usuarioUltimaAlteracaoId);

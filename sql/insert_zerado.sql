@@ -5738,34 +5738,14 @@ INSERT INTO `Comunidade` (`id`, `nome`, `paroquiaId`, `dataFundacao`, `responsav
 --
 
 INSERT INTO `Pessoa` (`id`, `nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, `cpf`, `rg`, `rgEmissor`, `rgUF`, `passaporte`, `nacionalidade`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, `primeiraEucaristia`, `localPrimeiraEucaristia`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `dataBatismo`, `dataPrimeiraEucaristia`) VALUES
-(1, 'Admin', 'M', 'Pai', 'Mãe', '2001-01-01', '54987879879', '54545646565', '00746064098', '454545', 'ssp', 'GO', NULL, 'Brasileira', 'email@gmail.com', 'Endereço', '12345', 'complemento', 'bairro', 4697, 98764564, '12345', 2, 'XXXXX', 0, 'AAAA', 1, 'VVVV', 1, '2018-01-04 00:27:51', NULL, NULL, NULL),
-(2, 'Maria da Silva', 'F', 'Mario da Silva', 'Isabel da Silva', '2017-06-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '12345', 1, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(3, 'Antônio de Jesus', 'M', 'João de Jesus', 'Marta de Jesus', '2017-08-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '12345', 1, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(4, 'Salete da Costa', 'F', 'Mario da Costa', 'Teresa da Costa', '2017-06-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '12345', 1, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(5, 'Rafael Gonçalves', 'M', 'Jose Gonçalves', 'Lourdes Gonçalves', '2017-08-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '12345', 1, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(6, 'Simone da Cruz', 'F', 'Mario da Cruz', 'Salete da Cruz', '2017-06-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '12345', 1, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(7, 'Gabriel da Costa', 'M', 'Douglas da Costa', 'Maria da Costa', '2017-08-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '12345', 1, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(8, 'Jéssica Antunes', 'F', 'Mario Antunes', 'Maria Antunes', '2017-06-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '12345', 1, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(10, 'Fabio da Conceicao', 'M', 'Pai', 'Mae', '1986-06-11', '54987773472', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-14 06:47:17', NULL, NULL, NULL),
-(11, 'Antonia Vasconcelos', 'F', 'pai', 'mae', '1984-06-11', '54082320134', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-14 06:53:42', NULL, NULL, NULL),
-(12, 'Antonia Vasconcelos', 'F', 'pai', 'mae', '1984-06-11', '54082320134', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-14 06:54:22', NULL, NULL, NULL),
-(13, 'José Luis Andrade', 'M', 'Pai', 'Mae', '1956-04-21', '54990566000', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-14 06:57:34', NULL, NULL, NULL),
-(14, 'Lourdes Andrade', 'F', 'pai', 'mae', '1957-09-08', '54654656456', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-14 07:00:53', NULL, NULL, NULL),
-(24, 'Mariana da Cruz', 'F', NULL, NULL, '2000-10-11', '54764634564', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-14 23:26:04', NULL, NULL, NULL),
-(25, 'Joaquin da Silva', 'M', NULL, NULL, '1010-02-11', '54234232342', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-14 23:49:55', NULL, NULL, NULL),
-(26, 'Ana Barcelos', 'F', NULL, NULL, '2000-09-11', '54454356453', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-14 23:58:50', NULL, NULL, NULL),
-(27, 'Lucas da Silva', 'M', 'João da Silva', 'Mara da Silva', '2010-05-11', '54545454545', '', '00075645456', '12323123', NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '2017-11-15 00:06:44', NULL, NULL, NULL),
-(29, 'Fernando Rodrigues', 'M', 'teste', 'teste', '1985-08-14', '', '', '', NULL, NULL, NULL, NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, NULL, 95185000, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, '2017-11-19 08:52:26', NULL, NULL, NULL),
-(30, 'teste', 'M', '', NULL, '2000-04-14', '', '', '', '2342342342', 'ssp', 'DF', NULL, 'Brasileira', 'email@email.com', NULL, NULL, NULL, NULL, 4697, 95185000, NULL, 2, NULL, NULL, NULL, NULL, NULL, 1, '2017-11-23 01:02:21', NULL, NULL, NULL),
-(31, 'Fernando Ghinzelli', 'M', 'José Luis Ghinzelli', 'Lourdes Camatti Ghinzelli', '1985-08-14', '', '', '', NULL, NULL, NULL, NULL, 'Brasileira', NULL, NULL, NULL, NULL, NULL, 4697, 95185000, NULL, NULL, NULL, 0, NULL, 0, NULL, 1, '2018-01-03 23:24:12', NULL, NULL, NULL);
+(1, 'Admin', 'M', '', '', '2001-01-01', '54987879879', '54545646565', '00746064098', '454545', 'ssp', 'GO', NULL, 'Brasileira', 'email@gmail.com', 'Endereço', '12345', 'complemento', 'bairro', 4697, 98764564, '12345', 2, 'XXXXX', 0, 'AAAA', 1, 'VVVV', 1, '2018-01-04 00:27:51', NULL, NULL, NULL);
 
 --
 -- Dumping data for table `Usuario`
 --
 
 INSERT INTO `Usuario` (`id`, `username`, `senha`, `pessoaId`, `token`, `tokenExpiracao`, `status`, `paroquiaSelecionada`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 'admin', '$2y$10$CCv9j9AfeD7tPKSN/mq9P.WZiza8Wee6huJHrqux6aPYmOx0BD3Km', 1, 'b0729c9d43d1881f', '2017-11-23 02:02:29', 1, 1, '2017-11-22 00:24:33', NULL),
-(4, 'teste', '$2y$10$K/V0l5OwEQH59sZiNLoG4eRWAhcGIgHgDiR2/tVNeWvJRNEGFmwDO', 29, NULL, NULL, 1, NULL, '2017-11-22 20:13:49', NULL);
+(1, 'admin', '$2y$10$CCv9j9AfeD7tPKSN/mq9P.WZiza8Wee6huJHrqux6aPYmOx0BD3Km', 1, 'b0729c9d43d1881f', '2017-11-23 02:02:29', 1, 1, '2017-11-22 00:24:33', NULL);
 
 --
 -- Dumping data for table `AcessoParoquia`
@@ -5775,63 +5755,8 @@ INSERT INTO `AcessoParoquia` (`id`, `paroquiaId`, `usuarioId`, `nivelAcessoId`) 
 (1, 1, 1, 1);
 
 --
--- Dumping data for table `Catequista`
---
-
-INSERT INTO `Catequista` (`id`, `pessoaId`, `comunidadeId`, `dataInicio`, `observacoes`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 1, 1, '2017-11-01', 'Observacoes', 1, '2017-11-07 06:02:31', NULL),
-(2, 2, 1, '2017-11-01', 'Observacoes', 1, '2017-11-15 00:09:18', NULL),
-(3, 13, 1, '2017-11-01', 'Observacoes', 1, '2017-11-16 21:06:02', NULL),
-(6, 7, 1, '2010-10-23', 'Observacoes', 1, '2017-11-09 00:20:05', NULL),
-(7, 26, 2, '2001-10-11', 'Observações do Catequista', 1, '2017-11-21 21:46:30', NULL),
-(9, 29, 1, '2000-01-01', 'Observacoes', 1, '2017-11-19 08:52:45', NULL);
-
---
 -- Dumping data for table `AnoLetivoCatequese`
 --
 
 INSERT INTO `AnoLetivoCatequese` (`id`, `descricao`, `status`) VALUES
-(1, '2017/2018', 1),
-(2, '2016/2017', 1);
-
---
--- Dumping data for table `TurmaCatequese`
---
-
-INSERT INTO `TurmaCatequese` (`id`, `etapaCatequeseId`, `catequistaId`, `observacoes`, `turnoId`, `diaSemana`, `dataInicio`, `dataTermino`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `horario`, `comunidadeId`, `anoLetivoId`) VALUES
-(1, 1, 1, 'obs', 1, 3, '2017-11-08', NULL, 1, '2017-11-09 02:12:31', NULL, '13:00', 1, 1),
-(2, 2, 2, 'obs', 2, 2, '2017-11-08', NULL, 1, NULL, NULL, '13:00', 1, 1),
-(3, 2, 1, 'obs', 3, 0, NULL, NULL, 0, '2017-11-09 02:12:48', NULL, '16:00', 1, 1),
-(4, 4, 6, 'obs', 3, 2, '2010-10-10', '2010-01-28', 1, '2017-11-16 21:09:54', NULL, '10:00', 1, 1),
-(5, 2, 2, 'obs', 2, 2, '2017-10-08', '2017-12-08', 2, '2017-11-19 23:47:05', NULL, '14:00', 1, 1);
-
---
--- Dumping data for table `InscricaoCatequese`
---
-
-INSERT INTO `InscricaoCatequese` (`id`, `pessoaId`, `etapaCatequeseId`, `escolaId`, `etapaEscolaId`, `observacoes`, `situacaoInscricaoId`, `comunidadeId`, `dataInscricao`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `anoLetivoId`, `livroPago`, `inscricaoPaga`, `inscricaoDataPagamento`, `nomePadrinho`) VALUES
-(1, 2, 2, 3, 1, 'xxxxx', 1, 1, '2017-11-07', 1, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(2, 3, 3, 2, 2, 'xxxxxab', 1, 1, '2018-11-07', 1, '2018-01-04 00:34:23', NULL, 1, 0, 1, NULL, NULL),
-(3, 4, 4, 1, 1, 'abcde', 1, 1, '2017-11-07', 0, '2018-01-02 00:15:54', NULL, 1, NULL, NULL, NULL, NULL),
-(9, 26, 2, 2, 2, 'eeeee', 1, 2, '2000-01-01', 0, '2017-12-30 11:49:29', NULL, 1, NULL, NULL, NULL, NULL),
-(12, 29, 1, 1, 1, 'abcdef', 1, 2, '2000-01-01', 1, '2017-12-30 11:54:15', NULL, 1, NULL, NULL, NULL, NULL),
-(17, 11, 3, 1, 1, 'ffffff', 1, 2, '2000-01-01', 0, '2017-12-30 12:33:08', NULL, 2, NULL, NULL, NULL, NULL),
-(18, 25, 1, 2, 6, 'santana', 1, 1, '2000-01-01', 1, '2017-12-30 12:34:23', NULL, 1, NULL, NULL, NULL, NULL),
-(19, 31, 1, 1, 1, 'abcdef', 1, 2, '2000-01-01', 0, '2017-12-30 11:54:15', NULL, 1, NULL, NULL, NULL, NULL),
-(20, 31, 1, 2, 10, NULL, 1, 1, '2001-01-01', 0, '2018-01-08 00:02:51', NULL, 2, 0, 1, NULL, NULL),
-(21, 31, 1, 2, 10, NULL, 1, 1, '2001-01-01', 0, '2018-01-08 00:03:24', NULL, 2, 0, 1, NULL, NULL),
-(22, 31, 1, 2, 10, NULL, 1, 1, '2001-01-01', 0, '2018-01-08 00:04:03', NULL, 2, 0, 1, NULL, NULL),
-(23, 31, 1, 2, 9, 'xxxx', 1, 1, '2001-01-01', 1, '2018-01-08 00:05:50', NULL, 1, 1, 1, NULL, NULL);
-
-
-INSERT INTO `ResponsavelInscricao` VALUES 
-(NULL, '1', '2', 'ABCCDE', '1', '1', NULL, NULL),
-(NULL, '2', '2', 'ABCCDE', '2', '1', NULL, NULL),
-(NULL, '1', '2', 'ABCCDE', '1', '1', NULL, NULL);
-
-
-INSERT INTO `TurmaCatequeseInscricao` (`id`, `inscricaoCatequeseId`, `turmaCatequeseId`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
-VALUES 
-(NULL, '1', '1', '1', NULL, NULL),
-(NULL, '2', '1', '1', NULL, NULL),
-(NULL, '3', '1', '1', NULL, NULL);
+(1, '2018', 1);
