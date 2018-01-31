@@ -38,7 +38,7 @@
 		$pessoa->loadData(null, 
 						  getAtt('nome', $data), getAtt('sexo', $data), getAtt('nomePai', $data),
 						  getAtt('nomeMae', $data), getAtt('dataNascimento', $data), getAtt('telefone1', $data),
-						  getAtt('telefone2', $data), getAtt('cpf', $data), getAtt('rg', $data),
+						  getAtt('telefone2', $data), getAtt('telefone3', $data), getAtt('cpf', $data), getAtt('rg', $data),
 						  getAtt('rgEmissor', $data), getAtt('rgUF', $data), getAtt('passaporte', $data),
 						  getAtt('nacionalidade', $data), getAtt('email', $data), getAtt('logradouro', $data),
 						  getAtt('numero', $data), getAtt('complemento', $data), getAtt('bairro', $data),
@@ -57,7 +57,7 @@
 		$data = $request->getParsedBody();
 		$pessoa = new Pessoa(db::getInstance());
 		$pessoa->loadData($args['id'], $data['nome'], $data['sexo'], $data['nomePai'], $data['nomeMae'],
-						  $data['dataNascimento'], $data['telefone1'], $data['telefone2'], $data['cpf'], $data['rg'], 
+						  $data['dataNascimento'], $data['telefone1'], $data['telefone2'], $data['telefone3'], $data['cpf'], $data['rg'], 
 						  $data['rgEmissor'], $data['rgUF'], $data['passaporte'], $data['nacionalidade'], 
 						  $data['email'], $data['logradouro'], $data['numero'], $data['complemento'], 
 						  $data['bairro'], $data['municipioId'], $data['cep'], $data['numeroDizimo'], $data['comunidadeId'],

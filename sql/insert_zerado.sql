@@ -5737,8 +5737,8 @@ INSERT INTO `Comunidade` (`id`, `nome`, `paroquiaId`, `dataFundacao`, `responsav
 -- Dumping data for table `Pessoa`
 --
 
-INSERT INTO `Pessoa` (`id`, `nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, `cpf`, `rg`, `rgEmissor`, `rgUF`, `passaporte`, `nacionalidade`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, `primeiraEucaristia`, `localPrimeiraEucaristia`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `dataBatismo`, `dataPrimeiraEucaristia`) VALUES
-(1, 'Admin', 'M', '', '', '2001-01-01', '54987879879', '54545646565', '00746064098', '454545', 'ssp', 'GO', NULL, 'Brasileira', 'email@gmail.com', 'Endereço', '12345', 'complemento', 'bairro', 4697, 98764564, '12345', 2, 'XXXXX', 0, 'AAAA', 1, 'VVVV', 1, '2018-01-04 00:27:51', NULL, NULL, NULL);
+INSERT INTO `Pessoa` (`id`, `nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, `telefone3`, `cpf`, `rg`, `rgEmissor`, `rgUF`, `passaporte`, `nacionalidade`, `email`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, `primeiraEucaristia`, `localPrimeiraEucaristia`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`, `dataBatismo`, `dataPrimeiraEucaristia`) VALUES
+(1, 'Admin', 'M', '', '', '2001-01-01', '54987879879', '54545646565', '54545646565', '00746064098', '454545', 'ssp', 'GO', NULL, 'Brasileira', 'email@gmail.com', 'Endereço', '12345', 'complemento', 'bairro', 4697, 98764564, '12345', 2, 'XXXXX', 0, 'AAAA', 1, 'VVVV', 1, '2018-01-04 00:27:51', NULL, NULL, NULL);
 
 --
 -- Dumping data for table `Usuario`

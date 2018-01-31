@@ -11,6 +11,7 @@ class Pessoa {
     public $dataNascimento;
     public $telefone1;
     public $telefone2;
+    public $telefone3;
     public $cpf;
     public $rg;
     public $rgEmissor;
@@ -41,7 +42,7 @@ class Pessoa {
         $this->db = $db;
     }
 
-    function loadData($id, $nome, $sexo, $nomePai, $nomeMae, $dataNascimento, $telefone1, $telefone2,
+    function loadData($id, $nome, $sexo, $nomePai, $nomeMae, $dataNascimento, $telefone1, $telefone2, $telefone3,
                       $cpf, $rg, $rgEmissor, $rgUF, $passaporte, $nacionalidade, $email, $logradouro, 
                       $numero, $complemento, $bairro, $municipioId, $cep,
                       $numeroDizimo, $comunidadeId, $observacoes, $batizado, $localBatismo, $dataBatismo, $primeiraEucaristia,
@@ -53,7 +54,8 @@ class Pessoa {
         $this->nomeMae = $nomeMae;
 		$this->dataNascimento = converterDataToISO($dataNascimento);
 		$this->telefone1 = $telefone1;
-		$this->telefone2 = $telefone2;
+        $this->telefone2 = $telefone2;
+        $this->telefone3 = $telefone3;
 		$this->cpf = $cpf;
         $this->rg = $rg;
         $this->rgEmissor = $rgEmissor;
@@ -138,13 +140,13 @@ class Pessoa {
     }
 
     function addPessoa() {
-        $sql = "INSERT INTO Pessoa (`nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, 
+        $sql = "INSERT INTO Pessoa (`nome`, `sexo`, `nomePai`, `nomeMae`, `dataNascimento`, `telefone1`, `telefone2`, `telefone3`, 
                                     `cpf`, `rg`, `rgEmissor`, `rgUF`, `passaporte`, `nacionalidade`, `email`, `logradouro`, 
                                     `numero`, `complemento`, `bairro`, `municipioId`, `cep`, 
                                     `numeroDizimo`, `comunidadeId`, `observacoes`, `batizado`, `localBatismo`, `dataBatismo`,
                                     `primeiraEucaristia`, `localPrimeiraEucaristia`, `dataPrimeiraEucaristia`,
                                     `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) 
-                VALUES (:nome, :sexo, :nomePai, :nomeMae, :dataNascimento, :telefone1, :telefone2, 
+                VALUES (:nome, :sexo, :nomePai, :nomeMae, :dataNascimento, :telefone1, :telefone2, :telefone3,
                         :cpf, :rg, :rgEmissor, :rgUF, :passaporte, :nacionalidade, :email, :logradouro, :numero, 
                         :complemento, :bairro, :municipioId, :cep, 
                         :numeroDizimo, :comunidadeId, :observacoes, :batizado, :localBatismo, :dataBatismo,
@@ -158,6 +160,7 @@ class Pessoa {
         $query->bindParam(":dataNascimento",$this->dataNascimento);
         $query->bindParam(":telefone1",$this->telefone1);
         $query->bindParam(":telefone2",$this->telefone2);
+        $query->bindParam(":telefone3",$this->telefone3);
         $query->bindParam(":cpf",$this->cpf);
         $query->bindParam(":rg",$this->rg);
         $query->bindParam(":rgEmissor",$this->rgEmissor);
@@ -191,7 +194,7 @@ class Pessoa {
     function savePessoa()
     {
         $sql = "UPDATE Pessoa SET nome=:nome, sexo=:sexo, nomePai=:nomePai, nomeMae=:nomeMae, 
-                                  dataNascimento=:dataNascimento, telefone1=:telefone1, telefone2=:telefone2, 
+                                  dataNascimento=:dataNascimento, telefone1=:telefone1, telefone2=:telefone2, telefone3=:telefone3, 
                                   cpf=:cpf, rg=:rg, rgEmissor=:rgEmissor, rgUF=:rgUF, passaporte=:passaporte, nacionalidade=:nacionalidade,
                                   email=:email, logradouro=:logradouro, numero=:numero, 
                                   complemento=:complemento, bairro=:bairro, municipioId=:municipioId, cep=:cep,
@@ -209,6 +212,7 @@ class Pessoa {
       $query->bindParam(":dataNascimento",$this->dataNascimento);
       $query->bindParam(":telefone1",$this->telefone1);
       $query->bindParam(":telefone2",$this->telefone2);
+      $query->bindParam(":telefone3",$this->telefone3);
       $query->bindParam(":cpf",$this->cpf);
       $query->bindParam(":rg",$this->rg);
       $query->bindParam(":rgEmissor",$this->rgEmissor);

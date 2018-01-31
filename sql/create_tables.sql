@@ -151,6 +151,7 @@ CREATE TABLE IF NOT EXISTS Pessoa (
 	dataNascimento date NULL,
 	telefone1 varchar(12) NULL,
 	telefone2 varchar(12) NULL,
+	telefone3 varchar(12) NULL,
 	cpf varchar(11) NULL,
 	rg varchar(15) NULL,
 	rgEmissor varchar(10) NULL,
