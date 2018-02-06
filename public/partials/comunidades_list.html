@@ -39,14 +39,14 @@
                             <thead>
                                 <tr>
                                     <th>Nome <i class="fa fa-sort"></i></th>
-                                    <th>Telefone <i class="fa fa-sort"></i></th>
+                                    <th>Bairro <i class="fa fa-sort"></i></th>
                                     <th>Ações <i class="fa fa-sort"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="comunidade in comunidades | filter: filtro">
                                     <td>{{comunidade.nome}}</td>
-                                    <td>{{comunidade.telefone}}</td>
+                                    <td>{{comunidade.bairro}}</td>
                                     <td>
                                         <a href="#/comunidades/edit/{{comunidade.id}}" class="btn btn-sm btn-default" href="">Editar</a>
                                         <button class="btn btn-sm btn-default" ng-click="remover(comunidade)">Remover</button>

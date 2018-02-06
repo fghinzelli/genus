@@ -2,12 +2,15 @@
 
 angular.module('Home',)
 .controller('PessoasListController',
-    ['$scope', '$rootScope', '$http', '$cookieStore', '$routeParams',
-    function ($scope, $rootScope, $http, $cookieStore, $routeParams) {
+    ['$scope', '$rootScope', '$http', '$cookieStore', '$routeParams', 'NgTableParams',
+    function ($scope, $rootScope, $http, $cookieStore, $routeParams, NgTableParams) {
         
         var serviceBase = 'services/';
         var globals = $cookieStore.get('globals');
         $http.defaults.headers.common['Authorization'] = globals['currentUser']['token'];
+        
+        //var data = [{name: "Moroni", age: 50}];
+        //$scope.tableParams = new NgTableParams({}, { dataset: data});
         
         
         // MENSAGEM DE ALERTA
@@ -30,7 +33,8 @@ angular.module('Home',)
         // LISTAGEM DE PESSOAS
         $http.get(serviceBase + 'pessoas')
         .success(function(pessoas) {
-            $scope.pessoas = pessoas;
+            //$scope.pessoas = pessoas;
+            $scope.tableParams = new NgTableParams({}, { dataset: pessoas});
         })
         .error(function(erro) {
             console.log(erro)

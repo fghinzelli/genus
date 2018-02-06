@@ -2,7 +2,7 @@
 
 // declare modules
 angular.module('Authentication', []);
-angular.module('Home', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+angular.module('Home', ['ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngTable']);
 
 angular.module('Genus', [
     'Authentication',
@@ -12,7 +12,7 @@ angular.module('Genus', [
     'ngSanitize',
     'ngCookies',
     'ui.bootstrap',
-    'ui.mask'
+    'ui.mask',
 ])
  
 

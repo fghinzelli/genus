@@ -35,28 +35,30 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped tablesorter">
-                            <thead>
-                                <tr>
-                                    <th>Nome <i class="fa fa-sort"></i></th>
-                                    <th>Nome da Mãe <i class="fa fa-sort"></i></th>
-                                    <th>Data Nascimento <i class="fa fa-sort"></i></th>
-                                    <th>Ações <i class="fa fa-sort"></i></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="pessoa in pessoas | filter: filtro">
-                                    <td>{{pessoa.nome}}</td>
-                                    <td>{{pessoa.nomeMae}}</td>
-                                    <td>{{pessoa.dataNascimento | date:'dd/MM/yyyy' }}</td>
-                                    <td>
-                                        <a href="#/pessoas/edit/{{pessoa.id}}" class="btn btn-sm btn-default" href="">Editar</a>
-                                        <button class="btn btn-sm btn-default" ng-click="remover(pessoa)">Remover</button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        <table class="table table-hover table-striped tablesorter" ng-table="tableParams">
+                            <tr ng-repeat="pessoa in $data | filter: filtro">
+                                <td title="'Nome'" sortable="'nome'">{{pessoa.nome}}</td>
+                                <td title="'Nome da Mãe'" sortable="'nomeMae'">{{pessoa.nomeMae}}</td>
+                                <td title="'Nascimento'" sortable="'dataNascimento'">{{pessoa.dataNascimento | date:'dd/MM/yyyy' }}</td>
+                                <td>
+                                    <a href="#/pessoas/edit/{{pessoa.id}}" class="btn btn-sm btn-default" href="">Editar</a>
+                                    <button class="btn btn-sm btn-default" ng-click="remover(pessoa)">Remover</button>
+                                </td>
+                            </tr>
                         </table>
+                    
+                        <!--
+                        <table ng-table="tableParams" class="table" show-filter="true">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Name'" sortable="'name'">
+                                    {{user.name}}</td>
+                                <td title="'Age'" sortable="'age'">
+                                    {{user.age}}</td>
+                            </tr>
+                        </table>
+                        -->
                     </div>
+                    
                 </div>
             </div><!-- /.row -->
 
