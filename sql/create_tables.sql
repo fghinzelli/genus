@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS Comunidade (
 	cep int(10) NULL,
 	email varchar(50) NULL,
 	telefone varchar(15) NULL,
+	telefone2 varchar(15) NULL,
 	status int(1) NULL,
 	dataUltimaAlteracao datetime,
 	usuarioUltimaAlteracaoId INT NULL,

@@ -5724,14 +5724,14 @@ INSERT INTO `Paroquia` (`id`, `nome`, `cnpj`, `email`, `telefone`, `logradouro`,
 -- Dumping data for table `Comunidade`
 --
 
-INSERT INTO `Comunidade` (`id`, `nome`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `email`, `telefone`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
-(1, 'NOSSA SENHORA APARECIDA', 1, '1999-10-10', 'INES', NULL, NULL, NULL, 'APARECIDA', 4697, 95185000, NULL, NULL, 1, NULL, NULL),
-(2, 'NOSSA SENHORA DAS GRAÇAS', 2, '2000-11-11', 'LETICIA', NULL, NULL, NULL, 'ARCOVERDE', 4697, 95185000, NULL, NULL, 1, NULL, NULL),
-(3, 'SÃO ROQUE', 1, '2006-10-30', 'RITA', NULL, NULL, NULL, 'PONTE SECA', 4697, 95185000, NULL, NULL, 1, NULL, NULL),
-(4, 'NOSSA SENHORA MÃE DE DEUS', 1, '1999-09-09', 'CLARICE', 'RUA PREFEITO JOSÉ CHIES', '222', NULL, 'CENTRO', 4697, 95185000, 'contato@paroquiamaededeus.org.br', '5434611476', 1, NULL, NULL),
-(5, 'CRISTO REI', 1, '2000-01-01', 'MARIA IRIS', NULL, NULL, NULL, 'VILA NOVA', 4697, 95185000, NULL, '5555555555', 1, NULL, NULL),
-(6, 'NOSSA SENHORA DE CARAVAGGIO', 1, '2000-01-01', 'ROSEMARA', 'ZCCBXBX', 'XBXB', '', 'TRIANGULO', 4697, 95185000, '', '6666666666', 1, NULL, NULL),
-(7, 'NOSSA SENHORA RAINHA DA PAZ', 1, '1977-10-19', 'AFFAF', NULL, NULL, NULL, NULL, 4697, 95185000, NULL, '', 1, NULL, NULL);
+INSERT INTO `Comunidade` (`id`, `nome`, `paroquiaId`, `dataFundacao`, `responsavelCatequese`, `logradouro`, `numero`, `complemento`, `bairro`, `municipioId`, `cep`, `email`, `telefone`, `telefone2`, `status`, `dataUltimaAlteracao`, `usuarioUltimaAlteracaoId`) VALUES
+(1, 'NOSSA SENHORA APARECIDA', 1, '1999-10-10', 'INES', NULL, NULL, NULL, 'APARECIDA', 4697, 95185000, NULL, NULL, NULL, 1, NULL, NULL),
+(2, 'NOSSA SENHORA DAS GRAÇAS', 2, '2000-11-11', 'LETICIA', NULL, NULL, NULL, 'ARCOVERDE', 4697, 95185000, NULL, NULL, NULL, 1, NULL, NULL),
+(3, 'SÃO ROQUE', 1, '2006-10-30', 'RITA', NULL, NULL, NULL, 'PONTE SECA', 4697, 95185000, NULL, NULL, NULL, 1, NULL, NULL),
+(4, 'NOSSA SENHORA MÃE DE DEUS', 1, '1999-09-09', 'CLARICE', 'RUA PREFEITO JOSÉ CHIES', '222', NULL, 'CENTRO', 4697, 95185000, 'contato@paroquiamaededeus.org.br', '5434611476', NULL, 1, NULL, NULL),
+(5, 'CRISTO REI', 1, '2000-01-01', 'MARIA IRIS', NULL, NULL, NULL, 'VILA NOVA', 4697, 95185000, NULL, '5555555555', NULL, 1, NULL, NULL),
+(6, 'NOSSA SENHORA DE CARAVAGGIO', 1, '2000-01-01', 'ROSEMARA', 'ZCCBXBX', 'XBXB', '', 'TRIANGULO', 4697, 95185000, '', '6666666666', NULL, 1, NULL, NULL),
+(7, 'NOSSA SENHORA RAINHA DA PAZ', 1, '1977-10-19', 'AFFAF', NULL, NULL, NULL, NULL, 4697, 95185000, NULL, '', NULL, 1, NULL, NULL);
 
 --
 -- Dumping data for table `Pessoa`
