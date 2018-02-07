@@ -3,7 +3,7 @@
 angular.module('Home',)
 .controller('PessoasListController',
     ['$scope', '$rootScope', '$http', '$cookieStore', '$routeParams', 'NgTableParams',
-    function ($scope, $rootScope, $http, $cookieStore, $routeParams, NgTableParams) {
+    function ($scope, $rootScope, $http, $cookieStore, $routeParams, NgTableParams, Excel, $timeout) {
         
         var serviceBase = 'services/';
         var globals = $cookieStore.get('globals');
@@ -17,6 +17,11 @@ angular.module('Home',)
         $scope.pessoas = [];
         $scope.filtro = '';
         $scope.mensagem = '';
+
+        $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+			$scope.exportHref=Excel.tableToExcel(tableId,'sheet name');
+			$timeout(function(){location.href=$scope.fileData.exportHref;},100); // trigger download
+		}
 
         // Exibe a mensagem ao retornar do formulário de edição
         if($rootScope.mensagem) {
