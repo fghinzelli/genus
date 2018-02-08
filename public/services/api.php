@@ -58,6 +58,7 @@
 	require 'view/inscricaoCatequese.php';
 	require 'view/situacaoInscricao.php';
 	require 'view/situacaoDizimo.php';
+	require 'view/relatorios.php';
 	
 
 	$app->post('/login', function($request, $response, $args) { 

@@ -159,6 +159,12 @@ angular.module('Genus', [
             templateUrl: 'partials/inscricoes_form.html'
         })
 
+        // relatórios
+        .when('/catequese/relatorios', {
+            controller: 'RelatoriosController',
+            templateUrl: 'partials/catequese_relatorios.html'
+        })
+
         .otherwise({ redirectTo: '/' });
 }])
 
