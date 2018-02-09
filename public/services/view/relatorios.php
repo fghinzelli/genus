@@ -1,10 +1,10 @@
 <?php   
-    require 'model/Pessoa.php';
+    require 'tcpdf/tcpdf.php';
 
     // catequizandos-etapas
 	$app->get('/relatorios/catequizandos-etapas', function($request, $response, $args) {
 		$semana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
-        $sql = "SELECT * FROM TurmaCatequese WHERE status=1;
+        $sql = "SELECT * FROM TurmaCatequese WHERE status=1";
         $query = $this->db->prepare($sql);
         $query->execute();
         // $query = $this->db->query($sql);
