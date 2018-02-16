@@ -38,6 +38,43 @@ function getColumns(report_name, dados) {
     var rows = [];
     var title = '';
     switch (report_name) {
+        case 'catequizandos-etapas':
+            title = 'Catequizandos por Etapa'
+            columns = ["Etapa", "Comunidade", "Nome"];
+            for (var i=0; i<dados.length; i++) {
+                rows.push([dados[i].inscricaoCatequese.etapaCatequese.descricao,
+                           dados[i].inscricaoCatequese.comunidade.nome,
+                           dados[i].inscricaoCatequese.pessoa.nome
+                          ])
+            }
+            return [title, columns, rows];
+            break;
+        case 'catequizandos-turmas':
+            title = 'Catequizandos por Turma'
+            columns = ["Comunidade", "Etapa", "Dia da Semana", "Horário", "Catequista", "Nome"];
+            for (var i=0; i<dados.length; i++) {
+                rows.push([dados[i].inscricaoCatequese.comunidade.nome,
+                           dados[i].inscricaoCatequese.etapaCatequese.descricao,
+                           dados[i].turmaCatequese.diaSemana,
+                           dados[i].turmaCatequese.horario,
+                           dados[i].turmaCatequese.catequista.pessoa.nome,
+                           dados[i].inscricaoCatequese.pessoa.nome
+                          ])
+            }
+            return [title, columns, rows];
+            break;
+        case 'catequizandos-padrinhos':
+            title = 'Padrinhos dos Catequizandos da Crisma'
+            columns = ["Comunidade", "Catequista", "Nome", "Padrinho"];
+            for (var i=0; i<dados.length; i++) {
+                rows.push([dados[i].inscricaoCatequese.comunidade.nome,
+                           dados[i].turmaCatequese.catequista.pessoa.nome,
+                           dados[i].inscricaoCatequese.pessoa.nome,
+                           dados[i].inscricaoCatequese.nomePadrinho
+                          ])
+            }
+            return [title, columns, rows];
+            break;
         case 'turmas-comunidade':
             title = 'Turmas por Comunidade'
             columns = ["Comunidade", "Etapa", "Dia da Semana", "Turno", "Horário", "Catequista"];
@@ -51,6 +88,13 @@ function getColumns(report_name, dados) {
                           ])
             }
             return [title, columns, rows];
+            break;
+        case 'catequistas-comunidade':
+            title = 'Catequistas por Comunidade'
+            console.log('catequistas-comunidade')
+            break;
+        default:
+            break;
     }
         
 
