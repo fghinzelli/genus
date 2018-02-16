@@ -164,7 +164,32 @@ angular.module('Genus', [
             controller: 'RelatoriosController',
             templateUrl: 'partials/catequese_relatorios.html'
         })
+        /*
+        .when('/catequese/relatorios/catequizandos-etapas', {
+            controller: 'RelatoriosController',
+            templateUrl: 'partials/relatorios/catequese/catequizandos_etapas.html'
+        })
 
+        .when('/catequese/relatorios/catequizandos-turmas', {
+            controller: 'RelatoriosController',
+            templateUrl: 'partials/relatorios/catequese/catequizandos_turmas.html'
+        })
+
+        .when('/catequese/relatorios/turmas-comunidade', {
+            controller: 'RelatoriosController',
+            templateUrl: 'partials/relatorios/catequese/turmas_comunidade.html'
+        })
+
+        .when('/catequese/relatorios/catequistas-comunidade', {
+            controller: 'RelatoriosController',
+            templateUrl: 'partials/relatorios/catequese/catequistas_comunidades.html'
+        })
+
+        .when('/catequese/relatorios/catequizandos-padrinhos', {
+            controller: 'RelatoriosController',
+            templateUrl: 'partials/relatorios/catequese/catequizandos_padrinhos.html'
+        })
+        */
         .otherwise({ redirectTo: '/' });
 }])
 
