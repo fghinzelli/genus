@@ -8,8 +8,9 @@
                     INNER JOIN InscricaoCatequese I ON I.id = TI.inscricaoCatequeseId
                     INNER JOIN Pessoa P ON P.id = I.pessoaId
                     INNER JOIN EtapaCatequese EC ON EC.id = I.etapaCatequeseId
+                    INNER JOIN Comunidade C ON C.id = I.comunidadeId
                 WHERE TI.status = 1
-                ORDER BY EC.id, P.nome";
+                ORDER BY EC.id, C.nome, P.nome";
         $query = $database->query($sql);
         $inscricoes = $query->fetchAll(PDO::FETCH_OBJ);
 
